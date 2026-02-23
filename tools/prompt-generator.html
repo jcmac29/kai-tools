@@ -1,0 +1,2835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Prompt Generator - Free Tool to Build Better ChatGPT & Claude Prompts | ToolsForge</title>
+    <meta name="description" content="Free AI prompt generator tool. Build powerful, well-structured prompts for ChatGPT, Claude, and other AI assistants. Get better results with professionally crafted prompt templates.">
+    <meta name="keywords" content="AI prompt generator, ChatGPT prompts, Claude prompts, prompt engineering, AI writing prompts, prompt templates, free prompt builder">
+    <link rel="canonical" href="https://toolsforge.com/tools/prompt-generator.html">
+
+    <meta property="og:title" content="AI Prompt Generator - Build Better AI Prompts Free">
+    <meta property="og:description" content="Create powerful, well-structured prompts for ChatGPT, Claude, and other AI tools. Free prompt templates for business, marketing, writing, and coding.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolsforge.com/tools/prompt-generator.html">
+
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Prompt Generator - Build Better AI Prompts Free">
+    <meta name="twitter:description" content="Create powerful prompts for ChatGPT, Claude, and other AI tools. Free templates for business, marketing, writing, and coding.">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #09090b;
+            --bg-secondary: #18181b;
+            --bg-card: #1c1c1f;
+            --accent: #ef4444;
+            --accent-light: #f87171;
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --border: #27272a;
+            --border-light: #3f3f46;
+            --green: #10b981;
+            --yellow: #f59e0b;
+            --cyan: #06b6d4;
+            --purple: #a855f7;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .gradient-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 100vh;
+            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(168, 85, 247, 0.12), transparent);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 16px 24px;
+            background: rgba(9, 9, 11, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #10b981, #3b82f6);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text-primary); }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 100px 24px 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ad-placeholder {
+            background: var(--bg-secondary);
+            border: 1px dashed var(--border-light);
+            border-radius: 8px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin: 24px 0;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--purple);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover { color: #c084fc; }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--purple), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .tool-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        .step-indicator {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 32px;
+            position: relative;
+        }
+
+        .step-indicator::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 40px;
+            right: 40px;
+            height: 2px;
+            background: var(--border);
+            z-index: 0;
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .step.active .step-number {
+            background: var(--purple);
+            border-color: var(--purple);
+        }
+
+        .step.completed .step-number {
+            background: var(--green);
+            border-color: var(--green);
+        }
+
+        .step-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .step.active .step-label {
+            color: var(--purple);
+        }
+
+        .form-section {
+            margin-bottom: 28px;
+        }
+
+        .form-section label {
+            display: block;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .form-section label small {
+            font-weight: 400;
+            color: var(--text-muted);
+            margin-left: 8px;
+        }
+
+        select, input, textarea {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        select:focus, input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--purple);
+            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.15);
+        }
+
+        select {
+            cursor: pointer;
+            -webkit-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23a1a1aa' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 12px center;
+            background-size: 20px;
+            padding-right: 44px;
+        }
+
+        select option {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .variables-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+        }
+
+        .variable-input {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .variable-input label {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0;
+        }
+
+        .variable-input input {
+            padding: 12px 14px;
+        }
+
+        .prompt-output {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            min-height: 150px;
+        }
+
+        .prompt-output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .prompt-output-title {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+
+        .char-count {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .prompt-text {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: var(--text-primary);
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .prompt-text .highlight {
+            background: rgba(168, 85, 247, 0.2);
+            color: var(--purple);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-muted);
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .generate-btn {
+            flex: 1;
+            min-width: 200px;
+            background: linear-gradient(135deg, var(--purple), var(--cyan));
+            border: none;
+            padding: 16px 24px;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(168, 85, 247, 0.3);
+        }
+
+        .generate-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .copy-btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-light);
+            padding: 16px 24px;
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: var(--border);
+        }
+
+        .copy-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(6, 182, 212, 0.1));
+            border: 1px solid rgba(168, 85, 247, 0.3);
+            border-radius: 16px;
+            padding: 32px;
+            text-align: center;
+            margin-top: 32px;
+        }
+
+        .cta-section h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--purple), var(--cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-section p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .cta-features {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .cta-feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .cta-feature-icon {
+            color: var(--green);
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--purple), var(--cyan));
+            color: white;
+            text-decoration: none;
+            padding: 16px 40px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(168, 85, 247, 0.4);
+        }
+
+        .tips-section {
+            margin-top: 32px;
+            padding: 24px;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .tips-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .tips-list {
+            list-style: none;
+        }
+
+        .tips-list li {
+            padding: 8px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            display: flex;
+            gap: 10px;
+        }
+
+        .tips-list li::before {
+            content: "\2713";
+            color: var(--green);
+            font-weight: bold;
+        }
+
+        .footer {
+            padding: 40px 24px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--purple); }
+
+        .footer p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .footer p a {
+            color: var(--purple);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .page-header h1 { font-size: 1.8rem; }
+            .container { padding: 80px 16px 40px; }
+            .tool-card { padding: 20px; }
+            .step-indicator { gap: 8px; }
+            .step-indicator::before { left: 20px; right: 20px; }
+            .step-label { font-size: 0.7rem; }
+            .variables-grid { grid-template-columns: 1fr; }
+            .btn-row { flex-direction: column; }
+            .generate-btn, .copy-btn { width: 100%; }
+            .cta-features { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+    <div class="gradient-bg"></div>
+
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="../" class="logo">
+                <div class="logo-icon">T</div>
+                ToolsForge
+            </a>
+            <ul class="nav-links">
+                <li><a href="../">All Tools</a></li>
+                <li><a href="https://kaiprompts.com" target="_blank">Kai Prompts</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <a href="../" class="back-link">&larr; All Tools</a>
+            <h1>AI Prompt Generator</h1>
+            <p>Build powerful prompts for ChatGPT, Claude, and other AI tools</p>
+        </div>
+
+        <div class="ad-placeholder">Advertisement</div>
+
+        <div class="tool-card">
+            <div class="step-indicator">
+                <div class="step active" data-step="1">
+                    <div class="step-number">1</div>
+                    <div class="step-label">Category</div>
+                </div>
+                <div class="step" data-step="2">
+                    <div class="step-number">2</div>
+                    <div class="step-label">Task</div>
+                </div>
+                <div class="step" data-step="3">
+                    <div class="step-number">3</div>
+                    <div class="step-label">Details</div>
+                </div>
+                <div class="step" data-step="4">
+                    <div class="step-number">4</div>
+                    <div class="step-label">Generate</div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <label for="category">1. Select Category</label>
+                <select id="category" onchange="updateTasks()">
+                    <option value="">Choose a category...</option>
+                    <option value="business">Business & Strategy</option>
+                    <option value="marketing">Marketing & Sales</option>
+                    <option value="writing">Writing & Content</option>
+                    <option value="coding">Coding & Development</option>
+                    <option value="education">Education & Learning</option>
+                    <option value="productivity">Productivity & Planning</option>
+                    <option value="creative">Creative & Design</option>
+                    <option value="analysis">Analysis & Research</option>
+                </select>
+            </div>
+
+            <div class="form-section" id="taskSection" style="display: none;">
+                <label for="task">2. Select Task Type</label>
+                <select id="task" onchange="updateVariables()">
+                    <option value="">Choose a task...</option>
+                </select>
+            </div>
+
+            <div class="form-section" id="variablesSection" style="display: none;">
+                <label>3. Fill in Details <small>Be specific for better results</small></label>
+                <div class="variables-grid" id="variablesGrid"></div>
+            </div>
+
+            <div class="form-section" id="outputSection">
+                <label>Your Generated Prompt</label>
+                <div class="prompt-output">
+                    <div id="emptyState" class="empty-state">
+                        <div class="empty-state-icon">&#9997;</div>
+                        <p>Select a category and task to generate your prompt</p>
+                    </div>
+                    <div id="promptContent" style="display: none;">
+                        <div class="prompt-output-header">
+                            <span class="prompt-output-title">Ready to copy</span>
+                            <span class="char-count" id="charCount">0 characters</span>
+                        </div>
+                        <div class="prompt-text" id="promptText"></div>
+                    </div>
+                </div>
+
+                <div class="btn-row">
+                    <button class="generate-btn" id="generateBtn" onclick="generatePrompt()" disabled>Generate Prompt</button>
+                    <button class="copy-btn" id="copyBtn" onclick="copyPrompt()" disabled>Copy to Clipboard</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h3>Want 400+ Premium AI Prompts?</h3>
+            <p>Get instant access to our complete library of battle-tested prompts that actually work.</p>
+            <div class="cta-features">
+                <div class="cta-feature">
+                    <span class="cta-feature-icon">&#10003;</span>
+                    <span>Copy-paste ready</span>
+                </div>
+                <div class="cta-feature">
+                    <span class="cta-feature-icon">&#10003;</span>
+                    <span>All categories included</span>
+                </div>
+                <div class="cta-feature">
+                    <span class="cta-feature-icon">&#10003;</span>
+                    <span>Regular updates</span>
+                </div>
+                <div class="cta-feature">
+                    <span class="cta-feature-icon">&#10003;</span>
+                    <span>Lifetime access</span>
+                </div>
+            </div>
+            <a href="https://kaiprompts.com" target="_blank" class="cta-btn">Check Out KaiPrompts.com &rarr;</a>
+        </div>
+
+        <div class="tips-section">
+            <div class="tips-title">Pro Tips for Better AI Prompts</div>
+            <ul class="tips-list">
+                <li>Be specific about the format you want (bullet points, paragraphs, table, etc.)</li>
+                <li>Include context about your audience and their knowledge level</li>
+                <li>Specify the tone: professional, casual, friendly, authoritative</li>
+                <li>Ask the AI to take on a specific role or persona for better results</li>
+                <li>Include examples of what you want when possible</li>
+            </ul>
+        </div>
+
+        <div class="ad-placeholder">Advertisement</div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-links">
+                <a href="../">All Tools</a>
+                <a href="word-counter.html">Word Counter</a>
+                <a href="json-formatter.html">JSON Formatter</a>
+                <a href="https://kaiprompts.com" target="_blank">Kai Prompts</a>
+            </div>
+            <p>&copy; 2026 ToolsForge. A <a href="https://kaiprompts.com" target="_blank">kaiprompts.com</a> project.</p>
+        </div>
+    </footer>
+
+    <script>
+        const promptData = {
+            business: {
+                name: "Business & Strategy",
+                tasks: {
+                    "business-plan": {
+                        name: "Business Plan Outline",
+                        variables: [
+                            { id: "business", label: "Business/Product Name", placeholder: "e.g., EcoBottle" },
+                            { id: "industry", label: "Industry", placeholder: "e.g., Sustainable products" },
+                            { id: "target", label: "Target Market", placeholder: "e.g., Environmentally conscious millennials" },
+                            { id: "unique", label: "Unique Value Proposition", placeholder: "e.g., 100% biodegradable water bottles" }
+                        ],
+                        template: `You are a seasoned business strategist with 20+ years of experience helping startups and SMBs develop winning business plans.
+
+Create a comprehensive business plan outline for {business}, a company in the {industry} industry.
+
+Target Market: {target}
+Unique Value Proposition: {unique}
+
+Please include:
+
+1. **Executive Summary** - A compelling overview that would attract investors
+2. **Market Analysis** - Industry trends, market size, and competitive landscape
+3. **Target Customer Profile** - Detailed persona with demographics, pain points, and buying behavior
+4. **Products/Services** - Detailed description with pricing strategy rationale
+5. **Marketing Strategy** - Customer acquisition channels and tactics
+6. **Operations Plan** - Key processes, technology needs, and resource requirements
+7. **Financial Projections** - Revenue model, key metrics, and 3-year forecast framework
+8. **Risk Assessment** - Top 5 risks and mitigation strategies
+
+Format each section with actionable bullet points and specific recommendations.`
+                    },
+                    "swot-analysis": {
+                        name: "SWOT Analysis",
+                        variables: [
+                            { id: "company", label: "Company/Project Name", placeholder: "e.g., TechStartup Inc." },
+                            { id: "industry", label: "Industry/Market", placeholder: "e.g., B2B SaaS" },
+                            { id: "context", label: "Current Situation", placeholder: "e.g., Launching new product line" }
+                        ],
+                        template: `You are a strategic business consultant specializing in competitive analysis.
+
+Conduct a thorough SWOT analysis for {company} in the {industry} market.
+
+Context: {context}
+
+For each category, provide:
+- **Strengths**: 5-7 internal advantages (resources, capabilities, market position)
+- **Weaknesses**: 5-7 internal limitations to address
+- **Opportunities**: 5-7 external factors to capitalize on
+- **Threats**: 5-7 external risks to monitor and mitigate
+
+After the SWOT matrix, provide:
+1. **Strategic Priorities**: Top 3 actions based on leveraging strengths to capture opportunities
+2. **Risk Mitigation Plan**: How to use strengths to defend against threats
+3. **Improvement Roadmap**: Priority weaknesses to address in next 90 days
+
+Present in a clear, actionable format that can be shared with stakeholders.`
+                    },
+                    "pitch-deck": {
+                        name: "Pitch Deck Content",
+                        variables: [
+                            { id: "company", label: "Company Name", placeholder: "e.g., InnovateTech" },
+                            { id: "problem", label: "Problem You Solve", placeholder: "e.g., Small businesses waste 10+ hours/week on invoicing" },
+                            { id: "solution", label: "Your Solution", placeholder: "e.g., AI-powered automated invoicing" },
+                            { id: "traction", label: "Current Traction", placeholder: "e.g., 500 users, $50k MRR" }
+                        ],
+                        template: `You are an expert pitch coach who has helped startups raise over $500M in funding.
+
+Create compelling pitch deck content for {company}.
+
+Problem: {problem}
+Solution: {solution}
+Current Traction: {traction}
+
+Generate content for each slide:
+
+1. **Title Slide**: Memorable tagline (under 10 words)
+2. **Problem**: Paint the pain point vividly with statistics
+3. **Solution**: Clear explanation with key benefits
+4. **How It Works**: 3-step explanation for non-technical audience
+5. **Market Size**: TAM, SAM, SOM framework with realistic numbers
+6. **Business Model**: Revenue streams and unit economics
+7. **Traction**: Highlight metrics that show momentum
+8. **Competition**: Positioning matrix showing your advantage
+9. **Team**: What to highlight about founder backgrounds
+10. **The Ask**: Investment amount and use of funds
+11. **Vision**: Compelling future state in 5 years
+
+For each slide, include:
+- Main headline (punchy, memorable)
+- 3-4 supporting bullet points
+- Suggested visual or data to include
+
+Keep language confident but not hyperbolic.`
+                    },
+                    "meeting-agenda": {
+                        name: "Meeting Agenda",
+                        variables: [
+                            { id: "meeting", label: "Meeting Type", placeholder: "e.g., Quarterly business review" },
+                            { id: "attendees", label: "Attendees", placeholder: "e.g., Executive team and department heads" },
+                            { id: "duration", label: "Duration", placeholder: "e.g., 90 minutes" },
+                            { id: "goals", label: "Meeting Goals", placeholder: "e.g., Align on Q2 priorities and budget" }
+                        ],
+                        template: `You are an executive assistant known for running highly effective meetings.
+
+Create a detailed meeting agenda for: {meeting}
+
+Attendees: {attendees}
+Duration: {duration}
+Goals: {goals}
+
+Please provide:
+
+1. **Pre-Meeting**
+   - Materials to distribute beforehand
+   - Pre-work required from attendees
+
+2. **Detailed Agenda** with time allocations:
+   - Opening and context setting
+   - Core discussion items (with owner for each)
+   - Decision points clearly marked
+   - Buffer time for discussion
+
+3. **For Each Agenda Item Include**:
+   - Time allocation
+   - Discussion lead
+   - Desired outcome (decision, alignment, or information)
+   - Key questions to address
+
+4. **Meeting Close**
+   - Action items capture process
+   - Next steps and follow-up timeline
+
+5. **Post-Meeting**
+   - Notes distribution timeline
+   - Follow-up meeting needs
+
+Format as a professional agenda that can be shared with all attendees.`
+                    }
+                }
+            },
+            marketing: {
+                name: "Marketing & Sales",
+                tasks: {
+                    "social-media": {
+                        name: "Social Media Content",
+                        variables: [
+                            { id: "platform", label: "Platform", placeholder: "e.g., LinkedIn, Twitter, Instagram" },
+                            { id: "topic", label: "Topic/Product", placeholder: "e.g., New productivity app launch" },
+                            { id: "audience", label: "Target Audience", placeholder: "e.g., Remote workers and freelancers" },
+                            { id: "tone", label: "Brand Tone", placeholder: "e.g., Professional but friendly" }
+                        ],
+                        template: `You are a social media strategist who has grown accounts to 100k+ followers for multiple brands.
+
+Create engaging social media content for {platform}.
+
+Topic: {topic}
+Target Audience: {audience}
+Brand Tone: {tone}
+
+Please provide:
+
+**5 Different Post Options** (varying styles):
+
+For each post include:
+1. **Hook** - First line that stops the scroll
+2. **Body** - Main content with line breaks for readability
+3. **CTA** - Clear call to action
+4. **Hashtags** - 5-10 relevant hashtags (if applicable to platform)
+
+**Post Styles to Include**:
+- Educational/Value-driven
+- Story-based/Personal
+- Question/Engagement-focused
+- List/Tips format
+- Bold statement/Contrarian take
+
+**Additional Elements**:
+- Best posting times for this audience
+- Suggested visual/media for each post
+- Engagement strategy (how to respond to comments)
+
+Make each post feel authentic, not salesy. Focus on providing value first.`
+                    },
+                    "email-sequence": {
+                        name: "Email Marketing Sequence",
+                        variables: [
+                            { id: "product", label: "Product/Service", placeholder: "e.g., Online course on photography" },
+                            { id: "audience", label: "Target Audience", placeholder: "e.g., Beginner photographers" },
+                            { id: "goal", label: "Campaign Goal", placeholder: "e.g., Convert free trial to paid" },
+                            { id: "emails", label: "Number of Emails", placeholder: "e.g., 5" }
+                        ],
+                        template: `You are an email marketing expert with a track record of 40%+ open rates and 5%+ click rates.
+
+Create a {emails}-email sequence for {product}.
+
+Target Audience: {audience}
+Campaign Goal: {goal}
+
+For each email provide:
+
+**Email Structure**:
+1. **Subject Line** - Primary + 2 A/B test alternatives
+2. **Preview Text** - Compelling snippet
+3. **Opening Hook** - First 2 sentences that pull them in
+4. **Body Content** - Value-focused, scannable format
+5. **CTA** - Single, clear call to action
+6. **P.S. Line** - Additional hook or urgency element
+
+**Sequence Strategy**:
+- Email 1: [Purpose and timing]
+- Email 2: [Purpose and timing]
+- Continue for all emails...
+
+**For Each Email Also Include**:
+- Send timing (days after trigger)
+- Emotional trigger being used
+- Objection being addressed
+- Segmentation notes (who should/shouldn't receive)
+
+**Overall Sequence Notes**:
+- Key metrics to track
+- When to remove non-engagers
+- Follow-up sequence recommendations
+
+Write in a conversational tone that builds relationship, not just sells.`
+                    },
+                    "landing-page": {
+                        name: "Landing Page Copy",
+                        variables: [
+                            { id: "product", label: "Product/Service", placeholder: "e.g., Project management software" },
+                            { id: "audience", label: "Target Audience", placeholder: "e.g., Small business owners" },
+                            { id: "pain", label: "Main Pain Point", placeholder: "e.g., Losing track of tasks and deadlines" },
+                            { id: "benefit", label: "Primary Benefit", placeholder: "e.g., Never miss a deadline again" }
+                        ],
+                        template: `You are a conversion copywriter who has written landing pages generating millions in revenue.
+
+Write high-converting landing page copy for {product}.
+
+Target Audience: {audience}
+Main Pain Point: {pain}
+Primary Benefit: {benefit}
+
+**Provide Complete Copy For**:
+
+1. **Hero Section**
+   - Headline (benefit-focused, under 10 words)
+   - Subheadline (expand on the promise)
+   - CTA button text
+   - Supporting micro-copy
+
+2. **Problem Section**
+   - Agitate the pain point
+   - Show you understand their struggle
+   - 3-4 specific pain scenarios
+
+3. **Solution Section**
+   - Introduce product as the answer
+   - Bridge from problem to solution
+   - Key differentiator statement
+
+4. **Features/Benefits Section**
+   - 4-6 features with benefit-focused descriptions
+   - Each feature: Icon suggestion + Headline + 2-line description
+
+5. **Social Proof Section**
+   - Testimonial prompts (what customers should say)
+   - Stats/numbers to highlight
+   - Trust badges to include
+
+6. **FAQ Section**
+   - 5 common objections reframed as questions
+   - Answers that overcome objections
+
+7. **Final CTA Section**
+   - Urgency-driven headline
+   - Value stack summary
+   - Risk reversal (guarantee)
+   - Final CTA button
+
+Include persuasion notes explaining why each section works.`
+                    },
+                    "ad-copy": {
+                        name: "Ad Copy (Facebook/Google)",
+                        variables: [
+                            { id: "platform", label: "Platform", placeholder: "e.g., Facebook Ads, Google Ads" },
+                            { id: "product", label: "Product/Service", placeholder: "e.g., Meal prep delivery service" },
+                            { id: "audience", label: "Target Audience", placeholder: "e.g., Busy professionals who want to eat healthy" },
+                            { id: "offer", label: "Offer/Hook", placeholder: "e.g., First week 50% off" }
+                        ],
+                        template: `You are a performance marketing expert who has managed $10M+ in ad spend profitably.
+
+Create high-converting ad copy for {platform}.
+
+Product: {product}
+Target Audience: {audience}
+Offer: {offer}
+
+**Provide 5 Complete Ad Variations**:
+
+For each ad include:
+
+**Facebook/Instagram Ads**:
+- Primary Text (125 chars for feed, full version for detailed)
+- Headline (40 chars max)
+- Description (30 chars max)
+- CTA button recommendation
+- Image/video concept suggestion
+
+**Google Ads**:
+- Headline 1 (30 chars)
+- Headline 2 (30 chars)
+- Headline 3 (30 chars)
+- Description 1 (90 chars)
+- Description 2 (90 chars)
+
+**Ad Angles to Cover**:
+1. Pain point focused
+2. Benefit/outcome focused
+3. Social proof/FOMO focused
+4. Question-based hook
+5. Direct offer/promotion focused
+
+**For Each Ad Also Include**:
+- Target audience segment it's best for
+- Funnel stage (cold/warm/hot)
+- Suggested audience targeting
+- Expected emotional trigger
+
+**Testing Recommendations**:
+- Variables to A/B test
+- Minimum budget for statistical significance
+- Key metrics to optimize for`
+                    }
+                }
+            },
+            writing: {
+                name: "Writing & Content",
+                tasks: {
+                    "blog-post": {
+                        name: "Blog Post Outline",
+                        variables: [
+                            { id: "topic", label: "Topic", placeholder: "e.g., How to start investing in your 20s" },
+                            { id: "audience", label: "Target Audience", placeholder: "e.g., Young professionals new to investing" },
+                            { id: "length", label: "Target Length", placeholder: "e.g., 2000 words" },
+                            { id: "goal", label: "Content Goal", placeholder: "e.g., Rank for 'beginner investing tips'" }
+                        ],
+                        template: `You are an SEO content strategist who has written articles ranking #1 for competitive keywords.
+
+Create a comprehensive blog post outline for: {topic}
+
+Target Audience: {audience}
+Target Length: {length}
+Content Goal: {goal}
+
+**Provide**:
+
+1. **SEO Strategy**
+   - Primary keyword
+   - 5-7 secondary keywords to include
+   - Search intent analysis
+   - Suggested meta title (under 60 chars)
+   - Meta description (under 155 chars)
+
+2. **Headline Options**
+   - 5 compelling title variations
+   - Explain why each works
+
+3. **Complete Outline**
+
+   **Introduction** (word count target)
+   - Hook options (statistic, question, story)
+   - Problem/opportunity statement
+   - What reader will learn (bulleted)
+   - Transition to first section
+
+   **Main Sections** (H2s and H3s)
+   For each section include:
+   - Section headline
+   - Key points to cover (bulleted)
+   - Examples or data to include
+   - Word count target
+   - Internal/external linking opportunities
+
+   **Conclusion**
+   - Key takeaways summary
+   - Clear CTA
+   - Engagement question for comments
+
+4. **Content Enhancements**
+   - Suggested images/graphics
+   - Pull quotes to feature
+   - FAQ schema opportunities
+   - Related posts to link
+
+5. **Promotion Strategy**
+   - Social snippets for sharing
+   - Email teaser copy`
+                    },
+                    "newsletter": {
+                        name: "Newsletter Content",
+                        variables: [
+                            { id: "topic", label: "Main Topic", placeholder: "e.g., Weekly marketing tips" },
+                            { id: "audience", label: "Subscriber Audience", placeholder: "e.g., Small business marketers" },
+                            { id: "tone", label: "Newsletter Tone", placeholder: "e.g., Casual, like advice from a friend" },
+                            { id: "sections", label: "Sections to Include", placeholder: "e.g., Main article, quick tips, tool of the week" }
+                        ],
+                        template: `You are a newsletter writer with 50k+ engaged subscribers and 45%+ open rates.
+
+Create engaging newsletter content about: {topic}
+
+Subscriber Audience: {audience}
+Tone: {tone}
+Sections: {sections}
+
+**Provide Complete Newsletter Draft**:
+
+1. **Subject Line Options** (5 variations)
+   - Curiosity-driven
+   - Benefit-focused
+   - Number/list-based
+   - Question format
+   - Personal/story-based
+
+2. **Preview Text** for each subject line
+
+3. **Opening Section**
+   - Personal greeting approach
+   - Hook that makes them want to keep reading
+   - Brief context/transition to main content
+
+4. **Main Content Section**
+   - Compelling subheadline
+   - Value-packed content (scannable format)
+   - Key insights highlighted
+   - Actionable takeaways
+
+5. **Secondary Sections** (based on your inputs)
+   - Each with its own mini-hook
+   - Concise but valuable content
+
+6. **Closing Section**
+   - Personal sign-off style
+   - CTA (reply, share, or click)
+   - P.S. line with additional value or teaser
+
+7. **Engagement Boosters**
+   - Question to encourage replies
+   - Share prompt
+   - Next issue teaser
+
+Format for easy reading on mobile with short paragraphs and clear breaks.`
+                    },
+                    "case-study": {
+                        name: "Case Study",
+                        variables: [
+                            { id: "client", label: "Client/Company", placeholder: "e.g., TechCorp Solutions" },
+                            { id: "challenge", label: "Challenge Faced", placeholder: "e.g., 50% customer churn rate" },
+                            { id: "solution", label: "Solution Provided", placeholder: "e.g., Implemented new onboarding system" },
+                            { id: "results", label: "Results Achieved", placeholder: "e.g., Reduced churn to 15%, saved $2M" }
+                        ],
+                        template: `You are a B2B content writer specializing in case studies that drive sales conversations.
+
+Write a compelling case study for: {client}
+
+Challenge: {challenge}
+Solution: {solution}
+Results: {results}
+
+**Provide Complete Case Study**:
+
+1. **Title Options** (3 variations)
+   - Results-focused headline
+   - Challenge-focused headline
+   - Transformation-focused headline
+
+2. **Executive Summary** (50-75 words)
+   - Quick snapshot for skimmers
+   - Key result highlighted
+
+3. **Client Overview**
+   - Industry and company size
+   - Relevant background context
+   - Why they're a good example
+
+4. **The Challenge**
+   - Situation before (paint the picture)
+   - Specific pain points
+   - What was at stake
+   - Why previous attempts failed
+
+5. **The Solution**
+   - Discovery/assessment phase
+   - Strategy development
+   - Implementation details
+   - Timeline overview
+
+6. **The Results**
+   - Quantified outcomes (before/after)
+   - Unexpected benefits
+   - Long-term impact
+   - Client quote placeholder
+
+7. **Key Takeaways**
+   - 3-4 lessons others can apply
+   - What made this successful
+
+8. **CTA Section**
+   - How readers can get similar results
+   - Next step invitation
+
+Include suggestions for:
+- Data visualizations
+- Pull quotes
+- Sidebar callouts`
+                    },
+                    "product-description": {
+                        name: "Product Description",
+                        variables: [
+                            { id: "product", label: "Product Name", placeholder: "e.g., ErgoMax Standing Desk" },
+                            { id: "features", label: "Key Features", placeholder: "e.g., Height adjustable, built-in cable management, bamboo top" },
+                            { id: "audience", label: "Target Buyer", placeholder: "e.g., Remote workers with home offices" },
+                            { id: "price", label: "Price Point", placeholder: "e.g., $599 (premium)" }
+                        ],
+                        template: `You are an e-commerce copywriter who has written product descriptions generating millions in sales.
+
+Write compelling product copy for: {product}
+
+Key Features: {features}
+Target Buyer: {audience}
+Price Point: {price}
+
+**Provide**:
+
+1. **Product Title Options** (3 variations)
+   - SEO-optimized with key benefit
+
+2. **Short Description** (50-75 words)
+   - For category pages and search results
+   - Key benefit + differentiator
+
+3. **Long Description** (200-300 words)
+   - Opening hook that speaks to buyer's desire
+   - Problem/solution framing
+   - Key features as benefits
+   - Social proof placeholder
+   - Urgency/scarcity element if appropriate
+
+4. **Bullet Points** (5-7)
+   - Feature + benefit format
+   - Scannable for quick readers
+   - Most important first
+
+5. **Technical Specifications Section**
+   - Formatted for clarity
+   - Highlight unique specs
+
+6. **FAQ Section** (5 questions)
+   - Common purchase objections
+   - Answers that sell
+
+7. **SEO Elements**
+   - Target keywords
+   - Alt text for main image
+   - Schema markup suggestions
+
+8. **Cross-sell Suggestions**
+   - Complementary products
+   - Bundle opportunity
+
+Write in a voice that matches the {price} positioning - premium products need premium copy.`
+                    }
+                }
+            },
+            coding: {
+                name: "Coding & Development",
+                tasks: {
+                    "code-review": {
+                        name: "Code Review Request",
+                        variables: [
+                            { id: "language", label: "Programming Language", placeholder: "e.g., Python, JavaScript, Go" },
+                            { id: "context", label: "What the Code Does", placeholder: "e.g., User authentication system" },
+                            { id: "concerns", label: "Specific Concerns", placeholder: "e.g., Security, performance, readability" }
+                        ],
+                        template: `You are a senior software engineer with 15+ years of experience in {language} and a focus on clean, maintainable code.
+
+Please review the code I'll provide with the following context:
+
+**Code Purpose**: {context}
+**Areas of Concern**: {concerns}
+
+Analyze the code for:
+
+1. **Correctness**
+   - Logic errors or bugs
+   - Edge cases not handled
+   - Potential runtime errors
+
+2. **Security**
+   - Vulnerabilities (injection, XSS, etc.)
+   - Data validation issues
+   - Authentication/authorization gaps
+
+3. **Performance**
+   - Time complexity concerns
+   - Memory usage issues
+   - Unnecessary operations
+   - Database query optimization (if applicable)
+
+4. **Code Quality**
+   - Readability and clarity
+   - Naming conventions
+   - Function/method length
+   - Single responsibility adherence
+
+5. **Best Practices**
+   - Language-specific idioms
+   - Design patterns that could help
+   - Error handling approach
+   - Testing considerations
+
+**For Each Issue Found**:
+- Severity (Critical/High/Medium/Low)
+- Line number or section
+- Explanation of the problem
+- Recommended fix with code example
+
+**Summary**:
+- Overall assessment
+- Top 3 priorities to address
+- Positive aspects to maintain
+
+Please paste the code and I'll provide the review.`
+                    },
+                    "debug-help": {
+                        name: "Debug Assistance",
+                        variables: [
+                            { id: "language", label: "Language/Framework", placeholder: "e.g., React, Node.js, Django" },
+                            { id: "error", label: "Error Message", placeholder: "e.g., TypeError: Cannot read property 'map' of undefined" },
+                            { id: "expected", label: "Expected Behavior", placeholder: "e.g., Display list of users from API" },
+                            { id: "actual", label: "Actual Behavior", placeholder: "e.g., Page crashes on load" }
+                        ],
+                        template: `You are a debugging expert specializing in {language}. You excel at systematic problem-solving and explaining issues clearly.
+
+I need help debugging an issue:
+
+**Error**: {error}
+**Expected Behavior**: {expected}
+**Actual Behavior**: {actual}
+
+Please help me by:
+
+1. **Initial Analysis**
+   - What this error typically means
+   - Most common causes (ranked by likelihood)
+
+2. **Diagnostic Questions**
+   - What information would help narrow down the issue
+   - Console logs or checks to add
+
+3. **Step-by-Step Debugging**
+   - Systematic approach to isolate the problem
+   - What to check at each step
+
+4. **Likely Solutions**
+   - For each potential cause, provide:
+     - The fix with code examples
+     - Explanation of why it works
+     - How to verify it's resolved
+
+5. **Prevention Tips**
+   - How to avoid this issue in the future
+   - Related patterns to watch for
+
+Please share:
+- The relevant code section
+- Any additional error stack trace
+- What you've already tried
+
+I'll provide targeted solutions based on your specific situation.`
+                    },
+                    "architecture": {
+                        name: "System Architecture Design",
+                        variables: [
+                            { id: "project", label: "Project Type", placeholder: "e.g., E-commerce platform" },
+                            { id: "requirements", label: "Key Requirements", placeholder: "e.g., 10k concurrent users, real-time inventory" },
+                            { id: "constraints", label: "Constraints", placeholder: "e.g., AWS, budget-conscious, small team" },
+                            { id: "stack", label: "Preferred Stack", placeholder: "e.g., Node.js, PostgreSQL, React" }
+                        ],
+                        template: `You are a solutions architect with expertise in designing scalable, maintainable systems.
+
+Design a system architecture for: {project}
+
+**Requirements**: {requirements}
+**Constraints**: {constraints}
+**Preferred Stack**: {stack}
+
+Please provide:
+
+1. **Architecture Overview**
+   - High-level system diagram description
+   - Core components and their responsibilities
+   - Data flow between components
+
+2. **Technology Recommendations**
+   For each component:
+   - Recommended technology
+   - Why it fits the requirements
+   - Alternatives considered
+   - Trade-offs
+
+3. **Database Design**
+   - Database choice and rationale
+   - Key entities and relationships
+   - Indexing strategy
+   - Scaling approach (read replicas, sharding)
+
+4. **API Design**
+   - REST vs GraphQL recommendation
+   - Key endpoints/operations
+   - Authentication approach
+   - Rate limiting strategy
+
+5. **Infrastructure**
+   - Cloud services to use
+   - Environment setup (dev/staging/prod)
+   - CI/CD pipeline recommendations
+   - Monitoring and logging
+
+6. **Scalability Plan**
+   - Current scale design
+   - Growth bottlenecks to watch
+   - Scaling strategies at each stage
+
+7. **Security Considerations**
+   - Authentication/authorization
+   - Data protection
+   - Network security
+   - Compliance considerations
+
+8. **Development Roadmap**
+   - MVP scope recommendation
+   - Phased implementation plan
+   - Team structure suggestions
+
+Include ASCII diagram of the architecture where helpful.`
+                    },
+                    "documentation": {
+                        name: "Code Documentation",
+                        variables: [
+                            { id: "project", label: "Project/Feature Name", placeholder: "e.g., Payment Processing Module" },
+                            { id: "audience", label: "Documentation Audience", placeholder: "e.g., New developers joining the team" },
+                            { id: "type", label: "Documentation Type", placeholder: "e.g., API docs, README, architecture" }
+                        ],
+                        template: `You are a technical writer who specializes in developer documentation that people actually read.
+
+Create {type} documentation for: {project}
+
+Target Audience: {audience}
+
+Please provide documentation including:
+
+1. **Overview**
+   - What this project/feature does (2-3 sentences)
+   - Key concepts to understand
+   - Architecture diagram description
+
+2. **Quick Start**
+   - Prerequisites
+   - Installation steps
+   - Basic usage example
+   - "Hello World" equivalent
+
+3. **Core Concepts**
+   - Key terminology defined
+   - How components interact
+   - Mental model for understanding
+
+4. **API Reference** (if applicable)
+   For each endpoint/function:
+   - Description
+   - Parameters (with types and defaults)
+   - Return value
+   - Example request/response
+   - Error codes
+
+5. **Configuration**
+   - Environment variables
+   - Config file options
+   - Defaults and recommendations
+
+6. **Common Use Cases**
+   - 3-5 typical scenarios
+   - Code examples for each
+
+7. **Troubleshooting**
+   - Common errors and solutions
+   - FAQ section
+   - Where to get help
+
+8. **Contributing**
+   - Development setup
+   - Code style guide
+   - PR process
+
+Format with clear headings, code blocks, and tables where appropriate.
+Keep explanations concise but complete.`
+                    }
+                }
+            },
+            education: {
+                name: "Education & Learning",
+                tasks: {
+                    "lesson-plan": {
+                        name: "Lesson Plan",
+                        variables: [
+                            { id: "topic", label: "Topic", placeholder: "e.g., Introduction to photosynthesis" },
+                            { id: "level", label: "Student Level", placeholder: "e.g., 7th grade, college intro, adult learners" },
+                            { id: "duration", label: "Duration", placeholder: "e.g., 45 minutes" },
+                            { id: "objectives", label: "Learning Objectives", placeholder: "e.g., Explain the process, identify key components" }
+                        ],
+                        template: `You are an experienced educator who creates engaging, effective lesson plans that maximize student learning.
+
+Create a detailed lesson plan for: {topic}
+
+Student Level: {level}
+Duration: {duration}
+Learning Objectives: {objectives}
+
+**Provide Complete Lesson Plan**:
+
+1. **Lesson Overview**
+   - Topic and grade level
+   - Learning objectives (measurable)
+   - Required materials
+   - Prior knowledge needed
+
+2. **Hook/Opening** (5-10 min)
+   - Attention-grabbing opener
+   - Connection to real life
+   - Activate prior knowledge
+
+3. **Direct Instruction** (time allocated)
+   - Key concepts to teach
+   - Explanation sequence
+   - Visual aids needed
+   - Check for understanding moments
+
+4. **Guided Practice** (time allocated)
+   - Activities with scaffolding
+   - Questions to ask
+   - Common misconceptions to address
+
+5. **Independent Practice** (time allocated)
+   - Activity description
+   - Success criteria
+   - Differentiation options:
+     - For struggling learners
+     - For advanced learners
+
+6. **Closure** (5 min)
+   - Summary strategy
+   - Exit ticket question
+   - Preview of next lesson
+
+7. **Assessment**
+   - Formative assessment methods
+   - Summative assessment ideas
+   - Rubric criteria
+
+8. **Extension Activities**
+   - Homework options
+   - Extra credit opportunities
+   - Cross-curricular connections
+
+9. **Accommodations**
+   - ELL supports
+   - IEP considerations
+   - Universal design elements
+
+Include teacher notes and timing markers throughout.`
+                    },
+                    "explain-concept": {
+                        name: "Explain a Concept",
+                        variables: [
+                            { id: "concept", label: "Concept to Explain", placeholder: "e.g., Blockchain technology" },
+                            { id: "audience", label: "Audience", placeholder: "e.g., Complete beginners, no tech background" },
+                            { id: "goal", label: "Understanding Goal", placeholder: "e.g., Understand how it works and why it matters" }
+                        ],
+                        template: `You are an exceptional teacher known for making complex concepts simple and memorable.
+
+Explain: {concept}
+
+Audience: {audience}
+Goal: {goal}
+
+Please explain this concept using:
+
+1. **Simple Definition**
+   - One sentence a child could understand
+   - Then a slightly more technical version
+
+2. **Real-World Analogy**
+   - Familiar comparison that captures the essence
+   - What the analogy does and doesn't capture
+
+3. **Visual Description**
+   - How to picture this concept
+   - Mental model or diagram description
+
+4. **Step-by-Step Breakdown**
+   - How it works in simple stages
+   - Each step builds on the previous
+
+5. **Why It Matters**
+   - Real-world applications
+   - Problems it solves
+   - Impact on daily life
+
+6. **Common Misconceptions**
+   - What people often get wrong
+   - The correct understanding
+
+7. **Key Terms Glossary**
+   - Essential vocabulary defined simply
+
+8. **Check Your Understanding**
+   - 3 questions to test comprehension
+   - Answers provided
+
+9. **Learn More**
+   - Next concepts to explore
+   - Suggested resources
+
+Use everyday language. Avoid jargon unless you define it first.
+Build understanding progressively from simple to complex.`
+                    },
+                    "study-guide": {
+                        name: "Study Guide",
+                        variables: [
+                            { id: "subject", label: "Subject/Topic", placeholder: "e.g., American Civil War" },
+                            { id: "exam", label: "Exam Type", placeholder: "e.g., Final exam, AP test, certification" },
+                            { id: "time", label: "Study Time Available", placeholder: "e.g., 1 week, 3 days" }
+                        ],
+                        template: `You are a study coach who helps students prepare effectively and reduce test anxiety.
+
+Create a comprehensive study guide for: {subject}
+
+Exam Type: {exam}
+Study Time Available: {time}
+
+**Provide**:
+
+1. **Study Schedule**
+   - Day-by-day breakdown
+   - What to study each session
+   - Built-in review periods
+   - Rest and breaks planned
+
+2. **Key Concepts Summary**
+   - Most important topics (prioritized)
+   - What's most likely to be tested
+   - Brief explanation of each
+
+3. **Must-Know Facts**
+   - Dates, names, formulas, definitions
+   - Formatted for quick review
+   - Memory tricks where helpful
+
+4. **Concept Connections**
+   - How topics relate to each other
+   - Themes that run throughout
+   - Compare/contrast key ideas
+
+5. **Practice Questions**
+   - 10 sample questions by type:
+     - Multiple choice
+     - Short answer
+     - Essay prompts
+   - Answers with explanations
+
+6. **Common Exam Traps**
+   - Tricky question patterns
+   - Common wrong answers
+   - How to avoid mistakes
+
+7. **Quick Reference Sheet**
+   - One-page summary of essentials
+   - "Cheat sheet" for final review
+
+8. **Test-Taking Strategies**
+   - Time management approach
+   - How to tackle different question types
+   - What to do if you blank
+
+9. **Day Before & Day Of**
+   - Final prep checklist
+   - Morning routine recommendations
+   - Stress management tips
+
+Format for easy scanning with headers, bullets, and tables.`
+                    },
+                    "quiz-questions": {
+                        name: "Quiz/Test Questions",
+                        variables: [
+                            { id: "topic", label: "Topic", placeholder: "e.g., World War II key events" },
+                            { id: "level", label: "Difficulty Level", placeholder: "e.g., High school AP level" },
+                            { id: "types", label: "Question Types Needed", placeholder: "e.g., Multiple choice, short answer, essay" },
+                            { id: "count", label: "Number of Questions", placeholder: "e.g., 20 questions" }
+                        ],
+                        template: `You are an assessment design expert who creates fair, effective test questions that truly measure understanding.
+
+Create quiz questions for: {topic}
+
+Difficulty Level: {level}
+Question Types: {types}
+Total Questions: {count}
+
+**Provide**:
+
+1. **Question Bank**
+
+   **Multiple Choice** (if requested)
+   For each:
+   - Question stem
+   - 4 answer options (A-D)
+   - Correct answer marked
+   - Explanation of why correct
+   - Why each wrong answer is wrong (common misconceptions)
+   - Bloom's taxonomy level
+
+   **Short Answer** (if requested)
+   For each:
+   - Clear question
+   - Model answer
+   - Grading rubric (point breakdown)
+   - Partial credit guidelines
+
+   **Essay Questions** (if requested)
+   For each:
+   - Question with clear parameters
+   - What a strong answer includes
+   - Detailed rubric with criteria
+   - Sample response outline
+
+2. **Question Distribution**
+   - Coverage of all key topics
+   - Mix of difficulty levels
+   - Bloom's taxonomy coverage
+
+3. **Answer Key**
+   - Quick-reference answer sheet
+   - Point values
+
+4. **Test Administration Notes**
+   - Suggested time limits
+   - Materials allowed
+   - Instructions for students
+
+5. **Question Analysis**
+   - What each question tests
+   - Potential for discrimination/bias
+   - Accessibility considerations
+
+Ensure questions are clear, unambiguous, and test true understanding rather than memorization.`
+                    }
+                }
+            },
+            productivity: {
+                name: "Productivity & Planning",
+                tasks: {
+                    "goal-setting": {
+                        name: "Goal Setting Framework",
+                        variables: [
+                            { id: "goal", label: "Main Goal", placeholder: "e.g., Launch a successful side business" },
+                            { id: "timeframe", label: "Timeframe", placeholder: "e.g., 6 months" },
+                            { id: "current", label: "Current Situation", placeholder: "e.g., Full-time job, 10 hours/week available" },
+                            { id: "obstacles", label: "Main Obstacles", placeholder: "e.g., Limited time, no audience yet" }
+                        ],
+                        template: `You are a goal achievement coach who has helped hundreds of people reach ambitious goals through systematic planning.
+
+Help me create an actionable plan for: {goal}
+
+Timeframe: {timeframe}
+Current Situation: {current}
+Main Obstacles: {obstacles}
+
+**Provide**:
+
+1. **Goal Clarification**
+   - Reframe goal as SMART format
+   - Success metrics (how you'll know you achieved it)
+   - Why this goal matters (motivation anchor)
+
+2. **Milestone Breakdown**
+   - Break into phases/quarters
+   - Key milestones for each phase
+   - Dependencies between milestones
+
+3. **Weekly Action Plan**
+   For each week/phase:
+   - Primary focus
+   - 3-5 specific tasks
+   - Time required for each
+   - Success criteria
+
+4. **Obstacle Strategy**
+   For each obstacle:
+   - Specific mitigation approach
+   - Backup plan if it persists
+   - Mindset shift needed
+
+5. **Habit Stack**
+   - Daily habits that support the goal
+   - Weekly routines to establish
+   - Triggers and rewards
+
+6. **Resource Needs**
+   - Skills to develop
+   - Tools/resources needed
+   - People to connect with
+   - Learning resources
+
+7. **Accountability System**
+   - Progress tracking method
+   - Check-in schedule
+   - Who to share progress with
+
+8. **Motivation Maintenance**
+   - Quick wins to build momentum
+   - Celebration milestones
+   - What to do when motivation drops
+
+9. **Review Process**
+   - Weekly review questions
+   - Monthly adjustment protocol
+   - Course correction triggers
+
+Make this actionable and realistic given the constraints.`
+                    },
+                    "weekly-planning": {
+                        name: "Weekly Planning Template",
+                        variables: [
+                            { id: "priorities", label: "Top Priorities", placeholder: "e.g., Complete project proposal, exercise 4x" },
+                            { id: "hours", label: "Available Hours", placeholder: "e.g., 40 work hours, 10 personal hours" },
+                            { id: "style", label: "Work Style", placeholder: "e.g., Most productive mornings, many meetings" }
+                        ],
+                        template: `You are a productivity expert who helps people design weeks that balance achievement with wellbeing.
+
+Create my weekly plan:
+
+Top Priorities: {priorities}
+Available Hours: {hours}
+Work Style: {style}
+
+**Provide**:
+
+1. **Week at a Glance**
+   - Theme for the week
+   - #1 must-accomplish item
+   - Key constraints to work around
+
+2. **Priority Matrix**
+   - Tasks categorized:
+     - Must do (non-negotiable)
+     - Should do (important but flexible)
+     - Could do (if time permits)
+     - Delegate/delete candidates
+
+3. **Time Block Template**
+   For each day:
+   - Morning block focus
+   - Afternoon block focus
+   - End of day routine
+   - Buffer time built in
+
+4. **Energy Management**
+   - When to schedule deep work
+   - When to schedule meetings/calls
+   - When to handle admin tasks
+   - Recovery periods
+
+5. **Daily Top 3**
+   - Sunday: Focus areas
+   - Monday through Friday: Specific outcomes
+   - Saturday: Review/reset
+
+6. **Habit Trackers**
+   - Habits to maintain
+   - Simple tracking method
+
+7. **Boundaries to Set**
+   - What to say no to
+   - Communication expectations
+   - Protected time blocks
+
+8. **End-of-Week Success**
+   - What "done" looks like
+   - Review questions for Friday
+
+9. **Contingency Plans**
+   - If behind schedule
+   - If unexpected comes up
+   - Energy backup strategies
+
+Keep realistic with buffers. Perfect weeks don't exist.`
+                    },
+                    "decision-making": {
+                        name: "Decision Framework",
+                        variables: [
+                            { id: "decision", label: "Decision to Make", placeholder: "e.g., Accept job offer vs stay at current company" },
+                            { id: "options", label: "Options", placeholder: "e.g., Option A: New job, Option B: Stay, Option C: Negotiate" },
+                            { id: "factors", label: "Important Factors", placeholder: "e.g., Salary, growth, work-life balance, location" },
+                            { id: "timeline", label: "Decision Deadline", placeholder: "e.g., 1 week" }
+                        ],
+                        template: `You are a decision-making coach who helps people make clear, confident decisions they won't regret.
+
+Help me decide: {decision}
+
+Options: {options}
+Important Factors: {factors}
+Timeline: {timeline}
+
+**Provide**:
+
+1. **Decision Clarity**
+   - Reframe the decision clearly
+   - What you're really choosing between
+   - Underlying values at play
+
+2. **Weighted Criteria Matrix**
+   - List all factors
+   - Weight importance (1-10)
+   - Score each option (1-10)
+   - Calculate weighted totals
+
+3. **Pro/Con Analysis**
+   For each option:
+   - Pros (be specific)
+   - Cons (be specific)
+   - Hidden considerations
+
+4. **Best/Worst Case Scenarios**
+   For each option:
+   - Best case outcome
+   - Worst case outcome
+   - Most likely outcome
+
+5. **Reversibility Analysis**
+   - Can this be undone?
+   - What's the true cost of being wrong?
+   - Time to know if it's working
+
+6. **10/10/10 Framework**
+   - How will you feel in 10 minutes?
+   - How will you feel in 10 months?
+   - How will you feel in 10 years?
+
+7. **Advisor Perspectives**
+   - What would a mentor say?
+   - What would you tell a friend?
+   - What would your future self want?
+
+8. **Fear vs Intuition Check**
+   - What fears are influencing you?
+   - What is your gut saying?
+   - Which concerns are valid vs anxiety?
+
+9. **Decision Recommendation**
+   - Based on analysis, suggested choice
+   - Key reasons why
+   - First steps after deciding
+
+10. **Pre-Mortem**
+    - If you chose X and it failed, why?
+    - How to mitigate those risks
+
+Help me decide with confidence, not endless analysis.`
+                    },
+                    "habit-design": {
+                        name: "Habit Building Plan",
+                        variables: [
+                            { id: "habit", label: "Habit to Build", placeholder: "e.g., Daily exercise routine" },
+                            { id: "current", label: "Current Behavior", placeholder: "e.g., Exercise once a week if at all" },
+                            { id: "time", label: "Available Time", placeholder: "e.g., 30 minutes in the morning" },
+                            { id: "attempts", label: "Past Attempts", placeholder: "e.g., Tried gym membership, quit after 2 weeks" }
+                        ],
+                        template: `You are a behavior change expert who designs habit systems that actually stick.
+
+Help me build: {habit}
+
+Current Behavior: {current}
+Available Time: {time}
+Past Attempts: {attempts}
+
+**Provide**:
+
+1. **Habit Analysis**
+   - Why this habit matters to you
+   - Identity shift required ("I am someone who...")
+   - Past failure patterns diagnosed
+
+2. **Tiny Habit Design**
+   - Smallest possible version (2-minute rule)
+   - Gradually expanding versions
+   - Full habit target
+
+3. **Habit Stack**
+   - Existing habit to attach to
+   - Specific trigger/cue
+   - Complete "After I [trigger], I will [tiny habit]"
+
+4. **Environment Design**
+   - Physical changes to make it easier
+   - Remove friction
+   - Visual cues to add
+   - Obstacles to eliminate
+
+5. **Reward System**
+   - Immediate reward after habit
+   - Celebration ritual
+   - Progress tracking method
+   - Milestone rewards
+
+6. **Accountability Structure**
+   - Who to tell
+   - How to track
+   - Commitment device options
+
+7. **Obstacle Anticipation**
+   - Days you'll want to skip
+   - "If [obstacle], then [response]" plans
+   - Minimum viable habit for bad days
+
+8. **21-Day Starter Plan**
+   - Week 1: Foundation
+   - Week 2: Building
+   - Week 3: Cementing
+   - Daily specific targets
+
+9. **Recovery Protocol**
+   - What to do if you miss a day
+   - Never miss twice rule
+   - Self-compassion script
+
+10. **Long-Term Integration**
+    - Month 2-3 evolution
+    - Signs it's becoming automatic
+    - When to level up
+
+Make this specific and actionable, not generic advice.`
+                    }
+                }
+            },
+            creative: {
+                name: "Creative & Design",
+                tasks: {
+                    "story-premise": {
+                        name: "Story/Novel Premise",
+                        variables: [
+                            { id: "genre", label: "Genre", placeholder: "e.g., Sci-fi thriller" },
+                            { id: "themes", label: "Themes to Explore", placeholder: "e.g., Identity, technology, freedom" },
+                            { id: "setting", label: "Setting", placeholder: "e.g., Near-future dystopia, small town" },
+                            { id: "audience", label: "Target Audience", placeholder: "e.g., Young adult, adult literary" }
+                        ],
+                        template: `You are a story consultant who has helped develop bestselling novels and award-winning screenplays.
+
+Develop a story premise for: {genre}
+
+Themes: {themes}
+Setting: {setting}
+Target Audience: {audience}
+
+**Provide**:
+
+1. **Logline Options** (3 variations)
+   - One-sentence hook for each
+   - Explain what makes each compelling
+
+2. **Premise Expansion**
+   - The world/setting richly described
+   - Central conflict
+   - Stakes (personal and larger)
+
+3. **Protagonist Profile**
+   - Name and basic description
+   - Core want vs need
+   - Fatal flaw
+   - Ghost/wound from past
+   - Character arc trajectory
+
+4. **Antagonist Profile**
+   - The opposition (person, system, or internal)
+   - Their motivation (make them sympathetic)
+   - Why they're a perfect foil
+
+5. **Supporting Cast** (3-4 characters)
+   - Role in protagonist's journey
+   - Their own mini-arc
+   - Key relationships
+
+6. **Three-Act Structure**
+   - Act 1: Setup and inciting incident
+   - Act 2: Rising action and midpoint
+   - Act 3: Climax and resolution
+
+7. **Key Scenes**
+   - 5 pivotal moments to write toward
+   - What each accomplishes emotionally
+
+8. **Theme Exploration**
+   - How themes manifest in plot
+   - Character's relationship to themes
+   - The "message" without being preachy
+
+9. **Unique Hooks**
+   - What makes this fresh
+   - Comparable titles ("X meets Y")
+   - Market positioning
+
+10. **Opening Scene Options**
+    - 2-3 ways to begin
+    - What each establishes
+
+This should be a story you'd want to read.`
+                    },
+                    "character-development": {
+                        name: "Character Development",
+                        variables: [
+                            { id: "name", label: "Character Name", placeholder: "e.g., Maya Chen" },
+                            { id: "role", label: "Role in Story", placeholder: "e.g., Protagonist, reluctant hero" },
+                            { id: "genre", label: "Story Genre", placeholder: "e.g., Contemporary drama" },
+                            { id: "traits", label: "Key Traits to Include", placeholder: "e.g., Brilliant but self-destructive" }
+                        ],
+                        template: `You are a character development expert who creates memorable, three-dimensional characters.
+
+Develop this character: {name}
+
+Role: {role}
+Genre: {genre}
+Key Traits: {traits}
+
+**Provide Deep Character Profile**:
+
+1. **Basic Info**
+   - Age, appearance, occupation
+   - First impression they give
+   - How they see themselves vs how others see them
+
+2. **Psychology**
+   - Core personality traits
+   - Biggest fear
+   - Greatest desire
+   - Secret they keep
+   - What they lie about
+
+3. **Backstory**
+   - Childhood defining moment
+   - Key relationship that shaped them
+   - Their "wound" or trauma
+   - How past affects present behavior
+
+4. **Voice & Mannerisms**
+   - How they speak (vocabulary, patterns)
+   - Physical habits/tics
+   - What makes their voice distinct
+   - Sample dialogue lines
+
+5. **Relationships**
+   - How they treat different people
+   - Who they trust (and why)
+   - Their attachment style
+   - Conflict style
+
+6. **Want vs Need**
+   - External goal (what they pursue)
+   - Internal need (what they actually need)
+   - Why these create tension
+
+7. **Character Arc**
+   - Starting state
+   - What challenges them to change
+   - What they resist
+   - Transformation moment
+   - End state
+
+8. **Contradictions**
+   - Inconsistencies that make them human
+   - Public vs private self
+   - What surprises people about them
+
+9. **Symbolic Elements**
+   - Object that represents them
+   - Recurring motif
+   - Color/imagery associations
+
+10. **Interview Questions**
+    - 5 questions to ask this character
+    - Their answers in voice
+
+Make them someone readers will think about long after the story ends.`
+                    },
+                    "content-ideas": {
+                        name: "Content Ideas Generator",
+                        variables: [
+                            { id: "niche", label: "Niche/Topic Area", placeholder: "e.g., Personal finance for millennials" },
+                            { id: "platform", label: "Platform", placeholder: "e.g., YouTube, Blog, TikTok" },
+                            { id: "audience", label: "Target Audience", placeholder: "e.g., 25-35 year olds starting to invest" },
+                            { id: "goals", label: "Content Goals", placeholder: "e.g., Grow audience, establish authority" }
+                        ],
+                        template: `You are a content strategist who has helped creators build audiences of millions.
+
+Generate content ideas for: {niche}
+
+Platform: {platform}
+Target Audience: {audience}
+Goals: {goals}
+
+**Provide**:
+
+1. **Content Pillars** (4-5)
+   - Core themes to build around
+   - Why each resonates with audience
+   - Example topics for each pillar
+
+2. **Viral Potential Ideas** (10)
+   - High-shareability concepts
+   - Hook for each
+   - Why it could spread
+
+3. **Evergreen Content** (10)
+   - Always-relevant topics
+   - SEO keyword focus
+   - Long-term value
+
+4. **Trending/Timely** (5)
+   - Current trends to tap into
+   - How to add unique angle
+   - Time-sensitive hooks
+
+5. **Series Concepts** (3)
+   - Multi-part content series
+   - Episode/post breakdown
+   - Binge-worthy hooks
+
+6. **Engagement Drivers** (5)
+   - Content that sparks comments
+   - Question-based content
+   - Controversial (but safe) takes
+
+7. **Collaboration Opportunities**
+   - Types of creators to partner with
+   - Collaboration content formats
+   - Pitch angles
+
+8. **Repurposing Strategy**
+   - How to turn 1 piece into 5+
+   - Platform adaptations
+   - Content atomization plan
+
+9. **Content Calendar**
+   - Monthly theme suggestions
+   - Posting rhythm recommendation
+   - Mix of content types
+
+10. **Headline/Hook Formulas**
+    - 10 templates that work in this niche
+    - Examples for each
+
+These should be ideas you're excited to create.`
+                    },
+                    "brand-naming": {
+                        name: "Brand/Product Naming",
+                        variables: [
+                            { id: "description", label: "What You're Naming", placeholder: "e.g., Sustainable clothing brand" },
+                            { id: "values", label: "Brand Values", placeholder: "e.g., Eco-friendly, minimalist, premium" },
+                            { id: "audience", label: "Target Audience", placeholder: "e.g., Environmentally conscious professionals" },
+                            { id: "style", label: "Name Style Preference", placeholder: "e.g., Modern, invented word, or meaningful" }
+                        ],
+                        template: `You are a brand naming expert who has named successful products and companies.
+
+Create name options for: {description}
+
+Brand Values: {values}
+Target Audience: {audience}
+Style Preference: {style}
+
+**Provide**:
+
+1. **Name Candidates** (15-20 options)
+
+   **Invented Words** (4-5)
+   - Made-up words that sound right
+   - Phonetic breakdown
+   - What it evokes
+
+   **Real Words, New Context** (4-5)
+   - Existing words used freshly
+   - Why it works for this brand
+
+   **Compound/Portmanteau** (4-5)
+   - Two concepts combined
+   - What each part contributes
+
+   **Metaphorical** (4-5)
+   - Names that suggest qualities
+   - The association they create
+
+2. **For Each Top 5 Name**:
+   - Domain availability check approach
+   - Social handle availability
+   - Trademark considerations
+   - International implications
+   - How it sounds spoken
+   - Nickname potential
+
+3. **Name Evaluation Matrix**
+   - Memorability score
+   - Pronounceability
+   - Uniqueness
+   - Brand fit
+   - Growth potential
+
+4. **Tagline Pairings**
+   - Tagline options for top names
+   - How name + tagline work together
+
+5. **Visual Considerations**
+   - How name looks written
+   - Logo direction suggestions
+   - Letter mark potential
+
+6. **Stress Test**
+   - How each sounds in:
+     - "Welcome to [name]"
+     - "I love my [name]"
+     - "[Name] just launched..."
+
+7. **Recommendation**
+   - Top 3 picks with rationale
+   - Which to pursue first
+
+Names should be ownable, memorable, and scalable.`
+                    }
+                }
+            },
+            analysis: {
+                name: "Analysis & Research",
+                tasks: {
+                    "data-analysis": {
+                        name: "Data Analysis Request",
+                        variables: [
+                            { id: "data", label: "Data Description", placeholder: "e.g., Sales data from last 12 months" },
+                            { id: "questions", label: "Questions to Answer", placeholder: "e.g., What drives sales? Seasonal patterns?" },
+                            { id: "audience", label: "Who Will See This", placeholder: "e.g., Executive team" },
+                            { id: "format", label: "Output Format", placeholder: "e.g., Executive summary with charts" }
+                        ],
+                        template: `You are a data analyst who excels at finding insights and presenting them clearly.
+
+Analyze: {data}
+
+Questions to Answer: {questions}
+Audience: {audience}
+Desired Format: {format}
+
+**When I provide the data, please**:
+
+1. **Data Overview**
+   - Summary statistics
+   - Data quality assessment
+   - Time range and completeness
+
+2. **Key Findings** (Executive Summary)
+   - Top 3-5 insights
+   - Each with supporting data point
+   - Business implications
+
+3. **Detailed Analysis**
+
+   For each question:
+   - Methodology used
+   - Findings with specific numbers
+   - Confidence level
+   - Caveats or limitations
+
+4. **Trend Analysis**
+   - Patterns identified
+   - Seasonal factors
+   - Anomalies flagged
+
+5. **Correlation Insights**
+   - Relationships between variables
+   - What drives what
+   - Surprising connections
+
+6. **Visualization Recommendations**
+   - Best chart type for each insight
+   - What to highlight
+   - How to present to audience
+
+7. **Actionable Recommendations**
+   - What to do based on findings
+   - Priority order
+   - Expected impact
+
+8. **Further Questions**
+   - What the data suggests exploring
+   - Additional data that would help
+   - Hypotheses to test
+
+Present in a format ready for {audience} - appropriate detail level and language.
+
+Please share the data and I'll provide the analysis.`
+                    },
+                    "competitor-analysis": {
+                        name: "Competitor Analysis",
+                        variables: [
+                            { id: "company", label: "Your Company", placeholder: "e.g., Our SaaS product" },
+                            { id: "competitors", label: "Competitors", placeholder: "e.g., Competitor A, B, and C" },
+                            { id: "aspects", label: "Aspects to Analyze", placeholder: "e.g., Pricing, features, positioning" },
+                            { id: "goal", label: "Analysis Goal", placeholder: "e.g., Find differentiation opportunities" }
+                        ],
+                        template: `You are a competitive intelligence analyst who provides actionable market insights.
+
+Analyze competition for: {company}
+
+Competitors to Analyze: {competitors}
+Aspects to Cover: {aspects}
+Goal: {goal}
+
+**Provide**:
+
+1. **Competitor Profiles**
+   For each competitor:
+   - Company overview
+   - Target market
+   - Value proposition
+   - Estimated size/market share
+
+2. **Feature Comparison Matrix**
+   - Side-by-side feature comparison
+   - Highlight unique features
+   - Feature gaps for each
+
+3. **Pricing Analysis**
+   - Pricing models compared
+   - Price positioning
+   - Value perception
+   - Pricing opportunities
+
+4. **Positioning Map**
+   - How each positions themselves
+   - Brand voice and messaging
+   - Target persona differences
+   - White space opportunities
+
+5. **Strengths & Weaknesses**
+   For each competitor:
+   - What they do well
+   - Where they fall short
+   - Customer complaints (if known)
+
+6. **Go-to-Market Analysis**
+   - Marketing channels used
+   - Sales approach
+   - Partnership strategy
+   - Content strategy
+
+7. **Customer Perspective**
+   - Why customers choose each
+   - Switching triggers
+   - Loyalty factors
+
+8. **Differentiation Opportunities**
+   - Gaps in the market
+   - Underserved segments
+   - Positioning options
+
+9. **Threat Assessment**
+   - Competitive threats prioritized
+   - Likely competitor moves
+   - Defensive strategies
+
+10. **Strategic Recommendations**
+    - Top 3 actions to take
+    - Quick wins
+    - Long-term positioning
+
+Make this actionable, not just informational.`
+                    },
+                    "research-brief": {
+                        name: "Research Brief",
+                        variables: [
+                            { id: "topic", label: "Research Topic", placeholder: "e.g., Consumer adoption of AI assistants" },
+                            { id: "purpose", label: "Research Purpose", placeholder: "e.g., Inform product roadmap decisions" },
+                            { id: "scope", label: "Scope", placeholder: "e.g., US market, last 2 years" },
+                            { id: "deliverable", label: "Deliverable Needed", placeholder: "e.g., Executive summary with recommendations" }
+                        ],
+                        template: `You are a research analyst who synthesizes complex information into clear, actionable briefs.
+
+Research: {topic}
+
+Purpose: {purpose}
+Scope: {scope}
+Deliverable: {deliverable}
+
+**Provide Research Brief**:
+
+1. **Executive Summary**
+   - Key findings (3-5 bullets)
+   - So what? (implications)
+   - Recommended actions
+
+2. **Background & Context**
+   - Why this matters now
+   - Historical context
+   - Current state of the topic
+
+3. **Key Findings**
+
+   Finding 1: [Major finding]
+   - Supporting evidence
+   - Data points
+   - Source credibility
+
+   [Continue for 4-6 major findings]
+
+4. **Market/Trend Analysis**
+   - Current trends
+   - Growth projections
+   - Driving factors
+   - Headwinds
+
+5. **Stakeholder Perspectives**
+   - Different viewpoints on the topic
+   - Areas of consensus
+   - Areas of debate
+
+6. **Case Studies/Examples**
+   - 2-3 relevant examples
+   - What they demonstrate
+   - Lessons learned
+
+7. **Implications**
+   - For your organization
+   - For the industry
+   - For customers
+
+8. **Risks & Uncertainties**
+   - What we don't know
+   - Conflicting data
+   - Assumptions made
+
+9. **Recommendations**
+   - Prioritized action items
+   - Quick wins vs long-term
+   - Resource requirements
+
+10. **Appendix**
+    - Methodology notes
+    - Sources to cite
+    - Further reading
+
+Research should inform decisions, not just describe situations.`
+                    },
+                    "survey-design": {
+                        name: "Survey Design",
+                        variables: [
+                            { id: "objective", label: "Research Objective", placeholder: "e.g., Measure customer satisfaction" },
+                            { id: "audience", label: "Survey Audience", placeholder: "e.g., Existing customers who purchased in last 6 months" },
+                            { id: "length", label: "Target Length", placeholder: "e.g., 5 minutes, 15 questions max" },
+                            { id: "method", label: "Distribution Method", placeholder: "e.g., Email, in-app, phone" }
+                        ],
+                        template: `You are a survey research expert who designs surveys that get high response rates and actionable data.
+
+Design a survey for: {objective}
+
+Target Audience: {audience}
+Target Length: {length}
+Distribution: {method}
+
+**Provide**:
+
+1. **Survey Strategy**
+   - Research questions to answer
+   - Hypotheses to test
+   - How results will be used
+
+2. **Survey Structure**
+   - Opening/screening questions
+   - Core questions by theme
+   - Demographic questions
+   - Closing
+
+3. **Complete Question Bank**
+   For each question:
+   - Question text (exact wording)
+   - Question type (multiple choice, scale, open)
+   - Answer options (if applicable)
+   - Required or optional
+   - Logic/skip patterns
+
+   **Include mix of**:
+   - Likert scale questions
+   - Multiple choice
+   - Ranking questions
+   - Open-ended (sparingly)
+
+4. **Introduction Script**
+   - Who's conducting survey
+   - Purpose (what to share)
+   - Time estimate
+   - Confidentiality statement
+
+5. **Question Best Practices Applied**
+   - Neutral wording
+   - Single concepts per question
+   - Appropriate answer scales
+   - Logical flow
+
+6. **Thank You/Close**
+   - Appreciation message
+   - What happens next
+   - Additional feedback option
+
+7. **Analysis Plan**
+   - Key metrics to calculate
+   - Segments to compare
+   - Statistical tests if needed
+   - Reporting format
+
+8. **Response Rate Tips**
+   - Subject line options
+   - Send timing
+   - Reminder strategy
+   - Incentive recommendations
+
+9. **Pilot Testing Plan**
+   - Who to test with
+   - What to check
+   - Iteration approach
+
+Prioritize questions that lead to action, not just interesting data.`
+                    }
+                }
+            }
+        };
+
+        let currentVariables = [];
+        let generatedPrompt = '';
+
+        function updateTasks() {
+            const category = document.getElementById('category').value;
+            const taskSection = document.getElementById('taskSection');
+            const taskSelect = document.getElementById('task');
+            const variablesSection = document.getElementById('variablesSection');
+
+            updateStepIndicator(category ? 2 : 1);
+
+            if (!category) {
+                taskSection.style.display = 'none';
+                variablesSection.style.display = 'none';
+                resetOutput();
+                return;
+            }
+
+            const tasks = promptData[category].tasks;
+            taskSelect.innerHTML = '<option value="">Choose a task...</option>';
+
+            for (const [key, task] of Object.entries(tasks)) {
+                const option = document.createElement('option');
+                option.value = key;
+                option.textContent = task.name;
+                taskSelect.appendChild(option);
+            }
+
+            taskSection.style.display = 'block';
+            variablesSection.style.display = 'none';
+            resetOutput();
+        }
+
+        function updateVariables() {
+            const category = document.getElementById('category').value;
+            const task = document.getElementById('task').value;
+            const variablesSection = document.getElementById('variablesSection');
+            const variablesGrid = document.getElementById('variablesGrid');
+
+            if (!task) {
+                variablesSection.style.display = 'none';
+                updateStepIndicator(2);
+                resetOutput();
+                return;
+            }
+
+            updateStepIndicator(3);
+
+            currentVariables = promptData[category].tasks[task].variables;
+            variablesGrid.innerHTML = '';
+
+            currentVariables.forEach(variable => {
+                const div = document.createElement('div');
+                div.className = 'variable-input';
+                div.innerHTML = `
+                    <label for="${variable.id}">${variable.label}</label>
+                    <input type="text" id="${variable.id}" placeholder="${variable.placeholder}" oninput="checkReady()">
+                `;
+                variablesGrid.appendChild(div);
+            });
+
+            variablesSection.style.display = 'block';
+            document.getElementById('generateBtn').disabled = false;
+            resetOutput();
+        }
+
+        function checkReady() {
+            const allFilled = currentVariables.every(v =>
+                document.getElementById(v.id).value.trim() !== ''
+            );
+            document.getElementById('generateBtn').disabled = !allFilled;
+        }
+
+        function generatePrompt() {
+            const category = document.getElementById('category').value;
+            const task = document.getElementById('task').value;
+
+            if (!category || !task) return;
+
+            let template = promptData[category].tasks[task].template;
+
+            currentVariables.forEach(variable => {
+                const value = document.getElementById(variable.id).value.trim();
+                template = template.replace(new RegExp(`\\{${variable.id}\\}`, 'g'), value);
+            });
+
+            generatedPrompt = template;
+
+            document.getElementById('emptyState').style.display = 'none';
+            document.getElementById('promptContent').style.display = 'block';
+            document.getElementById('promptText').textContent = generatedPrompt;
+            document.getElementById('charCount').textContent = `${generatedPrompt.length} characters`;
+            document.getElementById('copyBtn').disabled = false;
+
+            updateStepIndicator(4);
+
+            // Scroll to output
+            document.getElementById('outputSection').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function copyPrompt() {
+            if (!generatedPrompt) return;
+
+            navigator.clipboard.writeText(generatedPrompt).then(() => {
+                const btn = document.getElementById('copyBtn');
+                const originalText = btn.textContent;
+                btn.textContent = 'Copied!';
+                btn.style.background = 'var(--green)';
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '';
+                }, 2000);
+            });
+        }
+
+        function resetOutput() {
+            document.getElementById('emptyState').style.display = 'block';
+            document.getElementById('promptContent').style.display = 'none';
+            document.getElementById('copyBtn').disabled = true;
+            document.getElementById('generateBtn').disabled = true;
+            generatedPrompt = '';
+        }
+
+        function updateStepIndicator(activeStep) {
+            document.querySelectorAll('.step').forEach((step, index) => {
+                const stepNum = index + 1;
+                step.classList.remove('active', 'completed');
+                if (stepNum < activeStep) {
+                    step.classList.add('completed');
+                } else if (stepNum === activeStep) {
+                    step.classList.add('active');
+                }
+            });
+        }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI Prompt Generator",
+        "description": "Free AI prompt generator tool. Build powerful, well-structured prompts for ChatGPT, Claude, and other AI assistants.",
+        "url": "https://toolsforge.com/tools/prompt-generator.html",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "ToolsForge",
+            "url": "https://toolsforge.com"
+        }
+    }
+    </script>
+</body>
+</html>
