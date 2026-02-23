@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lorem Ipsum Generator - Free Placeholder Text | ToolsForge</title>
+    <meta name="description" content="Free Lorem Ipsum generator. Generate placeholder text by paragraphs, sentences, or words. Perfect for mockups and design projects.">
+    <meta name="keywords" content="lorem ipsum generator, placeholder text, dummy text, filler text, design mockup">
+    <link rel="canonical" href="https://toolsforge.com/tools/lorem-ipsum.html">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #09090b;
+            --bg-secondary: #18181b;
+            --bg-card: #1c1c1f;
+            --accent: #f59e0b;
+            --accent-light: #fbbf24;
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --border: #27272a;
+            --border-light: #3f3f46;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .gradient-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            height: 100vh;
+            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(245, 158, 11, 0.1), transparent);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 16px 24px;
+            background: rgba(9, 9, 11, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, #10b981, #3b82f6);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text-primary); }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 100px 24px 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ad-placeholder {
+            background: var(--bg-secondary);
+            border: 1px dashed var(--border-light);
+            border-radius: 8px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin: 24px 0;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover { color: var(--accent-light); }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--accent-light), #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .tool-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+        }
+
+        .type-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .type-btn {
+            flex: 1;
+            min-width: 120px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-light);
+            padding: 16px;
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .type-btn:hover { border-color: var(--accent); }
+
+        .type-btn.active {
+            border-color: var(--accent);
+            background: rgba(245, 158, 11, 0.1);
+        }
+
+        .type-btn small {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-weight: 400;
+            margin-top: 4px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .option-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .option-group label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        select, input[type="number"] {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        select:focus, input[type="number"]:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 24px;
+        }
+
+        .checkbox-option input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--accent);
+        }
+
+        .checkbox-option label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .generate-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--accent), #ec4899);
+            border: none;
+            padding: 16px 24px;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-bottom: 24px;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
+        }
+
+        .output-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .output-label {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .action-btns {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            background: var(--accent);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            color: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn:hover {
+            background: var(--accent-light);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--border-light);
+            color: var(--text-secondary);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--text-primary);
+            background: transparent;
+        }
+
+        .output-text {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 20px;
+            min-height: 200px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .output-text p {
+            margin-bottom: 16px;
+        }
+
+        .output-text p:last-child { margin-bottom: 0; }
+
+        .stats-row {
+            display: flex;
+            gap: 20px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .stat span {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .footer {
+            padding: 40px 24px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-inner {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--accent); }
+
+        .footer p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .footer p a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .page-header h1 { font-size: 1.8rem; }
+            .container { padding: 80px 16px 40px; }
+            .tool-card { padding: 20px; }
+            .type-buttons { flex-direction: column; }
+            .output-header { flex-direction: column; gap: 12px; align-items: flex-start; }
+        }
+    </style>
+</head>
+<body>
+    <div class="gradient-bg"></div>
+
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="../" class="logo">
+                <div class="logo-icon">T</div>
+                ToolsForge
+            </a>
+            <ul class="nav-links">
+                <li><a href="../">All Tools</a></li>
+                <li><a href="https://kaiprompts.com" target="_blank">Kai Prompts</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <a href="../" class="back-link">&larr; All Tools</a>
+            <h1>Lorem Ipsum Generator</h1>
+            <p>Generate placeholder text for your designs and mockups</p>
+        </div>
+
+        <div class="ad-placeholder">Advertisement</div>
+
+        <div class="tool-card">
+            <div class="type-buttons">
+                <button class="type-btn active" onclick="setType('paragraphs', this)">Paragraphs<small>Full text blocks</small></button>
+                <button class="type-btn" onclick="setType('sentences', this)">Sentences<small>Individual lines</small></button>
+                <button class="type-btn" onclick="setType('words', this)">Words<small>Random words</small></button>
+            </div>
+
+            <div class="options-grid">
+                <div class="option-group">
+                    <label for="amount">Amount</label>
+                    <input type="number" id="amount" min="1" max="100" value="3">
+                </div>
+                <div class="option-group">
+                    <label for="wordsPerSentence">Words per Sentence</label>
+                    <select id="wordsPerSentence">
+                        <option value="short">Short (5-10)</option>
+                        <option value="medium" selected>Medium (10-20)</option>
+                        <option value="long">Long (15-25)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="checkbox-option">
+                <input type="checkbox" id="startWithLorem" checked>
+                <label for="startWithLorem">Start with "Lorem ipsum dolor sit amet..."</label>
+            </div>
+
+            <button class="generate-btn" onclick="generateLorem()">Generate Lorem Ipsum</button>
+
+            <div class="output-header">
+                <span class="output-label">Generated Text</span>
+                <div class="action-btns">
+                    <button class="btn" onclick="copyOutput()">Copy</button>
+                    <button class="btn btn-secondary" onclick="copyAsHTML()">Copy as HTML</button>
+                </div>
+            </div>
+            <div class="output-text" id="outputText">
+                <p>Click "Generate Lorem Ipsum" to create placeholder text...</p>
+            </div>
+
+            <div class="stats-row">
+                <div class="stat">Words: <span id="wordCount">0</span></div>
+                <div class="stat">Characters: <span id="charCount">0</span></div>
+            </div>
+        </div>
+
+        <div class="ad-placeholder">Advertisement</div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-links">
+                <a href="../">All Tools</a>
+                <a href="word-counter.html">Word Counter</a>
+                <a href="case-converter.html">Case Converter</a>
+                <a href="https://kaiprompts.com" target="_blank">Kai Prompts</a>
+            </div>
+            <p>&copy; 2026 ToolsForge. A <a href="https://kaiprompts.com" target="_blank">kaiprompts.com</a> project.</p>
+        </div>
+    </footer>
+
+    <script>
+        const loremWords = [
+            'lorem', 'ipsum', 'dolor', 'sit', 'amet', 'consectetur', 'adipiscing', 'elit',
+            'sed', 'do', 'eiusmod', 'tempor', 'incididunt', 'ut', 'labore', 'et', 'dolore',
+            'magna', 'aliqua', 'enim', 'ad', 'minim', 'veniam', 'quis', 'nostrud',
+            'exercitation', 'ullamco', 'laboris', 'nisi', 'aliquip', 'ex', 'ea', 'commodo',
+            'consequat', 'duis', 'aute', 'irure', 'in', 'reprehenderit', 'voluptate',
+            'velit', 'esse', 'cillum', 'fugiat', 'nulla', 'pariatur', 'excepteur', 'sint',
+            'occaecat', 'cupidatat', 'non', 'proident', 'sunt', 'culpa', 'qui', 'officia',
+            'deserunt', 'mollit', 'anim', 'id', 'est', 'laborum', 'perspiciatis', 'unde',
+            'omnis', 'iste', 'natus', 'error', 'voluptatem', 'accusantium', 'doloremque',
+            'laudantium', 'totam', 'rem', 'aperiam', 'eaque', 'ipsa', 'quae', 'ab', 'illo',
+            'inventore', 'veritatis', 'quasi', 'architecto', 'beatae', 'vitae', 'dicta',
+            'explicabo', 'nemo', 'ipsam', 'quia', 'voluptas', 'aspernatur', 'aut', 'odit',
+            'fugit', 'consequuntur', 'magni', 'dolores', 'eos', 'ratione', 'sequi', 'nesciunt',
+            'neque', 'porro', 'quisquam', 'nihil', 'impedit', 'quo', 'minus', 'quod', 'maxime',
+            'placeat', 'facere', 'possimus', 'assumenda', 'repudiandae', 'temporibus', 'autem'
+        ];
+
+        const classicStart = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit';
+        let currentType = 'paragraphs';
+        let generatedParagraphs = [];
+
+        function setType(type, btn) {
+            currentType = type;
+            document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        function getRandomWord() {
+            return loremWords[Math.floor(Math.random() * loremWords.length)];
+        }
+
+        function getWordRange() {
+            const setting = document.getElementById('wordsPerSentence').value;
+            switch(setting) {
+                case 'short': return { min: 5, max: 10 };
+                case 'medium': return { min: 10, max: 20 };
+                case 'long': return { min: 15, max: 25 };
+                default: return { min: 10, max: 20 };
+            }
+        }
+
+        function generateSentence(forceStart = false) {
+            if (forceStart) return classicStart + '.';
+
+            const range = getWordRange();
+            const wordCount = Math.floor(Math.random() * (range.max - range.min + 1)) + range.min;
+            let words = [];
+            for (let i = 0; i < wordCount; i++) words.push(getRandomWord());
+            words[0] = words[0].charAt(0).toUpperCase() + words[0].slice(1);
+            return words.join(' ') + '.';
+        }
+
+        function generateParagraph(isFirst = false) {
+            const sentenceCount = Math.floor(Math.random() * 4) + 4;
+            let sentences = [];
+            const startWithLorem = document.getElementById('startWithLorem').checked;
+
+            for (let i = 0; i < sentenceCount; i++) {
+                sentences.push(i === 0 && isFirst && startWithLorem ? generateSentence(true) : generateSentence());
+            }
+            return sentences.join(' ');
+        }
+
+        function generateWords(count) {
+            const startWithLorem = document.getElementById('startWithLorem').checked;
+            let words = startWithLorem ? classicStart.toLowerCase().replace(/[,.]/g, '').split(' ') : [];
+            while (words.length < count) words.push(getRandomWord());
+            words[0] = words[0].charAt(0).toUpperCase() + words[0].slice(1);
+            return words.slice(0, count).join(' ') + '.';
+        }
+
+        function generateLorem() {
+            const amount = parseInt(document.getElementById('amount').value) || 3;
+            const outputText = document.getElementById('outputText');
+            generatedParagraphs = [];
+
+            switch(currentType) {
+                case 'paragraphs':
+                    for (let i = 0; i < amount; i++) generatedParagraphs.push(generateParagraph(i === 0));
+                    outputText.innerHTML = generatedParagraphs.map(p => `<p>${p}</p>`).join('');
+                    break;
+                case 'sentences':
+                    const startWithLorem = document.getElementById('startWithLorem').checked;
+                    for (let i = 0; i < amount; i++) {
+                        generatedParagraphs.push(i === 0 && startWithLorem ? generateSentence(true) : generateSentence());
+                    }
+                    outputText.innerHTML = generatedParagraphs.map(s => `<p>${s}</p>`).join('');
+                    break;
+                case 'words':
+                    const text = generateWords(amount);
+                    generatedParagraphs.push(text);
+                    outputText.innerHTML = `<p>${text}</p>`;
+                    break;
+            }
+            updateStats();
+        }
+
+        function updateStats() {
+            const text = generatedParagraphs.join(' ');
+            document.getElementById('wordCount').textContent = text.trim().split(/\s+/).length;
+            document.getElementById('charCount').textContent = text.length;
+        }
+
+        function copyOutput() {
+            const text = generatedParagraphs.join('\n\n');
+            if (!text) return;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = event.target;
+                btn.textContent = 'Copied!';
+                setTimeout(() => btn.textContent = 'Copy', 2000);
+            });
+        }
+
+        function copyAsHTML() {
+            if (!generatedParagraphs.length) return;
+            const html = generatedParagraphs.map(p => `<p>${p}</p>`).join('\n');
+            navigator.clipboard.writeText(html).then(() => {
+                const btn = event.target;
+                btn.textContent = 'Copied!';
+                setTimeout(() => btn.textContent = 'Copy as HTML', 2000);
+            });
+        }
+
+        generateLorem();
+    </script>
+</body>
+</html>

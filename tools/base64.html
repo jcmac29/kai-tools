@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Base64 Encoder/Decoder Tool | Kai Tools</title>
+    <meta name="description" content="Free online Base64 encoder and decoder. Convert text to Base64 or decode Base64 strings instantly. No sign-up required.">
+    <meta name="keywords" content="Base64 encoder, Base64 decoder, Base64 online, encode Base64, decode Base64, free Base64 tool">
+    <link rel="canonical" href="https://kaiprompts.com/tools/base64.html" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Free Base64 Encoder/Decoder Tool | Kai Tools" />
+    <meta property="og:description" content="Encode or decode Base64 strings instantly. Free online tool with no sign-up required." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kaiprompts.com/tools/base64.html" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Free Base64 Encoder/Decoder Tool" />
+    <meta name="twitter:description" content="Encode or decode Base64 strings instantly. Free online tool." />
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Base64 Encoder/Decoder",
+        "description": "Free online Base64 encoder and decoder tool",
+        "url": "https://kaiprompts.com/tools/base64.html",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #09090b;
+            --bg-secondary: #18181b;
+            --bg-card: #1c1c1f;
+            --bg-card-hover: #27272a;
+            --accent: #8b5cf6;
+            --accent-light: #a78bfa;
+            --accent-glow: rgba(139, 92, 246, 0.3);
+            --green: #22c55e;
+            --blue: #3b82f6;
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --border: #27272a;
+            --border-light: #3f3f46;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100vh;
+            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(139, 92, 246, 0.15), transparent);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 24px;
+            background: rgba(9, 9, 11, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent), var(--blue));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-cta {
+            background: var(--accent);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-light);
+            transform: translateY(-1px);
+        }
+
+        main {
+            flex: 1;
+            padding: 120px 24px 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .tool-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tool-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            margin-bottom: 24px;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-light);
+        }
+
+        .breadcrumb span {
+            color: var(--text-muted);
+            margin: 0 8px;
+        }
+
+        .ad-placeholder {
+            background: var(--bg-secondary);
+            border: 1px dashed var(--border-light);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 32px;
+        }
+
+        .tool-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .mode-toggle {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .mode-btn {
+            flex: 1;
+            padding: 14px 24px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .mode-btn.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .mode-btn:hover:not(.active) {
+            background: var(--bg-card-hover);
+            border-color: var(--accent);
+        }
+
+        label {
+            display: block;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.95rem;
+            resize: vertical;
+            margin-bottom: 20px;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        .btn-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent), #7c3aed);
+            color: white;
+            flex: 1;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px var(--accent-glow);
+        }
+
+        .btn-secondary {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent);
+        }
+
+        .result-area {
+            position: relative;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 8px 16px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: var(--accent-light);
+        }
+
+        .copy-btn.copied {
+            background: var(--green);
+        }
+
+        .stats {
+            display: flex;
+            gap: 24px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat-item {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .stat-item span {
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px;
+        }
+
+        .info-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .info-section p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }
+
+        .info-section ul {
+            color: var(--text-secondary);
+            margin-left: 20px;
+            margin-bottom: 16px;
+        }
+
+        .info-section li {
+            margin-bottom: 8px;
+        }
+
+        .footer {
+            padding: 40px 24px;
+            border-top: 1px solid var(--border);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-light);
+        }
+
+        .footer-brand {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-brand a {
+            color: var(--accent-light);
+            text-decoration: none;
+        }
+
+        .footer-brand a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            main {
+                padding: 100px 16px 40px;
+            }
+
+            .tool-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .tool-card {
+                padding: 20px;
+            }
+
+            .mode-toggle {
+                flex-direction: column;
+            }
+
+            .btn-row {
+                flex-direction: column;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gradient-bg"></div>
+
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="https://kaiprompts.com" class="logo">
+                <div class="logo-icon">K</div>
+                Kai Tools
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html">All Tools</a></li>
+                <li><a href="https://kaiprompts.com">Prompt Packs</a></li>
+                <li><a href="https://kaiprompts.com/blog/">Blog</a></li>
+            </ul>
+            <a href="https://kaiprompts.com/#bundle" class="nav-cta">Get AI Prompts</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="https://kaiprompts.com">Home</a>
+                <span>/</span>
+                <a href="../index.html">Tools</a>
+                <span>/</span>
+                Base64 Encoder/Decoder
+            </div>
+
+            <div class="tool-header">
+                <h1>Base64 Encoder/Decoder</h1>
+                <p>Convert text to Base64 encoding or decode Base64 strings back to readable text. Supports UTF-8 characters.</p>
+            </div>
+
+            <div class="ad-placeholder">
+                <!-- Google AdSense Placeholder -->
+                <p>Advertisement</p>
+            </div>
+
+            <div class="tool-card">
+                <div class="mode-toggle">
+                    <button class="mode-btn active" data-mode="encode">Encode</button>
+                    <button class="mode-btn" data-mode="decode">Decode</button>
+                </div>
+
+                <label for="input">Input Text</label>
+                <textarea id="input" placeholder="Enter text to encode or Base64 string to decode..."></textarea>
+
+                <div class="btn-row">
+                    <button class="btn btn-primary" id="processBtn">Encode to Base64</button>
+                    <button class="btn btn-secondary" id="clearBtn">Clear</button>
+                </div>
+
+                <label for="output">Result</label>
+                <div class="result-area">
+                    <textarea id="output" readonly placeholder="Result will appear here..."></textarea>
+                    <button class="copy-btn" id="copyBtn">Copy</button>
+                </div>
+
+                <div class="stats">
+                    <div class="stat-item">Input length: <span id="inputLength">0</span> chars</div>
+                    <div class="stat-item">Output length: <span id="outputLength">0</span> chars</div>
+                    <div class="stat-item">Size change: <span id="sizeChange">0%</span></div>
+                </div>
+            </div>
+
+            <div class="ad-placeholder">
+                <!-- Google AdSense Placeholder -->
+                <p>Advertisement</p>
+            </div>
+
+            <div class="info-section">
+                <h2>What is Base64 Encoding?</h2>
+                <p>Base64 is a binary-to-text encoding scheme that represents binary data in an ASCII string format. It's commonly used when you need to transmit binary data over media that only supports text, such as email or JSON.</p>
+
+                <h2>Common Use Cases</h2>
+                <ul>
+                    <li>Encoding images for inline display in HTML/CSS</li>
+                    <li>Transmitting binary data in JSON or XML</li>
+                    <li>Encoding email attachments (MIME)</li>
+                    <li>Storing complex data in cookies or URLs</li>
+                    <li>Basic obfuscation of text (not encryption!)</li>
+                </ul>
+
+                <h2>Important Notes</h2>
+                <p>Base64 encoding increases the data size by approximately 33%. It is NOT encryption - Base64 can be easily decoded by anyone. Never use Base64 alone for sensitive data protection.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-links">
+                <a href="../index.html">All Tools</a>
+                <a href="https://kaiprompts.com">Kai Prompts</a>
+                <a href="https://kaiprompts.com/blog/">Blog</a>
+                <a href="https://kaiprompts.com/privacy.html">Privacy</a>
+            </div>
+            <div class="footer-brand">
+                Free tools by <a href="https://kaiprompts.com">kaiprompts.com</a> | 2026
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const modeButtons = document.querySelectorAll('.mode-btn');
+        const processBtn = document.getElementById('processBtn');
+        const inputEl = document.getElementById('input');
+        const outputEl = document.getElementById('output');
+        const copyBtn = document.getElementById('copyBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const inputLength = document.getElementById('inputLength');
+        const outputLength = document.getElementById('outputLength');
+        const sizeChange = document.getElementById('sizeChange');
+
+        let currentMode = 'encode';
+
+        // UTF-8 aware Base64 encoding
+        function utf8ToBase64(str) {
+            return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+                function(match, p1) {
+                    return String.fromCharCode('0x' + p1);
+                }));
+        }
+
+        // UTF-8 aware Base64 decoding
+        function base64ToUtf8(str) {
+            return decodeURIComponent(atob(str).split('').map(function(c) {
+                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+            }).join(''));
+        }
+
+        modeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                modeButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentMode = btn.dataset.mode;
+                processBtn.textContent = currentMode === 'encode' ? 'Encode to Base64' : 'Decode from Base64';
+            });
+        });
+
+        function updateStats() {
+            const inLen = inputEl.value.length;
+            const outLen = outputEl.value.length;
+            inputLength.textContent = inLen;
+            outputLength.textContent = outLen;
+
+            if (inLen > 0) {
+                const change = ((outLen - inLen) / inLen * 100).toFixed(1);
+                sizeChange.textContent = (change > 0 ? '+' : '') + change + '%';
+            } else {
+                sizeChange.textContent = '0%';
+            }
+        }
+
+        processBtn.addEventListener('click', () => {
+            const input = inputEl.value;
+            if (!input.trim()) {
+                outputEl.value = '';
+                updateStats();
+                return;
+            }
+
+            try {
+                if (currentMode === 'encode') {
+                    outputEl.value = utf8ToBase64(input);
+                } else {
+                    outputEl.value = base64ToUtf8(input);
+                }
+            } catch (e) {
+                outputEl.value = 'Error: Invalid Base64 string';
+            }
+            updateStats();
+        });
+
+        clearBtn.addEventListener('click', () => {
+            inputEl.value = '';
+            outputEl.value = '';
+            updateStats();
+        });
+
+        copyBtn.addEventListener('click', async () => {
+            const text = outputEl.value;
+            if (!text) return;
+
+            try {
+                await navigator.clipboard.writeText(text);
+                copyBtn.textContent = 'Copied!';
+                copyBtn.classList.add('copied');
+                setTimeout(() => {
+                    copyBtn.textContent = 'Copy';
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            } catch (e) {
+                outputEl.select();
+                document.execCommand('copy');
+                copyBtn.textContent = 'Copied!';
+                copyBtn.classList.add('copied');
+                setTimeout(() => {
+                    copyBtn.textContent = 'Copy';
+                    copyBtn.classList.remove('copied');
+                }, 2000);
+            }
+        });
+
+        let debounceTimer;
+        inputEl.addEventListener('input', () => {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+                processBtn.click();
+            }, 300);
+        });
+    </script>
+</body>
+</html>

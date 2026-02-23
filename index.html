@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- SEO Meta Tags -->
+    <title>ToolsForge | Free Online Tools for Developers & Creators</title>
+    <meta name="description" content="Free online tools for developers and creators. Word counter, JSON formatter, password generator, base64 encoder, color picker, and more. No signup required.">
+    <meta name="keywords" content="free online tools, word counter, character counter, JSON formatter, password generator, lorem ipsum generator, case converter, URL encoder, base64 encoder, color picker, markdown preview">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://toolsforge.com/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolsforge.com/">
+    <meta property="og:title" content="ToolsForge | Free Online Tools for Developers & Creators">
+    <meta property="og:description" content="Free online tools for developers and creators. Word counter, JSON formatter, password generator, and more. No signup required.">
+    <meta property="og:image" content="https://toolsforge.com/og-image.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ToolsForge | Free Online Tools">
+    <meta name="twitter:description" content="Free online tools for developers and creators. No signup required.">
+
+    <!-- Google Analytics Placeholder -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <!-- Google AdSense Placeholder -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script>
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "ToolsForge",
+        "url": "https://toolsforge.com",
+        "description": "Free online tools for developers and creators",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://toolsforge.com/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Word Counter", "url": "https://toolsforge.com/tools/word-counter.html"},
+            {"@type": "ListItem", "position": 2, "name": "Character Counter", "url": "https://toolsforge.com/tools/character-counter.html"},
+            {"@type": "ListItem", "position": 3, "name": "JSON Formatter", "url": "https://toolsforge.com/tools/json-formatter.html"},
+            {"@type": "ListItem", "position": 4, "name": "Password Generator", "url": "https://toolsforge.com/tools/password-generator.html"},
+            {"@type": "ListItem", "position": 5, "name": "Lorem Ipsum Generator", "url": "https://toolsforge.com/tools/lorem-ipsum.html"},
+            {"@type": "ListItem", "position": 6, "name": "Case Converter", "url": "https://toolsforge.com/tools/case-converter.html"},
+            {"@type": "ListItem", "position": 7, "name": "URL Encoder/Decoder", "url": "https://toolsforge.com/tools/url-encoder.html"},
+            {"@type": "ListItem", "position": 8, "name": "Base64 Encoder/Decoder", "url": "https://toolsforge.com/tools/base64.html"},
+            {"@type": "ListItem", "position": 9, "name": "Color Picker", "url": "https://toolsforge.com/tools/color-picker.html"},
+            {"@type": "ListItem", "position": 10, "name": "Markdown Preview", "url": "https://toolsforge.com/tools/markdown-preview.html"},
+            {"@type": "ListItem", "position": 11, "name": "Hash Generator", "url": "https://toolsforge.com/tools/hash-generator.html"}
+        ]
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #09090b;
+            --bg-secondary: #18181b;
+            --bg-card: #1c1c1f;
+            --bg-card-hover: #27272a;
+            --accent: #10b981;
+            --accent-light: #34d399;
+            --accent-glow: rgba(16, 185, 129, 0.3);
+            --purple: #8b5cf6;
+            --blue: #3b82f6;
+            --orange: #f59e0b;
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --border: #27272a;
+            --border-light: #3f3f46;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Gradient background */
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100vh;
+            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(16, 185, 129, 0.12), transparent);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 24px;
+            background: rgba(9, 9, 11, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent), var(--blue));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-cta {
+            background: var(--accent);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-light);
+            transform: translateY(-1px);
+        }
+
+        /* Ad Banner Placeholder - Top */
+        .ad-banner {
+            max-width: 1200px;
+            margin: 100px auto 0;
+            padding: 0 24px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ad-placeholder {
+            background: var(--bg-secondary);
+            border: 1px dashed var(--border-light);
+            border-radius: 8px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .ad-placeholder.sidebar {
+            height: 250px;
+            width: 300px;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            padding: 60px 24px 80px;
+            text-align: center;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            padding: 8px 16px;
+            border-radius: 100px;
+            font-size: 0.85rem;
+            color: var(--accent-light);
+            margin-bottom: 24px;
+        }
+
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--accent-light), var(--blue), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto 40px;
+            line-height: 1.7;
+        }
+
+        /* Search Box */
+        .search-box {
+            max-width: 500px;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 16px 20px 16px 50px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .search-box input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .search-box svg {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+            height: 20px;
+            stroke: var(--text-muted);
+        }
+
+        /* Main Content Layout */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px 80px;
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Tools Grid */
+        .tools-section {
+            flex: 1;
+        }
+
+        .section-header {
+            margin-bottom: 32px;
+        }
+
+        .section-label {
+            color: var(--accent-light);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 8px;
+        }
+
+        .section-title {
+            font-size: 1.75rem;
+            font-weight: 700;
+        }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .tool-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s;
+            display: block;
+        }
+
+        .tool-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .tool-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .tool-icon.green { background: linear-gradient(135deg, #10b981, #059669); }
+        .tool-icon.blue { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        .tool-icon.purple { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+        .tool-icon.orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .tool-icon.pink { background: linear-gradient(135deg, #ec4899, #db2777); }
+        .tool-icon.cyan { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+        .tool-icon.red { background: linear-gradient(135deg, #ef4444, #dc2626); }
+        .tool-icon.indigo { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+        .tool-icon.teal { background: linear-gradient(135deg, #14b8a6, #0d9488); }
+        .tool-icon.yellow { background: linear-gradient(135deg, #eab308, #ca8a04); }
+
+        .tool-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tool-card h3 .arrow {
+            opacity: 0;
+            transition: all 0.3s;
+            transform: translateX(-4px);
+        }
+
+        .tool-card:hover h3 .arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .tool-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .tool-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .tool-tag {
+            background: var(--bg-secondary);
+            color: var(--text-muted);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .sidebar-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+        }
+
+        .sidebar-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .sidebar-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .sidebar-btn {
+            display: block;
+            width: 100%;
+            background: var(--purple);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-align: center;
+            transition: all 0.2s;
+        }
+
+        .sidebar-btn:hover {
+            background: #a78bfa;
+            transform: translateY(-2px);
+        }
+
+        .popular-list {
+            list-style: none;
+        }
+
+        .popular-list li {
+            margin-bottom: 12px;
+        }
+
+        .popular-list a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: color 0.2s;
+        }
+
+        .popular-list a:hover {
+            color: var(--accent-light);
+        }
+
+        .popular-list .num {
+            width: 24px;
+            height: 24px;
+            background: var(--bg-secondary);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        /* Footer */
+        .footer {
+            padding: 60px 24px 40px;
+            border-top: 1px solid var(--border);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 48px;
+            margin-bottom: 48px;
+        }
+
+        .footer-brand h3 {
+            font-size: 1.4rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer-brand p {
+            color: var(--text-muted);
+            line-height: 1.7;
+            max-width: 280px;
+            font-size: 0.9rem;
+        }
+
+        .footer-column h4 {
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-column a:hover {
+            color: var(--accent-light);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 32px;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .footer-bottom a {
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .footer-bottom a:hover {
+            color: var(--accent-light);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                padding: 40px 20px 60px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .tools-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 32px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .ad-banner {
+                margin-top: 80px;
+            }
+        }
+
+        /* Hidden search results */
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--text-muted);
+        }
+
+        .no-results h3 {
+            font-size: 1.25rem;
+            margin-bottom: 8px;
+            color: var(--text-secondary);
+        }
+
+        .tool-card.hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="gradient-bg"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="/" class="logo">
+                <div class="logo-icon">T</div>
+                ToolsForge
+            </a>
+            <ul class="nav-links">
+                <li><a href="#text-tools">Text Tools</a></li>
+                <li><a href="#dev-tools">Dev Tools</a></li>
+                <li><a href="#generators">Generators</a></li>
+                <li><a href="https://kaiprompts.com" target="_blank">Kai Prompts</a></li>
+            </ul>
+            <a href="https://kaiprompts.com" class="nav-cta" target="_blank">Get AI Prompts</a>
+        </div>
+    </nav>
+
+    <!-- Top Ad Banner -->
+    <div class="ad-banner">
+        <div class="ad-placeholder">
+            <!-- AdSense Ad Unit Placeholder - 728x90 Leaderboard -->
+            <ins class="adsbygoogle"
+                style="display:inline-block;width:728px;height:90px"
+                data-ad-client="ca-pub-XXXXXXXXXX"
+                data-ad-slot="XXXXXXXXXX"></ins>
+            <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-badge">
+            <span class="hero-badge-dot"></span>
+            11 Free Tools - No Signup Required
+        </div>
+        <h1>
+            Free Online Tools for<br>
+            <span class="gradient-text">Developers & Creators</span>
+        </h1>
+        <p class="hero-subtitle">
+            Simple, fast, and privacy-friendly tools for everyday tasks.
+            Everything runs in your browser - your data never leaves your device.
+        </p>
+
+        <!-- Search Box -->
+        <div class="search-box">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+            </svg>
+            <input type="text" id="toolSearch" placeholder="Search tools..." autocomplete="off">
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Tools Section -->
+        <div class="tools-section">
+            <div class="section-header">
+                <p class="section-label">All Tools</p>
+                <h2 class="section-title">Choose a Tool to Get Started</h2>
+            </div>
+
+            <div class="tools-grid" id="toolsGrid">
+                <!-- Word Counter -->
+                <a href="tools/word-counter.html" class="tool-card" data-tags="text word count characters sentences paragraphs">
+                    <div class="tool-icon green">W</div>
+                    <h3>Word Counter <span class="arrow">&rarr;</span></h3>
+                    <p>Count words, characters, sentences, and paragraphs in your text instantly.</p>
+                    <div class="tool-tags">
+                        <span class="tool-tag">Text</span>
+                        <span class="tool-tag">Writing</span>
+                    </div>
+                </a>
+
+                <!-- Character Counter -->
+                <a href="tools/character-counter.html" class="tool-card" data-tags="text character count letters spaces twitter limit">
+                    <div class="tool-icon blue">C</div>
+                    <h3>Character Counter <span class="arrow">&rarr;</span></h3>
+                    <p>Count characters with or without spaces. Perfect for Twitter and social media.</p>
+                    <div class="tool-tags">
+                        <span class="tool-tag">Text</span>
+                        <span class="tool-tag">Social Media</span>
+                    </div>
+                </a>
+
+                <!-- JSON Formatter -->
+                <a href="tools/json-formatter.html" class="tool-card" data-tags="json format beautify minify validate developer code">
+                    <div class="tool-icon purple">{ }</div>
+                    <h3>JSON Formatter <span class="arrow">&rarr;</span></h3>
+                    <p>Format, beautify, minify, and validate JSON data with syntax highlighting.</p>
+                    <div class="tool-tags">
+                        <span class="tool-tag">Developer</span>
+                        <span class="tool-tag">Code</span>
+                    </div>
+                </a>
+
+                <!-- Password Generator -->
+                <a href="tools/password-generator.html" class="tool-card" data-tags="password generator secure random strong security">
+                    <div class="tool-icon red">*</div>
+                    <h3>Password Generator <span class="arrow">&rarr;</span></h3>
+                    <p>Generate strong, secure passwords with customizable length and complexity.</p>
+                    <div class="tool-tags">
+                        <span class="tool-tag">Security</span>
+                        <span class="tool-tag">Generator</span>
+                    </div>
+                </a>
+
+                <!-- Lorem Ipsum Generator -->
+                <a href="tools/lorem-ipsum.html" class="tool-card" data-tags="lorem ipsum placeholder text dummy content design">
+                    <div class="tool-icon orange">L</div>
+                    <h3>Lorem Ipsum Generator <span class="arrow">&rarr;</span></h3>
+                    <p>Generate placeholder text for designs, mockups, and prototypes.</p>
+                    <div class="tool-tags">
+                        <span class="tool-tag">Design</span>
+                        <span class="tool-tag">Content</span>
+                    </div>
+                </a>
+
+                <!-- Case Converter -->
+                <a href="tools/case-converter.html" class="tool-card" data-tags="case convert uppercase lowercase title sentence camel">
+                    <div class="tool-icon cyan">Aa</div>
+                    <h3>Case Converter <span class="arrow">&rarr;</span></h3>
+                    <p>Convert text to uppercase, lowercase, title case, sentence case, and more.</p>
+                    <div class="tool-tags">
+                        <span class="tool-tag">Text</span>
+                        <span class="tool-tag">Formatting</span>
+                    </div>
+                </a>
+
+                <!-- URL Encoder/Decoder -->
+                <a href="tools/url-encoder.html" class="tool-card" data-tags="url encode decode uri percent escape web">
+                    <div class="tool-icon indigo">%</div>
+                    <h3>URL Encoder/Decoder <span class="arrow">&rarr;</span></h3>
+                    <p>Encode or decode URLs and URI components for web development.</p>
+                    <div class="tool-tags">
+                        <span class="tool-tag">Developer</span>
+                        <span class="tool-tag">Web</span>
+                    </div>
+                </a>
+
+                <!-- Base64 Encoder/Decoder -->
+                <a href="tools/base64.html" class="tool-card" data-tags="base64 encode decode binary text data conversion">
+                    <div class="tool-icon teal">64</div>
+                    <h3>Base64 Encoder/Decoder <span class="arrow">&rarr;</span></h3>
+                    <p>Encode text to Base64 or decode Base64 strings back to text.</p>
+                    <div class="tool-tags">
+                        <span class="tool-tag">Developer</span>
+                        <span class="tool-tag">Encoding</span>
+                    </div>
+                </a>
+
+                <!-- Color Picker -->
+                <a href="tools/color-picker.html" class="tool-card" data-tags="color picker hex rgb hsl converter design palette">
+                    <div class="tool-icon pink">#</div>
+                    <h3>Color Picker <span class="arrow">&rarr;</span></h3>
+                    <p>Pick colors and convert between HEX, RGB, and HSL formats instantly.</p>
+                    <div class="tool-tags">
+                        <span class="tool-tag">Design</span>
+                        <span class="tool-tag">Color</span>
+                    </div>
+                </a>
+
+                <!-- Markdown Preview -->
+                <a href="tools/markdown-preview.html" class="tool-card" data-tags="markdown preview editor render html github readme">
+                    <div class="tool-icon yellow">M</div>
+                    <h3>Markdown Preview <span class="arrow">&rarr;</span></h3>
+                    <p>Write Markdown and see it rendered in real-time. Export to HTML.</p>
+                    <div class="tool-tags">
+                        <span class="tool-tag">Writing</span>
+                        <span class="tool-tag">Developer</span>
+                    </div>
+                </a>
+
+                <!-- Hash Generator -->
+                <a href="tools/hash-generator.html" class="tool-card" data-tags="hash md5 sha1 sha256 sha512 crypto security checksum">
+                    <div class="tool-icon red">#</div>
+                    <h3>Hash Generator <span class="arrow">&rarr;</span></h3>
+                    <p>Generate MD5, SHA-1, SHA-256, and SHA-512 hashes. Client-side processing.</p>
+                    <div class="tool-tags">
+                        <span class="tool-tag">Security</span>
+                        <span class="tool-tag">Crypto</span>
+                    </div>
+                </a>
+            </div>
+
+            <!-- No Results Message -->
+            <div class="no-results" id="noResults" style="display: none;">
+                <h3>No tools found</h3>
+                <p>Try a different search term</p>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <!-- Ad Placeholder -->
+            <div class="ad-placeholder sidebar">
+                <!-- AdSense Ad Unit Placeholder - 300x250 Medium Rectangle -->
+                <ins class="adsbygoogle"
+                    style="display:inline-block;width:300px;height:250px"
+                    data-ad-client="ca-pub-XXXXXXXXXX"
+                    data-ad-slot="XXXXXXXXXX"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+
+            <!-- Popular Tools -->
+            <div class="sidebar-card">
+                <h3>Popular Tools</h3>
+                <ul class="popular-list">
+                    <li><span class="num">1</span><a href="tools/word-counter.html">Word Counter</a></li>
+                    <li><span class="num">2</span><a href="tools/json-formatter.html">JSON Formatter</a></li>
+                    <li><span class="num">3</span><a href="tools/password-generator.html">Password Generator</a></li>
+                    <li><span class="num">4</span><a href="tools/base64.html">Base64 Encoder</a></li>
+                    <li><span class="num">5</span><a href="tools/color-picker.html">Color Picker</a></li>
+                </ul>
+            </div>
+
+            <!-- Promo Card -->
+            <div class="sidebar-card" style="border-color: var(--purple);">
+                <h3>Level Up with AI</h3>
+                <p>Get 375+ battle-tested AI prompts for ChatGPT, Claude, and more. Boost your productivity instantly.</p>
+                <a href="https://kaiprompts.com" class="sidebar-btn" target="_blank">Get AI Prompts</a>
+            </div>
+
+            <!-- Another Ad -->
+            <div class="ad-placeholder sidebar">
+                <!-- AdSense Ad Unit Placeholder - 300x250 Medium Rectangle -->
+                <ins class="adsbygoogle"
+                    style="display:inline-block;width:300px;height:250px"
+                    data-ad-client="ca-pub-XXXXXXXXXX"
+                    data-ad-slot="XXXXXXXXXX"></ins>
+                <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>
+                        <div class="logo-icon" style="width:28px;height:28px;font-size:14px;">T</div>
+                        ToolsForge
+                    </h3>
+                    <p>Free online tools for developers and creators. Built with privacy in mind - all processing happens in your browser.</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Text Tools</h4>
+                    <ul>
+                        <li><a href="tools/word-counter.html">Word Counter</a></li>
+                        <li><a href="tools/character-counter.html">Character Counter</a></li>
+                        <li><a href="tools/case-converter.html">Case Converter</a></li>
+                        <li><a href="tools/lorem-ipsum.html">Lorem Ipsum</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Developer Tools</h4>
+                    <ul>
+                        <li><a href="tools/json-formatter.html">JSON Formatter</a></li>
+                        <li><a href="tools/url-encoder.html">URL Encoder</a></li>
+                        <li><a href="tools/base64.html">Base64 Encoder</a></li>
+                        <li><a href="tools/markdown-preview.html">Markdown Preview</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>More</h4>
+                    <ul>
+                        <li><a href="tools/password-generator.html">Password Generator</a></li>
+                        <li><a href="tools/color-picker.html">Color Picker</a></li>
+                        <li><a href="https://kaiprompts.com" target="_blank">Kai Prompts</a></li>
+                        <li><a href="mailto:hello@toolsforge.com">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 ToolsForge. All rights reserved. A <a href="https://kaiprompts.com" target="_blank">Kai Prompts</a> project.</p>
+                <p>Made with code, for people who code.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Search Script -->
+    <script>
+        const searchInput = document.getElementById('toolSearch');
+        const toolsGrid = document.getElementById('toolsGrid');
+        const toolCards = toolsGrid.querySelectorAll('.tool-card');
+        const noResults = document.getElementById('noResults');
+
+        searchInput.addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase().trim();
+            let visibleCount = 0;
+
+            toolCards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('p').textContent.toLowerCase();
+                const tags = card.dataset.tags.toLowerCase();
+
+                const matches = title.includes(searchTerm) ||
+                               description.includes(searchTerm) ||
+                               tags.includes(searchTerm);
+
+                if (matches || searchTerm === '') {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+        });
+
+        // Track tool clicks for analytics
+        toolCards.forEach(card => {
+            card.addEventListener('click', function() {
+                const toolName = this.querySelector('h3').textContent.replace(' \u2192', '');
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'tool_click', {
+                        'tool_name': toolName
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

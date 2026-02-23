@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Markdown Editor with Live Preview | Kai Tools</title>
+    <meta name="description" content="Free online markdown editor with live preview. Write markdown and see the formatted output instantly. Supports all common markdown syntax.">
+    <meta name="keywords" content="markdown editor, markdown preview, online markdown, markdown to html, free markdown tool, live markdown">
+    <link rel="canonical" href="https://kaiprompts.com/tools/markdown-preview.html" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Free Markdown Editor with Live Preview | Kai Tools" />
+    <meta property="og:description" content="Write markdown and see formatted output instantly. Free online editor with live preview." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kaiprompts.com/tools/markdown-preview.html" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Free Markdown Editor" />
+    <meta name="twitter:description" content="Write markdown with live preview. Free online tool." />
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Markdown Editor with Live Preview",
+        "description": "Free online markdown editor with instant preview",
+        "url": "https://kaiprompts.com/tools/markdown-preview.html",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #09090b;
+            --bg-secondary: #18181b;
+            --bg-card: #1c1c1f;
+            --bg-card-hover: #27272a;
+            --accent: #8b5cf6;
+            --accent-light: #a78bfa;
+            --accent-glow: rgba(139, 92, 246, 0.3);
+            --green: #22c55e;
+            --blue: #3b82f6;
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --border: #27272a;
+            --border-light: #3f3f46;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100vh;
+            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(139, 92, 246, 0.15), transparent);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 24px;
+            background: rgba(9, 9, 11, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent), var(--blue));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-cta {
+            background: var(--accent);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-light);
+            transform: translateY(-1px);
+        }
+
+        main {
+            flex: 1;
+            padding: 100px 24px 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .tool-header h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tool-header p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-light);
+        }
+
+        .breadcrumb span {
+            color: var(--text-muted);
+            margin: 0 8px;
+        }
+
+        .ad-placeholder {
+            background: var(--bg-secondary);
+            border: 1px dashed var(--border-light);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 24px;
+        }
+
+        .editor-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .editor-panel, .preview-panel {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 16px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .panel-title {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .panel-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .panel-btn {
+            padding: 6px 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .panel-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .panel-btn.copied {
+            background: var(--green);
+            border-color: var(--green);
+            color: white;
+        }
+
+        #markdownInput {
+            flex: 1;
+            width: 100%;
+            min-height: 500px;
+            padding: 20px;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            resize: none;
+        }
+
+        #markdownInput:focus {
+            outline: none;
+        }
+
+        #markdownInput::placeholder {
+            color: var(--text-muted);
+        }
+
+        .preview-content {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            min-height: 500px;
+        }
+
+        /* Markdown preview styles */
+        .preview-content h1 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .preview-content h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 24px 0 12px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .preview-content h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 20px 0 10px;
+        }
+
+        .preview-content h4, .preview-content h5, .preview-content h6 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 16px 0 8px;
+        }
+
+        .preview-content p {
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+        }
+
+        .preview-content strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .preview-content em {
+            font-style: italic;
+        }
+
+        .preview-content code {
+            background: var(--bg-secondary);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.9em;
+            color: var(--accent-light);
+        }
+
+        .preview-content pre {
+            background: var(--bg-secondary);
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin-bottom: 16px;
+        }
+
+        .preview-content pre code {
+            background: transparent;
+            padding: 0;
+            color: var(--text-primary);
+        }
+
+        .preview-content blockquote {
+            border-left: 4px solid var(--accent);
+            padding-left: 16px;
+            margin: 16px 0;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        .preview-content ul, .preview-content ol {
+            margin: 16px 0;
+            padding-left: 24px;
+            color: var(--text-secondary);
+        }
+
+        .preview-content li {
+            margin-bottom: 8px;
+        }
+
+        .preview-content a {
+            color: var(--accent-light);
+            text-decoration: none;
+        }
+
+        .preview-content a:hover {
+            text-decoration: underline;
+        }
+
+        .preview-content hr {
+            border: none;
+            border-top: 1px solid var(--border);
+            margin: 24px 0;
+        }
+
+        .preview-content img {
+            max-width: 100%;
+            border-radius: 8px;
+        }
+
+        .preview-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+        }
+
+        .preview-content th, .preview-content td {
+            border: 1px solid var(--border);
+            padding: 10px 12px;
+            text-align: left;
+        }
+
+        .preview-content th {
+            background: var(--bg-secondary);
+            font-weight: 600;
+        }
+
+        .toolbar {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .toolbar-btn {
+            padding: 8px 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .toolbar-btn:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--accent);
+            color: var(--text-primary);
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px;
+        }
+
+        .info-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .info-section p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }
+
+        .syntax-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .syntax-item {
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            padding: 12px;
+        }
+
+        .syntax-item code {
+            display: block;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.85rem;
+            color: var(--accent-light);
+            margin-bottom: 4px;
+        }
+
+        .syntax-item span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .footer {
+            padding: 40px 24px;
+            border-top: 1px solid var(--border);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-light);
+        }
+
+        .footer-brand {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-brand a {
+            color: var(--accent-light);
+            text-decoration: none;
+        }
+
+        .footer-brand a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+            }
+
+            main {
+                padding: 90px 16px 40px;
+            }
+
+            .tool-header h1 {
+                font-size: 1.6rem;
+            }
+
+            .editor-container {
+                grid-template-columns: 1fr;
+            }
+
+            #markdownInput, .preview-content {
+                min-height: 300px;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gradient-bg"></div>
+
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="https://kaiprompts.com" class="logo">
+                <div class="logo-icon">K</div>
+                Kai Tools
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html">All Tools</a></li>
+                <li><a href="https://kaiprompts.com">Prompt Packs</a></li>
+                <li><a href="https://kaiprompts.com/blog/">Blog</a></li>
+            </ul>
+            <a href="https://kaiprompts.com/#bundle" class="nav-cta">Get AI Prompts</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="https://kaiprompts.com">Home</a>
+                <span>/</span>
+                <a href="../index.html">Tools</a>
+                <span>/</span>
+                Markdown Preview
+            </div>
+
+            <div class="tool-header">
+                <h1>Markdown Editor with Live Preview</h1>
+                <p>Write markdown on the left, see the formatted result on the right. Supports all common markdown syntax.</p>
+            </div>
+
+            <div class="ad-placeholder">
+                <p>Advertisement</p>
+            </div>
+
+            <div class="toolbar">
+                <button class="toolbar-btn" data-insert="**bold**">Bold</button>
+                <button class="toolbar-btn" data-insert="*italic*">Italic</button>
+                <button class="toolbar-btn" data-insert="# ">H1</button>
+                <button class="toolbar-btn" data-insert="## ">H2</button>
+                <button class="toolbar-btn" data-insert="### ">H3</button>
+                <button class="toolbar-btn" data-insert="[link](url)">Link</button>
+                <button class="toolbar-btn" data-insert="![alt](image-url)">Image</button>
+                <button class="toolbar-btn" data-insert="`code`">Code</button>
+                <button class="toolbar-btn" data-insert="```\ncode block\n```">Code Block</button>
+                <button class="toolbar-btn" data-insert="> ">Quote</button>
+                <button class="toolbar-btn" data-insert="- ">List</button>
+                <button class="toolbar-btn" data-insert="---">HR</button>
+            </div>
+
+            <div class="editor-container">
+                <div class="editor-panel">
+                    <div class="panel-header">
+                        <span class="panel-title">Markdown</span>
+                        <div class="panel-actions">
+                            <button class="panel-btn" id="clearBtn">Clear</button>
+                            <button class="panel-btn" id="copyMd">Copy MD</button>
+                        </div>
+                    </div>
+                    <textarea id="markdownInput" placeholder="Start typing your markdown here...
+
+# Heading 1
+## Heading 2
+
+**Bold text** and *italic text*
+
+- List item 1
+- List item 2
+
+> Blockquote
+
+`inline code`
+
+```
+code block
+```
+
+[Link text](https://example.com)"></textarea>
+                </div>
+
+                <div class="preview-panel">
+                    <div class="panel-header">
+                        <span class="panel-title">Preview</span>
+                        <div class="panel-actions">
+                            <button class="panel-btn" id="copyHtml">Copy HTML</button>
+                        </div>
+                    </div>
+                    <div class="preview-content" id="previewContent">
+                        <p style="color: var(--text-muted);">Your preview will appear here...</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ad-placeholder">
+                <p>Advertisement</p>
+            </div>
+
+            <div class="info-section">
+                <h2>Markdown Syntax Reference</h2>
+                <p>Markdown is a lightweight markup language that lets you format text using simple symbols. Here's a quick reference:</p>
+
+                <div class="syntax-grid">
+                    <div class="syntax-item">
+                        <code># Heading 1</code>
+                        <span>Creates a large heading</span>
+                    </div>
+                    <div class="syntax-item">
+                        <code>## Heading 2</code>
+                        <span>Creates a medium heading</span>
+                    </div>
+                    <div class="syntax-item">
+                        <code>**bold**</code>
+                        <span>Makes text bold</span>
+                    </div>
+                    <div class="syntax-item">
+                        <code>*italic*</code>
+                        <span>Makes text italic</span>
+                    </div>
+                    <div class="syntax-item">
+                        <code>[text](url)</code>
+                        <span>Creates a link</span>
+                    </div>
+                    <div class="syntax-item">
+                        <code>![alt](url)</code>
+                        <span>Embeds an image</span>
+                    </div>
+                    <div class="syntax-item">
+                        <code>`code`</code>
+                        <span>Inline code</span>
+                    </div>
+                    <div class="syntax-item">
+                        <code>```code```</code>
+                        <span>Code block</span>
+                    </div>
+                    <div class="syntax-item">
+                        <code>> quote</code>
+                        <span>Blockquote</span>
+                    </div>
+                    <div class="syntax-item">
+                        <code>- item</code>
+                        <span>Unordered list</span>
+                    </div>
+                    <div class="syntax-item">
+                        <code>1. item</code>
+                        <span>Ordered list</span>
+                    </div>
+                    <div class="syntax-item">
+                        <code>---</code>
+                        <span>Horizontal rule</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-links">
+                <a href="../index.html">All Tools</a>
+                <a href="https://kaiprompts.com">Kai Prompts</a>
+                <a href="https://kaiprompts.com/blog/">Blog</a>
+                <a href="https://kaiprompts.com/privacy.html">Privacy</a>
+            </div>
+            <div class="footer-brand">
+                Free tools by <a href="https://kaiprompts.com">kaiprompts.com</a> | 2026
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const markdownInput = document.getElementById('markdownInput');
+        const previewContent = document.getElementById('previewContent');
+        const clearBtn = document.getElementById('clearBtn');
+        const copyMdBtn = document.getElementById('copyMd');
+        const copyHtmlBtn = document.getElementById('copyHtml');
+
+        // Simple markdown parser
+        function parseMarkdown(md) {
+            let html = md;
+
+            // Escape HTML first
+            html = html.replace(/&/g, '&amp;')
+                       .replace(/</g, '&lt;')
+                       .replace(/>/g, '&gt;');
+
+            // Code blocks (before other processing)
+            html = html.replace(/```(\w*)\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
+
+            // Inline code
+            html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+            // Headers
+            html = html.replace(/^###### (.*$)/gim, '<h6>$1</h6>');
+            html = html.replace(/^##### (.*$)/gim, '<h5>$1</h5>');
+            html = html.replace(/^#### (.*$)/gim, '<h4>$1</h4>');
+            html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+            html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+            html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+
+            // Bold and italic
+            html = html.replace(/\*\*\*([^*]+)\*\*\*/g, '<strong><em>$1</em></strong>');
+            html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+            html = html.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+            html = html.replace(/___([^_]+)___/g, '<strong><em>$1</em></strong>');
+            html = html.replace(/__([^_]+)__/g, '<strong>$1</strong>');
+            html = html.replace(/_([^_]+)_/g, '<em>$1</em>');
+
+            // Strikethrough
+            html = html.replace(/~~([^~]+)~~/g, '<del>$1</del>');
+
+            // Images (before links)
+            html = html.replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">');
+
+            // Links
+            html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+
+            // Blockquotes
+            html = html.replace(/^&gt; (.*$)/gim, '<blockquote>$1</blockquote>');
+
+            // Horizontal rules
+            html = html.replace(/^---$/gim, '<hr>');
+            html = html.replace(/^\*\*\*$/gim, '<hr>');
+            html = html.replace(/^___$/gim, '<hr>');
+
+            // Unordered lists
+            html = html.replace(/^\s*[-*+] (.*)$/gim, '<li>$1</li>');
+            html = html.replace(/(<li>.*<\/li>)/s, '<ul>$1</ul>');
+
+            // Ordered lists
+            html = html.replace(/^\s*\d+\. (.*)$/gim, '<li>$1</li>');
+
+            // Fix list grouping
+            html = html.replace(/<\/li>\n<li>/g, '</li><li>');
+            html = html.replace(/(<li>[\s\S]*?<\/li>)/g, function(match) {
+                if (!match.includes('<ul>') && !match.includes('<ol>')) {
+                    return '<ul>' + match + '</ul>';
+                }
+                return match;
+            });
+
+            // Tables
+            html = html.replace(/^\|(.+)\|$/gim, function(match, content) {
+                const cells = content.split('|').map(c => c.trim());
+                if (cells.every(c => /^[-:]+$/.test(c))) {
+                    return ''; // Skip separator row
+                }
+                const cellHtml = cells.map(c => `<td>${c}</td>`).join('');
+                return `<tr>${cellHtml}</tr>`;
+            });
+            html = html.replace(/(<tr>[\s\S]*?<\/tr>)+/g, '<table>$&</table>');
+
+            // Paragraphs (double newlines)
+            html = html.replace(/\n\n+/g, '</p><p>');
+            html = '<p>' + html + '</p>';
+
+            // Clean up empty paragraphs
+            html = html.replace(/<p><\/p>/g, '');
+            html = html.replace(/<p>(<h[1-6]>)/g, '$1');
+            html = html.replace(/(<\/h[1-6]>)<\/p>/g, '$1');
+            html = html.replace(/<p>(<ul>)/g, '$1');
+            html = html.replace(/(<\/ul>)<\/p>/g, '$1');
+            html = html.replace(/<p>(<ol>)/g, '$1');
+            html = html.replace(/(<\/ol>)<\/p>/g, '$1');
+            html = html.replace(/<p>(<pre>)/g, '$1');
+            html = html.replace(/(<\/pre>)<\/p>/g, '$1');
+            html = html.replace(/<p>(<blockquote>)/g, '$1');
+            html = html.replace(/(<\/blockquote>)<\/p>/g, '$1');
+            html = html.replace(/<p>(<hr>)<\/p>/g, '$1');
+            html = html.replace(/<p>(<table>)/g, '$1');
+            html = html.replace(/(<\/table>)<\/p>/g, '$1');
+
+            // Line breaks
+            html = html.replace(/\n/g, '<br>');
+            html = html.replace(/<br><br>/g, '</p><p>');
+
+            return html;
+        }
+
+        function updatePreview() {
+            const md = markdownInput.value;
+            if (!md.trim()) {
+                previewContent.innerHTML = '<p style="color: var(--text-muted);">Your preview will appear here...</p>';
+                return;
+            }
+            previewContent.innerHTML = parseMarkdown(md);
+        }
+
+        markdownInput.addEventListener('input', updatePreview);
+
+        clearBtn.addEventListener('click', () => {
+            markdownInput.value = '';
+            updatePreview();
+        });
+
+        async function copyToClipboard(text, btn) {
+            try {
+                await navigator.clipboard.writeText(text);
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = btn.id === 'copyMd' ? 'Copy MD' : 'Copy HTML';
+                    btn.classList.remove('copied');
+                }, 1500);
+            } catch (e) {
+                console.error('Copy failed', e);
+            }
+        }
+
+        copyMdBtn.addEventListener('click', () => {
+            copyToClipboard(markdownInput.value, copyMdBtn);
+        });
+
+        copyHtmlBtn.addEventListener('click', () => {
+            copyToClipboard(previewContent.innerHTML, copyHtmlBtn);
+        });
+
+        // Toolbar buttons
+        document.querySelectorAll('.toolbar-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const insert = btn.dataset.insert;
+                const start = markdownInput.selectionStart;
+                const end = markdownInput.selectionEnd;
+                const text = markdownInput.value;
+
+                markdownInput.value = text.substring(0, start) + insert + text.substring(end);
+                markdownInput.focus();
+                markdownInput.selectionStart = markdownInput.selectionEnd = start + insert.length;
+                updatePreview();
+            });
+        });
+
+        // Load saved content
+        const saved = localStorage.getItem('markdown-draft');
+        if (saved) {
+            markdownInput.value = saved;
+            updatePreview();
+        }
+
+        // Auto-save
+        markdownInput.addEventListener('input', () => {
+            localStorage.setItem('markdown-draft', markdownInput.value);
+        });
+    </script>
+</body>
+</html>

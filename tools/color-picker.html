@@ -1,0 +1,900 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Color Picker - HEX RGB HSL Converter | Kai Tools</title>
+    <meta name="description" content="Free online color picker tool. Convert colors between HEX, RGB, and HSL formats. Pick colors visually and copy values instantly.">
+    <meta name="keywords" content="color picker, hex to rgb, rgb to hex, hsl converter, color converter, online color tool">
+    <link rel="canonical" href="https://kaiprompts.com/tools/color-picker.html" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Free Color Picker - HEX RGB HSL Converter | Kai Tools" />
+    <meta property="og:description" content="Pick colors and convert between HEX, RGB, and HSL formats instantly." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kaiprompts.com/tools/color-picker.html" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Free Color Picker Tool" />
+    <meta name="twitter:description" content="Pick colors and convert between HEX, RGB, HSL." />
+
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Color Picker & Converter",
+        "description": "Free online color picker and converter tool",
+        "url": "https://kaiprompts.com/tools/color-picker.html",
+        "applicationCategory": "DesignApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #09090b;
+            --bg-secondary: #18181b;
+            --bg-card: #1c1c1f;
+            --bg-card-hover: #27272a;
+            --accent: #8b5cf6;
+            --accent-light: #a78bfa;
+            --accent-glow: rgba(139, 92, 246, 0.3);
+            --green: #22c55e;
+            --blue: #3b82f6;
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --border: #27272a;
+            --border-light: #3f3f46;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gradient-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100vh;
+            background: radial-gradient(ellipse 80% 50% at 50% -20%, rgba(139, 92, 246, 0.15), transparent);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 16px 24px;
+            background: rgba(9, 9, 11, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent), var(--blue));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-cta {
+            background: var(--accent);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent-light);
+            transform: translateY(-1px);
+        }
+
+        main {
+            flex: 1;
+            padding: 120px 24px 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .tool-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tool-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .breadcrumb {
+            margin-bottom: 24px;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-light);
+        }
+
+        .breadcrumb span {
+            color: var(--text-muted);
+            margin: 0 8px;
+        }
+
+        .ad-placeholder {
+            background: var(--bg-secondary);
+            border: 1px dashed var(--border-light);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 32px;
+        }
+
+        .tool-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 32px;
+        }
+
+        .color-picker-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+
+        .picker-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .color-preview {
+            width: 200px;
+            height: 200px;
+            border-radius: 16px;
+            border: 3px solid var(--border-light);
+            margin-bottom: 20px;
+            transition: background-color 0.2s;
+        }
+
+        .native-picker {
+            width: 100%;
+            max-width: 200px;
+            height: 50px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            background: transparent;
+        }
+
+        .native-picker::-webkit-color-swatch-wrapper {
+            padding: 0;
+        }
+
+        .native-picker::-webkit-color-swatch {
+            border: 2px solid var(--border-light);
+            border-radius: 10px;
+        }
+
+        .values-area {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .color-input-group {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .color-input-group label {
+            display: block;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 8px;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .color-input-group input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 0.95rem;
+        }
+
+        .color-input-group input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .copy-small {
+            padding: 12px 16px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .copy-small:hover {
+            background: var(--accent-light);
+        }
+
+        .copy-small.copied {
+            background: var(--green);
+        }
+
+        .sliders-section {
+            border-top: 1px solid var(--border);
+            padding-top: 24px;
+        }
+
+        .slider-group {
+            margin-bottom: 20px;
+        }
+
+        .slider-group label {
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        .slider-group input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--bg-secondary);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider-group input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        }
+
+        #hueSlider {
+            background: linear-gradient(to right,
+                hsl(0, 100%, 50%),
+                hsl(60, 100%, 50%),
+                hsl(120, 100%, 50%),
+                hsl(180, 100%, 50%),
+                hsl(240, 100%, 50%),
+                hsl(300, 100%, 50%),
+                hsl(360, 100%, 50%)
+            );
+        }
+
+        .saved-colors {
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .saved-colors h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            color: var(--text-secondary);
+        }
+
+        .color-palette {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .saved-color {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid var(--border);
+            transition: all 0.2s;
+        }
+
+        .saved-color:hover {
+            transform: scale(1.1);
+            border-color: var(--accent);
+        }
+
+        .add-color-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: var(--bg-secondary);
+            border: 2px dashed var(--border-light);
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .add-color-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .info-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 32px;
+        }
+
+        .info-section h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .info-section p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }
+
+        .info-section ul {
+            color: var(--text-secondary);
+            margin-left: 20px;
+            margin-bottom: 16px;
+        }
+
+        .info-section li {
+            margin-bottom: 8px;
+        }
+
+        .footer {
+            padding: 40px 24px;
+            border-top: 1px solid var(--border);
+            position: relative;
+            z-index: 1;
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-light);
+        }
+
+        .footer-brand {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-brand a {
+            color: var(--accent-light);
+            text-decoration: none;
+        }
+
+        .footer-brand a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            main {
+                padding: 100px 16px 40px;
+            }
+
+            .tool-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .tool-card {
+                padding: 20px;
+            }
+
+            .color-picker-section {
+                grid-template-columns: 1fr;
+            }
+
+            .color-preview {
+                width: 150px;
+                height: 150px;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gradient-bg"></div>
+
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="https://kaiprompts.com" class="logo">
+                <div class="logo-icon">K</div>
+                Kai Tools
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html">All Tools</a></li>
+                <li><a href="https://kaiprompts.com">Prompt Packs</a></li>
+                <li><a href="https://kaiprompts.com/blog/">Blog</a></li>
+            </ul>
+            <a href="https://kaiprompts.com/#bundle" class="nav-cta">Get AI Prompts</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="https://kaiprompts.com">Home</a>
+                <span>/</span>
+                <a href="../index.html">Tools</a>
+                <span>/</span>
+                Color Picker
+            </div>
+
+            <div class="tool-header">
+                <h1>Color Picker & Converter</h1>
+                <p>Pick colors visually and convert between HEX, RGB, and HSL formats. Copy any format with one click.</p>
+            </div>
+
+            <div class="ad-placeholder">
+                <p>Advertisement</p>
+            </div>
+
+            <div class="tool-card">
+                <div class="color-picker-section">
+                    <div class="picker-area">
+                        <div class="color-preview" id="colorPreview"></div>
+                        <input type="color" class="native-picker" id="colorPicker" value="#8b5cf6">
+                    </div>
+
+                    <div class="values-area">
+                        <div class="color-input-group">
+                            <label>HEX</label>
+                            <div class="input-row">
+                                <input type="text" id="hexInput" value="#8b5cf6">
+                                <button class="copy-small" data-target="hexInput">Copy</button>
+                            </div>
+                        </div>
+
+                        <div class="color-input-group">
+                            <label>RGB</label>
+                            <div class="input-row">
+                                <input type="text" id="rgbInput" value="rgb(139, 92, 246)">
+                                <button class="copy-small" data-target="rgbInput">Copy</button>
+                            </div>
+                        </div>
+
+                        <div class="color-input-group">
+                            <label>HSL</label>
+                            <div class="input-row">
+                                <input type="text" id="hslInput" value="hsl(262, 90%, 66%)">
+                                <button class="copy-small" data-target="hslInput">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sliders-section">
+                    <div class="slider-group">
+                        <label>Hue <span id="hueValue">262</span></label>
+                        <input type="range" id="hueSlider" min="0" max="360" value="262">
+                    </div>
+                    <div class="slider-group">
+                        <label>Saturation <span id="satValue">90%</span></label>
+                        <input type="range" id="satSlider" min="0" max="100" value="90">
+                    </div>
+                    <div class="slider-group">
+                        <label>Lightness <span id="lightValue">66%</span></label>
+                        <input type="range" id="lightSlider" min="0" max="100" value="66">
+                    </div>
+                </div>
+
+                <div class="saved-colors">
+                    <h3>Saved Colors</h3>
+                    <div class="color-palette" id="colorPalette">
+                        <button class="add-color-btn" id="addColorBtn">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ad-placeholder">
+                <p>Advertisement</p>
+            </div>
+
+            <div class="info-section">
+                <h2>Color Format Guide</h2>
+                <p>Understanding different color formats helps you work efficiently across various design and development tools.</p>
+
+                <h2>HEX Colors</h2>
+                <p>Hexadecimal colors use a # followed by 6 characters (0-9 and A-F). Each pair represents Red, Green, and Blue values. Example: #FF5733</p>
+
+                <h2>RGB Colors</h2>
+                <p>RGB uses three numbers (0-255) for Red, Green, and Blue channels. This format is common in CSS and design software. Example: rgb(255, 87, 51)</p>
+
+                <h2>HSL Colors</h2>
+                <p>HSL represents Hue (0-360), Saturation (0-100%), and Lightness (0-100%). It's more intuitive for adjusting colors. Example: hsl(14, 100%, 60%)</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-links">
+                <a href="../index.html">All Tools</a>
+                <a href="https://kaiprompts.com">Kai Prompts</a>
+                <a href="https://kaiprompts.com/blog/">Blog</a>
+                <a href="https://kaiprompts.com/privacy.html">Privacy</a>
+            </div>
+            <div class="footer-brand">
+                Free tools by <a href="https://kaiprompts.com">kaiprompts.com</a> | 2026
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const colorPicker = document.getElementById('colorPicker');
+        const colorPreview = document.getElementById('colorPreview');
+        const hexInput = document.getElementById('hexInput');
+        const rgbInput = document.getElementById('rgbInput');
+        const hslInput = document.getElementById('hslInput');
+        const hueSlider = document.getElementById('hueSlider');
+        const satSlider = document.getElementById('satSlider');
+        const lightSlider = document.getElementById('lightSlider');
+        const hueValue = document.getElementById('hueValue');
+        const satValue = document.getElementById('satValue');
+        const lightValue = document.getElementById('lightValue');
+        const colorPalette = document.getElementById('colorPalette');
+        const addColorBtn = document.getElementById('addColorBtn');
+
+        let currentHSL = { h: 262, s: 90, l: 66 };
+        let savedColors = JSON.parse(localStorage.getItem('savedColors') || '[]');
+
+        // Color conversion functions
+        function hslToRgb(h, s, l) {
+            s /= 100;
+            l /= 100;
+            const k = n => (n + h / 30) % 12;
+            const a = s * Math.min(l, 1 - l);
+            const f = n => l - a * Math.max(-1, Math.min(k(n) - 3, Math.min(9 - k(n), 1)));
+            return [Math.round(f(0) * 255), Math.round(f(8) * 255), Math.round(f(4) * 255)];
+        }
+
+        function rgbToHsl(r, g, b) {
+            r /= 255; g /= 255; b /= 255;
+            const max = Math.max(r, g, b), min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+
+            if (max === min) {
+                h = s = 0;
+            } else {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch (max) {
+                    case r: h = ((g - b) / d + (g < b ? 6 : 0)) / 6; break;
+                    case g: h = ((b - r) / d + 2) / 6; break;
+                    case b: h = ((r - g) / d + 4) / 6; break;
+                }
+            }
+            return [Math.round(h * 360), Math.round(s * 100), Math.round(l * 100)];
+        }
+
+        function rgbToHex(r, g, b) {
+            return '#' + [r, g, b].map(x => x.toString(16).padStart(2, '0')).join('');
+        }
+
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? [
+                parseInt(result[1], 16),
+                parseInt(result[2], 16),
+                parseInt(result[3], 16)
+            ] : null;
+        }
+
+        function updateAllFromHSL() {
+            const rgb = hslToRgb(currentHSL.h, currentHSL.s, currentHSL.l);
+            const hex = rgbToHex(...rgb);
+
+            colorPreview.style.backgroundColor = hex;
+            colorPicker.value = hex;
+            hexInput.value = hex;
+            rgbInput.value = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+            hslInput.value = `hsl(${currentHSL.h}, ${currentHSL.s}%, ${currentHSL.l}%)`;
+
+            hueSlider.value = currentHSL.h;
+            satSlider.value = currentHSL.s;
+            lightSlider.value = currentHSL.l;
+            hueValue.textContent = currentHSL.h;
+            satValue.textContent = currentHSL.s + '%';
+            lightValue.textContent = currentHSL.l + '%';
+        }
+
+        // Color picker change
+        colorPicker.addEventListener('input', (e) => {
+            const rgb = hexToRgb(e.target.value);
+            if (rgb) {
+                const hsl = rgbToHsl(...rgb);
+                currentHSL = { h: hsl[0], s: hsl[1], l: hsl[2] };
+                updateAllFromHSL();
+            }
+        });
+
+        // Hex input change
+        hexInput.addEventListener('input', (e) => {
+            let hex = e.target.value;
+            if (!hex.startsWith('#')) hex = '#' + hex;
+            if (/^#[0-9A-Fa-f]{6}$/.test(hex)) {
+                const rgb = hexToRgb(hex);
+                if (rgb) {
+                    const hsl = rgbToHsl(...rgb);
+                    currentHSL = { h: hsl[0], s: hsl[1], l: hsl[2] };
+                    updateAllFromHSL();
+                }
+            }
+        });
+
+        // RGB input change
+        rgbInput.addEventListener('input', (e) => {
+            const match = e.target.value.match(/rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/i);
+            if (match) {
+                const rgb = [parseInt(match[1]), parseInt(match[2]), parseInt(match[3])];
+                if (rgb.every(v => v >= 0 && v <= 255)) {
+                    const hsl = rgbToHsl(...rgb);
+                    currentHSL = { h: hsl[0], s: hsl[1], l: hsl[2] };
+                    updateAllFromHSL();
+                }
+            }
+        });
+
+        // HSL input change
+        hslInput.addEventListener('input', (e) => {
+            const match = e.target.value.match(/hsl\s*\(\s*(\d+)\s*,\s*(\d+)%?\s*,\s*(\d+)%?\s*\)/i);
+            if (match) {
+                currentHSL = {
+                    h: Math.min(360, Math.max(0, parseInt(match[1]))),
+                    s: Math.min(100, Math.max(0, parseInt(match[2]))),
+                    l: Math.min(100, Math.max(0, parseInt(match[3])))
+                };
+                updateAllFromHSL();
+            }
+        });
+
+        // Slider changes
+        hueSlider.addEventListener('input', (e) => {
+            currentHSL.h = parseInt(e.target.value);
+            updateAllFromHSL();
+        });
+
+        satSlider.addEventListener('input', (e) => {
+            currentHSL.s = parseInt(e.target.value);
+            updateAllFromHSL();
+        });
+
+        lightSlider.addEventListener('input', (e) => {
+            currentHSL.l = parseInt(e.target.value);
+            updateAllFromHSL();
+        });
+
+        // Copy buttons
+        document.querySelectorAll('.copy-small').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const input = document.getElementById(btn.dataset.target);
+                try {
+                    await navigator.clipboard.writeText(input.value);
+                    btn.textContent = 'Copied!';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = 'Copy';
+                        btn.classList.remove('copied');
+                    }, 1500);
+                } catch (e) {
+                    input.select();
+                    document.execCommand('copy');
+                    btn.textContent = 'Copied!';
+                    btn.classList.add('copied');
+                    setTimeout(() => {
+                        btn.textContent = 'Copy';
+                        btn.classList.remove('copied');
+                    }, 1500);
+                }
+            });
+        });
+
+        // Saved colors
+        function renderSavedColors() {
+            const existingColors = colorPalette.querySelectorAll('.saved-color');
+            existingColors.forEach(el => el.remove());
+
+            savedColors.forEach((color, index) => {
+                const colorEl = document.createElement('div');
+                colorEl.className = 'saved-color';
+                colorEl.style.backgroundColor = color;
+                colorEl.title = color;
+                colorEl.addEventListener('click', () => {
+                    const rgb = hexToRgb(color);
+                    if (rgb) {
+                        const hsl = rgbToHsl(...rgb);
+                        currentHSL = { h: hsl[0], s: hsl[1], l: hsl[2] };
+                        updateAllFromHSL();
+                    }
+                });
+                colorEl.addEventListener('contextmenu', (e) => {
+                    e.preventDefault();
+                    savedColors.splice(index, 1);
+                    localStorage.setItem('savedColors', JSON.stringify(savedColors));
+                    renderSavedColors();
+                });
+                colorPalette.insertBefore(colorEl, addColorBtn);
+            });
+        }
+
+        addColorBtn.addEventListener('click', () => {
+            const hex = hexInput.value;
+            if (!savedColors.includes(hex)) {
+                savedColors.push(hex);
+                if (savedColors.length > 12) savedColors.shift();
+                localStorage.setItem('savedColors', JSON.stringify(savedColors));
+                renderSavedColors();
+            }
+        });
+
+        // Initialize
+        updateAllFromHSL();
+        renderSavedColors();
+    </script>
+</body>
+</html>
