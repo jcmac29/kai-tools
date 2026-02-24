@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Use Case Generator - Find AI Applications for Any Industry | ToolsForge</title>
+    <meta name="description" content="Discover AI use cases for your industry. Generate practical AI applications, automation ideas, and implementation strategies for any business or role.">
+    <meta name="keywords" content="AI use cases, AI applications, AI for business, ChatGPT use cases, AI automation ideas">
+    <link rel="canonical" href="https://toolsforge.co/tools/ai-use-cases.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230a0a0a' width='100' height='100' rx='20'/><text x='50' y='68' text-anchor='middle' font-size='50' fill='%2300d4aa'>TF</text></svg>">
+
+    <!-- Schema.org for AI Discovery -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI Use Case Generator",
+        "description": "Generate practical AI use cases and automation ideas for any industry or role",
+        "url": "https://toolsforge.co/tools/ai-use-cases.html",
+        "applicationCategory": "BusinessApplication",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #0a0a0a;
+            --accent-cyan: #00d4aa;
+            --accent-purple: #a855f7;
+            --accent-green: #22c55e;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --glass-bg: rgba(255,255,255,0.03);
+            --glass-border: rgba(255,255,255,0.08);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        .bg-effects {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3;
+        }
+
+        .orb-1 { width: 400px; height: 400px; background: var(--accent-purple); top: -100px; right: -100px; }
+        .orb-2 { width: 300px; height: 300px; background: var(--accent-cyan); bottom: -50px; left: -50px; }
+
+        header {
+            position: relative;
+            z-index: 10;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        nav a { color: var(--text-secondary); text-decoration: none; margin-left: 2rem; }
+        nav a:hover { color: var(--accent-cyan); }
+
+        main {
+            position: relative;
+            z-index: 10;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitle { text-align: center; color: var(--text-secondary); margin-bottom: 2rem; }
+
+        .generator-box {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .input-group { display: flex; flex-direction: column; gap: 0.5rem; }
+
+        label { color: var(--text-secondary); font-size: 0.9rem; }
+
+        select, input {
+            padding: 1rem;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        select:focus, input:focus { outline: none; border-color: var(--accent-cyan); }
+
+        .btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            color: var(--bg-primary);
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,212,170,0.3);
+        }
+
+        .results {
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .results.active { display: block; }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .results-header h2 {
+            font-size: 1.5rem;
+        }
+
+        .use-case-grid {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .use-case-card {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .use-case-card:hover {
+            transform: translateX(5px);
+            border-color: var(--accent-cyan);
+        }
+
+        .use-case-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .use-case-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .use-case-title { font-size: 1.2rem; font-weight: 600; }
+
+        .use-case-difficulty {
+            font-size: 0.75rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            background: rgba(34,197,94,0.2);
+            color: var(--accent-green);
+        }
+
+        .use-case-difficulty.medium { background: rgba(251,191,36,0.2); color: #fbbf24; }
+        .use-case-difficulty.advanced { background: rgba(239,68,68,0.2); color: #ef4444; }
+
+        .use-case-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .use-case-tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tool-tag {
+            font-size: 0.8rem;
+            padding: 0.25rem 0.75rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            color: var(--text-secondary);
+        }
+
+        .implementation-steps {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--glass-border);
+        }
+
+        .implementation-steps h4 {
+            font-size: 0.9rem;
+            color: var(--accent-purple);
+            margin-bottom: 0.5rem;
+        }
+
+        .implementation-steps ol {
+            padding-left: 1.25rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .implementation-steps li { margin-bottom: 0.25rem; }
+
+        .cta-section {
+            margin-top: 3rem;
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(0,212,170,0.1));
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+        }
+
+        .cta-section h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .cta-section p { color: var(--text-secondary); margin-bottom: 1rem; }
+
+        .cta-section a {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        footer {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 2rem;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+        }
+
+        footer a { color: var(--accent-cyan); text-decoration: none; }
+
+        @media (max-width: 768px) {
+            .input-row { grid-template-columns: 1fr; }
+            h1 { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-effects">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+    </div>
+
+    <header>
+        <a href="../index.html" class="logo">ToolsForge</a>
+        <nav>
+            <a href="../index.html">All Tools</a>
+            <a href="https://kaiprompts.com">Premium Prompts</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>AI Use Case Generator</h1>
+        <p class="subtitle">Discover practical AI applications for your industry and role</p>
+
+        <div class="generator-box">
+            <div class="input-row">
+                <div class="input-group">
+                    <label for="industry">Industry</label>
+                    <select id="industry">
+                        <option value="">Select your industry...</option>
+                        <option value="technology">Technology / Software</option>
+                        <option value="healthcare">Healthcare / Medical</option>
+                        <option value="finance">Finance / Banking</option>
+                        <option value="retail">Retail / E-commerce</option>
+                        <option value="education">Education</option>
+                        <option value="marketing">Marketing / Advertising</option>
+                        <option value="realestate">Real Estate</option>
+                        <option value="legal">Legal</option>
+                        <option value="manufacturing">Manufacturing</option>
+                        <option value="consulting">Consulting</option>
+                        <option value="nonprofit">Non-Profit</option>
+                        <option value="media">Media / Entertainment</option>
+                        <option value="hospitality">Hospitality / Travel</option>
+                        <option value="hr">Human Resources</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="role">Your Role</label>
+                    <select id="role">
+                        <option value="">Select your role...</option>
+                        <option value="executive">Executive / C-Suite</option>
+                        <option value="manager">Manager</option>
+                        <option value="individual">Individual Contributor</option>
+                        <option value="founder">Founder / Entrepreneur</option>
+                        <option value="freelancer">Freelancer / Consultant</option>
+                        <option value="student">Student</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="input-group" style="margin-bottom: 1.5rem;">
+                <label for="challenge">Current Challenge (optional)</label>
+                <input type="text" id="challenge" placeholder="e.g., spending too much time on reports, customer response times">
+            </div>
+
+            <button class="btn" onclick="generateUseCases()">Generate AI Use Cases</button>
+
+            <div class="results" id="results">
+                <div class="results-header">
+                    <h2>Recommended AI Use Cases</h2>
+                </div>
+                <div class="use-case-grid" id="useCaseGrid"></div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h3>Ready to Implement These Use Cases?</h3>
+            <p>Get pre-built prompts optimized for each use case</p>
+            <a href="https://kaiprompts.com">Browse Industry-Specific Prompt Packs</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>Part of the <a href="https://kaiprompts.com">KaiPrompts</a> ecosystem | <a href="../index.html">More Free Tools</a></p>
+    </footer>
+
+    <script>
+        const useCaseDB = {
+            technology: [
+                { icon: "📝", title: "Code Documentation Generator", difficulty: "easy", desc: "Automatically generate comprehensive documentation for codebases, APIs, and functions.", tools: ["ChatGPT", "Claude", "GitHub Copilot"], steps: ["Paste code or function", "Specify documentation style", "Generate and refine", "Export to markdown"] },
+                { icon: "🐛", title: "Automated Bug Analysis", difficulty: "medium", desc: "Analyze error logs and stack traces to identify root causes and suggest fixes.", tools: ["Claude", "GPT-4", "Custom agents"], steps: ["Connect to error tracking", "Configure analysis rules", "Review AI suggestions", "Implement fixes"] },
+                { icon: "🧪", title: "Test Case Generation", difficulty: "easy", desc: "Generate comprehensive test cases including edge cases and boundary conditions.", tools: ["ChatGPT", "Claude", "Copilot"], steps: ["Provide function code", "Specify testing framework", "Generate test suite", "Review and customize"] },
+                { icon: "📊", title: "Sprint Planning Assistant", difficulty: "medium", desc: "Analyze tickets, estimate complexity, and suggest optimal sprint compositions.", tools: ["GPT-4", "Claude", "Jira API"], steps: ["Export backlog items", "Define team capacity", "Run AI analysis", "Adjust assignments"] },
+                { icon: "🔒", title: "Security Vulnerability Scanner", difficulty: "advanced", desc: "Review code for potential security issues and OWASP vulnerabilities.", tools: ["Claude", "GPT-4", "Custom tools"], steps: ["Scan codebase", "Review findings", "Prioritize fixes", "Verify remediations"] }
+            ],
+            healthcare: [
+                { icon: "📋", title: "Clinical Documentation Assistant", difficulty: "medium", desc: "Convert voice notes and observations into structured clinical documentation.", tools: ["Claude", "GPT-4", "Whisper"], steps: ["Record observations", "Transcribe with AI", "Structure into templates", "Review and finalize"] },
+                { icon: "📚", title: "Medical Literature Summarizer", difficulty: "easy", desc: "Summarize research papers and extract key findings for quick review.", tools: ["Claude", "ChatGPT", "Perplexity"], steps: ["Upload papers", "Define focus areas", "Generate summaries", "Create reference library"] },
+                { icon: "👥", title: "Patient Communication Helper", difficulty: "easy", desc: "Draft patient-friendly explanations of conditions and treatment plans.", tools: ["ChatGPT", "Claude"], steps: ["Input medical information", "Set reading level", "Generate explanation", "Customize for patient"] },
+                { icon: "📅", title: "Appointment Scheduling Optimizer", difficulty: "advanced", desc: "Optimize scheduling based on procedure types, staff availability, and patient preferences.", tools: ["GPT-4", "Custom AI", "Calendar APIs"], steps: ["Define constraints", "Input historical data", "Run optimization", "Implement schedule"] }
+            ],
+            finance: [
+                { icon: "📈", title: "Financial Report Analyzer", difficulty: "medium", desc: "Extract insights from earnings reports, 10-Ks, and financial statements.", tools: ["GPT-4", "Claude", "Custom parsers"], steps: ["Upload documents", "Define metrics of interest", "Generate analysis", "Create summary report"] },
+                { icon: "💬", title: "Client Communication Drafter", difficulty: "easy", desc: "Draft personalized client communications for portfolio updates and market commentary.", tools: ["ChatGPT", "Claude"], steps: ["Input client profile", "Add market context", "Generate draft", "Personalize and send"] },
+                { icon: "⚠️", title: "Risk Assessment Assistant", difficulty: "advanced", desc: "Analyze portfolios and identify potential risk factors and correlations.", tools: ["GPT-4", "Python + AI", "Custom models"], steps: ["Connect data sources", "Define risk parameters", "Run analysis", "Generate risk report"] },
+                { icon: "📊", title: "Compliance Document Generator", difficulty: "medium", desc: "Generate compliant disclosures and regulatory documentation.", tools: ["Claude", "GPT-4"], steps: ["Input requirements", "Select templates", "Generate documents", "Legal review"] }
+            ],
+            marketing: [
+                { icon: "✍️", title: "Content Calendar Generator", difficulty: "easy", desc: "Plan months of content with AI-generated topics, hooks, and outlines.", tools: ["ChatGPT", "Claude", "Notion AI"], steps: ["Define goals and themes", "Set posting frequency", "Generate calendar", "Refine and schedule"] },
+                { icon: "🎯", title: "Ad Copy Optimizer", difficulty: "easy", desc: "Generate and A/B test multiple ad variations across platforms.", tools: ["ChatGPT", "GPT-4", "Copy.ai"], steps: ["Input product details", "Generate variations", "Set up A/B tests", "Analyze and iterate"] },
+                { icon: "📧", title: "Email Sequence Builder", difficulty: "medium", desc: "Create personalized email nurture sequences based on customer segments.", tools: ["Claude", "ChatGPT", "Email platforms"], steps: ["Define segments", "Map customer journey", "Generate sequences", "Automate sending"] },
+                { icon: "🔍", title: "SEO Content Optimizer", difficulty: "medium", desc: "Analyze and optimize content for search rankings and featured snippets.", tools: ["GPT-4", "Claude", "SEO tools"], steps: ["Audit existing content", "Research keywords", "Generate optimizations", "Implement changes"] },
+                { icon: "📱", title: "Social Media Repurposer", difficulty: "easy", desc: "Transform long-form content into platform-specific social posts.", tools: ["ChatGPT", "Claude"], steps: ["Input source content", "Select platforms", "Generate posts", "Schedule publishing"] }
+            ],
+            retail: [
+                { icon: "📝", title: "Product Description Generator", difficulty: "easy", desc: "Create compelling, SEO-optimized product descriptions at scale.", tools: ["ChatGPT", "Claude", "Jasper"], steps: ["Input product specs", "Define tone and style", "Generate descriptions", "Review and publish"] },
+                { icon: "💬", title: "Customer Service Automation", difficulty: "medium", desc: "Build AI chatbots to handle common customer inquiries 24/7.", tools: ["ChatGPT API", "Claude API", "Chatbot platforms"], steps: ["Map common questions", "Train responses", "Deploy chatbot", "Monitor and improve"] },
+                { icon: "📊", title: "Inventory Forecasting", difficulty: "advanced", desc: "Predict demand patterns and optimize inventory levels with AI.", tools: ["GPT-4", "Custom ML", "Analytics tools"], steps: ["Connect sales data", "Train prediction model", "Generate forecasts", "Adjust inventory"] },
+                { icon: "🎁", title: "Personalized Recommendations", difficulty: "medium", desc: "Create AI-powered product recommendations based on customer behavior.", tools: ["GPT-4", "Recommendation engines"], steps: ["Analyze purchase history", "Define recommendation rules", "Implement engine", "Test and optimize"] }
+            ],
+            education: [
+                { icon: "📚", title: "Curriculum Development Assistant", difficulty: "medium", desc: "Generate lesson plans, activities, and assessments aligned to standards.", tools: ["Claude", "ChatGPT", "Education AI"], steps: ["Input learning objectives", "Specify grade level", "Generate materials", "Customize for class"] },
+                { icon: "✅", title: "Automated Grading Assistant", difficulty: "medium", desc: "Grade essays and provide constructive feedback at scale.", tools: ["GPT-4", "Claude", "Grading platforms"], steps: ["Define rubric", "Submit assignments", "Review AI grades", "Provide feedback"] },
+                { icon: "❓", title: "Quiz & Assessment Generator", difficulty: "easy", desc: "Create varied assessments from learning materials automatically.", tools: ["ChatGPT", "Claude", "Quiz tools"], steps: ["Upload content", "Select question types", "Generate assessment", "Export to LMS"] },
+                { icon: "🎓", title: "Personalized Tutoring Content", difficulty: "advanced", desc: "Create adaptive learning paths based on student performance.", tools: ["GPT-4", "Custom AI", "LMS integration"], steps: ["Assess student level", "Identify gaps", "Generate content", "Track progress"] }
+            ],
+            realestate: [
+                { icon: "🏠", title: "Property Description Writer", difficulty: "easy", desc: "Generate compelling listing descriptions that sell properties faster.", tools: ["ChatGPT", "Claude"], steps: ["Input property details", "Add unique features", "Generate description", "Optimize for platforms"] },
+                { icon: "📊", title: "Market Analysis Reporter", difficulty: "medium", desc: "Generate comprehensive market reports with AI-analyzed trends.", tools: ["GPT-4", "Claude", "Data APIs"], steps: ["Gather market data", "Define report scope", "Generate analysis", "Add visualizations"] },
+                { icon: "📧", title: "Lead Nurture Automation", difficulty: "medium", desc: "Create personalized follow-up sequences for potential buyers and sellers.", tools: ["ChatGPT", "CRM platforms"], steps: ["Segment leads", "Map touchpoints", "Generate content", "Automate sequences"] },
+                { icon: "🔍", title: "Property Matching Assistant", difficulty: "advanced", desc: "Match buyers with properties based on preferences and behavior.", tools: ["GPT-4", "Custom AI", "MLS integration"], steps: ["Capture preferences", "Analyze listings", "Generate matches", "Prioritize showings"] }
+            ],
+            legal: [
+                { icon: "📄", title: "Contract Analysis Assistant", difficulty: "medium", desc: "Review contracts for key terms, risks, and inconsistencies.", tools: ["Claude", "GPT-4", "Legal AI"], steps: ["Upload contract", "Define review scope", "Generate analysis", "Flag issues"] },
+                { icon: "📝", title: "Legal Document Drafter", difficulty: "medium", desc: "Generate first drafts of common legal documents and agreements.", tools: ["Claude", "GPT-4"], steps: ["Select document type", "Input parameters", "Generate draft", "Attorney review"] },
+                { icon: "🔍", title: "Legal Research Assistant", difficulty: "easy", desc: "Research case law and statutes with AI-powered summaries.", tools: ["Claude", "Perplexity", "Legal databases"], steps: ["Define research question", "Search sources", "Summarize findings", "Cite properly"] },
+                { icon: "⏱️", title: "Time Entry Optimizer", difficulty: "easy", desc: "Generate detailed time entries from notes and communications.", tools: ["ChatGPT", "Claude"], steps: ["Input work notes", "Apply billing codes", "Generate entries", "Review and submit"] }
+            ],
+            consulting: [
+                { icon: "📊", title: "Presentation Generator", difficulty: "medium", desc: "Create structured presentations with data-driven insights.", tools: ["GPT-4", "Claude", "Gamma"], steps: ["Define objectives", "Input research", "Generate slides", "Refine visuals"] },
+                { icon: "📝", title: "Proposal Writer", difficulty: "medium", desc: "Generate customized proposals based on client needs and past wins.", tools: ["Claude", "GPT-4"], steps: ["Input RFP details", "Add differentiators", "Generate proposal", "Customize and review"] },
+                { icon: "🔍", title: "Industry Research Synthesizer", difficulty: "easy", desc: "Synthesize multiple research sources into actionable insights.", tools: ["Claude", "Perplexity", "ChatGPT"], steps: ["Gather sources", "Define focus areas", "Generate synthesis", "Create deliverable"] },
+                { icon: "📋", title: "Meeting Notes & Actions", difficulty: "easy", desc: "Convert meeting recordings into structured notes and action items.", tools: ["Whisper", "Claude", "ChatGPT"], steps: ["Record meeting", "Transcribe audio", "Extract actions", "Distribute notes"] }
+            ],
+            hr: [
+                { icon: "📋", title: "Job Description Generator", difficulty: "easy", desc: "Create inclusive, compelling job descriptions that attract top talent.", tools: ["ChatGPT", "Claude"], steps: ["Input requirements", "Define culture fit", "Generate description", "Check for bias"] },
+                { icon: "📝", title: "Resume Screening Assistant", difficulty: "medium", desc: "Screen resumes against job requirements and rank candidates.", tools: ["GPT-4", "Claude", "ATS integration"], steps: ["Define criteria", "Upload resumes", "Run screening", "Review rankings"] },
+                { icon: "❓", title: "Interview Question Generator", difficulty: "easy", desc: "Generate role-specific interview questions with evaluation criteria.", tools: ["ChatGPT", "Claude"], steps: ["Input role details", "Select competencies", "Generate questions", "Add scoring guides"] },
+                { icon: "📚", title: "Policy Document Creator", difficulty: "medium", desc: "Draft HR policies and procedures with compliance considerations.", tools: ["Claude", "GPT-4"], steps: ["Define policy scope", "Research requirements", "Generate draft", "Legal review"] },
+                { icon: "🎓", title: "Training Content Developer", difficulty: "medium", desc: "Create engaging training materials and assessments.", tools: ["Claude", "ChatGPT", "LMS"], steps: ["Define learning goals", "Generate content", "Create assessments", "Deploy to LMS"] }
+            ]
+        };
+
+        // Default use cases for unmatched industries
+        const defaultUseCases = [
+            { icon: "📧", title: "Email Communication Assistant", difficulty: "easy", desc: "Draft professional emails and communications quickly.", tools: ["ChatGPT", "Claude"], steps: ["Define purpose", "Input context", "Generate draft", "Review and send"] },
+            { icon: "📊", title: "Report Generator", difficulty: "medium", desc: "Transform data into well-structured reports and summaries.", tools: ["GPT-4", "Claude"], steps: ["Gather data", "Define structure", "Generate report", "Add insights"] },
+            { icon: "📝", title: "Meeting Notes Summarizer", difficulty: "easy", desc: "Convert meeting recordings into actionable summaries.", tools: ["Whisper", "Claude", "ChatGPT"], steps: ["Record meeting", "Transcribe", "Summarize key points", "Extract actions"] },
+            { icon: "🔍", title: "Research Assistant", difficulty: "easy", desc: "Research topics and synthesize information quickly.", tools: ["Perplexity", "Claude", "ChatGPT"], steps: ["Define question", "Gather sources", "Synthesize info", "Create summary"] }
+        ];
+
+        function generateUseCases() {
+            const industry = document.getElementById('industry').value;
+            const role = document.getElementById('role').value;
+            const challenge = document.getElementById('challenge').value;
+
+            if (!industry) {
+                alert('Please select an industry');
+                return;
+            }
+
+            let useCases = useCaseDB[industry] || defaultUseCases;
+
+            // Add challenge-specific use case if provided
+            if (challenge) {
+                useCases = [{
+                    icon: "🎯",
+                    title: "Custom Solution: " + challenge.substring(0, 30) + "...",
+                    difficulty: "medium",
+                    desc: `AI can help address "${challenge}" by automating repetitive tasks, analyzing patterns, and providing intelligent recommendations.`,
+                    tools: ["ChatGPT", "Claude", "Custom automation"],
+                    steps: ["Define specific workflow", "Identify AI touchpoints", "Implement solution", "Measure impact"]
+                }, ...useCases];
+            }
+
+            // Limit to 5 use cases
+            useCases = useCases.slice(0, 5);
+
+            const grid = document.getElementById('useCaseGrid');
+            grid.innerHTML = useCases.map(uc => `
+                <div class="use-case-card">
+                    <div class="use-case-header">
+                        <div class="use-case-icon">${uc.icon}</div>
+                        <div>
+                            <div class="use-case-title">${uc.title}</div>
+                            <span class="use-case-difficulty ${uc.difficulty}">${uc.difficulty}</span>
+                        </div>
+                    </div>
+                    <p class="use-case-description">${uc.desc}</p>
+                    <div class="use-case-tools">
+                        ${uc.tools.map(t => `<span class="tool-tag">${t}</span>`).join('')}
+                    </div>
+                    <div class="implementation-steps">
+                        <h4>Implementation Steps:</h4>
+                        <ol>
+                            ${uc.steps.map(s => `<li>${s}</li>`).join('')}
+                        </ol>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('results').classList.add('active');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Which AI Model Should I Use? - AI Model Picker Quiz | ToolsForge</title>
+    <meta name="description" content="Not sure which AI model to use? Take our quick quiz to find the perfect LLM for your needs. Compare ChatGPT, Claude, Gemini, and more based on your use case, budget, and requirements.">
+    <meta name="keywords" content="which AI should I use, best AI model, ChatGPT vs Claude, AI model comparison, LLM recommendation, AI assistant picker, which LLM to use, AI model quiz">
+    <link rel="canonical" href="https://toolsforge.com/tools/ai-model-picker.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolsforge.com/tools/ai-model-picker.html">
+    <meta property="og:title" content="Which AI Model Should I Use? - Find Your Perfect AI">
+    <meta property="og:description" content="Take our quick quiz to find the best AI model for your specific needs. Get personalized recommendations for ChatGPT, Claude, Gemini, and more.">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Which AI Model Should I Use?">
+    <meta name="twitter:description" content="Find the perfect AI model for your needs with our interactive quiz.">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #09090b;
+            --bg-secondary: #0f0f12;
+            --bg-card: rgba(24, 24, 30, 0.7);
+            --accent-purple: #a855f7;
+            --accent-cyan: #06b6d4;
+            --accent-green: #10b981;
+            --accent-pink: #ec4899;
+            --accent-orange: #f59e0b;
+            --accent-blue: #3b82f6;
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-light: rgba(255, 255, 255, 0.12);
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes particleFloat {
+            0%, 100% { transform: translateY(0) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(20px); opacity: 0; }
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes confetti {
+            0% { transform: translateY(-100%) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        .glow-orb-1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.25), transparent);
+            top: -10%;
+            left: 10%;
+        }
+
+        .glow-orb-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.2), transparent);
+            top: 50%;
+            right: 5%;
+            animation-delay: 2s;
+        }
+
+        .glow-orb-3 {
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.15), transparent);
+            bottom: -10%;
+            left: 30%;
+            animation-delay: 4s;
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-purple);
+            border-radius: 50%;
+            animation: particleFloat 15s linear infinite;
+        }
+
+        .particle:nth-child(1) { left: 10%; animation-delay: 0s; background: var(--accent-cyan); }
+        .particle:nth-child(2) { left: 20%; animation-delay: 2s; }
+        .particle:nth-child(3) { left: 30%; animation-delay: 4s; background: var(--accent-green); }
+        .particle:nth-child(4) { left: 40%; animation-delay: 1s; }
+        .particle:nth-child(5) { left: 50%; animation-delay: 3s; background: var(--accent-pink); }
+        .particle:nth-child(6) { left: 60%; animation-delay: 5s; }
+        .particle:nth-child(7) { left: 70%; animation-delay: 2.5s; background: var(--accent-cyan); }
+        .particle:nth-child(8) { left: 80%; animation-delay: 4.5s; }
+        .particle:nth-child(9) { left: 90%; animation-delay: 1.5s; background: var(--accent-green); }
+        .particle:nth-child(10) { left: 95%; animation-delay: 3.5s; }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 16px 24px;
+            background: rgba(9, 9, 11, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--text-primary); }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            color: white !important;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .main {
+            position: relative;
+            z-index: 1;
+            padding: 100px 24px 60px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            margin-bottom: 20px;
+        }
+
+        .badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        h1 {
+            font-size: clamp(2.2rem, 5vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-purple) 50%, var(--accent-cyan) 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 5s ease infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Ad Placeholder */
+        .ad-container {
+            background: var(--glass);
+            border: 1px dashed var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(135deg, transparent, transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .glass-card:hover::before {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan), var(--accent-green));
+            background-size: 200% 200%;
+            animation: borderGlow 3s linear infinite;
+            opacity: 1;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin-bottom: 40px;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-cyan));
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+
+        .progress-text {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Quiz Question */
+        .quiz-container {
+            min-height: 400px;
+        }
+
+        .question-slide {
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .question-slide.active {
+            display: block;
+        }
+
+        .question-number {
+            font-size: 0.9rem;
+            color: var(--accent-purple);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .question-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            line-height: 1.4;
+        }
+
+        /* Answer Options */
+        .options-grid {
+            display: grid;
+            gap: 16px;
+        }
+
+        .option-btn {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 20px 24px;
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .option-btn:hover {
+            border-color: var(--accent-purple);
+            background: rgba(168, 85, 247, 0.1);
+            transform: translateX(8px);
+        }
+
+        .option-btn.selected {
+            border-color: var(--accent-cyan);
+            background: rgba(6, 182, 212, 0.15);
+        }
+
+        .option-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .option-content h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .option-content p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Navigation Buttons */
+        .quiz-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            gap: 16px;
+        }
+
+        .nav-btn {
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-family: inherit;
+        }
+
+        .nav-btn.back {
+            background: transparent;
+            border: 2px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .nav-btn.back:hover {
+            border-color: var(--text-primary);
+            color: var(--text-primary);
+        }
+
+        .nav-btn.next {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            color: white;
+            flex: 1;
+            max-width: 200px;
+        }
+
+        .nav-btn.next:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* Results Section */
+        .results-container {
+            display: none;
+            animation: scaleIn 0.6s ease-out;
+        }
+
+        .results-container.active {
+            display: block;
+        }
+
+        .result-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .result-header h2 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: var(--accent-green);
+        }
+
+        .result-header p {
+            color: var(--text-secondary);
+        }
+
+        /* Recommendation Card */
+        .recommendation-card {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(6, 182, 212, 0.1));
+            border: 2px solid var(--accent-purple);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .recommendation-card::before {
+            content: 'TOP PICK';
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .rec-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .rec-logo {
+            width: 72px;
+            height: 72px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 800;
+        }
+
+        .rec-info h3 {
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+        }
+
+        .rec-info .provider {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .rec-reasons {
+            margin-bottom: 24px;
+        }
+
+        .rec-reasons h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--accent-cyan);
+        }
+
+        .reason-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .reason-icon {
+            color: var(--accent-green);
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .reason-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .rec-cta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .rec-btn {
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .rec-btn.primary {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            color: white;
+        }
+
+        .rec-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
+        }
+
+        .rec-btn.secondary {
+            background: transparent;
+            border: 2px solid var(--border);
+            color: var(--text-primary);
+        }
+
+        .rec-btn.secondary:hover {
+            border-color: var(--accent-purple);
+        }
+
+        /* Alternative Options */
+        .alternatives {
+            margin-top: 40px;
+        }
+
+        .alternatives h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .alt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 16px;
+        }
+
+        .alt-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .alt-card:hover {
+            border-color: var(--accent-purple);
+            transform: translateY(-4px);
+        }
+
+        .alt-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .alt-logo {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+        }
+
+        .alt-name {
+            font-weight: 600;
+        }
+
+        .alt-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-bottom: 12px;
+        }
+
+        .alt-link {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .alt-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Restart Button */
+        .restart-section {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .restart-btn {
+            padding: 12px 24px;
+            background: transparent;
+            border: 2px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .restart-btn:hover {
+            border-color: var(--text-primary);
+            color: var(--text-primary);
+        }
+
+        /* Promo Section */
+        .promo-section {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .promo-card {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(6, 182, 212, 0.15));
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promo-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.1), transparent 50%);
+            animation: float 10s ease-in-out infinite;
+        }
+
+        .promo-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .promo-text {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+        }
+
+        .promo-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            border-radius: 12px;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .promo-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(168, 85, 247, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 80px;
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-copy {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .footer-copy a {
+            color: var(--accent-purple);
+            text-decoration: none;
+        }
+
+        /* Mobile */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .mobile-menu-btn { display: block; }
+            .glass-card { padding: 24px; }
+            .question-text { font-size: 1.2rem; }
+            .option-btn { padding: 16px; }
+            .option-icon { width: 40px; height: 40px; font-size: 20px; }
+            .rec-header { flex-direction: column; text-align: center; }
+            .rec-cta { justify-content: center; }
+            .alt-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Confetti */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            opacity: 0;
+        }
+
+        .confetti.active {
+            animation: confetti 3s ease-out forwards;
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg">
+        <div class="glow-orb glow-orb-1"></div>
+        <div class="glow-orb glow-orb-2"></div>
+        <div class="glow-orb glow-orb-3"></div>
+        <div class="particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+    </div>
+
+    <div class="confetti-container" id="confettiContainer"></div>
+
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="../index.html" class="logo">
+                <div class="logo-icon">T</div>
+                ToolsForge
+            </a>
+            <div class="nav-links">
+                <a href="../index.html">All Tools</a>
+                <a href="llm-pricing.html">LLM Pricing</a>
+                <a href="api-calculator.html">API Calculator</a>
+                <a href="https://kaiprompts.com" class="nav-cta" target="_blank">KaiPrompts</a>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <main class="main">
+        <header class="header">
+            <div class="badge">Interactive Quiz</div>
+            <h1>Which AI Model Should I Use?</h1>
+            <p class="subtitle">Answer a few quick questions and we'll recommend the perfect AI model for your specific needs.</p>
+        </header>
+
+        <!-- Ad Placeholder -->
+        <div class="ad-container">
+            <p>Advertisement</p>
+        </div>
+
+        <div class="glass-card">
+            <!-- Progress Bar -->
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+                <div class="progress-text">
+                    <span id="progressLabel">Question 1 of 5</span>
+                    <span id="progressPercent">0%</span>
+                </div>
+            </div>
+
+            <!-- Quiz Container -->
+            <div class="quiz-container" id="quizContainer">
+                <!-- Question 1: Use Case -->
+                <div class="question-slide active" data-question="1">
+                    <p class="question-number">Question 1</p>
+                    <h2 class="question-text">What's your primary use case?</h2>
+                    <div class="options-grid">
+                        <button class="option-btn" data-value="writing" onclick="selectOption(this, 1)">
+                            <div class="option-icon">&#9998;</div>
+                            <div class="option-content">
+                                <h4>Writing & Content</h4>
+                                <p>Blog posts, articles, marketing copy, creative writing</p>
+                            </div>
+                        </button>
+                        <button class="option-btn" data-value="coding" onclick="selectOption(this, 1)">
+                            <div class="option-icon">&lt;/&gt;</div>
+                            <div class="option-content">
+                                <h4>Coding & Development</h4>
+                                <p>Writing code, debugging, code review, documentation</p>
+                            </div>
+                        </button>
+                        <button class="option-btn" data-value="analysis" onclick="selectOption(this, 1)">
+                            <div class="option-icon">&#128202;</div>
+                            <div class="option-content">
+                                <h4>Research & Analysis</h4>
+                                <p>Data analysis, research summaries, complex reasoning</p>
+                            </div>
+                        </button>
+                        <button class="option-btn" data-value="conversation" onclick="selectOption(this, 1)">
+                            <div class="option-icon">&#128172;</div>
+                            <div class="option-content">
+                                <h4>Conversation & Chat</h4>
+                                <p>Chatbots, customer service, personal assistant</p>
+                            </div>
+                        </button>
+                        <button class="option-btn" data-value="multimodal" onclick="selectOption(this, 1)">
+                            <div class="option-icon">&#127912;</div>
+                            <div class="option-content">
+                                <h4>Images & Multimodal</h4>
+                                <p>Image analysis, vision tasks, document processing</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Question 2: Budget -->
+                <div class="question-slide" data-question="2">
+                    <p class="question-number">Question 2</p>
+                    <h2 class="question-text">What's your budget situation?</h2>
+                    <div class="options-grid">
+                        <button class="option-btn" data-value="free" onclick="selectOption(this, 2)">
+                            <div class="option-icon">&#127873;</div>
+                            <div class="option-content">
+                                <h4>Free or Minimal</h4>
+                                <p>I want to use free tiers or spend very little</p>
+                            </div>
+                        </button>
+                        <button class="option-btn" data-value="budget" onclick="selectOption(this, 2)">
+                            <div class="option-icon">&#128176;</div>
+                            <div class="option-content">
+                                <h4>Budget-Conscious</h4>
+                                <p>$20-50/month, balancing cost and quality</p>
+                            </div>
+                        </button>
+                        <button class="option-btn" data-value="moderate" onclick="selectOption(this, 2)">
+                            <div class="option-icon">&#128179;</div>
+                            <div class="option-content">
+                                <h4>Moderate Spend</h4>
+                                <p>$50-200/month for better capabilities</p>
+                            </div>
+                        </button>
+                        <button class="option-btn" data-value="enterprise" onclick="selectOption(this, 2)">
+                            <div class="option-icon">&#127974;</div>
+                            <div class="option-content">
+                                <h4>Enterprise / No Limit</h4>
+                                <p>Quality matters most, budget is flexible</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Question 3: Speed vs Quality -->
+                <div class="question-slide" data-question="3">
+                    <p class="question-number">Question 3</p>
+                    <h2 class="question-text">What matters more: speed or quality?</h2>
+                    <div class="options-grid">
+                        <button class="option-btn" data-value="speed" onclick="selectOption(this, 3)">
+                            <div class="option-icon">&#9889;</div>
+                            <div class="option-content">
+                                <h4>Speed is Critical</h4>
+                                <p>I need fast responses, even if slightly less accurate</p>
+                            </div>
+                        </button>
+                        <button class="option-btn" data-value="balanced" onclick="selectOption(this, 3)">
+                            <div class="option-icon">&#9878;</div>
+                            <div class="option-content">
+                                <h4>Balanced</h4>
+                                <p>Good mix of speed and quality</p>
+                            </div>
+                        </button>
+                        <button class="option-btn" data-value="quality" onclick="selectOption(this, 3)">
+                            <div class="option-icon">&#127942;</div>
+                            <div class="option-content">
+                                <h4>Quality Above All</h4>
+                                <p>I'll wait longer for the best possible output</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Question 4: Context Length -->
+                <div class="question-slide" data-question="4">
+                    <p class="question-number">Question 4</p>
+                    <h2 class="question-text">How much context do you typically need?</h2>
+                    <div class="options-grid">
+                        <button class="option-btn" data-value="small" onclick="selectOption(this, 4)">
+                            <div class="option-icon">&#128221;</div>
+                            <div class="option-content">
+                                <h4>Short Conversations</h4>
+                                <p>Quick questions, single tasks, brief chats</p>
+                            </div>
+                        </button>
+                        <button class="option-btn" data-value="medium" onclick="selectOption(this, 4)">
+                            <div class="option-icon">&#128214;</div>
+                            <div class="option-content">
+                                <h4>Medium Documents</h4>
+                                <p>Articles, reports, moderate-length conversations</p>
+                            </div>
+                        </button>
+                        <button class="option-btn" data-value="large" onclick="selectOption(this, 4)">
+                            <div class="option-icon">&#128218;</div>
+                            <div class="option-content">
+                                <h4>Long Documents</h4>
+                                <p>Books, codebases, extensive research papers</p>
+                            </div>
+                        </button>
+                        <button class="option-btn" data-value="massive" onclick="selectOption(this, 4)">
+                            <div class="option-icon">&#128506;</div>
+                            <div class="option-content">
+                                <h4>Massive Context</h4>
+                                <p>Entire repositories, multiple books, huge datasets</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Question 5: Special Requirements -->
+                <div class="question-slide" data-question="5">
+                    <p class="question-number">Question 5</p>
+                    <h2 class="question-text">Any special requirements?</h2>
+                    <div class="options-grid">
+                        <button class="option-btn" data-value="none" onclick="selectOption(this, 5)">
+                            <div class="option-icon">&#10003;</div>
+                            <div class="option-content">
+                                <h4>No Special Needs</h4>
+                                <p>Just want the best general-purpose AI</p>
+                            </div>
+                        </button>
+                        <button class="option-btn" data-value="privacy" onclick="selectOption(this, 5)">
+                            <div class="option-icon">&#128274;</div>
+                            <div class="option-content">
+                                <h4>Privacy & Security</h4>
+                                <p>Data privacy, no training on my data, local options</p>
+                            </div>
+                        </button>
+                        <button class="option-btn" data-value="realtime" onclick="selectOption(this, 5)">
+                            <div class="option-icon">&#127760;</div>
+                            <div class="option-content">
+                                <h4>Real-time Information</h4>
+                                <p>Need current events, live web access, citations</p>
+                            </div>
+                        </button>
+                        <button class="option-btn" data-value="api" onclick="selectOption(this, 5)">
+                            <div class="option-icon">&#128268;</div>
+                            <div class="option-content">
+                                <h4>API Integration</h4>
+                                <p>Building apps, need reliable API access</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="quiz-nav" id="quizNav">
+                <button class="nav-btn back" id="backBtn" onclick="prevQuestion()" disabled>Back</button>
+                <button class="nav-btn next" id="nextBtn" onclick="nextQuestion()" disabled>Next</button>
+            </div>
+
+            <!-- Results Container -->
+            <div class="results-container" id="resultsContainer">
+                <div class="result-header">
+                    <h2>Your Perfect AI Match!</h2>
+                    <p>Based on your answers, here's our recommendation:</p>
+                </div>
+
+                <div class="recommendation-card" id="recommendationCard">
+                    <!-- Populated by JS -->
+                </div>
+
+                <div class="alternatives" id="alternativesSection">
+                    <h3>Also Consider These Alternatives:</h3>
+                    <div class="alt-grid" id="alternativesGrid">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <div class="restart-section">
+                    <button class="restart-btn" onclick="restartQuiz()">&#8634; Start Over</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Promo Section -->
+        <section class="promo-section">
+            <div class="promo-card">
+                <h2 class="promo-title">Get Better Results from Any AI</h2>
+                <p class="promo-text">No matter which AI you choose, better prompts mean better results. Get professionally crafted prompts that work with any model.</p>
+                <a href="https://kaiprompts.com" class="promo-btn" target="_blank">
+                    Browse Prompt Library
+                    <span>→</span>
+                </a>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="../index.html">All Tools</a>
+                <a href="llm-pricing.html">LLM Pricing</a>
+                <a href="api-calculator.html">API Calculator</a>
+                <a href="ai-tools-directory.html">AI Directory</a>
+                <a href="https://kaiprompts.com" target="_blank">KaiPrompts</a>
+            </div>
+            <p class="footer-copy">© 2026 ToolsForge. A <a href="https://kaiprompts.com" target="_blank">kaiprompts.com</a> project.</p>
+        </footer>
+    </main>
+
+    <script>
+        // AI Model Database
+        const aiModels = {
+            'gpt-4o': {
+                name: 'GPT-4o',
+                provider: 'OpenAI',
+                logo: 'G',
+                logoColor: 'linear-gradient(135deg, #10a37f, #1a7f64)',
+                url: 'https://chat.openai.com',
+                strengths: ['Fast responses', 'Great coding', 'Multimodal', 'Balanced quality'],
+                scores: {
+                    writing: 9, coding: 9, analysis: 8, conversation: 9, multimodal: 9,
+                    free: 7, budget: 9, moderate: 9, enterprise: 8,
+                    speed: 9, balanced: 9, quality: 8,
+                    small: 9, medium: 9, large: 8, massive: 7,
+                    none: 9, privacy: 6, realtime: 8, api: 9
+                }
+            },
+            'claude-3.5-sonnet': {
+                name: 'Claude 3.5 Sonnet',
+                provider: 'Anthropic',
+                logo: 'C',
+                logoColor: 'linear-gradient(135deg, #d97706, #b45309)',
+                url: 'https://claude.ai',
+                strengths: ['Best coding', 'Nuanced writing', 'Long context', 'Safety focused'],
+                scores: {
+                    writing: 10, coding: 10, analysis: 9, conversation: 9, multimodal: 8,
+                    free: 7, budget: 8, moderate: 9, enterprise: 9,
+                    speed: 8, balanced: 9, quality: 10,
+                    small: 9, medium: 9, large: 10, massive: 9,
+                    none: 9, privacy: 8, realtime: 6, api: 9
+                }
+            },
+            'gemini-1.5-pro': {
+                name: 'Gemini 1.5 Pro',
+                provider: 'Google',
+                logo: 'G',
+                logoColor: 'linear-gradient(135deg, #4285f4, #34a853)',
+                url: 'https://gemini.google.com',
+                strengths: ['Massive context (2M)', 'Multimodal', 'Real-time info', 'Google integration'],
+                scores: {
+                    writing: 8, coding: 8, analysis: 9, conversation: 8, multimodal: 10,
+                    free: 8, budget: 9, moderate: 9, enterprise: 8,
+                    speed: 8, balanced: 9, quality: 8,
+                    small: 8, medium: 9, large: 10, massive: 10,
+                    none: 8, privacy: 6, realtime: 10, api: 8
+                }
+            },
+            'gpt-4o-mini': {
+                name: 'GPT-4o mini',
+                provider: 'OpenAI',
+                logo: 'G',
+                logoColor: 'linear-gradient(135deg, #10a37f, #1a7f64)',
+                url: 'https://chat.openai.com',
+                strengths: ['Very affordable', 'Fast', 'Good quality', 'Great for APIs'],
+                scores: {
+                    writing: 7, coding: 7, analysis: 6, conversation: 8, multimodal: 7,
+                    free: 9, budget: 10, moderate: 7, enterprise: 5,
+                    speed: 10, balanced: 8, quality: 6,
+                    small: 9, medium: 8, large: 7, massive: 6,
+                    none: 8, privacy: 6, realtime: 7, api: 10
+                }
+            },
+            'claude-3-haiku': {
+                name: 'Claude 3 Haiku',
+                provider: 'Anthropic',
+                logo: 'C',
+                logoColor: 'linear-gradient(135deg, #d97706, #b45309)',
+                url: 'https://claude.ai',
+                strengths: ['Very fast', 'Cheapest Claude', 'Good for chat', 'Long context'],
+                scores: {
+                    writing: 7, coding: 7, analysis: 6, conversation: 9, multimodal: 6,
+                    free: 9, budget: 10, moderate: 6, enterprise: 5,
+                    speed: 10, balanced: 8, quality: 6,
+                    small: 9, medium: 9, large: 9, massive: 8,
+                    none: 8, privacy: 8, realtime: 5, api: 9
+                }
+            },
+            'perplexity': {
+                name: 'Perplexity',
+                provider: 'Perplexity AI',
+                logo: 'P',
+                logoColor: 'linear-gradient(135deg, #20b2aa, #008080)',
+                url: 'https://perplexity.ai',
+                strengths: ['Real-time search', 'Citations', 'Research focused', 'Current events'],
+                scores: {
+                    writing: 6, coding: 5, analysis: 9, conversation: 7, multimodal: 5,
+                    free: 9, budget: 9, moderate: 8, enterprise: 6,
+                    speed: 8, balanced: 8, quality: 7,
+                    small: 9, medium: 8, large: 6, massive: 4,
+                    none: 7, privacy: 5, realtime: 10, api: 6
+                }
+            },
+            'deepseek-v3': {
+                name: 'DeepSeek V3',
+                provider: 'DeepSeek',
+                logo: 'D',
+                logoColor: 'linear-gradient(135deg, #06b6d4, #0891b2)',
+                url: 'https://chat.deepseek.com',
+                strengths: ['Extremely cheap', 'Good coding', 'Open weights', 'Chinese + English'],
+                scores: {
+                    writing: 7, coding: 9, analysis: 7, conversation: 7, multimodal: 5,
+                    free: 10, budget: 10, moderate: 8, enterprise: 6,
+                    speed: 8, balanced: 8, quality: 7,
+                    small: 8, medium: 8, large: 8, massive: 7,
+                    none: 7, privacy: 9, realtime: 4, api: 9
+                }
+            },
+            'claude-3-opus': {
+                name: 'Claude 3 Opus',
+                provider: 'Anthropic',
+                logo: 'C',
+                logoColor: 'linear-gradient(135deg, #d97706, #b45309)',
+                url: 'https://claude.ai',
+                strengths: ['Highest quality', 'Complex reasoning', 'Long documents', 'Premium tier'],
+                scores: {
+                    writing: 10, coding: 9, analysis: 10, conversation: 9, multimodal: 8,
+                    free: 3, budget: 4, moderate: 7, enterprise: 10,
+                    speed: 5, balanced: 7, quality: 10,
+                    small: 8, medium: 9, large: 10, massive: 9,
+                    none: 9, privacy: 8, realtime: 5, api: 8
+                }
+            },
+            'o1': {
+                name: 'o1',
+                provider: 'OpenAI',
+                logo: 'O',
+                logoColor: 'linear-gradient(135deg, #000, #333)',
+                url: 'https://chat.openai.com',
+                strengths: ['Best reasoning', 'Complex problems', 'Math & Science', 'Chain of thought'],
+                scores: {
+                    writing: 7, coding: 9, analysis: 10, conversation: 6, multimodal: 6,
+                    free: 2, budget: 3, moderate: 6, enterprise: 10,
+                    speed: 3, balanced: 5, quality: 10,
+                    small: 7, medium: 8, large: 9, massive: 8,
+                    none: 8, privacy: 6, realtime: 5, api: 7
+                }
+            },
+            'llama-3.1-70b': {
+                name: 'Llama 3.1 70B',
+                provider: 'Meta (via providers)',
+                logo: 'L',
+                logoColor: 'linear-gradient(135deg, #3b82f6, #2563eb)',
+                url: 'https://llama.meta.com',
+                strengths: ['Open source', 'Self-hostable', 'No data concerns', 'Very affordable'],
+                scores: {
+                    writing: 8, coding: 8, analysis: 7, conversation: 8, multimodal: 5,
+                    free: 10, budget: 10, moderate: 8, enterprise: 7,
+                    speed: 8, balanced: 8, quality: 7,
+                    small: 8, medium: 8, large: 8, massive: 7,
+                    none: 8, privacy: 10, realtime: 3, api: 8
+                }
+            },
+            'mistral-large': {
+                name: 'Mistral Large',
+                provider: 'Mistral',
+                logo: 'M',
+                logoColor: 'linear-gradient(135deg, #ff7800, #e56700)',
+                url: 'https://mistral.ai',
+                strengths: ['European AI', 'Good multilingual', 'Competitive pricing', 'Enterprise ready'],
+                scores: {
+                    writing: 8, coding: 8, analysis: 8, conversation: 8, multimodal: 6,
+                    free: 5, budget: 7, moderate: 9, enterprise: 8,
+                    speed: 8, balanced: 9, quality: 8,
+                    small: 8, medium: 8, large: 8, massive: 7,
+                    none: 8, privacy: 8, realtime: 5, api: 9
+                }
+            },
+            'gemini-flash': {
+                name: 'Gemini 2.0 Flash',
+                provider: 'Google',
+                logo: 'G',
+                logoColor: 'linear-gradient(135deg, #4285f4, #34a853)',
+                url: 'https://gemini.google.com',
+                strengths: ['Extremely fast', 'Very cheap', '1M context', 'Multimodal'],
+                scores: {
+                    writing: 7, coding: 7, analysis: 7, conversation: 8, multimodal: 9,
+                    free: 10, budget: 10, moderate: 7, enterprise: 6,
+                    speed: 10, balanced: 8, quality: 6,
+                    small: 9, medium: 9, large: 9, massive: 9,
+                    none: 8, privacy: 5, realtime: 9, api: 9
+                }
+            }
+        };
+
+        let currentQuestion = 1;
+        const totalQuestions = 5;
+        let answers = {};
+
+        // Select option
+        function selectOption(button, question) {
+            // Remove previous selection
+            const options = button.parentElement.querySelectorAll('.option-btn');
+            options.forEach(opt => opt.classList.remove('selected'));
+
+            // Add selection
+            button.classList.add('selected');
+
+            // Store answer
+            answers[question] = button.dataset.value;
+
+            // Enable next button
+            document.getElementById('nextBtn').disabled = false;
+
+            // Auto advance after short delay
+            setTimeout(() => {
+                if (currentQuestion < totalQuestions) {
+                    nextQuestion();
+                } else {
+                    showResults();
+                }
+            }, 300);
+        }
+
+        // Next question
+        function nextQuestion() {
+            if (currentQuestion < totalQuestions) {
+                currentQuestion++;
+                updateQuiz();
+            } else {
+                showResults();
+            }
+        }
+
+        // Previous question
+        function prevQuestion() {
+            if (currentQuestion > 1) {
+                currentQuestion--;
+                updateQuiz();
+            }
+        }
+
+        // Update quiz display
+        function updateQuiz() {
+            // Update slides
+            document.querySelectorAll('.question-slide').forEach(slide => {
+                slide.classList.remove('active');
+            });
+            document.querySelector(`[data-question="${currentQuestion}"]`).classList.add('active');
+
+            // Update progress
+            const progress = ((currentQuestion - 1) / totalQuestions) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+            document.getElementById('progressLabel').textContent = `Question ${currentQuestion} of ${totalQuestions}`;
+            document.getElementById('progressPercent').textContent = `${Math.round(progress)}%`;
+
+            // Update buttons
+            document.getElementById('backBtn').disabled = currentQuestion === 1;
+            document.getElementById('nextBtn').disabled = !answers[currentQuestion];
+            document.getElementById('nextBtn').textContent = currentQuestion === totalQuestions ? 'See Results' : 'Next';
+        }
+
+        // Calculate scores and show results
+        function showResults() {
+            // Hide quiz, show results
+            document.getElementById('quizContainer').style.display = 'none';
+            document.getElementById('quizNav').style.display = 'none';
+            document.getElementById('resultsContainer').classList.add('active');
+            document.querySelector('.progress-container').style.display = 'none';
+
+            // Calculate scores
+            const scores = {};
+            for (const [modelId, model] of Object.entries(aiModels)) {
+                let score = 0;
+                for (const [question, answer] of Object.entries(answers)) {
+                    if (model.scores[answer]) {
+                        score += model.scores[answer];
+                    }
+                }
+                scores[modelId] = score;
+            }
+
+            // Sort by score
+            const ranked = Object.entries(scores)
+                .sort((a, b) => b[1] - a[1])
+                .map(([id, score]) => ({ id, score, ...aiModels[id] }));
+
+            // Display top recommendation
+            const top = ranked[0];
+            displayRecommendation(top);
+
+            // Display alternatives
+            const alternatives = ranked.slice(1, 4);
+            displayAlternatives(alternatives);
+
+            // Confetti!
+            createConfetti();
+        }
+
+        // Display main recommendation
+        function displayRecommendation(model) {
+            const card = document.getElementById('recommendationCard');
+
+            const reasons = getReasons(model, answers);
+
+            card.innerHTML = `
+                <div class="rec-header">
+                    <div class="rec-logo" style="background: ${model.logoColor}">${model.logo}</div>
+                    <div class="rec-info">
+                        <h3>${model.name}</h3>
+                        <p class="provider">by ${model.provider}</p>
+                    </div>
+                </div>
+                <div class="rec-reasons">
+                    <h4>Why ${model.name} is perfect for you:</h4>
+                    ${reasons.map(r => `
+                        <div class="reason-item">
+                            <span class="reason-icon">&#10003;</span>
+                            <span class="reason-text">${r}</span>
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="rec-cta">
+                    <a href="${model.url}" target="_blank" class="rec-btn primary">Try ${model.name} →</a>
+                    <a href="https://kaiprompts.com" target="_blank" class="rec-btn secondary">Get Prompts for ${model.name}</a>
+                </div>
+            `;
+        }
+
+        // Generate personalized reasons
+        function getReasons(model, answers) {
+            const reasons = [];
+
+            // Use case specific
+            const useCaseReasons = {
+                writing: `Excellent at ${model.name === 'Claude 3.5 Sonnet' ? 'nuanced, professional' : 'high-quality'} writing and content creation`,
+                coding: `${model.scores.coding >= 9 ? 'Industry-leading' : 'Strong'} code generation and debugging capabilities`,
+                analysis: `Powerful ${model.scores.analysis >= 9 ? 'complex reasoning and deep' : ''} analysis features`,
+                conversation: `Natural, engaging conversational abilities`,
+                multimodal: `Advanced image understanding and multimodal processing`
+            };
+            reasons.push(useCaseReasons[answers[1]]);
+
+            // Budget specific
+            if (answers[2] === 'free' || answers[2] === 'budget') {
+                reasons.push(`Affordable pricing that fits your budget constraints`);
+            } else if (answers[2] === 'enterprise') {
+                reasons.push(`Enterprise-grade quality and reliability`);
+            }
+
+            // Speed/Quality
+            if (answers[3] === 'speed') {
+                reasons.push(`Fast response times for efficient workflows`);
+            } else if (answers[3] === 'quality') {
+                reasons.push(`Prioritizes output quality and accuracy`);
+            }
+
+            // Context
+            if (answers[4] === 'large' || answers[4] === 'massive') {
+                reasons.push(`${model.name.includes('Gemini') ? 'Industry-leading' : 'Large'} context window for handling extensive documents`);
+            }
+
+            // Special requirements
+            const specialReasons = {
+                privacy: `Strong privacy practices and data handling policies`,
+                realtime: `Access to real-time information and web search`,
+                api: `Reliable, well-documented API for developers`
+            };
+            if (answers[5] !== 'none' && specialReasons[answers[5]]) {
+                reasons.push(specialReasons[answers[5]]);
+            }
+
+            // Add strength
+            reasons.push(model.strengths[0]);
+
+            return reasons.slice(0, 4);
+        }
+
+        // Display alternatives
+        function displayAlternatives(alternatives) {
+            const grid = document.getElementById('alternativesGrid');
+
+            grid.innerHTML = alternatives.map(model => `
+                <div class="alt-card">
+                    <div class="alt-header">
+                        <div class="alt-logo" style="background: ${model.logoColor}">${model.logo}</div>
+                        <span class="alt-name">${model.name}</span>
+                    </div>
+                    <p class="alt-desc">${model.strengths.slice(0, 2).join(', ')}</p>
+                    <a href="${model.url}" target="_blank" class="alt-link">Try ${model.name} →</a>
+                </div>
+            `).join('');
+        }
+
+        // Restart quiz
+        function restartQuiz() {
+            currentQuestion = 1;
+            answers = {};
+
+            document.getElementById('quizContainer').style.display = 'block';
+            document.getElementById('quizNav').style.display = 'flex';
+            document.getElementById('resultsContainer').classList.remove('active');
+            document.querySelector('.progress-container').style.display = 'block';
+
+            // Reset all selections
+            document.querySelectorAll('.option-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+
+            updateQuiz();
+        }
+
+        // Create confetti effect
+        function createConfetti() {
+            const container = document.getElementById('confettiContainer');
+            const colors = ['#a855f7', '#06b6d4', '#10b981', '#ec4899', '#f59e0b'];
+
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                container.appendChild(confetti);
+
+                setTimeout(() => confetti.classList.add('active'), 10);
+
+                // Remove after animation
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', updateQuiz);
+    </script>
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI Model Picker - Which AI Should I Use?",
+        "description": "Interactive quiz to help you find the perfect AI model for your needs. Compare ChatGPT, Claude, Gemini, and more based on your use case, budget, and requirements.",
+        "url": "https://toolsforge.com/tools/ai-model-picker.html",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "Personalized AI model recommendations",
+            "Compare 10+ AI models",
+            "Consider budget, use case, and requirements",
+            "Instant results with detailed explanations"
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Which AI is best for coding?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Claude 3.5 Sonnet is currently considered the best AI for coding tasks, with excellent code generation, debugging, and explanation capabilities. GPT-4o and DeepSeek V3 are also strong alternatives for developers."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the best free AI assistant?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "For free AI assistants, Claude (free tier), ChatGPT (free tier), and Google Gemini offer excellent capabilities. Perplexity AI is great for research with its free tier, and DeepSeek offers very affordable API access."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "ChatGPT vs Claude - which is better?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "It depends on your use case. Claude 3.5 Sonnet excels at coding, nuanced writing, and handling long documents. GPT-4o is faster, more affordable, and great for general tasks. Both are excellent choices for most users."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Which AI has the largest context window?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Google Gemini 1.5 Pro has the largest context window at 2 million tokens, allowing it to process entire codebases or multiple books at once. Claude offers 200K tokens, and GPT-4 models support 128K tokens."
+                }
+            }
+        ]
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Choose the Right AI Model",
+        "description": "A step-by-step guide to selecting the best AI model for your specific needs.",
+        "step": [
+            {
+                "@type": "HowToStep",
+                "name": "Identify Your Use Case",
+                "text": "Determine whether you need AI for writing, coding, analysis, conversation, or multimodal tasks."
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Set Your Budget",
+                "text": "Decide how much you're willing to spend - from free tiers to enterprise solutions."
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Balance Speed and Quality",
+                "text": "Choose whether fast responses or highest quality outputs matter more for your workflow."
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Consider Context Needs",
+                "text": "Evaluate how much text you typically need to process - from short chats to entire books."
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Check Special Requirements",
+                "text": "Factor in needs like privacy, real-time information, or API integration."
+            }
+        ]
+    }
+    </script>
+</body>
+</html>

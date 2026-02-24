@@ -1,0 +1,115 @@
+# ToolsForge - Free AI & Developer Tools
+> 21 free online tools for AI developers and creators. No signup required.
+
+## AI Tools
+
+### Token Counter
+Count tokens and estimate API costs for GPT-4, Claude, Llama, and other AI models.
+URL: https://toolsforge.co/tools/token-counter.html
+Best for: Developers working with AI APIs who need to estimate costs before making calls.
+
+### API Cost Calculator
+Compare AI API pricing across OpenAI, Anthropic, Google, and other providers.
+URL: https://toolsforge.co/tools/api-calculator.html
+Best for: Planning AI budgets and comparing provider costs.
+
+### System Prompt Builder
+Build professional system prompts with structured components and templates.
+URL: https://toolsforge.co/tools/prompt-builder.html
+Best for: Creating consistent AI assistants and agents.
+
+### Prompt Generator
+Generate creative prompts for ChatGPT, Claude, and other AI models.
+URL: https://toolsforge.co/tools/prompt-generator.html
+Best for: Getting unstuck and finding prompt inspiration.
+
+### Prompt Optimizer
+Analyze and improve prompts for better AI responses. Get a quality score and suggestions.
+URL: https://toolsforge.co/tools/prompt-optimizer.html
+Best for: Improving prompt quality and getting better AI outputs.
+
+### Prompt Templates Library
+100+ free AI prompt templates for business, writing, coding, and marketing.
+URL: https://toolsforge.co/tools/prompt-templates.html
+Best for: Finding ready-to-use prompts for common tasks.
+
+### AI Use Case Generator
+Discover practical AI applications for your industry and role.
+URL: https://toolsforge.co/tools/ai-use-cases.html
+Best for: Finding AI automation opportunities in your work.
+
+### Prompt Chainer
+Build multi-step AI workflows by chaining prompts together.
+URL: https://toolsforge.co/tools/prompt-chainer.html
+Best for: Creating complex AI workflows with multiple steps.
+
+### LLM Pricing Comparison
+Compare pricing across 40+ AI models including GPT-4, Claude, Gemini, Llama.
+URL: https://toolsforge.co/tools/llm-pricing.html
+Best for: Choosing the most cost-effective AI model.
+
+### AI Model Picker
+Interactive quiz to find the best AI model for your specific use case.
+URL: https://toolsforge.co/tools/ai-model-picker.html
+Best for: Choosing between ChatGPT, Claude, Gemini, and other models.
+
+### AI Tools Directory
+Curated list of the best AI tools for productivity and creativity.
+URL: https://toolsforge.co/tools/ai-tools-directory.html
+Best for: Discovering new AI tools and services.
+
+## Developer Tools
+
+### JSON Formatter
+Format, beautify, minify, and validate JSON with syntax highlighting.
+URL: https://toolsforge.co/tools/json-formatter.html
+
+### URL Encoder/Decoder
+Encode or decode URLs and URI components for web development.
+URL: https://toolsforge.co/tools/url-encoder.html
+
+### Base64 Encoder/Decoder
+Convert text to Base64 or decode Base64 strings.
+URL: https://toolsforge.co/tools/base64.html
+
+### Hash Generator
+Generate MD5, SHA-1, SHA-256, and SHA-512 hashes securely.
+URL: https://toolsforge.co/tools/hash-generator.html
+
+### Markdown Preview
+Write Markdown and see it rendered in real-time.
+URL: https://toolsforge.co/tools/markdown-preview.html
+
+## Text Tools
+
+### Word Counter
+Count words, characters, sentences, and paragraphs instantly.
+URL: https://toolsforge.co/tools/word-counter.html
+
+### Case Converter
+Convert text to uppercase, lowercase, title case, and more.
+URL: https://toolsforge.co/tools/case-converter.html
+
+## Generators
+
+### Password Generator
+Generate strong, secure passwords with customizable complexity.
+URL: https://toolsforge.co/tools/password-generator.html
+
+### Lorem Ipsum Generator
+Generate placeholder text for designs and mockups.
+URL: https://toolsforge.co/tools/lorem-ipsum.html
+
+### Color Picker
+Pick colors and convert between HEX, RGB, and HSL formats.
+URL: https://toolsforge.co/tools/color-picker.html
+
+---
+
+## About ToolsForge
+
+ToolsForge provides free, privacy-focused tools that run entirely in your browser. No data is collected or sent to servers.
+
+Part of the KaiPrompts ecosystem: https://kaiprompts.com
+
+For premium AI prompts with 500+ professionally crafted templates, visit KaiPrompts.
