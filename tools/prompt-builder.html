@@ -1,0 +1,2262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Prompt Builder - Free System Prompt Generator | ToolsForge</title>
+    <meta name="description" content="Free visual AI prompt builder. Drag-and-drop blocks to create perfect system prompts for ChatGPT, Claude, and other AI assistants. No signup required.">
+    <meta name="keywords" content="AI prompt builder, system prompt generator, ChatGPT prompts, Claude prompts, prompt engineering, AI assistant prompts, prompt templates">
+    <link rel="canonical" href="https://toolsforge.com/tools/prompt-builder.html">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #09090b;
+            --bg-secondary: #18181b;
+            --bg-card: #1c1c1f;
+            --bg-glass: rgba(28, 28, 31, 0.7);
+            --accent: #8b5cf6;
+            --accent-light: #a78bfa;
+            --accent-glow: rgba(139, 92, 246, 0.3);
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --border: #27272a;
+            --border-light: #3f3f46;
+            --green: #10b981;
+            --yellow: #f59e0b;
+            --red: #ef4444;
+            --blue: #3b82f6;
+            --pink: #ec4899;
+            --cyan: #06b6d4;
+            --orange: #f97316;
+            --role-color: #8b5cf6;
+            --context-color: #3b82f6;
+            --task-color: #10b981;
+            --format-color: #f59e0b;
+            --constraints-color: #ef4444;
+            --examples-color: #ec4899;
+            --tone-color: #06b6d4;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated gradient background */
+        .gradient-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(ellipse 80% 50% at 50% -20%, rgba(139, 92, 246, 0.15), transparent),
+                radial-gradient(ellipse 60% 40% at 80% 80%, rgba(59, 130, 246, 0.1), transparent),
+                radial-gradient(ellipse 40% 30% at 20% 60%, rgba(236, 72, 153, 0.08), transparent);
+            pointer-events: none;
+            z-index: 0;
+            animation: gradientShift 20s ease infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        /* Floating particles */
+        .particles {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.3; }
+            90% { opacity: 0.3; }
+            100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+        }
+
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 16px 24px;
+            background: rgba(9, 9, 11, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent), var(--pink));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: var(--text-primary); }
+
+        .main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 100px 24px 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ad-banner { margin-bottom: 32px; }
+
+        .ad-placeholder {
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+            border: 1px dashed var(--border-light);
+            border-radius: 12px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--text-muted);
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover { color: var(--accent-light); }
+        .breadcrumb span { color: var(--text-muted); }
+
+        .tool-header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--text-primary), var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tool-header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Templates Bar */
+        .templates-bar {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .template-btn {
+            background: var(--bg-glass);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            padding: 10px 20px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .template-btn:hover {
+            border-color: var(--accent);
+            color: var(--text-primary);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--accent-glow);
+        }
+
+        .template-btn.active {
+            background: linear-gradient(135deg, var(--accent), var(--pink));
+            border-color: transparent;
+            color: white;
+        }
+
+        /* Main Builder Layout */
+        .builder-container {
+            display: grid;
+            grid-template-columns: 280px 1fr 400px;
+            gap: 24px;
+            min-height: 600px;
+        }
+
+        @media (max-width: 1200px) {
+            .builder-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Block Palette */
+        .block-palette {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 20px;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .palette-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 16px;
+        }
+
+        .palette-blocks {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .palette-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 16px;
+            cursor: grab;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .palette-block::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--block-color);
+            border-radius: 4px 0 0 4px;
+        }
+
+        .palette-block:hover {
+            transform: translateX(8px) scale(1.02);
+            border-color: var(--block-color);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3), 0 0 20px color-mix(in srgb, var(--block-color) 30%, transparent);
+        }
+
+        .palette-block:active {
+            cursor: grabbing;
+            transform: scale(1.05);
+        }
+
+        .palette-block.dragging {
+            opacity: 0.5;
+            transform: scale(0.95);
+        }
+
+        .block-icon {
+            width: 36px;
+            height: 36px;
+            background: color-mix(in srgb, var(--block-color) 20%, transparent);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .block-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .block-name {
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        .block-desc {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Canvas Area */
+        .canvas-wrapper {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 24px;
+            min-height: 600px;
+            position: relative;
+        }
+
+        .canvas-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .canvas-title {
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .canvas-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .canvas-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 14px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .canvas-btn:hover {
+            background: var(--border);
+            color: var(--text-primary);
+        }
+
+        .canvas-btn.danger:hover {
+            background: var(--red);
+            border-color: var(--red);
+            color: white;
+        }
+
+        .canvas {
+            min-height: 500px;
+            position: relative;
+        }
+
+        .canvas-empty {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        .canvas-empty-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            opacity: 0.5;
+        }
+
+        .canvas-empty p {
+            font-size: 0.95rem;
+        }
+
+        /* Drop Zone */
+        .drop-zone {
+            min-height: 100px;
+            border: 2px dashed var(--border);
+            border-radius: 16px;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 16px;
+        }
+
+        .drop-zone.drag-over {
+            border-color: var(--accent);
+            background: var(--accent-glow);
+        }
+
+        /* Canvas Blocks */
+        .canvas-block {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: blockAppear 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        @keyframes blockAppear {
+            from {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .canvas-block::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--block-color);
+        }
+
+        .canvas-block:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 30px color-mix(in srgb, var(--block-color) 20%, transparent);
+            border-color: var(--block-color);
+        }
+
+        .canvas-block.dragging {
+            opacity: 0.7;
+            transform: scale(1.02) rotate(1deg);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            z-index: 100;
+        }
+
+        .block-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 16px;
+            background: rgba(255,255,255,0.02);
+            border-bottom: 1px solid var(--border);
+            cursor: grab;
+        }
+
+        .block-header:active {
+            cursor: grabbing;
+        }
+
+        .block-header-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .block-drag-handle {
+            color: var(--text-muted);
+            font-size: 14px;
+            cursor: grab;
+        }
+
+        .block-type-icon {
+            width: 28px;
+            height: 28px;
+            background: color-mix(in srgb, var(--block-color) 20%, transparent);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .block-type-label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--block-color);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .block-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .block-action-btn {
+            width: 28px;
+            height: 28px;
+            background: transparent;
+            border: none;
+            border-radius: 6px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .block-action-btn:hover {
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+        }
+
+        .block-action-btn.delete:hover {
+            background: var(--red);
+            color: white;
+        }
+
+        .block-content {
+            padding: 16px;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .block-content.collapsed {
+            max-height: 0;
+            padding: 0 16px;
+        }
+
+        .block-textarea {
+            width: 100%;
+            min-height: 80px;
+            padding: 12px 14px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            resize: vertical;
+            transition: all 0.2s;
+        }
+
+        .block-textarea:focus {
+            outline: none;
+            border-color: var(--block-color);
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--block-color) 20%, transparent);
+        }
+
+        .block-textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Tone Block Special */
+        .tone-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tone-option {
+            padding: 8px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .tone-option:hover {
+            border-color: var(--tone-color);
+            color: var(--text-primary);
+        }
+
+        .tone-option.selected {
+            background: var(--tone-color);
+            border-color: var(--tone-color);
+            color: white;
+        }
+
+        /* Examples Block Special */
+        .examples-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .example-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 12px;
+        }
+
+        .example-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 6px;
+        }
+
+        .example-input {
+            width: 100%;
+            padding: 8px 10px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        .example-input:focus {
+            outline: none;
+            border-color: var(--examples-color);
+        }
+
+        .add-example-btn {
+            width: 100%;
+            padding: 10px;
+            background: transparent;
+            border: 1px dashed var(--border);
+            border-radius: 10px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .add-example-btn:hover {
+            border-color: var(--examples-color);
+            color: var(--examples-color);
+        }
+
+        /* Constraints Block Special */
+        .constraints-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .constraint-item {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .constraint-type {
+            padding: 6px 12px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            cursor: pointer;
+            min-width: 70px;
+            text-align: center;
+        }
+
+        .constraint-type.do {
+            background: color-mix(in srgb, var(--green) 20%, transparent);
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        .constraint-type.dont {
+            background: color-mix(in srgb, var(--red) 20%, transparent);
+            border-color: var(--red);
+            color: var(--red);
+        }
+
+        .constraint-input {
+            flex: 1;
+            padding: 8px 12px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 0.85rem;
+        }
+
+        .constraint-input:focus {
+            outline: none;
+            border-color: var(--constraints-color);
+        }
+
+        .constraint-remove {
+            width: 28px;
+            height: 28px;
+            background: transparent;
+            border: none;
+            border-radius: 6px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .constraint-remove:hover {
+            background: var(--red);
+            color: white;
+        }
+
+        /* Preview Pane */
+        .preview-pane {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            position: sticky;
+            top: 100px;
+            max-height: calc(100vh - 140px);
+        }
+
+        .preview-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .preview-title {
+            font-size: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .preview-stats {
+            display: flex;
+            gap: 16px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .stat-value {
+            color: var(--accent-light);
+            font-weight: 600;
+        }
+
+        .preview-content {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+
+        .preview-text {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+            font-size: 0.85rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            white-space: pre-wrap;
+            word-break: break-word;
+            min-height: 200px;
+        }
+
+        .preview-text .highlight {
+            color: var(--text-primary);
+        }
+
+        .preview-text .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1em;
+            background: var(--accent);
+            margin-left: 2px;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .preview-empty {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 200px;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .preview-empty-icon {
+            font-size: 36px;
+            margin-bottom: 12px;
+            opacity: 0.5;
+        }
+
+        .preview-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .preview-btn {
+            flex: 1;
+            padding: 14px 20px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .preview-btn.primary {
+            background: linear-gradient(135deg, var(--accent), var(--pink));
+            border: none;
+            color: white;
+        }
+
+        .preview-btn.primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--accent-glow);
+        }
+
+        .preview-btn.secondary {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .preview-btn.secondary:hover {
+            border-color: var(--accent);
+            color: var(--text-primary);
+        }
+
+        /* Saved Prompts Section */
+        .saved-section {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+        }
+
+        .saved-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+
+        .saved-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
+        .saved-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 12px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .saved-item:hover {
+            border-color: var(--accent);
+        }
+
+        .saved-item-name {
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .saved-item-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .saved-item-delete {
+            width: 24px;
+            height: 24px;
+            background: transparent;
+            border: none;
+            border-radius: 4px;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.2s;
+        }
+
+        .saved-item:hover .saved-item-delete {
+            opacity: 1;
+        }
+
+        .saved-item-delete:hover {
+            background: var(--red);
+            color: white;
+        }
+
+        /* Copy Success Animation */
+        .copy-success {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: var(--bg-card);
+            border: 1px solid var(--green);
+            border-radius: 16px;
+            padding: 24px 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            z-index: 1000;
+            animation: successPop 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+
+        @keyframes successPop {
+            0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+
+        .copy-success-icon {
+            width: 60px;
+            height: 60px;
+            background: color-mix(in srgb, var(--green) 20%, transparent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: var(--green);
+        }
+
+        .copy-success-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* Confetti */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 999;
+            overflow: hidden;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            opacity: 0;
+        }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100%) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* Save Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            animation: fadeIn 0.2s;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 28px;
+            max-width: 400px;
+            width: 90%;
+            animation: modalSlide 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes modalSlide {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .modal-input {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        .modal-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .modal-btn.cancel {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .modal-btn.cancel:hover {
+            background: var(--border);
+            color: var(--text-primary);
+        }
+
+        .modal-btn.save {
+            background: var(--accent);
+            border: none;
+            color: white;
+        }
+
+        .modal-btn.save:hover {
+            background: var(--accent-light);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            margin-top: 60px;
+            padding: 40px;
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .cta-section p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--accent), var(--pink));
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px var(--accent-glow);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 60px;
+            padding: 40px 24px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer a {
+            color: var(--text-secondary);
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: var(--accent-light);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-light);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .block-palette {
+                position: static;
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 10px;
+            }
+
+            .palette-blocks {
+                display: contents;
+            }
+
+            .palette-title {
+                grid-column: 1 / -1;
+            }
+
+            .preview-pane {
+                position: static;
+                max-height: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .tool-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .templates-bar {
+                justify-content: flex-start;
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                padding-bottom: 10px;
+            }
+
+            .template-btn {
+                flex-shrink: 0;
+            }
+
+            .block-palette {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gradient-bg"></div>
+
+    <div class="particles" id="particles"></div>
+
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="../index.html" class="logo">
+                <span class="logo-icon">&#9881;</span>
+                ToolsForge
+            </a>
+            <ul class="nav-links">
+                <li><a href="../index.html">All Tools</a></li>
+                <li><a href="ai-tools-directory.html">AI Directory</a></li>
+                <li><a href="https://kaiprompts.com" target="_blank">Premium Prompts</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main">
+        <div class="ad-banner">
+            <div class="ad-placeholder">Advertisement</div>
+        </div>
+
+        <div class="tool-header">
+            <div class="breadcrumb">
+                <a href="../index.html">Tools</a>
+                <span>/</span>
+                <span>Prompt Builder</span>
+            </div>
+            <h1>AI System Prompt Builder</h1>
+            <p>Drag and drop blocks to create perfectly structured system prompts for ChatGPT, Claude, and other AI assistants</p>
+        </div>
+
+        <div class="templates-bar">
+            <button class="template-btn" data-template="blank">
+                <span>&#10010;</span> Start Blank
+            </button>
+            <button class="template-btn" data-template="customer-support">
+                <span>&#128172;</span> Customer Support
+            </button>
+            <button class="template-btn" data-template="code-review">
+                <span>&#128187;</span> Code Review
+            </button>
+            <button class="template-btn" data-template="writing-assistant">
+                <span>&#9997;</span> Writing Assistant
+            </button>
+            <button class="template-btn" data-template="data-analyst">
+                <span>&#128202;</span> Data Analyst
+            </button>
+            <button class="template-btn" data-template="tutor">
+                <span>&#127891;</span> Personal Tutor
+            </button>
+        </div>
+
+        <div class="builder-container">
+            <!-- Block Palette -->
+            <div class="block-palette">
+                <div class="palette-title">Prompt Blocks</div>
+                <div class="palette-blocks">
+                    <div class="palette-block" draggable="true" data-type="role" style="--block-color: var(--role-color)">
+                        <div class="block-icon">&#128100;</div>
+                        <div class="block-info">
+                            <div class="block-name">Role</div>
+                            <div class="block-desc">You are a...</div>
+                        </div>
+                    </div>
+                    <div class="palette-block" draggable="true" data-type="context" style="--block-color: var(--context-color)">
+                        <div class="block-icon">&#128218;</div>
+                        <div class="block-info">
+                            <div class="block-name">Context</div>
+                            <div class="block-desc">Background info...</div>
+                        </div>
+                    </div>
+                    <div class="palette-block" draggable="true" data-type="task" style="--block-color: var(--task-color)">
+                        <div class="block-icon">&#9989;</div>
+                        <div class="block-info">
+                            <div class="block-name">Task</div>
+                            <div class="block-desc">Your task is to...</div>
+                        </div>
+                    </div>
+                    <div class="palette-block" draggable="true" data-type="format" style="--block-color: var(--format-color)">
+                        <div class="block-icon">&#128196;</div>
+                        <div class="block-info">
+                            <div class="block-name">Format</div>
+                            <div class="block-desc">Respond in...</div>
+                        </div>
+                    </div>
+                    <div class="palette-block" draggable="true" data-type="constraints" style="--block-color: var(--constraints-color)">
+                        <div class="block-icon">&#128683;</div>
+                        <div class="block-info">
+                            <div class="block-name">Constraints</div>
+                            <div class="block-desc">Do / Don't...</div>
+                        </div>
+                    </div>
+                    <div class="palette-block" draggable="true" data-type="examples" style="--block-color: var(--examples-color)">
+                        <div class="block-icon">&#128161;</div>
+                        <div class="block-info">
+                            <div class="block-name">Examples</div>
+                            <div class="block-desc">Few-shot samples</div>
+                        </div>
+                    </div>
+                    <div class="palette-block" draggable="true" data-type="tone" style="--block-color: var(--tone-color)">
+                        <div class="block-icon">&#127908;</div>
+                        <div class="block-info">
+                            <div class="block-name">Tone</div>
+                            <div class="block-desc">Voice & style</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Canvas -->
+            <div class="canvas-wrapper">
+                <div class="canvas-header">
+                    <div class="canvas-title">
+                        <span>&#128640;</span> Prompt Canvas
+                    </div>
+                    <div class="canvas-actions">
+                        <button class="canvas-btn" id="clearCanvas" title="Clear all blocks">
+                            <span>&#128465;</span> Clear
+                        </button>
+                    </div>
+                </div>
+                <div class="canvas" id="canvas">
+                    <div class="drop-zone" id="dropZone">
+                        <div class="canvas-empty" id="canvasEmpty">
+                            <div class="canvas-empty-icon">&#128268;</div>
+                            <p>Drag blocks here to build your prompt<br><small>or select a template above</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preview Pane -->
+            <div class="preview-pane">
+                <div class="preview-header">
+                    <div class="preview-title">
+                        <span>&#128065;</span> Live Preview
+                    </div>
+                    <div class="preview-stats">
+                        <div class="stat-item">
+                            <span>Chars:</span>
+                            <span class="stat-value" id="charCount">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span>Tokens:</span>
+                            <span class="stat-value" id="tokenCount">~0</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="preview-content">
+                    <div class="preview-text" id="previewText">
+                        <div class="preview-empty">
+                            <div class="preview-empty-icon">&#128466;</div>
+                            <p>Your prompt will appear here</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="preview-actions">
+                    <button class="preview-btn secondary" id="savePrompt">
+                        <span>&#128190;</span> Save
+                    </button>
+                    <button class="preview-btn primary" id="copyPrompt">
+                        <span>&#128203;</span> Copy Prompt
+                    </button>
+                </div>
+
+                <div class="saved-section" id="savedSection" style="display: none;">
+                    <div class="saved-title">Saved Prompts</div>
+                    <div class="saved-list" id="savedList"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="cta-section">
+            <h2>Want Pro-Level Prompts?</h2>
+            <p>Get access to 500+ battle-tested prompts crafted by AI experts for every use case imaginable</p>
+            <a href="https://kaiprompts.com" target="_blank" class="cta-btn">
+                <span>&#128142;</span> Explore Premium Prompts
+            </a>
+        </div>
+
+        <div class="ad-banner" style="margin-top: 40px;">
+            <div class="ad-placeholder">Advertisement</div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2024 ToolsForge. Free tools for everyone. <a href="../index.html">View all tools</a></p>
+    </footer>
+
+    <!-- Save Modal -->
+    <div class="modal-overlay" id="saveModal">
+        <div class="modal">
+            <div class="modal-title">Save Prompt</div>
+            <input type="text" class="modal-input" id="promptName" placeholder="Enter a name for this prompt..." autofocus>
+            <div class="modal-actions">
+                <button class="modal-btn cancel" id="cancelSave">Cancel</button>
+                <button class="modal-btn save" id="confirmSave">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Copy Success Notification -->
+    <div id="copySuccess" style="display: none;">
+        <div class="copy-success">
+            <div class="copy-success-icon">&#10003;</div>
+            <div class="copy-success-text">Copied to clipboard!</div>
+        </div>
+    </div>
+
+    <!-- Confetti Container -->
+    <div class="confetti-container" id="confettiContainer"></div>
+
+    <script>
+        // Block configurations
+        const blockConfigs = {
+            role: {
+                icon: '&#128100;',
+                label: 'Role',
+                color: 'var(--role-color)',
+                placeholder: 'You are a helpful customer support agent for a tech company...',
+                prefix: 'You are '
+            },
+            context: {
+                icon: '&#128218;',
+                label: 'Context',
+                color: 'var(--context-color)',
+                placeholder: 'The company sells software products. Current promotion: 20% off annual plans...',
+                prefix: 'Background information:\n'
+            },
+            task: {
+                icon: '&#9989;',
+                label: 'Task',
+                color: 'var(--task-color)',
+                placeholder: 'Help customers with their questions, troubleshoot issues, and provide product recommendations...',
+                prefix: 'Your task is to '
+            },
+            format: {
+                icon: '&#128196;',
+                label: 'Format',
+                color: 'var(--format-color)',
+                placeholder: 'structured responses with clear headings, bullet points for lists, and code blocks for technical content...',
+                prefix: 'Format your responses as '
+            },
+            constraints: {
+                icon: '&#128683;',
+                label: 'Constraints',
+                color: 'var(--constraints-color)',
+                placeholder: null,
+                prefix: ''
+            },
+            examples: {
+                icon: '&#128161;',
+                label: 'Examples',
+                color: 'var(--examples-color)',
+                placeholder: null,
+                prefix: 'Here are some examples:\n'
+            },
+            tone: {
+                icon: '&#127908;',
+                label: 'Tone',
+                color: 'var(--tone-color)',
+                placeholder: null,
+                prefix: 'Maintain a '
+            }
+        };
+
+        const toneOptions = ['Professional', 'Casual', 'Technical', 'Friendly', 'Formal', 'Enthusiastic', 'Empathetic', 'Concise'];
+
+        // Templates
+        const templates = {
+            blank: [],
+            'customer-support': [
+                { type: 'role', content: 'a friendly and knowledgeable customer support specialist for a SaaS company. You have deep expertise in troubleshooting technical issues and explaining complex features in simple terms.' },
+                { type: 'context', content: 'You work for a project management software company. The software includes features like task boards, time tracking, team collaboration, and reporting. Common issues include login problems, sync errors, and billing questions.' },
+                { type: 'task', content: 'assist customers with their questions and issues. Listen carefully, ask clarifying questions when needed, troubleshoot problems step-by-step, and escalate to human support when the issue is beyond your capabilities.' },
+                { type: 'tone', content: 'Friendly' },
+                { type: 'constraints', content: [
+                    { type: 'do', text: 'Acknowledge the customer\'s frustration and show empathy' },
+                    { type: 'do', text: 'Provide step-by-step instructions when troubleshooting' },
+                    { type: 'dont', text: 'Make promises about refunds or credits without proper authorization' },
+                    { type: 'dont', text: 'Share internal company information or other customers\' data' }
+                ]},
+                { type: 'format', content: 'clear, numbered steps for troubleshooting. Use bullet points for multiple options. Keep responses concise but thorough.' }
+            ],
+            'code-review': [
+                { type: 'role', content: 'a senior software engineer with 15+ years of experience in code review. You specialize in writing clean, maintainable, and efficient code. You are familiar with best practices across multiple programming languages.' },
+                { type: 'task', content: 'review the provided code and give constructive feedback. Identify bugs, security vulnerabilities, performance issues, and areas for improvement. Suggest specific fixes and explain the reasoning behind your recommendations.' },
+                { type: 'tone', content: 'Professional' },
+                { type: 'format', content: 'organized sections: 1) Summary, 2) Critical Issues, 3) Suggestions, 4) Positive Observations. Use code snippets to show improved versions.' },
+                { type: 'constraints', content: [
+                    { type: 'do', text: 'Prioritize issues by severity (critical, major, minor)' },
+                    { type: 'do', text: 'Explain WHY something is an issue, not just WHAT' },
+                    { type: 'do', text: 'Suggest specific, actionable improvements with code examples' },
+                    { type: 'dont', text: 'Be overly critical or dismissive' },
+                    { type: 'dont', text: 'Suggest rewrites unless absolutely necessary' }
+                ]}
+            ],
+            'writing-assistant': [
+                { type: 'role', content: 'a skilled writing assistant with expertise in various writing styles, from creative fiction to professional business communication. You have a keen eye for grammar, structure, and clarity.' },
+                { type: 'task', content: 'help improve the user\'s writing. This may include editing for clarity, suggesting better word choices, restructuring sentences or paragraphs, and ensuring consistency in tone and style.' },
+                { type: 'tone', content: 'Friendly' },
+                { type: 'constraints', content: [
+                    { type: 'do', text: 'Preserve the author\'s voice and intent' },
+                    { type: 'do', text: 'Explain your suggestions so the user can learn' },
+                    { type: 'dont', text: 'Completely rewrite content unless asked' },
+                    { type: 'dont', text: 'Add unnecessary flourishes or overly complex vocabulary' }
+                ]},
+                { type: 'examples', content: [
+                    { input: 'The meeting was very long and boring', output: '"The meeting dragged on, testing everyone\'s patience" - more vivid and engaging' }
+                ]},
+                { type: 'format', content: 'showing original text, then suggested revision, followed by a brief explanation of changes.' }
+            ],
+            'data-analyst': [
+                { type: 'role', content: 'an expert data analyst with strong skills in statistical analysis, data visualization, and deriving actionable insights from complex datasets. You are proficient in SQL, Python, and various BI tools.' },
+                { type: 'context', content: 'You help users analyze their data, create queries, interpret results, and build visualizations. You can work with various data formats and explain statistical concepts in accessible terms.' },
+                { type: 'task', content: 'help users understand and analyze their data. Write efficient queries, explain statistical findings, suggest appropriate visualizations, and provide actionable recommendations based on the data.' },
+                { type: 'tone', content: 'Technical' },
+                { type: 'format', content: 'structured analysis with: 1) Data Overview, 2) Key Findings, 3) Statistical Details (when relevant), 4) Recommendations. Include code snippets for queries and visualizations.' },
+                { type: 'constraints', content: [
+                    { type: 'do', text: 'Explain statistical terms in plain language when needed' },
+                    { type: 'do', text: 'Consider data quality and potential biases' },
+                    { type: 'dont', text: 'Draw conclusions from insufficient data' },
+                    { type: 'dont', text: 'Overcomplicate analysis when simple methods suffice' }
+                ]}
+            ],
+            'tutor': [
+                { type: 'role', content: 'a patient and encouraging personal tutor with expertise across multiple subjects including mathematics, science, history, and languages. You adapt your teaching style to each student\'s needs and learning pace.' },
+                { type: 'task', content: 'help students understand concepts, solve problems, and develop critical thinking skills. Use the Socratic method when appropriate - guide students to discover answers rather than just providing them.' },
+                { type: 'tone', content: 'Enthusiastic' },
+                { type: 'constraints', content: [
+                    { type: 'do', text: 'Break down complex concepts into smaller, manageable parts' },
+                    { type: 'do', text: 'Use analogies and real-world examples' },
+                    { type: 'do', text: 'Praise effort and progress, not just correct answers' },
+                    { type: 'dont', text: 'Simply give answers without explanation' },
+                    { type: 'dont', text: 'Make students feel bad about mistakes - treat them as learning opportunities' }
+                ]},
+                { type: 'examples', content: [
+                    { input: 'What is 15% of 80?', output: 'Great question! Let\'s think about this step by step. "Percent" means "per hundred." So 15% is like saying 15 out of 100. To find 15% of 80, we multiply: 80 x 0.15 = 12. Does that make sense? Would you like to try a similar problem?' }
+                ]},
+                { type: 'format', content: 'conversational explanations with step-by-step breakdowns. Use analogies frequently. End with questions to check understanding or encourage further exploration.' }
+            ]
+        };
+
+        // State
+        let canvasBlocks = [];
+        let blockIdCounter = 0;
+        let savedPrompts = JSON.parse(localStorage.getItem('savedPrompts') || '[]');
+
+        // DOM Elements
+        const canvas = document.getElementById('dropZone');
+        const canvasEmpty = document.getElementById('canvasEmpty');
+        const previewText = document.getElementById('previewText');
+        const charCount = document.getElementById('charCount');
+        const tokenCount = document.getElementById('tokenCount');
+        const saveModal = document.getElementById('saveModal');
+        const promptNameInput = document.getElementById('promptName');
+        const savedSection = document.getElementById('savedSection');
+        const savedList = document.getElementById('savedList');
+        const confettiContainer = document.getElementById('confettiContainer');
+        const copySuccess = document.getElementById('copySuccess');
+
+        // Initialize particles
+        function initParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        // Drag and drop from palette
+        document.querySelectorAll('.palette-block').forEach(block => {
+            block.addEventListener('dragstart', (e) => {
+                e.dataTransfer.setData('blockType', block.dataset.type);
+                block.classList.add('dragging');
+            });
+
+            block.addEventListener('dragend', () => {
+                block.classList.remove('dragging');
+            });
+
+            // Double-click to add
+            block.addEventListener('dblclick', () => {
+                addBlock(block.dataset.type);
+            });
+        });
+
+        // Canvas drop zone
+        canvas.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            canvas.classList.add('drag-over');
+        });
+
+        canvas.addEventListener('dragleave', () => {
+            canvas.classList.remove('drag-over');
+        });
+
+        canvas.addEventListener('drop', (e) => {
+            e.preventDefault();
+            canvas.classList.remove('drag-over');
+
+            const blockType = e.dataTransfer.getData('blockType');
+            if (blockType) {
+                addBlock(blockType);
+            }
+        });
+
+        // Add a block to canvas
+        function addBlock(type, content = null) {
+            const config = blockConfigs[type];
+            const id = 'block-' + (++blockIdCounter);
+
+            const blockData = {
+                id,
+                type,
+                content: content || (type === 'constraints' ? [] : type === 'examples' ? [] : type === 'tone' ? '' : '')
+            };
+
+            canvasBlocks.push(blockData);
+            renderCanvas();
+            updatePreview();
+        }
+
+        // Render canvas blocks
+        function renderCanvas() {
+            // Clear existing blocks
+            const existingBlocks = canvas.querySelectorAll('.canvas-block');
+            existingBlocks.forEach(b => b.remove());
+
+            // Show/hide empty state
+            canvasEmpty.style.display = canvasBlocks.length === 0 ? 'flex' : 'none';
+
+            // Render blocks
+            canvasBlocks.forEach((blockData, index) => {
+                const config = blockConfigs[blockData.type];
+                const blockEl = createBlockElement(blockData, config, index);
+                canvas.insertBefore(blockEl, canvasEmpty);
+            });
+
+            setupBlockDragDrop();
+        }
+
+        // Create block element
+        function createBlockElement(blockData, config, index) {
+            const block = document.createElement('div');
+            block.className = 'canvas-block';
+            block.id = blockData.id;
+            block.style.setProperty('--block-color', config.color);
+            block.draggable = true;
+
+            let contentHTML = '';
+
+            if (blockData.type === 'tone') {
+                contentHTML = `
+                    <div class="tone-options">
+                        ${toneOptions.map(tone => `
+                            <div class="tone-option ${blockData.content === tone ? 'selected' : ''}" data-tone="${tone}">${tone}</div>
+                        `).join('')}
+                    </div>
+                `;
+            } else if (blockData.type === 'constraints') {
+                const constraints = blockData.content || [];
+                contentHTML = `
+                    <div class="constraints-list">
+                        ${constraints.map((c, i) => `
+                            <div class="constraint-item" data-index="${i}">
+                                <div class="constraint-type ${c.type}" data-index="${i}">${c.type === 'do' ? 'DO' : "DON'T"}</div>
+                                <input type="text" class="constraint-input" value="${escapeHtml(c.text)}" placeholder="Enter constraint..." data-index="${i}">
+                                <button class="constraint-remove" data-index="${i}">&times;</button>
+                            </div>
+                        `).join('')}
+                        <button class="add-example-btn add-constraint-btn">+ Add Constraint</button>
+                    </div>
+                `;
+            } else if (blockData.type === 'examples') {
+                const examples = blockData.content || [];
+                contentHTML = `
+                    <div class="examples-list">
+                        ${examples.map((ex, i) => `
+                            <div class="example-item" data-index="${i}">
+                                <div class="example-label">Input</div>
+                                <input type="text" class="example-input example-input-field" value="${escapeHtml(ex.input)}" placeholder="Example user input..." data-index="${i}">
+                                <div class="example-label">Output</div>
+                                <input type="text" class="example-input example-output-field" value="${escapeHtml(ex.output)}" placeholder="Expected AI response..." data-index="${i}">
+                                <button class="constraint-remove example-remove" data-index="${i}" style="position: absolute; top: 8px; right: 8px;">&times;</button>
+                            </div>
+                        `).join('')}
+                        <button class="add-example-btn add-example-item-btn">+ Add Example</button>
+                    </div>
+                `;
+            } else {
+                contentHTML = `
+                    <textarea class="block-textarea" placeholder="${config.placeholder}">${escapeHtml(blockData.content)}</textarea>
+                `;
+            }
+
+            block.innerHTML = `
+                <div class="block-header">
+                    <div class="block-header-left">
+                        <span class="block-drag-handle">&#8942;&#8942;</span>
+                        <div class="block-type-icon">${config.icon}</div>
+                        <span class="block-type-label">${config.label}</span>
+                    </div>
+                    <div class="block-actions">
+                        <button class="block-action-btn toggle-btn" title="Collapse/Expand">&#9660;</button>
+                        <button class="block-action-btn delete" title="Delete block">&times;</button>
+                    </div>
+                </div>
+                <div class="block-content">
+                    ${contentHTML}
+                </div>
+            `;
+
+            // Event listeners
+            const deleteBtn = block.querySelector('.block-action-btn.delete');
+            deleteBtn.addEventListener('click', () => {
+                canvasBlocks = canvasBlocks.filter(b => b.id !== blockData.id);
+                block.style.animation = 'blockAppear 0.3s reverse';
+                setTimeout(() => {
+                    renderCanvas();
+                    updatePreview();
+                }, 280);
+            });
+
+            const toggleBtn = block.querySelector('.toggle-btn');
+            const contentEl = block.querySelector('.block-content');
+            toggleBtn.addEventListener('click', () => {
+                contentEl.classList.toggle('collapsed');
+                toggleBtn.innerHTML = contentEl.classList.contains('collapsed') ? '&#9654;' : '&#9660;';
+            });
+
+            // Content change handlers
+            if (blockData.type === 'tone') {
+                block.querySelectorAll('.tone-option').forEach(opt => {
+                    opt.addEventListener('click', () => {
+                        block.querySelectorAll('.tone-option').forEach(o => o.classList.remove('selected'));
+                        opt.classList.add('selected');
+                        blockData.content = opt.dataset.tone;
+                        updatePreview();
+                    });
+                });
+            } else if (blockData.type === 'constraints') {
+                const addBtn = block.querySelector('.add-constraint-btn');
+                addBtn.addEventListener('click', () => {
+                    if (!blockData.content) blockData.content = [];
+                    blockData.content.push({ type: 'do', text: '' });
+                    renderCanvas();
+                    updatePreview();
+                });
+
+                block.querySelectorAll('.constraint-type').forEach(typeBtn => {
+                    typeBtn.addEventListener('click', () => {
+                        const idx = parseInt(typeBtn.dataset.index);
+                        blockData.content[idx].type = blockData.content[idx].type === 'do' ? 'dont' : 'do';
+                        renderCanvas();
+                        updatePreview();
+                    });
+                });
+
+                block.querySelectorAll('.constraint-input').forEach(input => {
+                    input.addEventListener('input', () => {
+                        const idx = parseInt(input.dataset.index);
+                        blockData.content[idx].text = input.value;
+                        updatePreview();
+                    });
+                });
+
+                block.querySelectorAll('.constraint-remove').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const idx = parseInt(btn.dataset.index);
+                        blockData.content.splice(idx, 1);
+                        renderCanvas();
+                        updatePreview();
+                    });
+                });
+            } else if (blockData.type === 'examples') {
+                const addBtn = block.querySelector('.add-example-item-btn');
+                addBtn.addEventListener('click', () => {
+                    if (!blockData.content) blockData.content = [];
+                    blockData.content.push({ input: '', output: '' });
+                    renderCanvas();
+                    updatePreview();
+                });
+
+                block.querySelectorAll('.example-input-field').forEach(input => {
+                    input.addEventListener('input', () => {
+                        const idx = parseInt(input.dataset.index);
+                        blockData.content[idx].input = input.value;
+                        updatePreview();
+                    });
+                });
+
+                block.querySelectorAll('.example-output-field').forEach(input => {
+                    input.addEventListener('input', () => {
+                        const idx = parseInt(input.dataset.index);
+                        blockData.content[idx].output = input.value;
+                        updatePreview();
+                    });
+                });
+
+                block.querySelectorAll('.example-remove').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const idx = parseInt(btn.dataset.index);
+                        blockData.content.splice(idx, 1);
+                        renderCanvas();
+                        updatePreview();
+                    });
+                });
+            } else {
+                const textarea = block.querySelector('.block-textarea');
+                if (textarea) {
+                    textarea.addEventListener('input', () => {
+                        blockData.content = textarea.value;
+                        updatePreview();
+                    });
+                }
+            }
+
+            return block;
+        }
+
+        // Setup block reordering
+        function setupBlockDragDrop() {
+            const blocks = canvas.querySelectorAll('.canvas-block');
+
+            blocks.forEach(block => {
+                block.addEventListener('dragstart', (e) => {
+                    e.dataTransfer.setData('blockId', block.id);
+                    block.classList.add('dragging');
+                });
+
+                block.addEventListener('dragend', () => {
+                    block.classList.remove('dragging');
+                });
+
+                block.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    const dragging = canvas.querySelector('.canvas-block.dragging');
+                    if (dragging && dragging !== block) {
+                        const rect = block.getBoundingClientRect();
+                        const midY = rect.top + rect.height / 2;
+                        if (e.clientY < midY) {
+                            canvas.insertBefore(dragging, block);
+                        } else {
+                            canvas.insertBefore(dragging, block.nextSibling);
+                        }
+                        // Update canvasBlocks order
+                        const newOrder = Array.from(canvas.querySelectorAll('.canvas-block')).map(b => b.id);
+                        canvasBlocks.sort((a, b) => newOrder.indexOf(a.id) - newOrder.indexOf(b.id));
+                        updatePreview();
+                    }
+                });
+            });
+        }
+
+        // Generate prompt text
+        function generatePrompt() {
+            let prompt = '';
+
+            canvasBlocks.forEach(block => {
+                const config = blockConfigs[block.type];
+
+                if (block.type === 'tone' && block.content) {
+                    prompt += config.prefix + block.content.toLowerCase() + ' tone throughout the conversation.\n\n';
+                } else if (block.type === 'constraints' && block.content && block.content.length > 0) {
+                    const dos = block.content.filter(c => c.type === 'do' && c.text);
+                    const donts = block.content.filter(c => c.type === 'dont' && c.text);
+
+                    if (dos.length > 0) {
+                        prompt += 'Always:\n';
+                        dos.forEach(d => prompt += '- ' + d.text + '\n');
+                        prompt += '\n';
+                    }
+                    if (donts.length > 0) {
+                        prompt += 'Never:\n';
+                        donts.forEach(d => prompt += '- ' + d.text + '\n');
+                        prompt += '\n';
+                    }
+                } else if (block.type === 'examples' && block.content && block.content.length > 0) {
+                    prompt += config.prefix + '\n';
+                    block.content.forEach((ex, i) => {
+                        if (ex.input || ex.output) {
+                            prompt += `Example ${i + 1}:\n`;
+                            if (ex.input) prompt += `User: ${ex.input}\n`;
+                            if (ex.output) prompt += `Assistant: ${ex.output}\n`;
+                            prompt += '\n';
+                        }
+                    });
+                } else if (block.content && typeof block.content === 'string' && block.content.trim()) {
+                    prompt += config.prefix + block.content.trim() + '\n\n';
+                }
+            });
+
+            return prompt.trim();
+        }
+
+        // Update preview with typewriter effect
+        let typewriterTimeout = null;
+        function updatePreview() {
+            const prompt = generatePrompt();
+
+            if (!prompt) {
+                previewText.innerHTML = `
+                    <div class="preview-empty">
+                        <div class="preview-empty-icon">&#128466;</div>
+                        <p>Your prompt will appear here</p>
+                    </div>
+                `;
+                charCount.textContent = '0';
+                tokenCount.textContent = '~0';
+                return;
+            }
+
+            // Update counts
+            charCount.textContent = prompt.length.toLocaleString();
+            // Rough token estimate (1 token ≈ 4 chars for English)
+            tokenCount.textContent = '~' + Math.ceil(prompt.length / 4).toLocaleString();
+
+            // Clear previous typewriter
+            if (typewriterTimeout) {
+                clearTimeout(typewriterTimeout);
+            }
+
+            // Display immediately (typewriter was too slow for live editing)
+            previewText.innerHTML = escapeHtml(prompt);
+        }
+
+        // Templates
+        document.querySelectorAll('.template-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const templateName = btn.dataset.template;
+                const template = templates[templateName];
+
+                // Clear current
+                canvasBlocks = [];
+                blockIdCounter = 0;
+
+                // Load template
+                if (template) {
+                    template.forEach(blockConfig => {
+                        const id = 'block-' + (++blockIdCounter);
+                        canvasBlocks.push({
+                            id,
+                            type: blockConfig.type,
+                            content: blockConfig.content
+                        });
+                    });
+                }
+
+                renderCanvas();
+                updatePreview();
+
+                // Highlight active template
+                document.querySelectorAll('.template-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // Clear canvas
+        document.getElementById('clearCanvas').addEventListener('click', () => {
+            if (canvasBlocks.length === 0) return;
+            if (confirm('Clear all blocks?')) {
+                canvasBlocks = [];
+                renderCanvas();
+                updatePreview();
+                document.querySelectorAll('.template-btn').forEach(b => b.classList.remove('active'));
+            }
+        });
+
+        // Copy to clipboard
+        document.getElementById('copyPrompt').addEventListener('click', () => {
+            const prompt = generatePrompt();
+            if (!prompt) {
+                alert('Add some blocks first!');
+                return;
+            }
+
+            navigator.clipboard.writeText(prompt).then(() => {
+                showCopySuccess();
+                createConfetti();
+            });
+        });
+
+        function showCopySuccess() {
+            copySuccess.style.display = 'block';
+            setTimeout(() => {
+                copySuccess.style.display = 'none';
+            }, 1500);
+        }
+
+        function createConfetti() {
+            const colors = ['#8b5cf6', '#ec4899', '#3b82f6', '#10b981', '#f59e0b', '#ef4444'];
+
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.background = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                confetti.style.width = (5 + Math.random() * 10) + 'px';
+                confetti.style.height = (5 + Math.random() * 10) + 'px';
+                confetti.style.animation = `confettiFall ${1 + Math.random() * 2}s linear forwards`;
+                confetti.style.animationDelay = Math.random() * 0.5 + 's';
+                confettiContainer.appendChild(confetti);
+
+                setTimeout(() => confetti.remove(), 3000);
+            }
+        }
+
+        // Save prompt
+        document.getElementById('savePrompt').addEventListener('click', () => {
+            const prompt = generatePrompt();
+            if (!prompt) {
+                alert('Add some blocks first!');
+                return;
+            }
+            saveModal.classList.add('active');
+            promptNameInput.value = '';
+            promptNameInput.focus();
+        });
+
+        document.getElementById('cancelSave').addEventListener('click', () => {
+            saveModal.classList.remove('active');
+        });
+
+        document.getElementById('confirmSave').addEventListener('click', () => {
+            const name = promptNameInput.value.trim() || 'Untitled Prompt';
+            const prompt = generatePrompt();
+
+            savedPrompts.unshift({
+                id: Date.now(),
+                name,
+                prompt,
+                blocks: JSON.parse(JSON.stringify(canvasBlocks)),
+                date: new Date().toLocaleDateString()
+            });
+
+            // Keep only last 20
+            if (savedPrompts.length > 20) {
+                savedPrompts = savedPrompts.slice(0, 20);
+            }
+
+            localStorage.setItem('savedPrompts', JSON.stringify(savedPrompts));
+            saveModal.classList.remove('active');
+            renderSavedPrompts();
+        });
+
+        // Close modal on overlay click
+        saveModal.addEventListener('click', (e) => {
+            if (e.target === saveModal) {
+                saveModal.classList.remove('active');
+            }
+        });
+
+        // Render saved prompts
+        function renderSavedPrompts() {
+            if (savedPrompts.length === 0) {
+                savedSection.style.display = 'none';
+                return;
+            }
+
+            savedSection.style.display = 'block';
+            savedList.innerHTML = savedPrompts.map(p => `
+                <div class="saved-item" data-id="${p.id}">
+                    <div>
+                        <div class="saved-item-name">${escapeHtml(p.name)}</div>
+                        <div class="saved-item-date">${p.date}</div>
+                    </div>
+                    <button class="saved-item-delete" data-id="${p.id}">&times;</button>
+                </div>
+            `).join('');
+
+            // Load saved prompt
+            savedList.querySelectorAll('.saved-item').forEach(item => {
+                item.addEventListener('click', (e) => {
+                    if (e.target.classList.contains('saved-item-delete')) return;
+
+                    const id = parseInt(item.dataset.id);
+                    const saved = savedPrompts.find(p => p.id === id);
+                    if (saved && saved.blocks) {
+                        canvasBlocks = JSON.parse(JSON.stringify(saved.blocks));
+                        blockIdCounter = canvasBlocks.length;
+                        renderCanvas();
+                        updatePreview();
+                    }
+                });
+            });
+
+            // Delete saved prompt
+            savedList.querySelectorAll('.saved-item-delete').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const id = parseInt(btn.dataset.id);
+                    savedPrompts = savedPrompts.filter(p => p.id !== id);
+                    localStorage.setItem('savedPrompts', JSON.stringify(savedPrompts));
+                    renderSavedPrompts();
+                });
+            });
+        }
+
+        // Utility
+        function escapeHtml(str) {
+            if (!str) return '';
+            const div = document.createElement('div');
+            div.textContent = str;
+            return div.innerHTML;
+        }
+
+        // Initialize
+        initParticles();
+        renderSavedPrompts();
+        updatePreview();
+    </script>
+
+    <!-- Schema.org markup for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI System Prompt Builder",
+        "description": "Free visual tool to create structured AI system prompts with drag-and-drop blocks. Build perfect prompts for ChatGPT, Claude, and other AI assistants.",
+        "url": "https://toolsforge.com/tools/prompt-builder.html",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "Drag-and-drop prompt blocks",
+            "Live preview",
+            "Pre-made templates",
+            "Save prompts locally",
+            "Character and token count",
+            "One-click copy"
+        ]
+    }
+    </script>
+</body>
+</html>

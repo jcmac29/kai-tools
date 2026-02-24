@@ -1,0 +1,1642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI API Cost Calculator - Estimate OpenAI, Claude, Gemini Pricing | ToolsForge</title>
+    <meta name="description" content="Free AI API cost calculator. Estimate costs for OpenAI GPT-4, Claude 3, Gemini Pro APIs. Compare pricing across providers. Calculate daily, weekly, monthly costs instantly.">
+    <meta name="keywords" content="AI API cost calculator, OpenAI pricing calculator, Claude API pricing, GPT-4 cost estimator, Gemini API cost, LLM pricing comparison, API token calculator">
+    <link rel="canonical" href="https://toolsforge.com/tools/api-calculator.html">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #09090b;
+            --bg-secondary: #0f0f12;
+            --bg-card: rgba(24, 24, 30, 0.7);
+            --accent-purple: #a855f7;
+            --accent-cyan: #06b6d4;
+            --accent-green: #10b981;
+            --accent-pink: #ec4899;
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-light: rgba(255, 255, 255, 0.12);
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 0.8; }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes countUp {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes borderGlow {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        @keyframes gridMove {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .grid-container {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background-image:
+                linear-gradient(rgba(168, 85, 247, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(168, 85, 247, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            transform: perspective(500px) rotateX(60deg);
+            animation: gridMove 20s linear infinite;
+        }
+
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        .glow-orb-1 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.3), transparent);
+            top: 10%;
+            left: 10%;
+        }
+
+        .glow-orb-2 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.25), transparent);
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .glow-orb-3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.2), transparent);
+            bottom: 10%;
+            left: 40%;
+            animation-delay: 4s;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 16px 24px;
+            background: rgba(9, 9, 11, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--text-primary); }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            color: white !important;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+        }
+
+        /* Main Content */
+        .main {
+            position: relative;
+            z-index: 1;
+            padding: 100px 24px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 14px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            margin-bottom: 20px;
+        }
+
+        .badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        h1 {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-purple) 50%, var(--accent-cyan) 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 5s ease infinite;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Ad Placeholder */
+        .ad-container {
+            background: var(--glass);
+            border: 1px dashed var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Glass Card */
+        .glass-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(135deg, transparent, transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+        }
+
+        .glass-card:hover::before,
+        .glass-card:focus-within::before {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan), var(--accent-green));
+            background-size: 200% 200%;
+            animation: borderGlow 3s linear infinite;
+            opacity: 1;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(168, 85, 247, 0.15);
+        }
+
+        /* Calculator Layout */
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title span {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        /* Form Controls */
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 10px;
+        }
+
+        .select-wrapper {
+            position: relative;
+        }
+
+        .select-wrapper::after {
+            content: '▼';
+            position: absolute;
+            right: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 10px;
+            color: var(--text-muted);
+            pointer-events: none;
+        }
+
+        select {
+            width: 100%;
+            padding: 14px 40px 14px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: inherit;
+            cursor: pointer;
+            appearance: none;
+            transition: all 0.3s ease;
+        }
+
+        select:hover {
+            border-color: var(--border-light);
+        }
+
+        select:focus {
+            outline: none;
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
+        }
+
+        /* Custom Slider */
+        .slider-container {
+            position: relative;
+        }
+
+        .slider-value {
+            position: absolute;
+            right: 0;
+            top: -30px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            appearance: none;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.15);
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.6);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            border-radius: 50%;
+            cursor: pointer;
+            border: none;
+        }
+
+        /* Number Input */
+        input[type="number"] {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        input[type="number"]:hover {
+            border-color: var(--border-light);
+        }
+
+        input[type="number"]:focus {
+            outline: none;
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.2);
+        }
+
+        /* Token Split */
+        .token-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .token-split .form-group {
+            margin-bottom: 0;
+        }
+
+        /* Calculate Button */
+        .btn-calculate {
+            width: 100%;
+            padding: 16px 32px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-calculate::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-calculate:hover::before {
+            left: 100%;
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
+        }
+
+        .btn-calculate:active {
+            transform: translateY(0);
+        }
+
+        /* Results Panel */
+        .results-panel {
+            animation: slideIn 0.6s ease-out;
+        }
+
+        .cost-display {
+            text-align: center;
+            padding: 30px 0;
+            margin-bottom: 30px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .cost-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+
+        .cost-amount {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: all 0.3s ease;
+        }
+
+        .cost-amount.animate {
+            animation: countUp 0.5s ease-out;
+        }
+
+        .cost-period {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .period-btn {
+            padding: 8px 20px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .period-btn.active {
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            border-color: transparent;
+            color: white;
+        }
+
+        .period-btn:hover:not(.active) {
+            border-color: var(--accent-purple);
+            color: var(--text-primary);
+        }
+
+        /* Cost Breakdown */
+        .breakdown-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-secondary);
+        }
+
+        .cost-bar {
+            margin-bottom: 20px;
+        }
+
+        .cost-bar-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 0.9rem;
+        }
+
+        .cost-bar-label {
+            color: var(--text-secondary);
+        }
+
+        .cost-bar-value {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .cost-bar-track {
+            height: 10px;
+            background: var(--bg-secondary);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .cost-bar-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.8s ease-out;
+        }
+
+        .cost-bar-fill.input {
+            background: linear-gradient(90deg, var(--accent-purple), var(--accent-pink));
+        }
+
+        .cost-bar-fill.output {
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-green));
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .stat-card {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: scale(1.03);
+        }
+
+        .stat-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .stat-value.purple { color: var(--accent-purple); }
+        .stat-value.cyan { color: var(--accent-cyan); }
+        .stat-value.green { color: var(--accent-green); }
+        .stat-value.pink { color: var(--accent-pink); }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Comparison Section */
+        .comparison-section {
+            margin-top: 50px;
+        }
+
+        .comparison-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .comparison-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .btn-add-compare {
+            padding: 10px 20px;
+            background: var(--glass);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-add-compare:hover {
+            border-color: var(--accent-purple);
+            background: rgba(168, 85, 247, 0.1);
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .compare-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            position: relative;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.4s ease;
+        }
+
+        .compare-card.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .compare-card.best {
+            border-color: var(--accent-green);
+            box-shadow: 0 0 30px rgba(16, 185, 129, 0.2);
+        }
+
+        .compare-card.best::after {
+            content: 'BEST VALUE';
+            position: absolute;
+            top: -10px;
+            right: 20px;
+            background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan));
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+
+        .compare-remove {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 28px;
+            height: 28px;
+            background: var(--bg-secondary);
+            border: none;
+            border-radius: 50%;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .compare-remove:hover {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+
+        .compare-provider {
+            font-size: 0.85rem;
+            color: var(--accent-purple);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .compare-model {
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .compare-cost {
+            font-size: 2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 4px;
+        }
+
+        .compare-period {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .compare-details {
+            border-top: 1px solid var(--border);
+            padding-top: 16px;
+        }
+
+        .compare-detail {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        .compare-detail-label {
+            color: var(--text-muted);
+        }
+
+        .compare-detail-value {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        /* Pricing Table */
+        .pricing-section {
+            margin-top: 60px;
+        }
+
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .pricing-table th,
+        .pricing-table td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .pricing-table th {
+            background: var(--bg-secondary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .pricing-table th:first-child {
+            border-radius: 12px 0 0 0;
+        }
+
+        .pricing-table th:last-child {
+            border-radius: 0 12px 0 0;
+        }
+
+        .pricing-table td {
+            font-size: 0.95rem;
+        }
+
+        .pricing-table tr:hover td {
+            background: var(--glass);
+        }
+
+        .provider-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .provider-badge.openai {
+            background: rgba(16, 163, 127, 0.2);
+            color: #10a37f;
+        }
+
+        .provider-badge.anthropic {
+            background: rgba(168, 85, 247, 0.2);
+            color: var(--accent-purple);
+        }
+
+        .provider-badge.google {
+            background: rgba(66, 133, 244, 0.2);
+            color: #4285f4;
+        }
+
+        .provider-badge.mistral {
+            background: rgba(255, 120, 0, 0.2);
+            color: #ff7800;
+        }
+
+        .provider-badge.cohere {
+            background: rgba(209, 89, 255, 0.2);
+            color: #d159ff;
+        }
+
+        /* Promo Section */
+        .promo-section {
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .promo-card {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(6, 182, 212, 0.15));
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promo-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.1), transparent 50%);
+            animation: float 10s ease-in-out infinite;
+        }
+
+        .promo-title {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            position: relative;
+        }
+
+        .promo-text {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+        }
+
+        .promo-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 32px;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            border-radius: 12px;
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .promo-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(168, 85, 247, 0.4);
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 80px;
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .footer-copy {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .calculator-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .token-split {
+                grid-template-columns: 1fr;
+            }
+
+            .cost-amount {
+                font-size: 2.5rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .comparison-header {
+                flex-direction: column;
+                gap: 16px;
+            }
+        }
+
+        /* Animations for visibility */
+        .animate-in {
+            animation: slideIn 0.6s ease-out forwards;
+        }
+
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+    </style>
+</head>
+<body>
+    <div class="animated-bg">
+        <div class="grid-container"></div>
+        <div class="glow-orb glow-orb-1"></div>
+        <div class="glow-orb glow-orb-2"></div>
+        <div class="glow-orb glow-orb-3"></div>
+    </div>
+
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="../index.html" class="logo">
+                <div class="logo-icon">T</div>
+                ToolsForge
+            </a>
+            <div class="nav-links">
+                <a href="../index.html">All Tools</a>
+                <a href="prompt-generator.html">Prompt Generator</a>
+                <a href="ai-tools-directory.html">AI Directory</a>
+                <a href="https://kaiprompts.com" class="nav-cta" target="_blank">KaiPrompts</a>
+            </div>
+            <button class="mobile-menu-btn">☰</button>
+        </div>
+    </nav>
+
+    <main class="main">
+        <header class="header">
+            <div class="badge">Real-time calculations</div>
+            <h1>AI API Cost Calculator</h1>
+            <p class="subtitle">Estimate your AI API costs before building. Compare pricing across OpenAI, Anthropic, Google, and more.</p>
+        </header>
+
+        <!-- Ad Placeholder -->
+        <div class="ad-container">
+            <p>Advertisement</p>
+            <!-- AdSense code will go here -->
+        </div>
+
+        <div class="calculator-grid">
+            <!-- Input Panel -->
+            <div class="glass-card">
+                <h2 class="section-title">
+                    <span>⚙</span>
+                    Configuration
+                </h2>
+
+                <div class="form-group">
+                    <label>AI Provider</label>
+                    <div class="select-wrapper">
+                        <select id="provider" onchange="updateModels()">
+                            <option value="openai">OpenAI</option>
+                            <option value="anthropic">Anthropic</option>
+                            <option value="google">Google</option>
+                            <option value="mistral">Mistral</option>
+                            <option value="cohere">Cohere</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Model</label>
+                    <div class="select-wrapper">
+                        <select id="model" onchange="calculate()">
+                            <!-- Options populated by JS -->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Requests per Day</label>
+                    <div class="slider-container">
+                        <span class="slider-value" id="requestsValue">1,000</span>
+                        <input type="range" id="requests" min="100" max="100000" value="1000" step="100" oninput="updateSlider('requests'); calculate();">
+                    </div>
+                </div>
+
+                <div class="form-group" style="margin-top: 50px;">
+                    <label>Average Tokens per Request</label>
+                </div>
+
+                <div class="token-split">
+                    <div class="form-group">
+                        <label style="font-size: 0.85rem; color: var(--accent-purple);">Input Tokens</label>
+                        <input type="number" id="inputTokens" value="500" min="1" max="100000" oninput="calculate()">
+                    </div>
+                    <div class="form-group">
+                        <label style="font-size: 0.85rem; color: var(--accent-cyan);">Output Tokens</label>
+                        <input type="number" id="outputTokens" value="500" min="1" max="100000" oninput="calculate()">
+                    </div>
+                </div>
+
+                <button class="btn-calculate" onclick="calculate()">
+                    Calculate Costs
+                </button>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="glass-card results-panel">
+                <h2 class="section-title">
+                    <span>$</span>
+                    Estimated Cost
+                </h2>
+
+                <div class="cost-display">
+                    <p class="cost-label">Your estimated cost</p>
+                    <p class="cost-amount" id="totalCost">$0.00</p>
+                    <div class="cost-period">
+                        <button class="period-btn active" data-period="daily" onclick="setPeriod('daily')">Daily</button>
+                        <button class="period-btn" data-period="weekly" onclick="setPeriod('weekly')">Weekly</button>
+                        <button class="period-btn" data-period="monthly" onclick="setPeriod('monthly')">Monthly</button>
+                    </div>
+                </div>
+
+                <p class="breakdown-title">Cost Breakdown</p>
+
+                <div class="cost-bar">
+                    <div class="cost-bar-header">
+                        <span class="cost-bar-label">Input Tokens</span>
+                        <span class="cost-bar-value" id="inputCost">$0.00</span>
+                    </div>
+                    <div class="cost-bar-track">
+                        <div class="cost-bar-fill input" id="inputBar" style="width: 50%"></div>
+                    </div>
+                </div>
+
+                <div class="cost-bar">
+                    <div class="cost-bar-header">
+                        <span class="cost-bar-label">Output Tokens</span>
+                        <span class="cost-bar-value" id="outputCost">$0.00</span>
+                    </div>
+                    <div class="cost-bar-track">
+                        <div class="cost-bar-fill output" id="outputBar" style="width: 50%"></div>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <p class="stat-value purple" id="totalRequests">0</p>
+                        <p class="stat-label">Total Requests</p>
+                    </div>
+                    <div class="stat-card">
+                        <p class="stat-value cyan" id="totalTokens">0</p>
+                        <p class="stat-label">Total Tokens</p>
+                    </div>
+                    <div class="stat-card">
+                        <p class="stat-value green" id="costPerRequest">$0.00</p>
+                        <p class="stat-label">Per Request</p>
+                    </div>
+                    <div class="stat-card">
+                        <p class="stat-value pink" id="costPer1k">$0.00</p>
+                        <p class="stat-label">Per 1K Tokens</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparison Section -->
+        <section class="comparison-section">
+            <div class="comparison-header">
+                <h2 class="comparison-title">Compare Models Side-by-Side</h2>
+                <button class="btn-add-compare" onclick="addToComparison()">
+                    <span>+</span> Add Current Model
+                </button>
+            </div>
+            <div class="comparison-grid" id="comparisonGrid">
+                <!-- Comparison cards will be added here -->
+            </div>
+        </section>
+
+        <!-- Ad Placeholder -->
+        <div class="ad-container" style="margin-top: 50px;">
+            <p>Advertisement</p>
+        </div>
+
+        <!-- Pricing Reference Table -->
+        <section class="pricing-section glass-card">
+            <h2 class="section-title">
+                <span>📊</span>
+                API Pricing Reference
+            </h2>
+            <table class="pricing-table">
+                <thead>
+                    <tr>
+                        <th>Provider</th>
+                        <th>Model</th>
+                        <th>Input (per 1K)</th>
+                        <th>Output (per 1K)</th>
+                    </tr>
+                </thead>
+                <tbody id="pricingTable">
+                    <!-- Populated by JS -->
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Promo Section -->
+        <section class="promo-section">
+            <div class="promo-card">
+                <h2 class="promo-title">Need AI Prompts for Your Project?</h2>
+                <p class="promo-text">Discover 1000+ ready-to-use prompts for ChatGPT, Claude, and more. Boost your AI productivity with KaiPrompts.</p>
+                <a href="https://kaiprompts.com" class="promo-btn" target="_blank">
+                    Visit KaiPrompts
+                    <span>→</span>
+                </a>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <div class="footer-links">
+                <a href="../index.html">All Tools</a>
+                <a href="prompt-generator.html">Prompt Generator</a>
+                <a href="ai-tools-directory.html">AI Tools Directory</a>
+                <a href="https://kaiprompts.com" target="_blank">KaiPrompts</a>
+            </div>
+            <p class="footer-copy">© 2025 ToolsForge. All rights reserved.</p>
+        </footer>
+    </main>
+
+    <script>
+        // Pricing data (per 1K tokens)
+        const pricingData = {
+            openai: {
+                name: 'OpenAI',
+                models: {
+                    'gpt-4-turbo': { name: 'GPT-4 Turbo', input: 0.01, output: 0.03 },
+                    'gpt-4o': { name: 'GPT-4o', input: 0.005, output: 0.015 },
+                    'gpt-3.5-turbo': { name: 'GPT-3.5 Turbo', input: 0.0005, output: 0.0015 }
+                }
+            },
+            anthropic: {
+                name: 'Anthropic',
+                models: {
+                    'claude-3-opus': { name: 'Claude 3 Opus', input: 0.015, output: 0.075 },
+                    'claude-3-sonnet': { name: 'Claude 3 Sonnet', input: 0.003, output: 0.015 },
+                    'claude-3-haiku': { name: 'Claude 3 Haiku', input: 0.00025, output: 0.00125 }
+                }
+            },
+            google: {
+                name: 'Google',
+                models: {
+                    'gemini-pro': { name: 'Gemini Pro', input: 0.00025, output: 0.0005 },
+                    'gemini-pro-vision': { name: 'Gemini Pro Vision', input: 0.00025, output: 0.0005 }
+                }
+            },
+            mistral: {
+                name: 'Mistral',
+                models: {
+                    'mistral-large': { name: 'Mistral Large', input: 0.008, output: 0.024 },
+                    'mistral-medium': { name: 'Mistral Medium', input: 0.0027, output: 0.0081 },
+                    'mistral-small': { name: 'Mistral Small', input: 0.002, output: 0.006 }
+                }
+            },
+            cohere: {
+                name: 'Cohere',
+                models: {
+                    'command-r-plus': { name: 'Command R+', input: 0.003, output: 0.015 },
+                    'command-r': { name: 'Command R', input: 0.0005, output: 0.0015 }
+                }
+            }
+        };
+
+        let currentPeriod = 'daily';
+        let comparisonItems = [];
+        let calculatedCosts = { daily: 0, weekly: 0, monthly: 0, inputCost: 0, outputCost: 0 };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSettings();
+            updateModels();
+            populatePricingTable();
+            calculate();
+        });
+
+        // Update model dropdown based on provider
+        function updateModels() {
+            const provider = document.getElementById('provider').value;
+            const modelSelect = document.getElementById('model');
+            const models = pricingData[provider].models;
+
+            modelSelect.innerHTML = '';
+            for (const [key, model] of Object.entries(models)) {
+                const option = document.createElement('option');
+                option.value = key;
+                option.textContent = model.name;
+                modelSelect.appendChild(option);
+            }
+
+            saveSettings();
+            calculate();
+        }
+
+        // Update slider display
+        function updateSlider(id) {
+            const slider = document.getElementById(id);
+            const display = document.getElementById(id + 'Value');
+            display.textContent = parseInt(slider.value).toLocaleString();
+            saveSettings();
+        }
+
+        // Main calculation
+        function calculate() {
+            const provider = document.getElementById('provider').value;
+            const model = document.getElementById('model').value;
+            const requests = parseInt(document.getElementById('requests').value);
+            const inputTokens = parseInt(document.getElementById('inputTokens').value) || 0;
+            const outputTokens = parseInt(document.getElementById('outputTokens').value) || 0;
+
+            const pricing = pricingData[provider].models[model];
+
+            // Calculate daily costs
+            const dailyInputCost = (requests * inputTokens / 1000) * pricing.input;
+            const dailyOutputCost = (requests * outputTokens / 1000) * pricing.output;
+            const dailyCost = dailyInputCost + dailyOutputCost;
+
+            calculatedCosts = {
+                daily: dailyCost,
+                weekly: dailyCost * 7,
+                monthly: dailyCost * 30,
+                inputCost: dailyInputCost,
+                outputCost: dailyOutputCost,
+                inputTokens: inputTokens,
+                outputTokens: outputTokens,
+                requests: requests
+            };
+
+            updateDisplay();
+            saveSettings();
+        }
+
+        // Update display based on period
+        function updateDisplay() {
+            const multiplier = currentPeriod === 'daily' ? 1 : currentPeriod === 'weekly' ? 7 : 30;
+            const cost = calculatedCosts.daily * multiplier;
+            const inputCost = calculatedCosts.inputCost * multiplier;
+            const outputCost = calculatedCosts.outputCost * multiplier;
+
+            // Animate cost display
+            animateValue('totalCost', cost);
+
+            // Update breakdown
+            document.getElementById('inputCost').textContent = formatCurrency(inputCost);
+            document.getElementById('outputCost').textContent = formatCurrency(outputCost);
+
+            // Update bars
+            const total = inputCost + outputCost;
+            if (total > 0) {
+                document.getElementById('inputBar').style.width = `${(inputCost / total) * 100}%`;
+                document.getElementById('outputBar').style.width = `${(outputCost / total) * 100}%`;
+            }
+
+            // Update stats
+            const totalRequests = calculatedCosts.requests * multiplier;
+            const totalTokens = (calculatedCosts.inputTokens + calculatedCosts.outputTokens) * calculatedCosts.requests * multiplier;
+            const costPerRequest = calculatedCosts.daily / calculatedCosts.requests;
+            const costPer1k = cost / (totalTokens / 1000) || 0;
+
+            document.getElementById('totalRequests').textContent = formatNumber(totalRequests);
+            document.getElementById('totalTokens').textContent = formatNumber(totalTokens);
+            document.getElementById('costPerRequest').textContent = formatCurrency(costPerRequest);
+            document.getElementById('costPer1k').textContent = formatCurrency(costPer1k);
+        }
+
+        // Period switcher
+        function setPeriod(period) {
+            currentPeriod = period;
+            document.querySelectorAll('.period-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.period === period);
+            });
+            updateDisplay();
+            updateComparisonPeriod();
+        }
+
+        // Animate value
+        function animateValue(elementId, value) {
+            const element = document.getElementById(elementId);
+            element.classList.remove('animate');
+            void element.offsetWidth; // Trigger reflow
+            element.classList.add('animate');
+
+            let start = 0;
+            const duration = 500;
+            const startTime = performance.now();
+
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                const current = start + (value - start) * easeOut;
+                element.textContent = formatCurrency(current);
+
+                if (progress < 1) {
+                    requestAnimationFrame(update);
+                }
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        // Format currency
+        function formatCurrency(value) {
+            if (value >= 1000) {
+                return '$' + value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            } else if (value >= 1) {
+                return '$' + value.toFixed(2);
+            } else if (value >= 0.01) {
+                return '$' + value.toFixed(3);
+            } else {
+                return '$' + value.toFixed(4);
+            }
+        }
+
+        // Format number
+        function formatNumber(value) {
+            if (value >= 1000000) {
+                return (value / 1000000).toFixed(1) + 'M';
+            } else if (value >= 1000) {
+                return (value / 1000).toFixed(1) + 'K';
+            }
+            return value.toLocaleString();
+        }
+
+        // Add to comparison
+        function addToComparison() {
+            const provider = document.getElementById('provider').value;
+            const model = document.getElementById('model').value;
+            const requests = parseInt(document.getElementById('requests').value);
+            const inputTokens = parseInt(document.getElementById('inputTokens').value);
+            const outputTokens = parseInt(document.getElementById('outputTokens').value);
+
+            // Check if already exists
+            const exists = comparisonItems.find(item =>
+                item.provider === provider && item.model === model
+            );
+
+            if (exists) {
+                alert('This model is already in your comparison!');
+                return;
+            }
+
+            const pricing = pricingData[provider].models[model];
+            const dailyCost = (requests * inputTokens / 1000) * pricing.input +
+                             (requests * outputTokens / 1000) * pricing.output;
+
+            comparisonItems.push({
+                id: Date.now(),
+                provider,
+                providerName: pricingData[provider].name,
+                model,
+                modelName: pricing.name,
+                requests,
+                inputTokens,
+                outputTokens,
+                dailyCost,
+                inputRate: pricing.input,
+                outputRate: pricing.output
+            });
+
+            renderComparison();
+        }
+
+        // Render comparison cards
+        function renderComparison() {
+            const grid = document.getElementById('comparisonGrid');
+
+            // Find best value
+            let minCost = Infinity;
+            comparisonItems.forEach(item => {
+                if (item.dailyCost < minCost) minCost = item.dailyCost;
+            });
+
+            grid.innerHTML = comparisonItems.map((item, index) => {
+                const multiplier = currentPeriod === 'daily' ? 1 : currentPeriod === 'weekly' ? 7 : 30;
+                const cost = item.dailyCost * multiplier;
+                const inputCost = (item.requests * item.inputTokens / 1000) * item.inputRate * multiplier;
+                const outputCost = (item.requests * item.outputTokens / 1000) * item.outputRate * multiplier;
+                const isBest = item.dailyCost === minCost && comparisonItems.length > 1;
+                const periodText = currentPeriod === 'daily' ? '/day' : currentPeriod === 'weekly' ? '/week' : '/month';
+
+                return `
+                    <div class="compare-card ${isBest ? 'best' : ''}" style="animation-delay: ${index * 0.1}s">
+                        <button class="compare-remove" onclick="removeComparison(${item.id})">×</button>
+                        <p class="compare-provider">${item.providerName}</p>
+                        <h3 class="compare-model">${item.modelName}</h3>
+                        <p class="compare-cost">${formatCurrency(cost)}</p>
+                        <p class="compare-period">${periodText}</p>
+                        <div class="compare-details">
+                            <div class="compare-detail">
+                                <span class="compare-detail-label">Input Cost</span>
+                                <span class="compare-detail-value">${formatCurrency(inputCost)}</span>
+                            </div>
+                            <div class="compare-detail">
+                                <span class="compare-detail-label">Output Cost</span>
+                                <span class="compare-detail-value">${formatCurrency(outputCost)}</span>
+                            </div>
+                            <div class="compare-detail">
+                                <span class="compare-detail-label">Requests</span>
+                                <span class="compare-detail-value">${item.requests.toLocaleString()}/day</span>
+                            </div>
+                            <div class="compare-detail">
+                                <span class="compare-detail-label">Tokens/Request</span>
+                                <span class="compare-detail-value">${(item.inputTokens + item.outputTokens).toLocaleString()}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Trigger animation
+            setTimeout(() => {
+                document.querySelectorAll('.compare-card').forEach(card => {
+                    card.classList.add('visible');
+                });
+            }, 50);
+        }
+
+        // Update comparison period
+        function updateComparisonPeriod() {
+            if (comparisonItems.length > 0) {
+                renderComparison();
+            }
+        }
+
+        // Remove from comparison
+        function removeComparison(id) {
+            comparisonItems = comparisonItems.filter(item => item.id !== id);
+            renderComparison();
+        }
+
+        // Populate pricing table
+        function populatePricingTable() {
+            const tbody = document.getElementById('pricingTable');
+            let html = '';
+
+            for (const [providerKey, provider] of Object.entries(pricingData)) {
+                for (const [modelKey, model] of Object.entries(provider.models)) {
+                    html += `
+                        <tr>
+                            <td><span class="provider-badge ${providerKey}">${provider.name}</span></td>
+                            <td>${model.name}</td>
+                            <td>$${model.input.toFixed(5)}</td>
+                            <td>$${model.output.toFixed(5)}</td>
+                        </tr>
+                    `;
+                }
+            }
+
+            tbody.innerHTML = html;
+        }
+
+        // Local Storage
+        function saveSettings() {
+            const settings = {
+                provider: document.getElementById('provider').value,
+                model: document.getElementById('model').value,
+                requests: document.getElementById('requests').value,
+                inputTokens: document.getElementById('inputTokens').value,
+                outputTokens: document.getElementById('outputTokens').value
+            };
+            localStorage.setItem('apiCalculatorSettings', JSON.stringify(settings));
+        }
+
+        function loadSettings() {
+            const saved = localStorage.getItem('apiCalculatorSettings');
+            if (saved) {
+                const settings = JSON.parse(saved);
+                document.getElementById('provider').value = settings.provider || 'openai';
+                document.getElementById('requests').value = settings.requests || 1000;
+                document.getElementById('inputTokens').value = settings.inputTokens || 500;
+                document.getElementById('outputTokens').value = settings.outputTokens || 500;
+                updateSlider('requests');
+            }
+        }
+    </script>
+
+    <!-- Schema.org markup for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI API Cost Calculator",
+        "description": "Free AI API cost calculator. Estimate costs for OpenAI GPT-4, Claude 3, Gemini Pro APIs. Compare pricing across providers.",
+        "url": "https://toolsforge.com/tools/api-calculator.html",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "featureList": [
+            "OpenAI GPT-4 cost calculator",
+            "Anthropic Claude pricing",
+            "Google Gemini API costs",
+            "Side-by-side model comparison",
+            "Daily, weekly, monthly estimates"
+        ]
+    }
+    </script>
+</body>
+</html>

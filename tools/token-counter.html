@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Token Counter - Free GPT-4 & Claude Token Calculator | ToolsForge</title>
+    <meta name="description" content="Free AI token counter for GPT-4, Claude 3, GPT-3.5, and Llama. Calculate tokens and estimate API costs before making calls. Real-time token counting.">
+    <meta name="keywords" content="AI token counter, GPT token calculator, Claude token counter, OpenAI token count, API cost calculator, tiktoken, LLM tokens">
+    <link rel="canonical" href="https://toolsforge.com/tools/token-counter.html">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="AI Token Counter - Calculate GPT-4 & Claude Tokens Free">
+    <meta property="og:description" content="Count tokens for GPT-4, Claude 3, and other AI models. Estimate API costs instantly.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolsforge.com/tools/token-counter.html">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Token Counter - Free Token Calculator">
+    <meta name="twitter:description" content="Calculate tokens and API costs for GPT-4, Claude, and more.">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX" crossorigin="anonymous"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg-primary: #09090b;
+            --bg-secondary: #18181b;
+            --bg-card: rgba(28, 28, 31, 0.8);
+            --bg-card-solid: #1c1c1f;
+            --accent-purple: #a855f7;
+            --accent-cyan: #06b6d4;
+            --accent-gradient: linear-gradient(135deg, #a855f7, #06b6d4);
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-light: rgba(255, 255, 255, 0.12);
+            --green: #10b981;
+            --yellow: #f59e0b;
+            --red: #ef4444;
+            --glow-purple: rgba(168, 85, 247, 0.4);
+            --glow-cyan: rgba(6, 182, 212, 0.4);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .gradient-orb-1 {
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, var(--accent-purple) 0%, transparent 70%);
+            top: -200px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .gradient-orb-2 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--accent-cyan) 0%, transparent 70%);
+            top: 50%;
+            right: -150px;
+            animation-delay: -10s;
+        }
+
+        .gradient-orb-3 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+            bottom: -100px;
+            left: 30%;
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(30px, -30px) scale(1.05); }
+            50% { transform: translate(-20px, 20px) scale(0.95); }
+            75% { transform: translate(20px, 10px) scale(1.02); }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-purple);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particle-float 15s infinite;
+        }
+
+        @keyframes particle-float {
+            0% { transform: translateY(100vh) scale(0); opacity: 0; }
+            10% { opacity: 0.6; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(-100px) scale(1); opacity: 0; }
+        }
+
+        .nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 100;
+            padding: 16px 24px;
+            background: rgba(9, 9, 11, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover { transform: scale(1.02); }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: var(--accent-gradient);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            box-shadow: 0 4px 15px var(--glow-purple);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover { color: var(--text-primary); }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gradient);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after { width: 100%; }
+
+        .main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 24px 60px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .ad-banner { margin-bottom: 32px; }
+
+        .ad-placeholder {
+            background: rgba(24, 24, 27, 0.6);
+            backdrop-filter: blur(10px);
+            border: 1px dashed var(--border-light);
+            border-radius: 12px;
+            height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumb a {
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumb a:hover { color: var(--accent-cyan); }
+        .breadcrumb span { color: var(--text-muted); }
+
+        .tool-header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tool-header p {
+            color: var(--text-secondary);
+            font-size: 1.15rem;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .tool-container {
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 28px;
+        }
+
+        .tool-main {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 60px rgba(168, 85, 247, 0.1);
+            border-color: var(--border-light);
+        }
+
+        .textarea-wrapper {
+            position: relative;
+        }
+
+        .textarea-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .textarea-header span {
+            font-weight: 600;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .textarea-header span::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            animation: pulse-dot 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(0.8); }
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            background: transparent;
+            border: 1px solid var(--border-light);
+            color: var(--text-secondary);
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+            transform: scale(1.02);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-primary {
+            background: var(--accent-gradient);
+            border: none;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 4px 20px var(--glow-purple);
+        }
+
+        .textarea-container {
+            position: relative;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 280px;
+            padding: 24px;
+            background: transparent;
+            border: none;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 1rem;
+            line-height: 1.8;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+
+        textarea::placeholder { color: var(--text-muted); }
+
+        textarea:focus {
+            outline: none;
+        }
+
+        .textarea-glow {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            border-radius: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            box-shadow: inset 0 0 30px var(--glow-purple), inset 0 0 60px var(--glow-cyan);
+        }
+
+        textarea:focus + .textarea-glow {
+            opacity: 0.15;
+        }
+
+        /* Model Selector */
+        .model-selector {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .model-selector label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .model-select {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(24, 24, 27, 0.6);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23a1a1aa' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 48px;
+        }
+
+        .model-select:hover {
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.15);
+        }
+
+        .model-select:focus {
+            outline: none;
+            border-color: var(--accent-purple);
+            box-shadow: 0 0 30px rgba(168, 85, 247, 0.2);
+        }
+
+        .model-select option {
+            background: var(--bg-card-solid);
+            color: var(--text-primary);
+            padding: 12px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--accent-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--border-light);
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
+        }
+
+        .stat-icon {
+            width: 44px;
+            height: 44px;
+            margin: 0 auto 12px;
+            background: var(--accent-gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            box-shadow: 0 4px 15px var(--glow-purple);
+        }
+
+        .stat-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 6px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        /* Cost Display */
+        .cost-card {
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.15), rgba(6, 182, 212, 0.15));
+            border: 1px solid rgba(168, 85, 247, 0.3);
+        }
+
+        .cost-card:hover {
+            border-color: var(--accent-purple);
+        }
+
+        .cost-breakdown {
+            padding: 24px;
+        }
+
+        .cost-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .cost-header h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cost-rows {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .cost-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 18px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .cost-row:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .cost-label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .cost-value {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--green);
+            font-variant-numeric: tabular-nums;
+        }
+
+        .cost-total {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cost-total .cost-label {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .cost-total .cost-value {
+            font-size: 1.5rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Pricing Reference */
+        .pricing-section {
+            padding: 24px;
+        }
+
+        .pricing-section h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .pricing-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 14px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 10px;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .pricing-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--border-light);
+        }
+
+        .pricing-item.active {
+            background: rgba(168, 85, 247, 0.1);
+            border-color: var(--accent-purple);
+        }
+
+        .pricing-model {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .pricing-cost {
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .sidebar-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .sidebar-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sidebar-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.7;
+        }
+
+        .ad-placeholder.sidebar {
+            height: 280px;
+            background: rgba(24, 24, 27, 0.4);
+        }
+
+        .promo-card {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(6, 182, 212, 0.1));
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .promo-card h3 {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .promo-btn {
+            display: block;
+            background: var(--accent-gradient);
+            color: white;
+            padding: 14px;
+            border-radius: 12px;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--glow-purple);
+        }
+
+        .promo-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 25px var(--glow-purple);
+        }
+
+        /* Tips List */
+        .tips-list {
+            list-style: none;
+            margin-top: 12px;
+        }
+
+        .tips-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .tips-list li:last-child { border-bottom: none; }
+
+        .tips-list li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            min-width: 6px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            margin-top: 8px;
+        }
+
+        /* Info Section */
+        .info-section {
+            margin-top: 60px;
+            padding: 40px;
+            background: var(--bg-card);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+        }
+
+        .info-section h2 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .info-section p {
+            color: var(--text-secondary);
+            margin-bottom: 18px;
+            line-height: 1.9;
+        }
+
+        .info-section h3 {
+            font-size: 1.2rem;
+            margin-top: 28px;
+            margin-bottom: 14px;
+            color: var(--text-primary);
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 24px;
+        }
+
+        .info-item {
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .info-item h4 {
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            color: var(--accent-cyan);
+        }
+
+        .info-item p {
+            margin-bottom: 0;
+            font-size: 0.9rem;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 60px;
+            padding: 40px 24px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        .footer a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer a:hover {
+            color: var(--accent-purple);
+        }
+
+        /* Copy Notification */
+        .copy-notification {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background: var(--accent-gradient);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px var(--glow-purple);
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+        }
+
+        .copy-notification.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .tool-container { grid-template-columns: 1fr; }
+            .sidebar {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            .ad-placeholder.sidebar { height: 150px; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .tool-header h1 { font-size: 2.2rem; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .info-grid { grid-template-columns: 1fr; }
+            .sidebar { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 480px) {
+            .main { padding: 90px 16px 40px; }
+            .tool-header h1 { font-size: 1.8rem; }
+            .tool-header p { font-size: 1rem; }
+            .stat-value { font-size: 1.8rem; }
+            .btn-group { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg">
+        <div class="gradient-orb gradient-orb-1"></div>
+        <div class="gradient-orb gradient-orb-2"></div>
+        <div class="gradient-orb gradient-orb-3"></div>
+    </div>
+
+    <div class="particles" id="particles"></div>
+
+    <nav class="nav">
+        <div class="nav-inner">
+            <a href="../" class="logo">
+                <div class="logo-icon">T</div>
+                ToolsForge
+            </a>
+            <ul class="nav-links">
+                <li><a href="../">All Tools</a></li>
+                <li><a href="character-counter.html">Character Counter</a></li>
+                <li><a href="word-counter.html">Word Counter</a></li>
+                <li><a href="https://kaiprompts.com" target="_blank">Kai Prompts</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main">
+        <div class="ad-banner">
+            <div class="ad-placeholder">Advertisement</div>
+        </div>
+
+        <div class="tool-header">
+            <div class="breadcrumb">
+                <a href="../">Tools</a>
+                <span>/</span>
+                <span>Token Counter</span>
+            </div>
+            <h1>AI Token Counter</h1>
+            <p>Calculate tokens and estimate API costs for GPT-4, Claude 3, Llama, and other AI models before making expensive API calls.</p>
+        </div>
+
+        <div class="tool-container">
+            <div class="tool-main">
+                <div class="glass-card textarea-wrapper">
+                    <div class="textarea-header">
+                        <span>Enter your prompt or text</span>
+                        <div class="btn-group">
+                            <button class="btn" onclick="clearText()">Clear</button>
+                            <button class="btn btn-primary" onclick="copyTokenCount()">Copy Count</button>
+                        </div>
+                    </div>
+                    <div class="model-selector">
+                        <label for="modelSelect">AI Model</label>
+                        <select id="modelSelect" class="model-select" onchange="updateModel()">
+                            <optgroup label="OpenAI">
+                                <option value="gpt-4" data-input="0.03" data-output="0.06" data-chars="4">GPT-4 (8K context)</option>
+                                <option value="gpt-4-turbo" data-input="0.01" data-output="0.03" data-chars="4">GPT-4 Turbo (128K context)</option>
+                                <option value="gpt-4o" data-input="0.005" data-output="0.015" data-chars="4">GPT-4o</option>
+                                <option value="gpt-3.5-turbo" data-input="0.0005" data-output="0.0015" data-chars="4">GPT-3.5 Turbo</option>
+                            </optgroup>
+                            <optgroup label="Anthropic">
+                                <option value="claude-3-opus" data-input="0.015" data-output="0.075" data-chars="3.5">Claude 3 Opus</option>
+                                <option value="claude-3-sonnet" data-input="0.003" data-output="0.015" data-chars="3.5">Claude 3 Sonnet</option>
+                                <option value="claude-3-haiku" data-input="0.00025" data-output="0.00125" data-chars="3.5">Claude 3 Haiku</option>
+                                <option value="claude-2" data-input="0.008" data-output="0.024" data-chars="3.5">Claude 2.1</option>
+                            </optgroup>
+                            <optgroup label="Meta">
+                                <option value="llama-3-70b" data-input="0.0008" data-output="0.0008" data-chars="4">Llama 3 70B</option>
+                                <option value="llama-3-8b" data-input="0.0001" data-output="0.0001" data-chars="4">Llama 3 8B</option>
+                            </optgroup>
+                            <optgroup label="Other">
+                                <option value="mistral-large" data-input="0.004" data-output="0.012" data-chars="4">Mistral Large</option>
+                                <option value="gemini-pro" data-input="0.00025" data-output="0.0005" data-chars="4">Gemini Pro</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="textarea-container">
+                        <textarea id="textInput" placeholder="Start typing or paste your prompt here to see token count and cost estimate..."></textarea>
+                        <div class="textarea-glow"></div>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">&#x1F4CA;</div>
+                        <div class="stat-value" id="tokenCount">0</div>
+                        <div class="stat-label">Tokens</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">&#x1F4DD;</div>
+                        <div class="stat-value" id="charCount">0</div>
+                        <div class="stat-label">Characters</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">&#x1F4AC;</div>
+                        <div class="stat-value" id="wordCount">0</div>
+                        <div class="stat-label">Words</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">&#x1F4B0;</div>
+                        <div class="stat-value" id="costDisplay">$0.00</div>
+                        <div class="stat-label">Est. Cost</div>
+                    </div>
+                </div>
+
+                <div class="glass-card cost-card">
+                    <div class="cost-breakdown">
+                        <div class="cost-header">
+                            <h3>&#x1F4B3; Cost Breakdown</h3>
+                            <span style="color: var(--text-muted); font-size: 0.85rem;">Per 1K tokens</span>
+                        </div>
+                        <div class="cost-rows">
+                            <div class="cost-row">
+                                <span class="cost-label">Input tokens (<span id="inputTokens">0</span>)</span>
+                                <span class="cost-value" id="inputCost">$0.0000</span>
+                            </div>
+                            <div class="cost-row">
+                                <span class="cost-label">Estimated output (~<span id="outputTokens">0</span>)</span>
+                                <span class="cost-value" id="outputCost">$0.0000</span>
+                            </div>
+                        </div>
+                        <div class="cost-total">
+                            <span class="cost-label">Estimated Total</span>
+                            <span class="cost-value" id="totalCost">$0.0000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card">
+                    <div class="pricing-section">
+                        <h3>&#x1F4C8; Model Pricing Reference</h3>
+                        <div class="pricing-grid" id="pricingGrid">
+                            <!-- Filled by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-section">
+                    <h2>How AI Token Counting Works</h2>
+                    <p>Tokens are the fundamental units that AI models use to process text. Understanding token counts is crucial for managing API costs and staying within context limits. This tool provides accurate estimates based on each model's tokenization approach.</p>
+
+                    <h3>What is a Token?</h3>
+                    <p>A token can be as short as one character or as long as one word. For English text, 1 token is approximately 4 characters or 0.75 words on average. Special characters, code, and non-English text may tokenize differently.</p>
+
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <h4>GPT-4 & GPT-3.5</h4>
+                            <p>Uses cl100k_base tokenizer. Approximately 4 characters per token for English text.</p>
+                        </div>
+                        <div class="info-item">
+                            <h4>Claude 3 Models</h4>
+                            <p>Uses custom tokenizer optimized for natural language. Roughly 3.5 characters per token.</p>
+                        </div>
+                        <div class="info-item">
+                            <h4>Llama & Others</h4>
+                            <p>Various tokenizers with similar ratios. Always verify with official tools for production use.</p>
+                        </div>
+                    </div>
+
+                    <h3>Tips for Reducing Token Usage</h3>
+                    <p>Write concise prompts, remove unnecessary whitespace, and use clear instructions. Consider using cheaper models for simple tasks and reserve advanced models like GPT-4 and Claude 3 Opus for complex reasoning.</p>
+                </div>
+            </div>
+
+            <aside class="sidebar">
+                <div class="ad-placeholder sidebar">Advertisement</div>
+
+                <div class="sidebar-card">
+                    <h3>&#x2728; Quick Tips</h3>
+                    <ul class="tips-list">
+                        <li>1 token is roughly 4 characters in English</li>
+                        <li>Code typically uses more tokens than prose</li>
+                        <li>GPT-4 Turbo offers best value for long contexts</li>
+                        <li>Claude 3 Haiku is most cost-effective for simple tasks</li>
+                    </ul>
+                </div>
+
+                <div class="sidebar-card promo-card">
+                    <h3>&#x1F680; Master AI Prompts</h3>
+                    <p>Get 375+ professionally crafted prompts for ChatGPT, Claude, and more. Save time and get better results.</p>
+                    <a href="https://kaiprompts.com" target="_blank" class="promo-btn">Get AI Prompts</a>
+                </div>
+
+                <div class="sidebar-card">
+                    <h3>&#x1F4A1; Context Limits</h3>
+                    <ul class="tips-list">
+                        <li>GPT-4: 8K or 32K tokens</li>
+                        <li>GPT-4 Turbo: 128K tokens</li>
+                        <li>Claude 3: 200K tokens</li>
+                        <li>Llama 3: 8K tokens</li>
+                    </ul>
+                </div>
+
+                <div class="ad-placeholder sidebar">Advertisement</div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; 2026 ToolsForge. A <a href="https://kaiprompts.com" target="_blank">kaiprompts.com</a> project. All pricing subject to change.</p>
+    </footer>
+
+    <div class="copy-notification" id="copyNotification">Token count copied!</div>
+
+    <script>
+        // Model pricing data
+        const models = {
+            'gpt-4': { name: 'GPT-4', input: 0.03, output: 0.06, charsPerToken: 4 },
+            'gpt-4-turbo': { name: 'GPT-4 Turbo', input: 0.01, output: 0.03, charsPerToken: 4 },
+            'gpt-4o': { name: 'GPT-4o', input: 0.005, output: 0.015, charsPerToken: 4 },
+            'gpt-3.5-turbo': { name: 'GPT-3.5 Turbo', input: 0.0005, output: 0.0015, charsPerToken: 4 },
+            'claude-3-opus': { name: 'Claude 3 Opus', input: 0.015, output: 0.075, charsPerToken: 3.5 },
+            'claude-3-sonnet': { name: 'Claude 3 Sonnet', input: 0.003, output: 0.015, charsPerToken: 3.5 },
+            'claude-3-haiku': { name: 'Claude 3 Haiku', input: 0.00025, output: 0.00125, charsPerToken: 3.5 },
+            'claude-2': { name: 'Claude 2.1', input: 0.008, output: 0.024, charsPerToken: 3.5 },
+            'llama-3-70b': { name: 'Llama 3 70B', input: 0.0008, output: 0.0008, charsPerToken: 4 },
+            'llama-3-8b': { name: 'Llama 3 8B', input: 0.0001, output: 0.0001, charsPerToken: 4 },
+            'mistral-large': { name: 'Mistral Large', input: 0.004, output: 0.012, charsPerToken: 4 },
+            'gemini-pro': { name: 'Gemini Pro', input: 0.00025, output: 0.0005, charsPerToken: 4 }
+        };
+
+        let currentModel = 'gpt-4';
+        let animationFrameId = null;
+
+        // Initialize particles
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.background = Math.random() > 0.5 ? 'var(--accent-purple)' : 'var(--accent-cyan)';
+                container.appendChild(particle);
+            }
+        }
+
+        // Initialize pricing grid
+        function initPricingGrid() {
+            const grid = document.getElementById('pricingGrid');
+            grid.innerHTML = Object.entries(models).map(([key, model]) => `
+                <div class="pricing-item ${key === currentModel ? 'active' : ''}" data-model="${key}" onclick="selectModel('${key}')">
+                    <span class="pricing-model">${model.name}</span>
+                    <span class="pricing-cost">$${model.input}/1K</span>
+                </div>
+            `).join('');
+        }
+
+        function selectModel(modelKey) {
+            currentModel = modelKey;
+            document.getElementById('modelSelect').value = modelKey;
+
+            // Update active state in pricing grid
+            document.querySelectorAll('.pricing-item').forEach(item => {
+                item.classList.toggle('active', item.dataset.model === modelKey);
+            });
+
+            updateCounts();
+        }
+
+        function updateModel() {
+            currentModel = document.getElementById('modelSelect').value;
+
+            // Update active state in pricing grid
+            document.querySelectorAll('.pricing-item').forEach(item => {
+                item.classList.toggle('active', item.dataset.model === currentModel);
+            });
+
+            updateCounts();
+        }
+
+        // Animated number counter
+        function animateValue(element, start, end, duration) {
+            if (animationFrameId) {
+                cancelAnimationFrame(animationFrameId);
+            }
+
+            const startTime = performance.now();
+            const isDecimal = end.toString().includes('.');
+
+            function update(currentTime) {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+
+                // Easing function
+                const easeOutQuart = 1 - Math.pow(1 - progress, 4);
+                const current = start + (end - start) * easeOutQuart;
+
+                if (isDecimal) {
+                    element.textContent = current.toFixed(4);
+                } else {
+                    element.textContent = Math.round(current).toLocaleString();
+                }
+
+                if (progress < 1) {
+                    animationFrameId = requestAnimationFrame(update);
+                }
+            }
+
+            requestAnimationFrame(update);
+        }
+
+        // Estimate tokens using tiktoken-style approach
+        function estimateTokens(text, charsPerToken) {
+            if (!text) return 0;
+
+            // Basic estimation: characters / chars per token
+            let estimate = text.length / charsPerToken;
+
+            // Adjust for special patterns
+            // Whitespace reduction
+            const whitespaceCount = (text.match(/\s+/g) || []).length;
+            estimate -= whitespaceCount * 0.2;
+
+            // Punctuation often gets its own token
+            const punctuationCount = (text.match(/[.,!?;:'"()\[\]{}]/g) || []).length;
+            estimate += punctuationCount * 0.3;
+
+            // Numbers might tokenize differently
+            const numberCount = (text.match(/\d+/g) || []).length;
+            estimate += numberCount * 0.2;
+
+            // Code patterns
+            const codePatterns = (text.match(/[<>\/={}]/g) || []).length;
+            estimate += codePatterns * 0.1;
+
+            return Math.max(1, Math.ceil(estimate));
+        }
+
+        let previousValues = {
+            tokens: 0,
+            chars: 0,
+            words: 0,
+            cost: 0
+        };
+
+        function updateCounts() {
+            const text = document.getElementById('textInput').value;
+            const model = models[currentModel];
+
+            // Calculate values
+            const charCount = text.length;
+            const wordCount = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+            const tokenCount = estimateTokens(text, model.charsPerToken);
+
+            // Estimate output tokens (roughly 50% of input for chat, adjust as needed)
+            const estimatedOutputTokens = Math.ceil(tokenCount * 0.5);
+
+            // Calculate costs
+            const inputCost = (tokenCount / 1000) * model.input;
+            const outputCost = (estimatedOutputTokens / 1000) * model.output;
+            const totalCost = inputCost + outputCost;
+
+            // Animate value changes
+            animateValue(document.getElementById('tokenCount'), previousValues.tokens, tokenCount, 300);
+            animateValue(document.getElementById('charCount'), previousValues.chars, charCount, 300);
+            animateValue(document.getElementById('wordCount'), previousValues.words, wordCount, 300);
+
+            // Update cost display with animation
+            const costDisplay = document.getElementById('costDisplay');
+            const formattedCost = totalCost < 0.01 ? '$' + totalCost.toFixed(4) : '$' + totalCost.toFixed(2);
+            costDisplay.textContent = formattedCost;
+
+            // Update detailed cost breakdown
+            document.getElementById('inputTokens').textContent = tokenCount.toLocaleString();
+            document.getElementById('outputTokens').textContent = estimatedOutputTokens.toLocaleString();
+            document.getElementById('inputCost').textContent = '$' + inputCost.toFixed(4);
+            document.getElementById('outputCost').textContent = '$' + outputCost.toFixed(4);
+            document.getElementById('totalCost').textContent = '$' + totalCost.toFixed(4);
+
+            // Store previous values for animation
+            previousValues = {
+                tokens: tokenCount,
+                chars: charCount,
+                words: wordCount,
+                cost: totalCost
+            };
+        }
+
+        function clearText() {
+            document.getElementById('textInput').value = '';
+            updateCounts();
+            document.getElementById('textInput').focus();
+        }
+
+        function copyTokenCount() {
+            const tokenCount = document.getElementById('tokenCount').textContent;
+            const model = models[currentModel].name;
+            const text = `${tokenCount} tokens (${model})`;
+
+            navigator.clipboard.writeText(text).then(() => {
+                const notification = document.getElementById('copyNotification');
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 2000);
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            initPricingGrid();
+
+            const textInput = document.getElementById('textInput');
+            textInput.addEventListener('input', updateCounts);
+
+            // Initial update
+            updateCounts();
+        });
+    </script>
+</body>
+</html>
