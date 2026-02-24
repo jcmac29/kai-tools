@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Subject Line Tester - Score & Optimize Your Subject Lines | ToolsForge</title>
+    <meta name="description" content="Test and score your email subject lines for open rates. Get actionable tips to improve engagement and avoid spam filters.">
+    <meta name="keywords" content="email subject line tester, email marketing, open rate optimizer, subject line analyzer, email copy">
+    <link rel="canonical" href="https://toolsforge.co/tools/email-subject-line-tester.html">
+
+    <meta property="og:title" content="Email Subject Line Tester - Optimize Open Rates">
+    <meta property="og:description" content="Test and score your email subject lines. Get tips to improve open rates and avoid spam filters.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolsforge.co/tools/email-subject-line-tester.html">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Email Subject Line Tester",
+        "description": "Tool to test and optimize email subject lines for better open rates",
+        "url": "https://toolsforge.co/tools/email-subject-line-tester.html",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .bg-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+            top: -200px;
+            left: -200px;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, #06b6d4, #ec4899);
+            bottom: -150px;
+            right: -150px;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #a0a0a0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #8b5cf6;
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 120px 2rem 4rem;
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .tool-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(236, 72, 153, 0.2);
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: #ec4899;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff, #a0a0a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tool-description {
+            color: #888;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .tool-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ccc;
+            font-weight: 500;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #ec4899;
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.2);
+        }
+
+        select option {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .char-counter {
+            text-align: right;
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .char-counter.warning { color: #f59e0b; }
+        .char-counter.danger { color: #ef4444; }
+        .char-counter.good { color: #10b981; }
+
+        .analyze-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .analyze-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(236, 72, 153, 0.3);
+        }
+
+        .results-section {
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .results-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .score-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1rem;
+            position: relative;
+        }
+
+        .score-circle svg {
+            transform: rotate(-90deg);
+        }
+
+        .score-circle circle {
+            fill: none;
+            stroke-width: 8;
+        }
+
+        .score-bg {
+            stroke: rgba(255, 255, 255, 0.1);
+        }
+
+        .score-fill {
+            stroke-linecap: round;
+            transition: stroke-dasharray 1s ease;
+        }
+
+        .score-value {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .score-label {
+            font-size: 1.1rem;
+            color: #888;
+        }
+
+        .score-excellent { color: #10b981; }
+        .score-good { color: #06b6d4; }
+        .score-average { color: #f59e0b; }
+        .score-poor { color: #ef4444; }
+
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .analysis-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1rem;
+        }
+
+        .analysis-label {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 0.5rem;
+        }
+
+        .analysis-value {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        .analysis-value.good { color: #10b981; }
+        .analysis-value.warning { color: #f59e0b; }
+        .analysis-value.bad { color: #ef4444; }
+
+        .feedback-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .feedback-title {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .feedback-list {
+            list-style: none;
+        }
+
+        .feedback-item {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .feedback-item:last-child {
+            border-bottom: none;
+        }
+
+        .feedback-icon {
+            font-size: 1.1rem;
+        }
+
+        .feedback-icon.positive { color: #10b981; }
+        .feedback-icon.negative { color: #ef4444; }
+        .feedback-icon.warning { color: #f59e0b; }
+
+        .feedback-text {
+            color: #ccc;
+        }
+
+        .improvements-section {
+            background: rgba(236, 72, 153, 0.1);
+            border: 1px solid rgba(236, 72, 153, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .improvements-title {
+            color: #ec4899;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .improved-subject {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .improved-text {
+            color: #fff;
+        }
+
+        .copy-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(236, 72, 153, 0.2);
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            border-radius: 8px;
+            color: #ec4899;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+        }
+
+        .copy-btn:hover {
+            background: rgba(236, 72, 153, 0.3);
+        }
+
+        .copy-btn.copied {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: #10b981;
+            color: #10b981;
+        }
+
+        .tips-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 16px;
+        }
+
+        .tips-section h3 {
+            color: #8b5cf6;
+            margin-bottom: 1rem;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .tip-card {
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+        }
+
+        .tip-title {
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .tip-text {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .cta-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(139, 92, 246, 0.2));
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .cta-section h3 {
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .cta-section p {
+            color: #888;
+            margin-bottom: 1rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+            border-radius: 50px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(236, 72, 153, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-effects">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+    </div>
+
+    <nav>
+        <div class="nav-content">
+            <a href="../index.html" class="logo">ToolsForge</a>
+            <div class="nav-links">
+                <a href="../index.html">All Tools</a>
+                <a href="prompt-templates.html">Templates</a>
+                <a href="https://kaiprompts.com" target="_blank">Premium</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="tool-header">
+            <span class="tool-badge">Email Marketing</span>
+            <h1>Email Subject Line Tester</h1>
+            <p class="tool-description">Test your email subject lines before you send. Get a score, detailed analysis, and improvement suggestions.</p>
+        </div>
+
+        <div class="tool-card">
+            <div class="form-group">
+                <label for="subjectLine">Enter Your Subject Line</label>
+                <input type="text" id="subjectLine" placeholder="e.g., Don't miss out - 50% off ends tonight!" oninput="updateCharCount()">
+                <div class="char-counter" id="charCounter">0 characters</div>
+            </div>
+
+            <div class="form-group">
+                <label for="industry">Industry (optional)</label>
+                <select id="industry">
+                    <option value="general">General</option>
+                    <option value="ecommerce">E-commerce</option>
+                    <option value="saas">SaaS/Tech</option>
+                    <option value="finance">Finance</option>
+                    <option value="health">Health & Wellness</option>
+                    <option value="education">Education</option>
+                    <option value="nonprofit">Non-profit</option>
+                </select>
+            </div>
+
+            <button class="analyze-btn" onclick="analyzeSubjectLine()">Analyze Subject Line</button>
+
+            <div class="results-section" id="resultsSection">
+                <div class="score-card" id="scoreCard">
+                    <div class="score-circle">
+                        <svg width="120" height="120">
+                            <circle class="score-bg" cx="60" cy="60" r="52"></circle>
+                            <circle class="score-fill" id="scoreFill" cx="60" cy="60" r="52" stroke-dasharray="0 327"></circle>
+                        </svg>
+                        <div class="score-value" id="scoreValue">0</div>
+                    </div>
+                    <div class="score-label" id="scoreLabel">Analyzing...</div>
+                </div>
+
+                <div class="analysis-grid" id="analysisGrid"></div>
+
+                <div class="feedback-section" id="feedbackSection">
+                    <div class="feedback-title">Detailed Feedback</div>
+                    <ul class="feedback-list" id="feedbackList"></ul>
+                </div>
+
+                <div class="improvements-section" id="improvementsSection">
+                    <div class="improvements-title">Suggested Improvements</div>
+                    <div id="improvedSubjects"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tips-section">
+            <h3>Email Subject Line Best Practices</h3>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-title">Optimal Length</div>
+                    <div class="tip-text">Keep it under 50 characters. Mobile shows only 30-40 chars.</div>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-title">Personalization</div>
+                    <div class="tip-text">Using the recipient's name can boost open rates by 26%.</div>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-title">Create Urgency</div>
+                    <div class="tip-text">Time-sensitive language drives action, but don't overuse it.</div>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-title">Avoid Spam Triggers</div>
+                    <div class="tip-text">Words like FREE, URGENT, or excessive caps trigger spam filters.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h3>Need More Email Marketing Help?</h3>
+            <p>Get 500+ email marketing prompts for subject lines, sequences, and campaigns that convert.</p>
+            <a href="https://kaiprompts.com/products/marketing-prompts" class="cta-btn" target="_blank">Get Marketing Prompts</a>
+        </div>
+    </main>
+
+    <script>
+        function updateCharCount() {
+            const input = document.getElementById('subjectLine');
+            const counter = document.getElementById('charCounter');
+            const len = input.value.length;
+
+            counter.textContent = `${len} characters`;
+            counter.className = 'char-counter';
+
+            if (len === 0) {
+                counter.className = 'char-counter';
+            } else if (len <= 40) {
+                counter.className = 'char-counter good';
+            } else if (len <= 60) {
+                counter.className = 'char-counter warning';
+            } else {
+                counter.className = 'char-counter danger';
+            }
+        }
+
+        // Spam trigger words
+        const spamWords = [
+            'free', 'urgent', 'act now', 'limited time', 'winner', 'congratulations',
+            'click here', 'buy now', 'order now', 'call now', 'apply now',
+            'no obligation', 'risk free', 'guarantee', '100%', 'cash', 'credit',
+            'earn money', 'make money', 'work from home', 'extra income',
+            'double your', 'increase your', 'lowest price', 'best price'
+        ];
+
+        // Power words that improve engagement
+        const powerWords = [
+            'you', 'your', 'new', 'now', 'today', 'exclusive', 'secret',
+            'discover', 'learn', 'proven', 'save', 'easy', 'quick', 'simple',
+            'introducing', 'announcing', 'finally', 'breaking', 'last chance',
+            'don\'t miss', 'reminder', 'important', 'update', 'invitation'
+        ];
+
+        // Question starters
+        const questionWords = ['how', 'why', 'what', 'when', 'where', 'who', 'which', 'can', 'do', 'is', 'are'];
+
+        function analyzeSubjectLine() {
+            const subject = document.getElementById('subjectLine').value.trim();
+            const industry = document.getElementById('industry').value;
+
+            if (!subject) {
+                alert('Please enter a subject line to analyze');
+                return;
+            }
+
+            const analysis = performAnalysis(subject, industry);
+            displayResults(analysis, subject);
+        }
+
+        function performAnalysis(subject, industry) {
+            let score = 50; // Start at 50
+            const feedback = [];
+            const metrics = {};
+
+            // Length analysis
+            const length = subject.length;
+            metrics.length = {
+                value: length,
+                status: length <= 40 ? 'good' : (length <= 60 ? 'warning' : 'bad')
+            };
+
+            if (length <= 40) {
+                score += 15;
+                feedback.push({ type: 'positive', text: 'Great length! Under 40 characters works well on mobile.' });
+            } else if (length <= 50) {
+                score += 10;
+                feedback.push({ type: 'warning', text: 'Good length, but consider shortening for mobile users.' });
+            } else if (length <= 60) {
+                score += 5;
+                feedback.push({ type: 'warning', text: 'Subject may be cut off on mobile devices.' });
+            } else {
+                score -= 10;
+                feedback.push({ type: 'negative', text: 'Too long! Will be truncated on most devices.' });
+            }
+
+            // Word count
+            const wordCount = subject.split(/\s+/).length;
+            metrics.words = {
+                value: wordCount,
+                status: wordCount >= 4 && wordCount <= 9 ? 'good' : 'warning'
+            };
+
+            if (wordCount >= 4 && wordCount <= 9) {
+                score += 10;
+                feedback.push({ type: 'positive', text: 'Optimal word count (4-9 words).' });
+            }
+
+            // Spam word check
+            const subjectLower = subject.toLowerCase();
+            const foundSpamWords = spamWords.filter(word => subjectLower.includes(word));
+            metrics.spam = {
+                value: foundSpamWords.length === 0 ? 'None' : foundSpamWords.length,
+                status: foundSpamWords.length === 0 ? 'good' : 'bad'
+            };
+
+            if (foundSpamWords.length > 0) {
+                score -= foundSpamWords.length * 10;
+                feedback.push({ type: 'negative', text: `Contains spam trigger words: ${foundSpamWords.slice(0, 3).join(', ')}` });
+            } else {
+                score += 10;
+                feedback.push({ type: 'positive', text: 'No spam trigger words detected.' });
+            }
+
+            // Power words check
+            const foundPowerWords = powerWords.filter(word => subjectLower.includes(word));
+            metrics.powerWords = {
+                value: foundPowerWords.length,
+                status: foundPowerWords.length > 0 ? 'good' : 'warning'
+            };
+
+            if (foundPowerWords.length > 0) {
+                score += Math.min(foundPowerWords.length * 5, 15);
+                feedback.push({ type: 'positive', text: `Uses power words: ${foundPowerWords.slice(0, 3).join(', ')}` });
+            } else {
+                feedback.push({ type: 'warning', text: 'Consider adding power words to increase engagement.' });
+            }
+
+            // Question check
+            const startsWithQuestion = questionWords.some(word => subjectLower.startsWith(word));
+            const hasQuestion = subject.includes('?');
+
+            if (startsWithQuestion || hasQuestion) {
+                score += 5;
+                feedback.push({ type: 'positive', text: 'Questions can increase curiosity and open rates.' });
+            }
+
+            // Caps check
+            const capsRatio = (subject.match(/[A-Z]/g) || []).length / subject.length;
+            metrics.caps = {
+                value: capsRatio < 0.3 ? 'Normal' : 'High',
+                status: capsRatio < 0.3 ? 'good' : 'bad'
+            };
+
+            if (capsRatio > 0.3) {
+                score -= 15;
+                feedback.push({ type: 'negative', text: 'Too many capital letters. This looks spammy.' });
+            }
+
+            // Emoji check
+            const hasEmoji = /[\u{1F300}-\u{1F9FF}]/u.test(subject);
+            if (hasEmoji) {
+                score += 5;
+                feedback.push({ type: 'positive', text: 'Emojis can help subject lines stand out in inbox.' });
+            }
+
+            // Number check
+            const hasNumber = /\d/.test(subject);
+            if (hasNumber) {
+                score += 5;
+                feedback.push({ type: 'positive', text: 'Numbers make subject lines more specific and credible.' });
+            }
+
+            // Personalization potential
+            if (subjectLower.includes('you') || subjectLower.includes('your')) {
+                score += 5;
+                feedback.push({ type: 'positive', text: 'Uses "you/your" for personal connection.' });
+            }
+
+            // Clamp score
+            score = Math.max(0, Math.min(100, score));
+
+            return { score, feedback, metrics };
+        }
+
+        function displayResults(analysis, subject) {
+            const resultsSection = document.getElementById('resultsSection');
+            resultsSection.classList.add('show');
+
+            // Score display
+            const scoreValue = document.getElementById('scoreValue');
+            const scoreLabel = document.getElementById('scoreLabel');
+            const scoreFill = document.getElementById('scoreFill');
+
+            let scoreClass = '';
+            let label = '';
+
+            if (analysis.score >= 80) {
+                scoreClass = 'score-excellent';
+                label = 'Excellent! Ready to send.';
+                scoreFill.style.stroke = '#10b981';
+            } else if (analysis.score >= 60) {
+                scoreClass = 'score-good';
+                label = 'Good. Consider improvements.';
+                scoreFill.style.stroke = '#06b6d4';
+            } else if (analysis.score >= 40) {
+                scoreClass = 'score-average';
+                label = 'Average. Needs work.';
+                scoreFill.style.stroke = '#f59e0b';
+            } else {
+                scoreClass = 'score-poor';
+                label = 'Poor. Rewrite recommended.';
+                scoreFill.style.stroke = '#ef4444';
+            }
+
+            scoreValue.textContent = analysis.score;
+            scoreValue.className = `score-value ${scoreClass}`;
+            scoreLabel.textContent = label;
+
+            // Animate score circle
+            const circumference = 327;
+            const offset = circumference - (analysis.score / 100) * circumference;
+            setTimeout(() => {
+                scoreFill.style.strokeDasharray = `${circumference - offset} ${circumference}`;
+            }, 100);
+
+            // Analysis grid
+            const analysisGrid = document.getElementById('analysisGrid');
+            analysisGrid.innerHTML = `
+                <div class="analysis-item">
+                    <div class="analysis-label">Length</div>
+                    <div class="analysis-value ${analysis.metrics.length.status}">${analysis.metrics.length.value} chars</div>
+                </div>
+                <div class="analysis-item">
+                    <div class="analysis-label">Words</div>
+                    <div class="analysis-value ${analysis.metrics.words.status}">${analysis.metrics.words.value} words</div>
+                </div>
+                <div class="analysis-item">
+                    <div class="analysis-label">Spam Words</div>
+                    <div class="analysis-value ${analysis.metrics.spam.status}">${analysis.metrics.spam.value}</div>
+                </div>
+                <div class="analysis-item">
+                    <div class="analysis-label">Power Words</div>
+                    <div class="analysis-value ${analysis.metrics.powerWords.status}">${analysis.metrics.powerWords.value} found</div>
+                </div>
+            `;
+
+            // Feedback list
+            const feedbackList = document.getElementById('feedbackList');
+            feedbackList.innerHTML = analysis.feedback.map(item => `
+                <li class="feedback-item">
+                    <span class="feedback-icon ${item.type}">${item.type === 'positive' ? '+' : (item.type === 'negative' ? '-' : '!')}</span>
+                    <span class="feedback-text">${item.text}</span>
+                </li>
+            `).join('');
+
+            // Generate improved versions
+            const improvedSubjects = document.getElementById('improvedSubjects');
+            const improvements = generateImprovements(subject, analysis);
+            improvedSubjects.innerHTML = improvements.map((imp, i) => `
+                <div class="improved-subject">
+                    <span class="improved-text">${escapeHtml(imp)}</span>
+                    <button class="copy-btn" onclick="copyImproved(this, ${i})">Copy</button>
+                </div>
+            `).join('');
+
+            window.improvedSubjects = improvements;
+        }
+
+        function generateImprovements(subject, analysis) {
+            const improvements = [];
+
+            // Shorter version
+            if (subject.length > 40) {
+                const words = subject.split(' ');
+                const shorter = words.slice(0, Math.min(6, words.length)).join(' ');
+                improvements.push(shorter.length < subject.length ? shorter : subject.substring(0, 40).trim());
+            }
+
+            // Add power word version
+            if (analysis.metrics.powerWords.value === 0) {
+                const powerOptions = ['Discover:', 'New:', 'Finally:'];
+                const prefix = powerOptions[Math.floor(Math.random() * powerOptions.length)];
+                improvements.push(`${prefix} ${subject}`);
+            }
+
+            // Question version
+            if (!subject.includes('?')) {
+                const questionStarters = ['Ready for', 'Want to know about', 'Have you seen'];
+                const starter = questionStarters[Math.floor(Math.random() * questionStarters.length)];
+                improvements.push(`${starter} ${subject.toLowerCase()}?`);
+            }
+
+            // Add urgency (if not spammy)
+            if (!subject.toLowerCase().includes('urgent') && !subject.toLowerCase().includes('now')) {
+                improvements.push(`${subject} (Today only)`);
+            }
+
+            // Number version
+            if (!/\d/.test(subject)) {
+                improvements.push(`3 reasons why ${subject.toLowerCase()}`);
+            }
+
+            return improvements.slice(0, 4);
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function copyImproved(btn, index) {
+            const text = window.improvedSubjects[index];
+            navigator.clipboard.writeText(text).then(() => {
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = 'Copy';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Value Proposition Generator - Create Compelling USPs | ToolsForge</title>
+    <meta name="description" content="Generate powerful value propositions that convert. Create unique selling points that clearly communicate your benefits and differentiate your business.">
+    <meta name="keywords" content="value proposition generator, USP generator, unique selling point, marketing copy, business messaging">
+    <link rel="canonical" href="https://toolsforge.co/tools/value-proposition-generator.html">
+
+    <meta property="og:title" content="Value Proposition Generator - Create USPs That Convert">
+    <meta property="og:description" content="Generate powerful value propositions that clearly communicate your benefits. Stand out from competitors.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolsforge.co/tools/value-proposition-generator.html">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Value Proposition Generator",
+        "description": "AI-powered tool that generates compelling value propositions and unique selling points",
+        "url": "https://toolsforge.co/tools/value-proposition-generator.html",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .bg-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg, #10b981, #06b6d4);
+            top: -200px;
+            left: -200px;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, #8b5cf6, #10b981);
+            bottom: -150px;
+            right: -150px;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #a0a0a0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #8b5cf6;
+        }
+
+        main {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 120px 2rem 4rem;
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .tool-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: #10b981;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff, #a0a0a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tool-description {
+            color: #888;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .tool-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ccc;
+            font-weight: 500;
+        }
+
+        .label-hint {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 400;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.2);
+        }
+
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        select option {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .generate-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #10b981, #06b6d4);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        }
+
+        .generate-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .results-section {
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .results-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .vp-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .vp-label {
+            font-size: 0.85rem;
+            color: #10b981;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .vp-content {
+            font-size: 1.25rem;
+            line-height: 1.5;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .vp-breakdown {
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .breakdown-item {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .breakdown-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .breakdown-label {
+            color: #10b981;
+            min-width: 100px;
+        }
+
+        .breakdown-value {
+            color: #ccc;
+        }
+
+        .vp-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+        }
+
+        .action-btn:hover {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: #10b981;
+            color: #fff;
+        }
+
+        .action-btn.copied {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: #10b981;
+            color: #10b981;
+        }
+
+        .frameworks-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 16px;
+        }
+
+        .frameworks-section h3 {
+            color: #10b981;
+            margin-bottom: 1.5rem;
+        }
+
+        .framework-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .framework-card {
+            padding: 1.25rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+        }
+
+        .framework-name {
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .framework-template {
+            color: #888;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+
+        .cta-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(6, 182, 212, 0.2));
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .cta-section h3 {
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .cta-section p {
+            color: #888;
+            margin-bottom: 1rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: linear-gradient(135deg, #10b981, #06b6d4);
+            border-radius: 50px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-effects">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+    </div>
+
+    <nav>
+        <div class="nav-content">
+            <a href="../index.html" class="logo">ToolsForge</a>
+            <div class="nav-links">
+                <a href="../index.html">All Tools</a>
+                <a href="prompt-templates.html">Templates</a>
+                <a href="https://kaiprompts.com" target="_blank">Premium</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="tool-header">
+            <span class="tool-badge">Business Tool</span>
+            <h1>Value Proposition Generator</h1>
+            <p class="tool-description">Create compelling value propositions that clearly communicate your unique benefits and convert visitors into customers.</p>
+        </div>
+
+        <div class="tool-card">
+            <div class="form-group">
+                <label for="product">What do you offer?</label>
+                <input type="text" id="product" placeholder="e.g., AI-powered marketing automation platform">
+            </div>
+
+            <div class="form-group">
+                <label for="audience">Who is it for? <span class="label-hint">(Target audience)</span></label>
+                <input type="text" id="audience" placeholder="e.g., Small business owners, SaaS founders, Marketing teams">
+            </div>
+
+            <div class="form-group">
+                <label for="problem">What problem do you solve?</label>
+                <textarea id="problem" placeholder="e.g., Businesses waste hours on manual marketing tasks that could be automated, losing potential customers and revenue"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="benefit">What's the main benefit? <span class="label-hint">(Outcome they achieve)</span></label>
+                <input type="text" id="benefit" placeholder="e.g., Save 10+ hours per week and increase leads by 3x">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="differentiator">What makes you different?</label>
+                    <input type="text" id="differentiator" placeholder="e.g., No-code setup, AI-powered, Built for small teams">
+                </div>
+                <div class="form-group">
+                    <label for="tone">Tone</label>
+                    <select id="tone">
+                        <option value="professional">Professional</option>
+                        <option value="bold">Bold & Direct</option>
+                        <option value="friendly">Friendly</option>
+                        <option value="innovative">Innovative</option>
+                        <option value="authoritative">Authoritative</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="generate-btn" id="generateBtn" onclick="generateValueProps()">Generate Value Propositions</button>
+
+            <div class="results-section" id="resultsSection">
+                <div id="vpContainer"></div>
+            </div>
+        </div>
+
+        <div class="frameworks-section">
+            <h3>Popular Value Proposition Frameworks</h3>
+            <div class="framework-grid">
+                <div class="framework-card">
+                    <div class="framework-name">The Classic</div>
+                    <div class="framework-template">We help [audience] to [benefit] by [method].</div>
+                </div>
+                <div class="framework-card">
+                    <div class="framework-name">The Geoff Moore</div>
+                    <div class="framework-template">For [target] who [need], [product] is a [category] that [benefit]. Unlike [competitor], we [differentiator].</div>
+                </div>
+                <div class="framework-card">
+                    <div class="framework-name">The Steve Blank</div>
+                    <div class="framework-template">We help X do Y by doing Z.</div>
+                </div>
+                <div class="framework-card">
+                    <div class="framework-name">The Before-After-Bridge</div>
+                    <div class="framework-template">Before: [problem]. After: [solution]. Bridge: [how your product gets them there].</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h3>Need Complete Marketing Copy?</h3>
+            <p>Get 500+ proven marketing prompts for landing pages, ads, emails, and more.</p>
+            <a href="https://kaiprompts.com/products/marketing-prompts" class="cta-btn" target="_blank">Get Marketing Prompts</a>
+        </div>
+    </main>
+
+    <script>
+        function generateValueProps() {
+            const product = document.getElementById('product').value.trim();
+            const audience = document.getElementById('audience').value.trim();
+            const problem = document.getElementById('problem').value.trim();
+            const benefit = document.getElementById('benefit').value.trim();
+            const differentiator = document.getElementById('differentiator').value.trim();
+            const tone = document.getElementById('tone').value;
+
+            if (!product || !audience || !problem || !benefit) {
+                alert('Please fill in the required fields');
+                return;
+            }
+
+            const btn = document.getElementById('generateBtn');
+            btn.disabled = true;
+            btn.textContent = 'Generating...';
+
+            setTimeout(() => {
+                const vps = generateAllFormats(product, audience, problem, benefit, differentiator, tone);
+                displayValueProps(vps);
+                btn.disabled = false;
+                btn.textContent = 'Generate Value Propositions';
+            }, 800);
+        }
+
+        function generateAllFormats(product, audience, problem, benefit, differentiator, tone) {
+            const toneModifiers = {
+                professional: { style: 'clear, credible', words: ['solutions', 'results', 'optimize', 'achieve'] },
+                bold: { style: 'direct, confident', words: ['dominate', 'crush', 'unstoppable', 'breakthrough'] },
+                friendly: { style: 'warm, approachable', words: ['love', 'easy', 'finally', 'simply'] },
+                innovative: { style: 'forward-thinking', words: ['revolutionary', 'cutting-edge', 'transform', 'reimagine'] },
+                authoritative: { style: 'expert, trusted', words: ['proven', 'trusted', 'industry-leading', 'definitive'] }
+            };
+
+            const modifier = toneModifiers[tone];
+            const vps = [];
+
+            // Format 1: Headline Style
+            vps.push({
+                type: 'Headline',
+                content: generateHeadlineVP(product, audience, benefit, modifier),
+                breakdown: {
+                    'Target': audience,
+                    'Benefit': benefit,
+                    'Style': modifier.style
+                }
+            });
+
+            // Format 2: Problem-Solution
+            vps.push({
+                type: 'Problem-Solution',
+                content: generateProblemSolutionVP(product, audience, problem, benefit, modifier),
+                breakdown: {
+                    'Problem': problem.substring(0, 50) + '...',
+                    'Solution': product,
+                    'Result': benefit
+                }
+            });
+
+            // Format 3: Geoff Moore Format
+            vps.push({
+                type: 'Positioning Statement',
+                content: generatePositioningVP(product, audience, problem, benefit, differentiator),
+                breakdown: {
+                    'Category': product,
+                    'Target': audience,
+                    'Differentiator': differentiator || 'Unique approach'
+                }
+            });
+
+            // Format 4: One-liner
+            vps.push({
+                type: 'One-Liner',
+                content: generateOneLinerVP(product, audience, benefit, modifier),
+                breakdown: {
+                    'Format': 'We help X do Y',
+                    'Audience': audience,
+                    'Outcome': benefit
+                }
+            });
+
+            // Format 5: Benefit-Focused
+            vps.push({
+                type: 'Benefit-Focused',
+                content: generateBenefitVP(product, audience, benefit, differentiator, modifier),
+                breakdown: {
+                    'Primary Benefit': benefit,
+                    'Secondary': differentiator || 'Easy to use',
+                    'Tone': tone
+                }
+            });
+
+            return vps;
+        }
+
+        function generateHeadlineVP(product, audience, benefit, modifier) {
+            const templates = [
+                `${capitalize(benefit)} for ${audience}.`,
+                `The ${modifier.words[0]} way to ${lowercaseFirst(benefit)}.`,
+                `${audience}: ${capitalize(benefit)} with ${product}.`,
+                `Finally, ${lowercaseFirst(benefit)}. Built for ${audience}.`
+            ];
+            return templates[Math.floor(Math.random() * templates.length)];
+        }
+
+        function generateProblemSolutionVP(product, audience, problem, benefit, modifier) {
+            return `Tired of ${extractPain(problem)}? ${product} helps ${audience.toLowerCase()} ${lowercaseFirst(benefit)}. ${modifier.words[0].charAt(0).toUpperCase() + modifier.words[0].slice(1)} results, guaranteed.`;
+        }
+
+        function generatePositioningVP(product, audience, problem, benefit, differentiator) {
+            const diff = differentiator || 'our unique approach';
+            return `For ${audience.toLowerCase()} who ${extractNeed(problem)}, ${product} is the solution that ${lowercaseFirst(benefit)}. Unlike alternatives, we ${lowercaseFirst(diff)}.`;
+        }
+
+        function generateOneLinerVP(product, audience, benefit, modifier) {
+            return `We help ${audience.toLowerCase()} ${lowercaseFirst(benefit)}.`;
+        }
+
+        function generateBenefitVP(product, audience, benefit, differentiator, modifier) {
+            const diff = differentiator || `${modifier.words[0]} technology`;
+            return `${capitalize(benefit)}. ${product} gives ${audience.toLowerCase()} the power to achieve more with ${lowercaseFirst(diff)}.`;
+        }
+
+        function extractPain(problem) {
+            const pain = problem.toLowerCase()
+                .replace(/businesses|companies|people|users/gi, '')
+                .trim()
+                .substring(0, 40);
+            return pain || 'struggling with inefficient processes';
+        }
+
+        function extractNeed(problem) {
+            return 'need better results';
+        }
+
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
+        function lowercaseFirst(str) {
+            return str.charAt(0).toLowerCase() + str.slice(1);
+        }
+
+        function displayValueProps(vps) {
+            const container = document.getElementById('vpContainer');
+            container.innerHTML = vps.map((vp, i) => `
+                <div class="vp-card">
+                    <div class="vp-label">${vp.type}</div>
+                    <div class="vp-content">${escapeHtml(vp.content)}</div>
+                    <div class="vp-breakdown">
+                        ${Object.entries(vp.breakdown).map(([key, value]) => `
+                            <div class="breakdown-item">
+                                <span class="breakdown-label">${key}:</span>
+                                <span class="breakdown-value">${escapeHtml(value)}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="vp-actions">
+                        <button class="action-btn" onclick="copyVP(this, ${i})">Copy</button>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('resultsSection').classList.add('show');
+            window.generatedVPs = vps;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function copyVP(btn, index) {
+            const vp = window.generatedVPs[index];
+            navigator.clipboard.writeText(vp.content).then(() => {
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = 'Copy';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

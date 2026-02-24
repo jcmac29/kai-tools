@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ad Copy Generator - Create High-Converting Ads for Google & Facebook | ToolsForge</title>
+    <meta name="description" content="Generate persuasive ad copy for Google Ads, Facebook Ads, and more. AI-powered headlines, descriptions, and CTAs that convert.">
+    <meta name="keywords" content="ad copy generator, Google Ads generator, Facebook ad copy, advertising copy, PPC ads, marketing copy">
+    <link rel="canonical" href="https://toolsforge.co/tools/ad-copy-generator.html">
+
+    <meta property="og:title" content="Ad Copy Generator - High-Converting Ad Copy">
+    <meta property="og:description" content="Generate persuasive ad copy for Google Ads, Facebook Ads, and more. AI-powered headlines and descriptions.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolsforge.co/tools/ad-copy-generator.html">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Ad Copy Generator",
+        "description": "AI-powered tool that generates high-converting ad copy for multiple platforms",
+        "url": "https://toolsforge.co/tools/ad-copy-generator.html",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            top: -200px;
+            left: -200px;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, #8b5cf6, #ec4899);
+            bottom: -150px;
+            right: -150px;
+            animation-delay: -10s;
+        }
+
+        .orb-3 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #06b6d4, #10b981);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #a0a0a0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #8b5cf6;
+        }
+
+        /* Main Content */
+        main {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 120px 2rem 4rem;
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .tool-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(245, 158, 11, 0.2);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: #f59e0b;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff, #a0a0a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tool-description {
+            color: #888;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Tool Card */
+        .tool-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ccc;
+            font-weight: 500;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #f59e0b;
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.2);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        select option {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        /* Platform Tabs */
+        .platform-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .platform-tab {
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .platform-tab:hover {
+            border-color: rgba(245, 158, 11, 0.5);
+            color: #ccc;
+        }
+
+        .platform-tab.active {
+            background: rgba(245, 158, 11, 0.2);
+            border-color: #f59e0b;
+            color: #fff;
+        }
+
+        /* Generate Button */
+        .generate-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
+        }
+
+        .generate-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Results */
+        .results-section {
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .results-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .ad-preview {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .ad-type-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(245, 158, 11, 0.2);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: #f59e0b;
+            margin-bottom: 1rem;
+        }
+
+        /* Google Ad Preview */
+        .google-ad {
+            background: #fff;
+            border-radius: 8px;
+            padding: 1rem;
+            color: #000;
+        }
+
+        .google-ad-label {
+            font-size: 0.75rem;
+            color: #006621;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .google-ad-url {
+            font-size: 0.85rem;
+            color: #006621;
+            margin-bottom: 0.25rem;
+        }
+
+        .google-ad-headline {
+            font-size: 1.25rem;
+            color: #1a0dab;
+            text-decoration: none;
+            cursor: pointer;
+            margin-bottom: 0.25rem;
+            display: block;
+        }
+
+        .google-ad-headline:hover {
+            text-decoration: underline;
+        }
+
+        .google-ad-description {
+            font-size: 0.9rem;
+            color: #545454;
+            line-height: 1.4;
+        }
+
+        /* Facebook Ad Preview */
+        .facebook-ad {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            color: #000;
+        }
+
+        .fb-ad-header {
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .fb-ad-avatar {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .fb-ad-name {
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .fb-ad-sponsored {
+            font-size: 0.75rem;
+            color: #65676b;
+        }
+
+        .fb-ad-text {
+            padding: 0 1rem 1rem;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .fb-ad-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #f59e0b20, #ef444420);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .fb-ad-cta {
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #ddd;
+        }
+
+        .fb-ad-headline {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .fb-ad-link {
+            font-size: 0.8rem;
+            color: #65676b;
+            text-transform: uppercase;
+        }
+
+        .fb-cta-btn {
+            padding: 0.5rem 1rem;
+            background: #1877f2;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Copy actions */
+        .ad-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .action-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+        }
+
+        .action-btn:hover {
+            background: rgba(245, 158, 11, 0.2);
+            border-color: #f59e0b;
+            color: #fff;
+        }
+
+        .action-btn.copied {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: #10b981;
+            color: #10b981;
+        }
+
+        /* Character limits */
+        .char-limit {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+        }
+
+        .char-limit span {
+            color: #666;
+        }
+
+        .char-limit .count {
+            color: #10b981;
+        }
+
+        .char-limit .count.warning {
+            color: #f59e0b;
+        }
+
+        .char-limit .count.over {
+            color: #ef4444;
+        }
+
+        /* Tips Section */
+        .tips-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+            border-radius: 16px;
+        }
+
+        .tips-section h3 {
+            color: #f59e0b;
+            margin-bottom: 1rem;
+        }
+
+        .tips-list {
+            list-style: none;
+        }
+
+        .tips-list li {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            color: #888;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .tips-list li:last-child {
+            border-bottom: none;
+        }
+
+        .tip-icon {
+            color: #f59e0b;
+            font-size: 1.25rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.2), rgba(239, 68, 68, 0.2));
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .cta-section h3 {
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .cta-section p {
+            color: #888;
+            margin-bottom: 1rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: linear-gradient(135deg, #f59e0b, #ef4444);
+            border-radius: 50px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
+        }
+
+        /* Two column layout */
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-effects">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <nav>
+        <div class="nav-content">
+            <a href="../index.html" class="logo">ToolsForge</a>
+            <div class="nav-links">
+                <a href="../index.html">All Tools</a>
+                <a href="prompt-templates.html">Templates</a>
+                <a href="https://kaiprompts.com" target="_blank">Premium</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="tool-header">
+            <span class="tool-badge">Marketing Tool</span>
+            <h1>Ad Copy Generator</h1>
+            <p class="tool-description">Create high-converting ad copy for Google Ads, Facebook, Instagram, and more. Get headlines, descriptions, and CTAs that sell.</p>
+        </div>
+
+        <div class="tool-card">
+            <div class="form-group">
+                <label>Ad Platform</label>
+                <div class="platform-tabs" id="platformTabs">
+                    <button type="button" class="platform-tab active" data-platform="google">Google Ads</button>
+                    <button type="button" class="platform-tab" data-platform="facebook">Facebook</button>
+                    <button type="button" class="platform-tab" data-platform="instagram">Instagram</button>
+                    <button type="button" class="platform-tab" data-platform="linkedin">LinkedIn</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="product">Product or Service</label>
+                <input type="text" id="product" placeholder="e.g., AI Marketing Tool, Online Course, SaaS Platform">
+            </div>
+
+            <div class="form-group">
+                <label for="description">Brief Description</label>
+                <textarea id="description" placeholder="Describe what it does, key features, and unique selling points..."></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="audience">Target Audience</label>
+                    <input type="text" id="audience" placeholder="e.g., Small business owners">
+                </div>
+                <div class="form-group">
+                    <label for="goal">Ad Goal</label>
+                    <select id="goal">
+                        <option value="conversions">Get Conversions</option>
+                        <option value="awareness">Brand Awareness</option>
+                        <option value="traffic">Drive Traffic</option>
+                        <option value="leads">Generate Leads</option>
+                        <option value="sales">Direct Sales</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="offer">Special Offer (optional)</label>
+                    <input type="text" id="offer" placeholder="e.g., 50% off, Free trial, Limited time">
+                </div>
+                <div class="form-group">
+                    <label for="cta">Call to Action</label>
+                    <select id="cta">
+                        <option value="learn_more">Learn More</option>
+                        <option value="sign_up">Sign Up</option>
+                        <option value="get_started">Get Started</option>
+                        <option value="shop_now">Shop Now</option>
+                        <option value="try_free">Try Free</option>
+                        <option value="book_now">Book Now</option>
+                        <option value="contact_us">Contact Us</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="generate-btn" id="generateBtn" onclick="generateAds()">Generate Ad Copy</button>
+
+            <div class="results-section" id="resultsSection">
+                <div id="adsContainer"></div>
+            </div>
+        </div>
+
+        <div class="tips-section">
+            <h3>Ad Copy Best Practices</h3>
+            <ul class="tips-list">
+                <li>
+                    <span class="tip-icon">*</span>
+                    <span><strong>Lead with benefits</strong> - Focus on what the customer gains, not just features</span>
+                </li>
+                <li>
+                    <span class="tip-icon">*</span>
+                    <span><strong>Create urgency</strong> - Use time-sensitive language to drive immediate action</span>
+                </li>
+                <li>
+                    <span class="tip-icon">*</span>
+                    <span><strong>Use numbers</strong> - "Save 50%" or "Join 10,000+ users" builds credibility</span>
+                </li>
+                <li>
+                    <span class="tip-icon">*</span>
+                    <span><strong>Match landing page</strong> - Ensure your ad copy aligns with where users land</span>
+                </li>
+                <li>
+                    <span class="tip-icon">*</span>
+                    <span><strong>Test multiple versions</strong> - A/B test different headlines and descriptions</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="cta-section">
+            <h3>Want More Marketing Power?</h3>
+            <p>Get 500+ marketing prompts for ads, emails, landing pages, and more.</p>
+            <a href="https://kaiprompts.com/products/marketing-prompts" class="cta-btn" target="_blank">Get Marketing Prompts</a>
+        </div>
+    </main>
+
+    <script>
+        // Platform selection
+        const platformTabs = document.querySelectorAll('.platform-tab');
+        let selectedPlatform = 'google';
+
+        platformTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                platformTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                selectedPlatform = tab.dataset.platform;
+            });
+        });
+
+        // Platform limits
+        const platformLimits = {
+            google: {
+                headline1: 30,
+                headline2: 30,
+                headline3: 30,
+                description1: 90,
+                description2: 90
+            },
+            facebook: {
+                primaryText: 125,
+                headline: 40,
+                description: 30
+            },
+            instagram: {
+                primaryText: 125,
+                headline: 40
+            },
+            linkedin: {
+                introText: 150,
+                headline: 70
+            }
+        };
+
+        // CTA options
+        const ctaText = {
+            learn_more: 'Learn More',
+            sign_up: 'Sign Up',
+            get_started: 'Get Started',
+            shop_now: 'Shop Now',
+            try_free: 'Try Free',
+            book_now: 'Book Now',
+            contact_us: 'Contact Us'
+        };
+
+        // Power words for ads
+        const powerWords = {
+            urgency: ['Now', 'Today', 'Limited', 'Hurry', 'Last Chance', 'Don\'t Miss', 'Act Fast'],
+            value: ['Free', 'Save', 'Exclusive', 'Premium', 'Best', 'Top', 'Ultimate'],
+            trust: ['Proven', 'Guaranteed', 'Trusted', 'Certified', 'Official', 'Secure'],
+            emotion: ['Transform', 'Discover', 'Unlock', 'Master', 'Achieve', 'Boost']
+        };
+
+        function generateAds() {
+            const product = document.getElementById('product').value.trim();
+            const description = document.getElementById('description').value.trim();
+            const audience = document.getElementById('audience').value.trim();
+            const goal = document.getElementById('goal').value;
+            const offer = document.getElementById('offer').value.trim();
+            const cta = document.getElementById('cta').value;
+
+            if (!product || !description) {
+                alert('Please enter product and description');
+                return;
+            }
+
+            const btn = document.getElementById('generateBtn');
+            btn.disabled = true;
+            btn.textContent = 'Generating...';
+
+            setTimeout(() => {
+                const ads = generateAdVariations(product, description, audience, goal, offer, cta);
+                displayAds(ads);
+                btn.disabled = false;
+                btn.textContent = 'Generate Ad Copy';
+            }, 800);
+        }
+
+        function generateAdVariations(product, description, audience, goal, offer, cta) {
+            const ads = [];
+
+            if (selectedPlatform === 'google') {
+                // Generate 3 Google Ad variations
+                for (let i = 0; i < 3; i++) {
+                    ads.push(generateGoogleAd(product, description, audience, goal, offer, cta, i));
+                }
+            } else if (selectedPlatform === 'facebook') {
+                for (let i = 0; i < 3; i++) {
+                    ads.push(generateFacebookAd(product, description, audience, goal, offer, cta, i));
+                }
+            } else if (selectedPlatform === 'instagram') {
+                for (let i = 0; i < 3; i++) {
+                    ads.push(generateInstagramAd(product, description, audience, goal, offer, cta, i));
+                }
+            } else if (selectedPlatform === 'linkedin') {
+                for (let i = 0; i < 3; i++) {
+                    ads.push(generateLinkedInAd(product, description, audience, goal, offer, cta, i));
+                }
+            }
+
+            return ads;
+        }
+
+        function generateGoogleAd(product, description, audience, goal, offer, cta, variation) {
+            const headlines = generateHeadlines(product, offer, variation, 30);
+            const descriptions = generateDescriptions(product, description, audience, offer, cta, 90);
+
+            return {
+                type: 'google',
+                variation: variation + 1,
+                headlines: headlines,
+                descriptions: descriptions,
+                displayUrl: `www.yoursite.com/${product.toLowerCase().replace(/\s+/g, '-')}`
+            };
+        }
+
+        function generateFacebookAd(product, description, audience, goal, offer, cta, variation) {
+            return {
+                type: 'facebook',
+                variation: variation + 1,
+                primaryText: generatePrimaryText(product, description, audience, offer, variation, 125),
+                headline: generateShortHeadline(product, offer, variation, 40),
+                linkDescription: truncate(description, 30),
+                cta: ctaText[cta]
+            };
+        }
+
+        function generateInstagramAd(product, description, audience, goal, offer, cta, variation) {
+            return {
+                type: 'instagram',
+                variation: variation + 1,
+                primaryText: generatePrimaryText(product, description, audience, offer, variation, 125),
+                headline: generateShortHeadline(product, offer, variation, 40),
+                cta: ctaText[cta]
+            };
+        }
+
+        function generateLinkedInAd(product, description, audience, goal, offer, cta, variation) {
+            return {
+                type: 'linkedin',
+                variation: variation + 1,
+                introText: generateLinkedInIntro(product, description, audience, offer, variation, 150),
+                headline: generateShortHeadline(product, offer, variation, 70),
+                cta: ctaText[cta]
+            };
+        }
+
+        function generateHeadlines(product, offer, variation, maxLen) {
+            const templates = [
+                [`${product}`, `Get Started Today`, offer ? `${offer}` : 'Best in Class'],
+                [`Try ${product} Free`, `Trusted Solution`, offer ? offer : 'See Results Fast'],
+                [`#1 ${product}`, `Start Now`, offer ? `${offer} Today` : 'Expert Solution']
+            ];
+            return templates[variation % templates.length].map(h => truncate(h, maxLen));
+        }
+
+        function generateDescriptions(product, description, audience, offer, cta, maxLen) {
+            const benefitWords = extractBenefits(description);
+            const audienceText = audience ? `Perfect for ${audience}.` : '';
+            const offerText = offer ? `${offer}.` : '';
+
+            const desc1 = truncate(`${product} helps you ${benefitWords}. ${audienceText} ${ctaText[cta]} today.`, maxLen);
+            const desc2 = truncate(`Transform your results with ${product}. ${offerText} Join thousands of satisfied users.`, maxLen);
+
+            return [desc1, desc2];
+        }
+
+        function generatePrimaryText(product, description, audience, offer, variation, maxLen) {
+            const templates = [
+                `Introducing ${product}. ${truncate(description, 60)} ${offer ? offer + '!' : 'Try it today!'}`,
+                `Ready to transform your results? ${product} is here. ${offer ? offer + ' - Limited time!' : 'Get started now.'}`,
+                `${audience ? audience + ', ' : ''}meet ${product}. ${truncate(description, 50)} ${offer ? 'Special: ' + offer : ''}`
+            ];
+            return truncate(templates[variation % templates.length], maxLen);
+        }
+
+        function generateShortHeadline(product, offer, variation, maxLen) {
+            const templates = [
+                offer ? `${offer} on ${product}` : `Try ${product} Today`,
+                `Get ${product} Now`,
+                offer ? `${offer} - ${product}` : `Discover ${product}`
+            ];
+            return truncate(templates[variation % templates.length], maxLen);
+        }
+
+        function generateLinkedInIntro(product, description, audience, offer, variation, maxLen) {
+            const templates = [
+                `Attention ${audience || 'professionals'}: ${product} is transforming how businesses operate. ${truncate(description, 60)}`,
+                `Looking for a better solution? ${product} delivers results. ${offer ? offer + '.' : ''} Learn how it can help you.`,
+                `${product}: The trusted choice for ${audience || 'businesses'}. ${truncate(description, 50)}`
+            ];
+            return truncate(templates[variation % templates.length], maxLen);
+        }
+
+        function extractBenefits(description) {
+            const words = description.split(' ').slice(0, 8).join(' ');
+            return words.toLowerCase();
+        }
+
+        function truncate(text, maxLen) {
+            if (text.length <= maxLen) return text;
+            return text.substring(0, maxLen - 3) + '...';
+        }
+
+        function displayAds(ads) {
+            const container = document.getElementById('adsContainer');
+            container.innerHTML = ads.map(ad => {
+                if (ad.type === 'google') {
+                    return renderGoogleAd(ad);
+                } else if (ad.type === 'facebook') {
+                    return renderFacebookAd(ad);
+                } else if (ad.type === 'instagram') {
+                    return renderInstagramAd(ad);
+                } else if (ad.type === 'linkedin') {
+                    return renderLinkedInAd(ad);
+                }
+            }).join('');
+
+            document.getElementById('resultsSection').classList.add('show');
+        }
+
+        function renderGoogleAd(ad) {
+            return `
+                <div class="ad-preview">
+                    <span class="ad-type-badge">Google Ad - Variation ${ad.variation}</span>
+                    <div class="google-ad">
+                        <div class="google-ad-label">Ad</div>
+                        <div class="google-ad-url">${ad.displayUrl}</div>
+                        <a class="google-ad-headline">${ad.headlines.join(' | ')}</a>
+                        <div class="google-ad-description">${ad.descriptions[0]}</div>
+                        <div class="google-ad-description" style="margin-top: 0.25rem;">${ad.descriptions[1]}</div>
+                    </div>
+                    <div class="char-limit">
+                        <span>Headlines: ${ad.headlines.map((h, i) => `H${i+1}: ${h.length}/30`).join(', ')}</span>
+                    </div>
+                    <div class="ad-actions">
+                        <button class="action-btn" onclick="copyAdText(this, 'google', ${ad.variation - 1})">Copy All</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderFacebookAd(ad) {
+            return `
+                <div class="ad-preview">
+                    <span class="ad-type-badge">Facebook Ad - Variation ${ad.variation}</span>
+                    <div class="facebook-ad">
+                        <div class="fb-ad-header">
+                            <div class="fb-ad-avatar">B</div>
+                            <div>
+                                <div class="fb-ad-name">Your Business</div>
+                                <div class="fb-ad-sponsored">Sponsored</div>
+                            </div>
+                        </div>
+                        <div class="fb-ad-text">${ad.primaryText}</div>
+                        <div class="fb-ad-image">[Your Ad Image/Video Here]</div>
+                        <div class="fb-ad-cta">
+                            <div>
+                                <div class="fb-ad-headline">${ad.headline}</div>
+                                <div class="fb-ad-link">yoursite.com</div>
+                            </div>
+                            <button class="fb-cta-btn">${ad.cta}</button>
+                        </div>
+                    </div>
+                    <div class="char-limit">
+                        <span>Primary: ${ad.primaryText.length}/125 | Headline: ${ad.headline.length}/40</span>
+                    </div>
+                    <div class="ad-actions">
+                        <button class="action-btn" onclick="copyAdText(this, 'facebook', ${ad.variation - 1})">Copy All</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderInstagramAd(ad) {
+            return `
+                <div class="ad-preview">
+                    <span class="ad-type-badge">Instagram Ad - Variation ${ad.variation}</span>
+                    <div class="facebook-ad">
+                        <div class="fb-ad-header">
+                            <div class="fb-ad-avatar">B</div>
+                            <div>
+                                <div class="fb-ad-name">your_business</div>
+                                <div class="fb-ad-sponsored">Sponsored</div>
+                            </div>
+                        </div>
+                        <div class="fb-ad-image" style="height: 300px;">[Your Ad Image/Video Here]</div>
+                        <div class="fb-ad-text">${ad.primaryText}</div>
+                        <div class="fb-ad-cta" style="justify-content: center;">
+                            <button class="fb-cta-btn">${ad.cta}</button>
+                        </div>
+                    </div>
+                    <div class="char-limit">
+                        <span>Caption: ${ad.primaryText.length}/125</span>
+                    </div>
+                    <div class="ad-actions">
+                        <button class="action-btn" onclick="copyAdText(this, 'instagram', ${ad.variation - 1})">Copy All</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderLinkedInAd(ad) {
+            return `
+                <div class="ad-preview">
+                    <span class="ad-type-badge">LinkedIn Ad - Variation ${ad.variation}</span>
+                    <div class="facebook-ad">
+                        <div class="fb-ad-header">
+                            <div class="fb-ad-avatar">B</div>
+                            <div>
+                                <div class="fb-ad-name">Your Company</div>
+                                <div class="fb-ad-sponsored">Promoted</div>
+                            </div>
+                        </div>
+                        <div class="fb-ad-text">${ad.introText}</div>
+                        <div class="fb-ad-image">[Your Ad Image Here]</div>
+                        <div class="fb-ad-cta">
+                            <div class="fb-ad-headline">${ad.headline}</div>
+                            <button class="fb-cta-btn">${ad.cta}</button>
+                        </div>
+                    </div>
+                    <div class="char-limit">
+                        <span>Intro: ${ad.introText.length}/150 | Headline: ${ad.headline.length}/70</span>
+                    </div>
+                    <div class="ad-actions">
+                        <button class="action-btn" onclick="copyAdText(this, 'linkedin', ${ad.variation - 1})">Copy All</button>
+                    </div>
+                </div>
+            `;
+        }
+
+        let generatedAds = [];
+
+        const originalGenerateAds = generateAdVariations;
+        generateAdVariations = function(...args) {
+            generatedAds = originalGenerateAds.apply(this, args);
+            return generatedAds;
+        };
+
+        function copyAdText(btn, type, index) {
+            const ad = generatedAds[index];
+            let text = '';
+
+            if (type === 'google') {
+                text = `Headlines:\n${ad.headlines.join('\n')}\n\nDescriptions:\n${ad.descriptions.join('\n')}\n\nDisplay URL: ${ad.displayUrl}`;
+            } else if (type === 'facebook' || type === 'instagram') {
+                text = `Primary Text: ${ad.primaryText}\n\nHeadline: ${ad.headline}\n\nCTA: ${ad.cta}`;
+            } else if (type === 'linkedin') {
+                text = `Intro Text: ${ad.introText}\n\nHeadline: ${ad.headline}\n\nCTA: ${ad.cta}`;
+            }
+
+            navigator.clipboard.writeText(text).then(() => {
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = 'Copy All';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

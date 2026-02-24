@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Post Generator - AI-Powered Content for Every Platform | ToolsForge</title>
+    <meta name="description" content="Generate engaging social media posts for Twitter, LinkedIn, Instagram, Facebook, and TikTok. AI-powered content with hashtags and emojis.">
+    <meta name="keywords" content="social media generator, AI post generator, content creator, Twitter generator, LinkedIn posts, Instagram captions">
+    <link rel="canonical" href="https://toolsforge.co/tools/social-media-post-generator.html">
+
+    <meta property="og:title" content="Social Media Post Generator - AI Content Tool">
+    <meta property="og:description" content="Generate platform-optimized social media posts with AI. Works for Twitter, LinkedIn, Instagram, Facebook, and TikTok.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolsforge.co/tools/social-media-post-generator.html">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Social Media Post Generator",
+        "description": "AI-powered tool that generates engaging social media posts for multiple platforms",
+        "url": "https://toolsforge.co/tools/social-media-post-generator.html",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .bg-effects {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 600px;
+            height: 600px;
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            top: -200px;
+            left: -200px;
+        }
+
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: linear-gradient(135deg, #ec4899, #8b5cf6);
+            bottom: -150px;
+            right: -150px;
+            animation-delay: -10s;
+        }
+
+        .orb-3 {
+            width: 400px;
+            height: 400px;
+            background: linear-gradient(135deg, #06b6d4, #10b981);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: -5s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #a0a0a0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #8b5cf6;
+        }
+
+        /* Main Content */
+        main {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 120px 2rem 4rem;
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .tool-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(139, 92, 246, 0.2);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: #8b5cf6;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff, #a0a0a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tool-description {
+            color: #888;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Tool Card */
+        .tool-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ccc;
+            font-weight: 500;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #8b5cf6;
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+        }
+
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        select option {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        /* Platform Selector */
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.75rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 600px) {
+            .platform-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .platform-btn {
+            padding: 1rem 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .platform-btn:hover {
+            border-color: rgba(139, 92, 246, 0.5);
+            color: #ccc;
+        }
+
+        .platform-btn.active {
+            background: rgba(139, 92, 246, 0.2);
+            border-color: #8b5cf6;
+            color: #fff;
+        }
+
+        .platform-icon {
+            font-size: 1.5rem;
+        }
+
+        /* Tone Options */
+        .tone-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .tone-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .tone-btn:hover {
+            border-color: rgba(139, 92, 246, 0.5);
+        }
+
+        .tone-btn.active {
+            background: rgba(139, 92, 246, 0.2);
+            border-color: #8b5cf6;
+            color: #fff;
+        }
+
+        /* Generate Button */
+        .generate-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        }
+
+        .generate-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Results */
+        .results-section {
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .results-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .post-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .post-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .post-platform {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #8b5cf6;
+            font-weight: 600;
+        }
+
+        .char-count {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .char-count.warning {
+            color: #f59e0b;
+        }
+
+        .char-count.danger {
+            color: #ef4444;
+        }
+
+        .post-content {
+            color: #e0e0e0;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            margin-bottom: 1rem;
+        }
+
+        .post-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #888;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+        }
+
+        .action-btn:hover {
+            background: rgba(139, 92, 246, 0.2);
+            border-color: #8b5cf6;
+            color: #fff;
+        }
+
+        .action-btn.copied {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: #10b981;
+            color: #10b981;
+        }
+
+        /* Tips Section */
+        .tips-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: rgba(139, 92, 246, 0.1);
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            border-radius: 16px;
+        }
+
+        .tips-section h3 {
+            color: #8b5cf6;
+            margin-bottom: 1rem;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .tip-card {
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+        }
+
+        .tip-platform {
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .tip-text {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(6, 182, 212, 0.2));
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .cta-section h3 {
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .cta-section p {
+            color: #888;
+            margin-bottom: 1rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            border-radius: 50px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+        }
+
+        /* Options Row */
+        .options-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .options-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .checkbox-group input {
+            width: auto;
+            accent-color: #8b5cf6;
+        }
+
+        .checkbox-group label {
+            margin: 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-effects">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <nav>
+        <div class="nav-content">
+            <a href="../index.html" class="logo">ToolsForge</a>
+            <div class="nav-links">
+                <a href="../index.html">All Tools</a>
+                <a href="prompt-templates.html">Templates</a>
+                <a href="https://kaiprompts.com" target="_blank">Premium</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="tool-header">
+            <span class="tool-badge">Marketing Tool</span>
+            <h1>Social Media Post Generator</h1>
+            <p class="tool-description">Generate engaging posts optimized for each platform. Get hashtags, emojis, and perfectly formatted content.</p>
+        </div>
+
+        <div class="tool-card">
+            <div class="form-group">
+                <label>Select Platform</label>
+                <div class="platform-grid" id="platformGrid">
+                    <button type="button" class="platform-btn active" data-platform="twitter">
+                        <span class="platform-icon">X</span>
+                        <span>Twitter/X</span>
+                    </button>
+                    <button type="button" class="platform-btn" data-platform="linkedin">
+                        <span class="platform-icon">in</span>
+                        <span>LinkedIn</span>
+                    </button>
+                    <button type="button" class="platform-btn" data-platform="instagram">
+                        <span class="platform-icon">IG</span>
+                        <span>Instagram</span>
+                    </button>
+                    <button type="button" class="platform-btn" data-platform="facebook">
+                        <span class="platform-icon">f</span>
+                        <span>Facebook</span>
+                    </button>
+                    <button type="button" class="platform-btn" data-platform="tiktok">
+                        <span class="platform-icon">TT</span>
+                        <span>TikTok</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="topic">What's your post about?</label>
+                <textarea id="topic" placeholder="Describe your topic, product, announcement, or idea... (e.g., 'Launching a new AI tool that helps small businesses automate their marketing')"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Tone</label>
+                <div class="tone-options" id="toneOptions">
+                    <button type="button" class="tone-btn active" data-tone="professional">Professional</button>
+                    <button type="button" class="tone-btn" data-tone="casual">Casual</button>
+                    <button type="button" class="tone-btn" data-tone="humorous">Humorous</button>
+                    <button type="button" class="tone-btn" data-tone="inspirational">Inspirational</button>
+                    <button type="button" class="tone-btn" data-tone="educational">Educational</button>
+                    <button type="button" class="tone-btn" data-tone="promotional">Promotional</button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="audience">Target Audience (optional)</label>
+                <input type="text" id="audience" placeholder="e.g., Entrepreneurs, developers, small business owners">
+            </div>
+
+            <div class="options-row">
+                <div class="checkbox-group">
+                    <input type="checkbox" id="includeHashtags" checked>
+                    <label for="includeHashtags">Include hashtags</label>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="includeEmojis" checked>
+                    <label for="includeEmojis">Include emojis</label>
+                </div>
+            </div>
+
+            <button class="generate-btn" id="generateBtn" onclick="generatePosts()">Generate Posts</button>
+
+            <div class="results-section" id="resultsSection">
+                <div id="postsContainer"></div>
+            </div>
+        </div>
+
+        <div class="tips-section">
+            <h3>Platform Best Practices</h3>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-platform">Twitter/X</div>
+                    <div class="tip-text">280 chars max. Use 1-2 hashtags. Questions drive engagement.</div>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-platform">LinkedIn</div>
+                    <div class="tip-text">First line is crucial. Use line breaks. Tell stories.</div>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-platform">Instagram</div>
+                    <div class="tip-text">Up to 30 hashtags. First line = hook. Use emojis.</div>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-platform">Facebook</div>
+                    <div class="tip-text">40-80 chars get most engagement. Ask questions.</div>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-platform">TikTok</div>
+                    <div class="tip-text">Keep it trendy. Use relevant sounds references. 3-5 hashtags.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h3>Want a Full Social Media Strategy?</h3>
+            <p>Get 500+ social media prompts for consistent, engaging content across all platforms.</p>
+            <a href="https://kaiprompts.com/products/social-media-prompts" class="cta-btn" target="_blank">Get Social Media Prompts</a>
+        </div>
+    </main>
+
+    <script>
+        // Platform selection
+        const platformBtns = document.querySelectorAll('.platform-btn');
+        let selectedPlatform = 'twitter';
+
+        platformBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                platformBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                selectedPlatform = btn.dataset.platform;
+            });
+        });
+
+        // Tone selection
+        const toneBtns = document.querySelectorAll('.tone-btn');
+        let selectedTone = 'professional';
+
+        toneBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                toneBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                selectedTone = btn.dataset.tone;
+            });
+        });
+
+        // Platform configurations
+        const platformConfig = {
+            twitter: {
+                name: 'Twitter/X',
+                icon: 'X',
+                maxChars: 280,
+                hashtagCount: 2,
+                style: 'concise, punchy, conversational'
+            },
+            linkedin: {
+                name: 'LinkedIn',
+                icon: 'in',
+                maxChars: 3000,
+                hashtagCount: 3,
+                style: 'professional, insightful, story-driven'
+            },
+            instagram: {
+                name: 'Instagram',
+                icon: 'IG',
+                maxChars: 2200,
+                hashtagCount: 15,
+                style: 'visual-focused, emotional, lifestyle'
+            },
+            facebook: {
+                name: 'Facebook',
+                icon: 'f',
+                maxChars: 63206,
+                hashtagCount: 2,
+                style: 'friendly, conversational, community-focused'
+            },
+            tiktok: {
+                name: 'TikTok',
+                icon: 'TT',
+                maxChars: 2200,
+                hashtagCount: 4,
+                style: 'trendy, fun, Gen-Z friendly, use current slang'
+            }
+        };
+
+        // Tone configurations
+        const toneConfig = {
+            professional: 'professional, authoritative, credible',
+            casual: 'relaxed, friendly, approachable',
+            humorous: 'witty, fun, uses wordplay',
+            inspirational: 'motivating, uplifting, empowering',
+            educational: 'informative, helpful, teaches something',
+            promotional: 'persuasive, highlights benefits, includes CTA'
+        };
+
+        // Hashtag databases by topic keywords
+        const hashtagDatabase = {
+            business: ['#business', '#entrepreneur', '#startup', '#smallbusiness', '#success', '#growth', '#hustle', '#businesstips'],
+            marketing: ['#marketing', '#digitalmarketing', '#socialmedia', '#branding', '#contentmarketing', '#marketingtips', '#growthhacking'],
+            ai: ['#AI', '#artificialintelligence', '#machinelearning', '#tech', '#innovation', '#futuretech', '#automation', '#chatgpt'],
+            productivity: ['#productivity', '#timemanagement', '#efficiency', '#worksmarter', '#goals', '#motivation', '#success'],
+            tech: ['#tech', '#technology', '#coding', '#developer', '#software', '#innovation', '#digital', '#techstartup'],
+            fitness: ['#fitness', '#health', '#workout', '#gym', '#motivation', '#healthy', '#fitnessmotivation', '#wellness'],
+            lifestyle: ['#lifestyle', '#life', '#inspiration', '#motivation', '#mindset', '#selfcare', '#growthmindset'],
+            default: ['#trending', '#viral', '#instagood', '#photooftheday', '#love', '#follow', '#like', '#explore']
+        };
+
+        // Emoji sets by tone
+        const emojiSets = {
+            professional: ['', '', '', '', '', '', '', ''],
+            casual: ['', '', '', '', '', '', '', ''],
+            humorous: ['', '', '', '', '', '', '', ''],
+            inspirational: ['', '', '', '', '', '', '', ''],
+            educational: ['', '', '', '', '', '', '', ''],
+            promotional: ['', '', '', '', '', '', '', '']
+        };
+
+        function generatePosts() {
+            const topic = document.getElementById('topic').value.trim();
+            const audience = document.getElementById('audience').value.trim();
+            const includeHashtags = document.getElementById('includeHashtags').checked;
+            const includeEmojis = document.getElementById('includeEmojis').checked;
+
+            if (!topic) {
+                alert('Please describe what your post is about');
+                return;
+            }
+
+            const btn = document.getElementById('generateBtn');
+            btn.disabled = true;
+            btn.textContent = 'Generating...';
+
+            // Simulate generation (in real app, this would call an API)
+            setTimeout(() => {
+                const posts = generateAllVariations(topic, audience, includeHashtags, includeEmojis);
+                displayPosts(posts);
+                btn.disabled = false;
+                btn.textContent = 'Generate Posts';
+            }, 800);
+        }
+
+        function generateAllVariations(topic, audience, includeHashtags, includeEmojis) {
+            const config = platformConfig[selectedPlatform];
+            const toneStyle = toneConfig[selectedTone];
+            const posts = [];
+
+            // Generate 3 variations
+            for (let i = 0; i < 3; i++) {
+                let post = generatePost(topic, audience, config, toneStyle, i, includeEmojis);
+
+                if (includeHashtags) {
+                    const hashtags = getRelevantHashtags(topic, config.hashtagCount);
+                    post += '\n\n' + hashtags.join(' ');
+                }
+
+                posts.push({
+                    content: post,
+                    platform: config.name,
+                    icon: config.icon,
+                    maxChars: config.maxChars
+                });
+            }
+
+            return posts;
+        }
+
+        function generatePost(topic, audience, config, toneStyle, variation, includeEmojis) {
+            const emojis = emojiSets[selectedTone];
+            const emoji1 = includeEmojis ? emojis[Math.floor(Math.random() * emojis.length)] + ' ' : '';
+            const emoji2 = includeEmojis ? ' ' + emojis[Math.floor(Math.random() * emojis.length)] : '';
+
+            const audienceText = audience ? ` for ${audience}` : '';
+
+            // Platform-specific templates
+            const templates = {
+                twitter: [
+                    `${emoji1}${generateHook(topic, 'short')}${emoji2}\n\nHere's what you need to know${audienceText}:`,
+                    `${emoji1}Stop scrolling.${emoji2}\n\n${topic}\n\nThis changes everything${audienceText}.`,
+                    `${emoji1}Hot take: ${generateHook(topic, 'opinion')}${emoji2}\n\nThread below if you agree.`
+                ],
+                linkedin: [
+                    `${emoji1}${generateHook(topic, 'story')}\n\nHere's what I learned${audienceText}:\n\n${generateBulletPoints(topic, 3)}\n\nThe bottom line? ${generateConclusion(topic)}${emoji2}\n\nWhat's your experience with this?`,
+                    `${emoji1}I used to think ${generateOldBelief(topic)}.\n\nThen I discovered ${topic}.\n\nNow I believe ${generateNewBelief(topic)}${audienceText}.${emoji2}\n\nAgree or disagree?`,
+                    `${emoji1}3 things nobody tells you about ${topic}${audienceText}:\n\n${generateBulletPoints(topic, 3)}\n\nSave this for later.${emoji2}`
+                ],
+                instagram: [
+                    `${emoji1}${generateHook(topic, 'emotion')}${emoji2}\n\n${topic} ${audienceText}\n\n${generateBulletPoints(topic, 4)}\n\nDouble tap if you agree!`,
+                    `${emoji1}POV: You just discovered ${topic}${emoji2}\n\nThis is your sign to:\n${generateBulletPoints(topic, 3)}\n\nTag someone who needs this!`,
+                    `${emoji1}${generateHook(topic, 'question')}${emoji2}\n\nSwipe to see how ${topic} can help you${audienceText}.\n\nSave this post for later!`
+                ],
+                facebook: [
+                    `${emoji1}${generateHook(topic, 'story')}\n\n${topic}${audienceText}\n\n${generateConclusion(topic)}${emoji2}\n\nWhat do you think? Drop a comment below!`,
+                    `${emoji1}Has anyone else noticed this about ${topic}?${emoji2}\n\n${generateQuestion(topic, audienceText)}\n\nCurious to hear your thoughts!`,
+                    `${emoji1}Big news! ${topic}${emoji2}\n\nHere's why this matters${audienceText}:\n\n${generateBulletPoints(topic, 3)}\n\nShare if you found this helpful!`
+                ],
+                tiktok: [
+                    `${emoji1}wait... you NEED to know about ${topic}${emoji2}\n\nno cap this is actually insane${audienceText}`,
+                    `${emoji1}POV: you just discovered ${topic} and now you can't stop thinking about it${emoji2}\n\n*chef's kiss*`,
+                    `${emoji1}okay but why is nobody talking about ${topic}??${emoji2}\n\nthis is lowkey a game changer${audienceText}`
+                ]
+            };
+
+            const platformTemplates = templates[selectedPlatform];
+            return platformTemplates[variation % platformTemplates.length];
+        }
+
+        function generateHook(topic, style) {
+            const hooks = {
+                short: [
+                    `${topic} is changing everything`,
+                    `The truth about ${topic}`,
+                    `Why ${topic} matters now more than ever`
+                ],
+                story: [
+                    `Last week, I had a realization about ${topic}`,
+                    `I spent years ignoring ${topic}. Big mistake.`,
+                    `Here's a story about ${topic} that will change how you think`
+                ],
+                emotion: [
+                    `This completely changed my perspective on ${topic}`,
+                    `I wish someone had told me this about ${topic} sooner`,
+                    `The moment ${topic} clicked for me`
+                ],
+                question: [
+                    `Ever wondered about ${topic}?`,
+                    `What if ${topic} could transform your life?`,
+                    `Ready to master ${topic}?`
+                ],
+                opinion: [
+                    `${topic} is underrated`,
+                    `Most people don't understand ${topic}`,
+                    `${topic} will be huge in 2026`
+                ]
+            };
+            const options = hooks[style] || hooks.short;
+            return options[Math.floor(Math.random() * options.length)];
+        }
+
+        function generateBulletPoints(topic, count) {
+            const bullets = [
+                `Start with the basics`,
+                `Focus on what matters most`,
+                `Don't overcomplicate it`,
+                `Consistency is key`,
+                `Learn from others who've done it`,
+                `Track your progress`,
+                `Adjust as you go`,
+                `Celebrate small wins`
+            ];
+
+            const selected = bullets.sort(() => Math.random() - 0.5).slice(0, count);
+            return selected.map(b => `- ${b}`).join('\n');
+        }
+
+        function generateConclusion(topic) {
+            const conclusions = [
+                `${topic} isn't just a trend - it's the future`,
+                `The best time to start was yesterday. The second best time is now.`,
+                `Small steps lead to big changes`,
+                `Your future self will thank you`
+            ];
+            return conclusions[Math.floor(Math.random() * conclusions.length)];
+        }
+
+        function generateOldBelief(topic) {
+            return `${topic} was just another buzzword`;
+        }
+
+        function generateNewBelief(topic) {
+            return `${topic} is essential for success`;
+        }
+
+        function generateQuestion(topic, audienceText) {
+            return `I've been diving deep into ${topic}${audienceText} and I'm curious about your experience.`;
+        }
+
+        function getRelevantHashtags(topic, count) {
+            const topicLower = topic.toLowerCase();
+            let hashtags = [...hashtagDatabase.default];
+
+            for (const [key, tags] of Object.entries(hashtagDatabase)) {
+                if (topicLower.includes(key)) {
+                    hashtags = [...tags, ...hashtags];
+                }
+            }
+
+            // Shuffle and pick
+            return hashtags.sort(() => Math.random() - 0.5).slice(0, count);
+        }
+
+        function displayPosts(posts) {
+            const container = document.getElementById('postsContainer');
+            container.innerHTML = posts.map((post, i) => {
+                const charCount = post.content.length;
+                let charClass = '';
+                if (charCount > post.maxChars) charClass = 'danger';
+                else if (charCount > post.maxChars * 0.9) charClass = 'warning';
+
+                return `
+                    <div class="post-card">
+                        <div class="post-header">
+                            <div class="post-platform">
+                                <span>${post.icon}</span>
+                                <span>${post.platform} - Variation ${i + 1}</span>
+                            </div>
+                            <span class="char-count ${charClass}">${charCount}/${post.maxChars} chars</span>
+                        </div>
+                        <div class="post-content">${escapeHtml(post.content)}</div>
+                        <div class="post-actions">
+                            <button class="action-btn" onclick="copyPost(this, ${i})">Copy</button>
+                            <button class="action-btn" onclick="regeneratePost(${i})">Regenerate</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('resultsSection').classList.add('show');
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function copyPost(btn, index) {
+            const postContent = document.querySelectorAll('.post-content')[index].textContent;
+            navigator.clipboard.writeText(postContent).then(() => {
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = 'Copy';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        function regeneratePost(index) {
+            // For simplicity, regenerate all posts
+            generatePosts();
+        }
+    </script>
+</body>
+</html>

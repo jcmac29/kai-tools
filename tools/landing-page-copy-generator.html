@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page Copy Generator - Create High-Converting Pages | ToolsForge</title>
+    <meta name="description" content="Generate persuasive landing page copy that converts. Get headlines, subheadlines, benefits, CTAs, and more. AI-powered conversion copywriting.">
+    <meta name="keywords" content="landing page generator, copywriting tool, conversion copy, marketing copy generator, sales page copy">
+    <link rel="canonical" href="https://toolsforge.co/tools/landing-page-copy-generator.html">
+
+    <meta property="og:title" content="Landing Page Copy Generator - Convert More Visitors">
+    <meta property="og:description" content="Generate complete landing page copy that converts. Headlines, benefits, CTAs and more.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://toolsforge.co/tools/landing-page-copy-generator.html">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Landing Page Copy Generator",
+        "description": "AI-powered tool that generates high-converting landing page copy",
+        "url": "https://toolsforge.co/tools/landing-page-copy-generator.html",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .bg-effects {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 600px; height: 600px;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            top: -200px; left: -200px;
+        }
+
+        .orb-2 {
+            width: 500px; height: 500px;
+            background: linear-gradient(135deg, #10b981, #3b82f6);
+            bottom: -150px; right: -150px;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-decoration: none;
+        }
+
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a {
+            color: #a0a0a0;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: #8b5cf6; }
+
+        main {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 120px 2rem 4rem;
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .tool-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: #3b82f6;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #ffffff, #a0a0a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .tool-description {
+            color: #888;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .tool-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group { margin-bottom: 1.5rem; }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ccc;
+            font-weight: 500;
+        }
+
+        .label-hint {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 400;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.2);
+        }
+
+        textarea { min-height: 80px; resize: vertical; }
+        select option { background: #1a1a1a; color: #fff; }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .form-row { grid-template-columns: 1fr; }
+        }
+
+        .generate-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+
+        .generate-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .results-section {
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .results-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section-block {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-label {
+            font-size: 0.85rem;
+            color: #3b82f6;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .copy-btn {
+            padding: 0.4rem 0.75rem;
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 6px;
+            color: #3b82f6;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.8rem;
+        }
+
+        .copy-btn:hover {
+            background: rgba(59, 130, 246, 0.3);
+        }
+
+        .copy-btn.copied {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: #10b981;
+            color: #10b981;
+        }
+
+        .section-content {
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        .headline-text {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1.3;
+        }
+
+        .subheadline-text {
+            font-size: 1.1rem;
+            color: #ccc;
+        }
+
+        .benefits-list {
+            list-style: none;
+        }
+
+        .benefits-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+
+        .benefit-icon {
+            color: #10b981;
+            font-size: 1.2rem;
+        }
+
+        .cta-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #3b82f6;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #ccc;
+        }
+
+        .testimonial-author {
+            margin-top: 0.5rem;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .urgency-text {
+            color: #f59e0b;
+            font-weight: 600;
+        }
+
+        .copy-all-btn {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            color: #3b82f6;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .copy-all-btn:hover {
+            background: rgba(59, 130, 246, 0.3);
+        }
+
+        .tips-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 16px;
+        }
+
+        .tips-section h3 {
+            color: #3b82f6;
+            margin-bottom: 1rem;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .tip-card {
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+        }
+
+        .tip-title {
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .tip-text {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .cta-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .cta-section h3 { margin-bottom: 0.5rem; color: #fff; }
+        .cta-section p { color: #888; margin-bottom: 1rem; }
+
+        .cta-link {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            border-radius: 50px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .cta-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-effects">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+    </div>
+
+    <nav>
+        <div class="nav-content">
+            <a href="../index.html" class="logo">ToolsForge</a>
+            <div class="nav-links">
+                <a href="../index.html">All Tools</a>
+                <a href="prompt-templates.html">Templates</a>
+                <a href="https://kaiprompts.com" target="_blank">Premium</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="tool-header">
+            <span class="tool-badge">Conversion Tool</span>
+            <h1>Landing Page Copy Generator</h1>
+            <p class="tool-description">Generate complete landing page copy that converts visitors into customers. Headlines, benefits, CTAs, and more.</p>
+        </div>
+
+        <div class="tool-card">
+            <div class="form-group">
+                <label for="product">Product/Service Name</label>
+                <input type="text" id="product" placeholder="e.g., ProTask - AI Project Management">
+            </div>
+
+            <div class="form-group">
+                <label for="description">What does it do? <span class="label-hint">(Main features/benefits)</span></label>
+                <textarea id="description" placeholder="e.g., An AI-powered project management tool that automates task assignments, predicts deadlines, and keeps teams aligned..."></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="audience">Target Audience</label>
+                    <input type="text" id="audience" placeholder="e.g., Remote teams, SaaS companies">
+                </div>
+                <div class="form-group">
+                    <label for="problem">Main Problem Solved</label>
+                    <input type="text" id="problem" placeholder="e.g., Missed deadlines, poor communication">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="price">Price Point</label>
+                    <input type="text" id="price" placeholder="e.g., $29/month, Free trial, One-time $99">
+                </div>
+                <div class="form-group">
+                    <label for="cta">Primary CTA</label>
+                    <select id="cta">
+                        <option value="start_free">Start Free Trial</option>
+                        <option value="get_started">Get Started</option>
+                        <option value="sign_up">Sign Up Now</option>
+                        <option value="buy_now">Buy Now</option>
+                        <option value="learn_more">Learn More</option>
+                        <option value="book_demo">Book a Demo</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="differentiator">What makes you different? <span class="label-hint">(optional)</span></label>
+                <input type="text" id="differentiator" placeholder="e.g., Only tool with AI predictions, No-code setup in 5 minutes">
+            </div>
+
+            <button class="generate-btn" onclick="generateLandingPage()">Generate Landing Page Copy</button>
+
+            <div class="results-section" id="resultsSection">
+                <div id="copyBlocks"></div>
+                <button class="copy-all-btn" onclick="copyAllCopy()">Copy All Sections</button>
+            </div>
+        </div>
+
+        <div class="tips-section">
+            <h3>Landing Page Best Practices</h3>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-title">Clear Value Prop</div>
+                    <div class="tip-text">Visitors should understand your offer within 5 seconds of landing.</div>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-title">Single CTA Focus</div>
+                    <div class="tip-text">One primary action. Don't confuse visitors with multiple options.</div>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-title">Social Proof</div>
+                    <div class="tip-text">Include testimonials, logos, or stats to build trust.</div>
+                </div>
+                <div class="tip-card">
+                    <div class="tip-title">Address Objections</div>
+                    <div class="tip-text">Answer common concerns before visitors leave to research.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h3>Need Complete Marketing Copy?</h3>
+            <p>Get 500+ marketing prompts for landing pages, ads, emails, and sales funnels.</p>
+            <a href="https://kaiprompts.com/products/marketing-prompts" class="cta-link" target="_blank">Get Marketing Prompts</a>
+        </div>
+    </main>
+
+    <script>
+        const ctaTexts = {
+            start_free: 'Start Your Free Trial',
+            get_started: 'Get Started Now',
+            sign_up: 'Sign Up Free',
+            buy_now: 'Buy Now',
+            learn_more: 'Learn More',
+            book_demo: 'Book Your Demo'
+        };
+
+        let generatedCopy = {};
+
+        function generateLandingPage() {
+            const product = document.getElementById('product').value.trim();
+            const description = document.getElementById('description').value.trim();
+            const audience = document.getElementById('audience').value.trim();
+            const problem = document.getElementById('problem').value.trim();
+            const price = document.getElementById('price').value.trim();
+            const cta = document.getElementById('cta').value;
+            const differentiator = document.getElementById('differentiator').value.trim();
+
+            if (!product || !description) {
+                alert('Please enter product name and description');
+                return;
+            }
+
+            const btn = document.querySelector('.generate-btn');
+            btn.disabled = true;
+            btn.textContent = 'Generating...';
+
+            setTimeout(() => {
+                generatedCopy = generateAllSections(product, description, audience, problem, price, cta, differentiator);
+                displayCopy(generatedCopy);
+                btn.disabled = false;
+                btn.textContent = 'Generate Landing Page Copy';
+            }, 1000);
+        }
+
+        function generateAllSections(product, description, audience, problem, price, cta, differentiator) {
+            const sections = {};
+
+            // Headline variations
+            sections.headlines = [
+                `${extractBenefit(description)} Without ${problem || 'The Hassle'}`,
+                `The ${audience || 'Smart'} Way to ${extractAction(description)}`,
+                `Finally, ${product} That Actually Works`
+            ];
+
+            // Subheadline
+            sections.subheadline = `${product} helps ${audience || 'you'} ${extractBenefit(description).toLowerCase()}. ${differentiator ? differentiator + '.' : 'Simple. Powerful. Effective.'}`;
+
+            // Hero CTA
+            sections.heroCta = ctaTexts[cta];
+
+            // Benefits
+            sections.benefits = generateBenefits(description, problem);
+
+            // Social proof
+            sections.testimonial = {
+                quote: `"${product} changed how we work. ${extractBenefit(description)} has never been easier. Highly recommend!"`,
+                author: `- Sarah K., ${audience ? audience.split(',')[0] : 'Happy Customer'}`
+            };
+
+            // Features section title
+            sections.featuresTitle = `Everything You Need to ${extractAction(description)}`;
+
+            // Features
+            sections.features = generateFeatures(description);
+
+            // Pricing section
+            sections.pricingIntro = price ?
+                `Get started with ${product} for just ${price}. No hidden fees.` :
+                `Try ${product} free. No credit card required.`;
+
+            // Urgency/Scarcity
+            sections.urgency = `Join ${Math.floor(Math.random() * 5000) + 1000}+ ${audience || 'users'} who already use ${product}`;
+
+            // Final CTA
+            sections.finalCta = {
+                headline: `Ready to ${extractAction(description)}?`,
+                subtext: `Start using ${product} today and see the difference.`,
+                button: ctaTexts[cta]
+            };
+
+            // FAQ intro
+            sections.faqIntro = 'Frequently Asked Questions';
+
+            return sections;
+        }
+
+        function extractBenefit(description) {
+            const benefits = ['Save Time', 'Boost Productivity', 'Get Results', 'Work Smarter', 'Scale Faster'];
+            const words = description.toLowerCase();
+
+            if (words.includes('automate') || words.includes('save')) return 'Save Hours Every Week';
+            if (words.includes('grow') || words.includes('increase')) return 'Grow Faster';
+            if (words.includes('simple') || words.includes('easy')) return 'Make It Simple';
+            if (words.includes('team')) return 'Align Your Team';
+
+            return benefits[Math.floor(Math.random() * benefits.length)];
+        }
+
+        function extractAction(description) {
+            const words = description.toLowerCase();
+
+            if (words.includes('manage')) return 'Manage Like a Pro';
+            if (words.includes('create') || words.includes('build')) return 'Create Without Limits';
+            if (words.includes('track')) return 'Track Everything';
+            if (words.includes('automate')) return 'Automate Your Workflow';
+            if (words.includes('grow')) return 'Grow Your Business';
+
+            return 'Get More Done';
+        }
+
+        function generateBenefits(description, problem) {
+            const benefits = [];
+            const words = description.toLowerCase();
+
+            // Generate contextual benefits
+            if (words.includes('ai') || words.includes('automate')) {
+                benefits.push('Automate repetitive tasks and save hours every week');
+            }
+            if (words.includes('team') || words.includes('collaborate')) {
+                benefits.push('Keep your entire team aligned and in sync');
+            }
+            if (words.includes('track') || words.includes('analytics')) {
+                benefits.push('Get real-time insights and data-driven decisions');
+            }
+
+            // Add generic high-value benefits to fill
+            const genericBenefits = [
+                'Get started in minutes with no technical setup required',
+                'Scale effortlessly as your needs grow',
+                'Access from anywhere on any device',
+                'Dedicated support when you need it'
+            ];
+
+            while (benefits.length < 4) {
+                const benefit = genericBenefits[benefits.length];
+                if (benefit) benefits.push(benefit);
+            }
+
+            return benefits.slice(0, 4);
+        }
+
+        function generateFeatures(description) {
+            const features = [];
+            const words = description.toLowerCase();
+
+            if (words.includes('ai')) features.push({ title: 'AI-Powered', desc: 'Smart automation that learns and improves' });
+            if (words.includes('team')) features.push({ title: 'Team Collaboration', desc: 'Work together seamlessly' });
+            if (words.includes('analytics') || words.includes('track')) features.push({ title: 'Analytics Dashboard', desc: 'See everything at a glance' });
+
+            const genericFeatures = [
+                { title: 'Easy Setup', desc: 'Get started in under 5 minutes' },
+                { title: 'Secure & Private', desc: 'Enterprise-grade security' },
+                { title: '24/7 Support', desc: 'Help when you need it' }
+            ];
+
+            while (features.length < 3) {
+                features.push(genericFeatures[features.length]);
+            }
+
+            return features.slice(0, 3);
+        }
+
+        function displayCopy(copy) {
+            const container = document.getElementById('copyBlocks');
+            container.innerHTML = `
+                <!-- Headlines -->
+                <div class="section-block">
+                    <div class="section-header">
+                        <span class="section-label">Headlines (Pick One)</span>
+                        <button class="copy-btn" onclick="copySection(this, 'headlines')">Copy</button>
+                    </div>
+                    <div class="section-content">
+                        ${copy.headlines.map((h, i) => `<div class="headline-text" style="margin-bottom: ${i < 2 ? '1rem' : '0'}; opacity: ${1 - i * 0.2}">${h}</div>`).join('')}
+                    </div>
+                </div>
+
+                <!-- Subheadline -->
+                <div class="section-block">
+                    <div class="section-header">
+                        <span class="section-label">Subheadline</span>
+                        <button class="copy-btn" onclick="copySection(this, 'subheadline')">Copy</button>
+                    </div>
+                    <div class="section-content">
+                        <div class="subheadline-text">${copy.subheadline}</div>
+                    </div>
+                </div>
+
+                <!-- Hero CTA -->
+                <div class="section-block">
+                    <div class="section-header">
+                        <span class="section-label">Hero CTA Button</span>
+                        <button class="copy-btn" onclick="copySection(this, 'heroCta')">Copy</button>
+                    </div>
+                    <div class="section-content">
+                        <div class="cta-text">${copy.heroCta}</div>
+                    </div>
+                </div>
+
+                <!-- Benefits -->
+                <div class="section-block">
+                    <div class="section-header">
+                        <span class="section-label">Benefits Section</span>
+                        <button class="copy-btn" onclick="copySection(this, 'benefits')">Copy</button>
+                    </div>
+                    <div class="section-content">
+                        <ul class="benefits-list">
+                            ${copy.benefits.map(b => `<li><span class="benefit-icon">+</span><span>${b}</span></li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Testimonial -->
+                <div class="section-block">
+                    <div class="section-header">
+                        <span class="section-label">Social Proof / Testimonial</span>
+                        <button class="copy-btn" onclick="copySection(this, 'testimonial')">Copy</button>
+                    </div>
+                    <div class="section-content">
+                        <div class="testimonial-text">${copy.testimonial.quote}</div>
+                        <div class="testimonial-author">${copy.testimonial.author}</div>
+                    </div>
+                </div>
+
+                <!-- Urgency -->
+                <div class="section-block">
+                    <div class="section-header">
+                        <span class="section-label">Social Proof / Urgency</span>
+                        <button class="copy-btn" onclick="copySection(this, 'urgency')">Copy</button>
+                    </div>
+                    <div class="section-content">
+                        <div class="urgency-text">${copy.urgency}</div>
+                    </div>
+                </div>
+
+                <!-- Pricing Intro -->
+                <div class="section-block">
+                    <div class="section-header">
+                        <span class="section-label">Pricing Section</span>
+                        <button class="copy-btn" onclick="copySection(this, 'pricingIntro')">Copy</button>
+                    </div>
+                    <div class="section-content">
+                        <div class="subheadline-text">${copy.pricingIntro}</div>
+                    </div>
+                </div>
+
+                <!-- Final CTA -->
+                <div class="section-block">
+                    <div class="section-header">
+                        <span class="section-label">Final CTA Section</span>
+                        <button class="copy-btn" onclick="copySection(this, 'finalCta')">Copy</button>
+                    </div>
+                    <div class="section-content">
+                        <div class="headline-text" style="font-size: 1.5rem; margin-bottom: 0.5rem;">${copy.finalCta.headline}</div>
+                        <div class="subheadline-text" style="margin-bottom: 0.75rem;">${copy.finalCta.subtext}</div>
+                        <div class="cta-text">${copy.finalCta.button}</div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('resultsSection').classList.add('show');
+        }
+
+        function copySection(btn, section) {
+            let text = '';
+
+            switch(section) {
+                case 'headlines':
+                    text = generatedCopy.headlines.join('\n');
+                    break;
+                case 'subheadline':
+                    text = generatedCopy.subheadline;
+                    break;
+                case 'heroCta':
+                    text = generatedCopy.heroCta;
+                    break;
+                case 'benefits':
+                    text = generatedCopy.benefits.map(b => `+ ${b}`).join('\n');
+                    break;
+                case 'testimonial':
+                    text = `${generatedCopy.testimonial.quote}\n${generatedCopy.testimonial.author}`;
+                    break;
+                case 'urgency':
+                    text = generatedCopy.urgency;
+                    break;
+                case 'pricingIntro':
+                    text = generatedCopy.pricingIntro;
+                    break;
+                case 'finalCta':
+                    text = `${generatedCopy.finalCta.headline}\n${generatedCopy.finalCta.subtext}\n[${generatedCopy.finalCta.button}]`;
+                    break;
+            }
+
+            navigator.clipboard.writeText(text).then(() => {
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = 'Copy';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        function copyAllCopy() {
+            const allCopy = `
+HEADLINES:
+${generatedCopy.headlines.join('\n')}
+
+SUBHEADLINE:
+${generatedCopy.subheadline}
+
+HERO CTA:
+${generatedCopy.heroCta}
+
+BENEFITS:
+${generatedCopy.benefits.map(b => `+ ${b}`).join('\n')}
+
+TESTIMONIAL:
+${generatedCopy.testimonial.quote}
+${generatedCopy.testimonial.author}
+
+SOCIAL PROOF:
+${generatedCopy.urgency}
+
+PRICING:
+${generatedCopy.pricingIntro}
+
+FINAL CTA:
+${generatedCopy.finalCta.headline}
+${generatedCopy.finalCta.subtext}
+[${generatedCopy.finalCta.button}]
+            `.trim();
+
+            navigator.clipboard.writeText(allCopy).then(() => {
+                const btn = document.querySelector('.copy-all-btn');
+                btn.textContent = 'All Sections Copied!';
+                setTimeout(() => {
+                    btn.textContent = 'Copy All Sections';
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
