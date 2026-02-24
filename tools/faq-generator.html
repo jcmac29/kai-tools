@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ Generator - Create FAQ Sections for Your Website | ToolsForge</title>
+    <meta name="description" content="Generate professional FAQ sections for your website or product. AI-powered questions and answers that address customer concerns and improve SEO.">
+    <meta name="keywords" content="FAQ generator, frequently asked questions, website FAQ, product FAQ, customer questions, SEO FAQ">
+    <link rel="canonical" href="https://toolsforge.co/tools/faq-generator.html">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "FAQ Generator",
+        "description": "Generate professional FAQ sections for websites and products",
+        "url": "https://toolsforge.co/tools/faq-generator.html",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+
+        .bg-effects {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+        }
+
+        .orb-1 {
+            width: 600px; height: 600px;
+            background: linear-gradient(135deg, #14b8a6, #06b6d4);
+            top: -200px; left: -200px;
+        }
+
+        .orb-2 {
+            width: 500px; height: 500px;
+            background: linear-gradient(135deg, #8b5cf6, #14b8a6);
+            bottom: -150px; right: -150px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { color: #a0a0a0; text-decoration: none; }
+        .nav-links a:hover { color: #14b8a6; }
+
+        main {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 120px 2rem 4rem;
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .tool-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(20, 184, 166, 0.2);
+            border: 1px solid rgba(20, 184, 166, 0.3);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: #14b8a6;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff, #a0a0a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tool-description {
+            color: #888;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .tool-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group { margin-bottom: 1.5rem; }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ccc;
+            font-weight: 500;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #14b8a6;
+            box-shadow: 0 0 20px rgba(20, 184, 166, 0.2);
+        }
+
+        select option { background: #1a1a1a; }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .form-row { grid-template-columns: 1fr; }
+        }
+
+        .generate-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #14b8a6, #06b6d4);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(20, 184, 166, 0.3);
+        }
+
+        .generate-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .results-section {
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .results-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.25rem;
+            background: rgba(20, 184, 166, 0.1);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .faq-question h3 {
+            font-size: 1rem;
+            color: #fff;
+            margin: 0;
+        }
+
+        .faq-toggle {
+            color: #14b8a6;
+            font-size: 1.25rem;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.open .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            padding: 0 1.25rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .faq-item.open .faq-answer {
+            padding: 1.25rem;
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            color: #ccc;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .faq-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .action-btn {
+            padding: 0.4rem 0.75rem;
+            background: rgba(20, 184, 166, 0.2);
+            border: 1px solid rgba(20, 184, 166, 0.3);
+            border-radius: 6px;
+            color: #14b8a6;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        .action-btn:hover { background: rgba(20, 184, 166, 0.3); }
+        .action-btn.copied { background: rgba(16, 185, 129, 0.2); color: #10b981; }
+
+        .export-section {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+        }
+
+        .export-title {
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .export-btns {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .export-btn {
+            padding: 0.75rem 1.25rem;
+            background: rgba(20, 184, 166, 0.2);
+            border: 1px solid rgba(20, 184, 166, 0.3);
+            border-radius: 8px;
+            color: #14b8a6;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        .export-btn:hover { background: rgba(20, 184, 166, 0.3); }
+
+        .cta-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.2), rgba(6, 182, 212, 0.2));
+            border: 1px solid rgba(20, 184, 166, 0.3);
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .cta-section h3 { color: #fff; margin-bottom: 0.5rem; }
+        .cta-section p { color: #888; margin-bottom: 1rem; }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: linear-gradient(135deg, #14b8a6, #06b6d4);
+            border-radius: 50px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(20, 184, 166, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-effects">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+    </div>
+
+    <nav>
+        <div class="nav-content">
+            <a href="../index.html" class="logo">ToolsForge</a>
+            <div class="nav-links">
+                <a href="../index.html">All Tools</a>
+                <a href="prompt-templates.html">Templates</a>
+                <a href="https://kaiprompts.com" target="_blank">Premium</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="tool-header">
+            <span class="tool-badge">Content Tool</span>
+            <h1>FAQ Generator</h1>
+            <p class="tool-description">Create professional FAQ sections that answer customer questions, reduce support tickets, and improve SEO.</p>
+        </div>
+
+        <div class="tool-card">
+            <div class="form-group">
+                <label for="product">Product/Service Name</label>
+                <input type="text" id="product" placeholder="e.g., TaskFlow Pro, Fitness Coaching, SaaS Platform">
+            </div>
+
+            <div class="form-group">
+                <label for="description">Brief Description</label>
+                <textarea id="description" placeholder="What does your product/service do? Who is it for?" rows="3"></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="type">FAQ Type</label>
+                    <select id="type">
+                        <option value="product">Product/Service</option>
+                        <option value="pricing">Pricing & Billing</option>
+                        <option value="support">Support & Technical</option>
+                        <option value="general">General Business</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="count">Number of FAQs</label>
+                    <select id="count">
+                        <option value="5">5 Questions</option>
+                        <option value="8" selected>8 Questions</option>
+                        <option value="12">12 Questions</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="generate-btn" onclick="generateFAQ()">Generate FAQ Section</button>
+
+            <div class="results-section" id="resultsSection">
+                <div id="faqContainer"></div>
+
+                <div class="export-section">
+                    <div class="export-title">Export Options</div>
+                    <div class="export-btns">
+                        <button class="export-btn" onclick="exportText()">Copy as Text</button>
+                        <button class="export-btn" onclick="exportHTML()">Copy as HTML</button>
+                        <button class="export-btn" onclick="exportJSON()">Copy as JSON-LD (SEO)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h3>Need More Content?</h3>
+            <p>Get 500+ prompts for creating website content, marketing copy, and more.</p>
+            <a href="https://kaiprompts.com/products/marketing-prompts" class="cta-btn" target="_blank">Get Content Prompts</a>
+        </div>
+    </main>
+
+    <script>
+        let generatedFAQs = [];
+
+        const faqTemplates = {
+            product: {
+                questions: [
+                    'What is {product} and how does it work?',
+                    'Who is {product} best suited for?',
+                    'What are the main features of {product}?',
+                    'How do I get started with {product}?',
+                    'Is {product} easy to use for beginners?',
+                    'What makes {product} different from alternatives?',
+                    'Can I try {product} before committing?',
+                    'What results can I expect from using {product}?',
+                    'Is there a mobile app available?',
+                    'How often is {product} updated?',
+                    'Can I integrate {product} with other tools?',
+                    'What kind of support does {product} offer?'
+                ]
+            },
+            pricing: {
+                questions: [
+                    'How much does {product} cost?',
+                    'Is there a free trial available?',
+                    'What payment methods do you accept?',
+                    'Can I cancel my subscription anytime?',
+                    'Do you offer refunds?',
+                    'Are there any hidden fees?',
+                    'Do you offer discounts for annual billing?',
+                    'Is there a money-back guarantee?',
+                    'Do you offer team or enterprise pricing?',
+                    'What happens if I exceed my plan limits?',
+                    'Can I upgrade or downgrade my plan?',
+                    'Do you offer student or nonprofit discounts?'
+                ]
+            },
+            support: {
+                questions: [
+                    'How do I contact customer support?',
+                    'What are your support hours?',
+                    'Is there documentation or tutorials available?',
+                    'How long does it take to get a support response?',
+                    'Do you offer phone support?',
+                    'Is there a community or forum?',
+                    'How do I report a bug or issue?',
+                    'What should I do if I forgot my password?',
+                    'Is my data secure with {product}?',
+                    'Do you provide onboarding assistance?',
+                    'Are there video tutorials available?',
+                    'How do I request a new feature?'
+                ]
+            },
+            general: {
+                questions: [
+                    'What is your company\'s mission?',
+                    'How long have you been in business?',
+                    'Where is your company located?',
+                    'How can I contact you?',
+                    'Do you have a privacy policy?',
+                    'What are your terms of service?',
+                    'Are you hiring?',
+                    'Do you have a partner or affiliate program?',
+                    'Can I write a testimonial or review?',
+                    'How do I stay updated on news and features?',
+                    'Do you have social media accounts?',
+                    'How can I provide feedback?'
+                ]
+            }
+        };
+
+        function generateFAQ() {
+            const product = document.getElementById('product').value.trim();
+            const description = document.getElementById('description').value.trim();
+            const type = document.getElementById('type').value;
+            const count = parseInt(document.getElementById('count').value);
+
+            if (!product) {
+                alert('Please enter your product/service name');
+                return;
+            }
+
+            const btn = document.querySelector('.generate-btn');
+            btn.disabled = true;
+            btn.textContent = 'Generating...';
+
+            setTimeout(() => {
+                generatedFAQs = createFAQs(product, description, type, count);
+                displayFAQs(generatedFAQs);
+                btn.disabled = false;
+                btn.textContent = 'Generate FAQ Section';
+            }, 800);
+        }
+
+        function createFAQs(product, description, type, count) {
+            const templates = faqTemplates[type];
+            const questions = shuffleArray([...templates.questions]).slice(0, count);
+
+            return questions.map(q => {
+                const question = q.replace(/{product}/g, product);
+                const answer = generateAnswer(question, product, description, type);
+                return { question, answer };
+            });
+        }
+
+        function shuffleArray(arr) {
+            return arr.sort(() => Math.random() - 0.5);
+        }
+
+        function generateAnswer(question, product, description, type) {
+            const qLower = question.toLowerCase();
+
+            // Generate contextual answers based on question type
+            if (qLower.includes('what is') && qLower.includes('how does')) {
+                return `${product} is ${description || 'a solution designed to help you achieve your goals more efficiently'}. It works by providing intuitive tools and features that streamline your workflow and deliver results.`;
+            }
+
+            if (qLower.includes('who is') && qLower.includes('best suited')) {
+                return `${product} is ideal for professionals, businesses, and individuals who want to ${description ? description.toLowerCase() : 'improve their productivity and achieve better results'}. Whether you're just starting out or scaling up, ${product} adapts to your needs.`;
+            }
+
+            if (qLower.includes('features')) {
+                return `${product} offers a comprehensive set of features designed to meet your needs. Key features include an intuitive interface, powerful automation capabilities, real-time analytics, and seamless integrations with popular tools.`;
+            }
+
+            if (qLower.includes('get started')) {
+                return `Getting started with ${product} is simple. Just sign up for an account, follow our quick setup wizard, and you'll be up and running in minutes. We also provide tutorials and documentation to help you make the most of ${product}.`;
+            }
+
+            if (qLower.includes('cost') || qLower.includes('price')) {
+                return `${product} offers flexible pricing plans to suit different needs and budgets. We offer both monthly and annual billing options, with annual plans providing significant savings. Visit our pricing page for detailed information.`;
+            }
+
+            if (qLower.includes('free trial')) {
+                return `Yes! We offer a free trial so you can explore ${product} and see if it's right for you. No credit card required to start. You'll have full access to features during the trial period.`;
+            }
+
+            if (qLower.includes('cancel')) {
+                return `Absolutely. You can cancel your ${product} subscription at any time with no questions asked. There are no cancellation fees, and you'll continue to have access until the end of your billing period.`;
+            }
+
+            if (qLower.includes('refund')) {
+                return `We offer a satisfaction guarantee. If you're not happy with ${product}, contact our support team within 30 days of purchase for a full refund. Your satisfaction is our priority.`;
+            }
+
+            if (qLower.includes('support') && qLower.includes('contact')) {
+                return `Our support team is here to help! You can reach us through email, live chat, or our help center. We aim to respond to all inquiries within 24 hours during business days.`;
+            }
+
+            if (qLower.includes('secure') || qLower.includes('security')) {
+                return `Security is our top priority. ${product} uses industry-standard encryption, secure data centers, and regular security audits to protect your information. We are committed to keeping your data safe.`;
+            }
+
+            // Default answer
+            return `Great question! ${product} is designed with your needs in mind. For more specific information, please check our documentation or contact our support team who will be happy to assist you.`;
+        }
+
+        function displayFAQs(faqs) {
+            const container = document.getElementById('faqContainer');
+            container.innerHTML = faqs.map((faq, i) => `
+                <div class="faq-item" onclick="toggleFAQ(this)">
+                    <div class="faq-question">
+                        <h3>${faq.question}</h3>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>${faq.answer}</p>
+                        <div class="faq-actions">
+                            <button class="action-btn" onclick="event.stopPropagation(); copyFAQ(this, ${i})">Copy</button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+
+            document.getElementById('resultsSection').classList.add('show');
+        }
+
+        function toggleFAQ(element) {
+            element.classList.toggle('open');
+        }
+
+        function copyFAQ(btn, index) {
+            const faq = generatedFAQs[index];
+            const text = `Q: ${faq.question}\nA: ${faq.answer}`;
+
+            navigator.clipboard.writeText(text).then(() => {
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = 'Copy';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+
+        function exportText() {
+            const text = generatedFAQs.map(faq =>
+                `Q: ${faq.question}\nA: ${faq.answer}`
+            ).join('\n\n');
+
+            copyToClipboard(text, 'Text copied!');
+        }
+
+        function exportHTML() {
+            const html = `<div class="faq-section">
+${generatedFAQs.map(faq => `  <div class="faq-item">
+    <h3 class="faq-question">${faq.question}</h3>
+    <p class="faq-answer">${faq.answer}</p>
+  </div>`).join('\n')}
+</div>`;
+
+            copyToClipboard(html, 'HTML copied!');
+        }
+
+        function exportJSON() {
+            const jsonLD = {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": generatedFAQs.map(faq => ({
+                    "@type": "Question",
+                    "name": faq.question,
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": faq.answer
+                    }
+                }))
+            };
+
+            const script = `<script type="application/ld+json">
+${JSON.stringify(jsonLD, null, 2)}
+<\/script>`;
+
+            copyToClipboard(script, 'JSON-LD copied!');
+        }
+
+        function copyToClipboard(text, message) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert(message);
+            });
+        }
+    </script>
+</body>
+</html>

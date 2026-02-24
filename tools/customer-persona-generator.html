@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Persona Generator - Create Buyer Personas for Marketing | ToolsForge</title>
+    <meta name="description" content="Generate detailed customer personas for your marketing campaigns. Understand your ideal customers with demographics, goals, pain points, and buying behavior.">
+    <meta name="keywords" content="customer persona generator, buyer persona, target audience, marketing personas, customer avatar">
+    <link rel="canonical" href="https://toolsforge.co/tools/customer-persona-generator.html">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Customer Persona Generator",
+        "description": "Create detailed customer personas for marketing campaigns",
+        "url": "https://toolsforge.co/tools/customer-persona-generator.html",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            min-height: 100vh;
+        }
+
+        .bg-effects {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.5;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 600px; height: 600px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            top: -200px; left: -200px;
+        }
+
+        .orb-2 {
+            width: 500px; height: 500px;
+            background: linear-gradient(135deg, #06b6d4, #6366f1);
+            bottom: -150px; right: -150px;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.05); }
+            66% { transform: translate(-20px, 20px) scale(0.95); }
+        }
+
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 1rem 2rem;
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { color: #a0a0a0; text-decoration: none; }
+        .nav-links a:hover { color: #8b5cf6; }
+
+        main {
+            position: relative;
+            z-index: 1;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 120px 2rem 4rem;
+        }
+
+        .tool-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .tool-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 50px;
+            font-size: 0.85rem;
+            color: #6366f1;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff, #a0a0a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .tool-description {
+            color: #888;
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .tool-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 2.5rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group { margin-bottom: 1.5rem; }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ccc;
+            font-weight: 500;
+        }
+
+        .label-hint {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 400;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #6366f1;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.2);
+        }
+
+        select option { background: #1a1a1a; }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        @media (max-width: 600px) {
+            .form-row { grid-template-columns: 1fr; }
+        }
+
+        .generate-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border: none;
+            border-radius: 12px;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .generate-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .results-section {
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .results-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .persona-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .persona-header {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .persona-avatar {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 2.5rem;
+        }
+
+        .persona-name {
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 0.25rem;
+        }
+
+        .persona-tagline {
+            color: #888;
+            font-style: italic;
+        }
+
+        .persona-body {
+            padding: 2rem;
+        }
+
+        .persona-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .persona-section {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+
+        .section-title {
+            color: #6366f1;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .section-content {
+            color: #ccc;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .section-list {
+            list-style: none;
+        }
+
+        .section-list li {
+            padding: 0.25rem 0;
+            padding-left: 1rem;
+            position: relative;
+        }
+
+        .section-list li::before {
+            content: "-";
+            position: absolute;
+            left: 0;
+            color: #6366f1;
+        }
+
+        .persona-full-section {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .copy-all-btn {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(99, 102, 241, 0.2);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 12px;
+            color: #6366f1;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .copy-all-btn:hover { background: rgba(99, 102, 241, 0.3); }
+        .copy-all-btn.copied { background: rgba(16, 185, 129, 0.2); color: #10b981; border-color: #10b981; }
+
+        .cta-section {
+            margin-top: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(139, 92, 246, 0.2));
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .cta-section h3 { color: #fff; margin-bottom: 0.5rem; }
+        .cta-section p { color: #888; margin-bottom: 1rem; }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-radius: 50px;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-effects">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+    </div>
+
+    <nav>
+        <div class="nav-content">
+            <a href="../index.html" class="logo">ToolsForge</a>
+            <div class="nav-links">
+                <a href="../index.html">All Tools</a>
+                <a href="prompt-templates.html">Templates</a>
+                <a href="https://kaiprompts.com" target="_blank">Premium</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="tool-header">
+            <span class="tool-badge">Marketing Strategy</span>
+            <h1>Customer Persona Generator</h1>
+            <p class="tool-description">Create detailed buyer personas to target your ideal customers. Understand their demographics, goals, pain points, and buying behavior.</p>
+        </div>
+
+        <div class="tool-card">
+            <div class="form-group">
+                <label for="business">Your Business/Product</label>
+                <input type="text" id="business" placeholder="e.g., SaaS project management tool, Online fitness coaching">
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="industry">Industry</label>
+                    <select id="industry">
+                        <option value="saas">SaaS/Software</option>
+                        <option value="ecommerce">E-commerce</option>
+                        <option value="services">Professional Services</option>
+                        <option value="health">Health & Wellness</option>
+                        <option value="education">Education</option>
+                        <option value="finance">Finance</option>
+                        <option value="realestate">Real Estate</option>
+                        <option value="marketing">Marketing/Agency</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="market">Target Market</label>
+                    <select id="market">
+                        <option value="b2b">B2B (Business)</option>
+                        <option value="b2c">B2C (Consumer)</option>
+                        <option value="both">Both B2B & B2C</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="problem">Main Problem You Solve <span class="label-hint">(What pain point do you address?)</span></label>
+                <input type="text" id="problem" placeholder="e.g., Teams wasting hours on status meetings and email chains">
+            </div>
+
+            <div class="form-group">
+                <label for="pricePoint">Price Point</label>
+                <select id="pricePoint">
+                    <option value="low">Low ($0-50)</option>
+                    <option value="mid">Mid ($50-500)</option>
+                    <option value="high">High ($500-5,000)</option>
+                    <option value="enterprise">Enterprise ($5,000+)</option>
+                </select>
+            </div>
+
+            <button class="generate-btn" onclick="generatePersona()">Generate Customer Persona</button>
+
+            <div class="results-section" id="resultsSection">
+                <div id="personaContainer"></div>
+                <button class="copy-all-btn" onclick="copyPersona()">Copy Persona to Clipboard</button>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h3>Need Marketing Help?</h3>
+            <p>Get 500+ marketing prompts for targeting, messaging, and campaigns.</p>
+            <a href="https://kaiprompts.com/products/marketing-prompts" class="cta-btn" target="_blank">Get Marketing Prompts</a>
+        </div>
+    </main>
+
+    <script>
+        const personaData = {
+            b2b: {
+                saas: {
+                    names: ['Alex', 'Jordan', 'Morgan', 'Taylor', 'Casey'],
+                    titles: ['Product Manager', 'Engineering Lead', 'Operations Director', 'VP of Technology', 'Founder/CEO'],
+                    ages: ['28-35', '32-42', '35-50'],
+                    goals: ['Increase team productivity', 'Reduce operational costs', 'Scale without adding headcount', 'Ship faster with fewer bugs'],
+                    pains: ['Too many tools to manage', 'Poor team alignment', 'Manual processes eating up time', 'Difficulty measuring ROI'],
+                    behaviors: ['Reads ProductHunt and HackerNews', 'Attends industry webinars', 'Relies on peer recommendations', 'Does extensive research before buying']
+                },
+                services: {
+                    names: ['Chris', 'Sam', 'Jamie', 'Riley', 'Drew'],
+                    titles: ['Business Owner', 'Operations Manager', 'Marketing Director', 'CEO', 'Managing Partner'],
+                    ages: ['35-50', '40-55', '30-45'],
+                    goals: ['Grow revenue predictably', 'Improve client retention', 'Streamline operations', 'Scale the business'],
+                    pains: ['Inconsistent cash flow', 'Difficulty finding quality talent', 'Time spent on admin tasks', 'Client acquisition costs'],
+                    behaviors: ['Active on LinkedIn', 'Joins industry associations', 'Listens to business podcasts', 'Values case studies and proof']
+                },
+                marketing: {
+                    names: ['Emma', 'Noah', 'Sophia', 'Liam', 'Olivia'],
+                    titles: ['Marketing Manager', 'CMO', 'Growth Lead', 'Digital Marketing Director', 'Brand Manager'],
+                    ages: ['28-40', '35-50', '30-45'],
+                    goals: ['Increase qualified leads', 'Improve conversion rates', 'Demonstrate marketing ROI', 'Build brand awareness'],
+                    pains: ['Proving marketing value to leadership', 'Limited budget', 'Keeping up with trends', 'Tool fragmentation'],
+                    behaviors: ['Follows marketing influencers', 'A/B tests everything', 'Data-driven decision making', 'Reads marketing blogs daily']
+                }
+            },
+            b2c: {
+                health: {
+                    names: ['Jessica', 'Michael', 'Sarah', 'David', 'Emily'],
+                    titles: ['Busy Professional', 'Working Parent', 'Fitness Enthusiast', 'Health-Conscious Consumer'],
+                    ages: ['25-35', '30-45', '35-50'],
+                    goals: ['Lose weight and feel better', 'Build sustainable healthy habits', 'Have more energy', 'Look and feel confident'],
+                    pains: ['No time for the gym', 'Tried diets that failed', 'Overwhelmed by conflicting advice', 'Lack of accountability'],
+                    behaviors: ['Active on Instagram', 'Follows fitness influencers', 'Reads health blogs', 'Uses fitness apps']
+                },
+                education: {
+                    names: ['Lisa', 'James', 'Maria', 'Robert', 'Amanda'],
+                    titles: ['Career Changer', 'Aspiring Professional', 'Lifelong Learner', 'Student'],
+                    ages: ['22-30', '25-40', '30-50'],
+                    goals: ['Learn new skills', 'Advance career', 'Increase earning potential', 'Stay competitive'],
+                    pains: ['Limited time for learning', 'Information overload', 'Expensive courses', 'Unsure where to start'],
+                    behaviors: ['Takes online courses', 'Watches YouTube tutorials', 'Reads industry news', 'Values certifications']
+                },
+                ecommerce: {
+                    names: ['Ashley', 'Brandon', 'Christina', 'Daniel', 'Nicole'],
+                    titles: ['Online Shopper', 'Value Seeker', 'Early Adopter', 'Convenience Buyer'],
+                    ages: ['25-40', '30-50', '20-35'],
+                    goals: ['Find quality products', 'Save money', 'Convenient shopping experience', 'Stay on trend'],
+                    pains: ['Too many options', 'Uncertainty about quality', 'Shipping costs', 'Returns hassle'],
+                    behaviors: ['Reads reviews before buying', 'Compares prices', 'Active on social media', 'Influenced by recommendations']
+                }
+            }
+        };
+
+        let generatedPersona = {};
+
+        function generatePersona() {
+            const business = document.getElementById('business').value.trim();
+            const industry = document.getElementById('industry').value;
+            const market = document.getElementById('market').value;
+            const problem = document.getElementById('problem').value.trim();
+            const pricePoint = document.getElementById('pricePoint').value;
+
+            if (!business) {
+                alert('Please enter your business/product');
+                return;
+            }
+
+            const btn = document.querySelector('.generate-btn');
+            btn.disabled = true;
+            btn.textContent = 'Generating...';
+
+            setTimeout(() => {
+                generatedPersona = createPersona(business, industry, market, problem, pricePoint);
+                displayPersona(generatedPersona);
+                btn.disabled = false;
+                btn.textContent = 'Generate Customer Persona';
+            }, 800);
+        }
+
+        function createPersona(business, industry, market, problem, pricePoint) {
+            // Get base data
+            const marketType = market === 'both' ? (Math.random() > 0.5 ? 'b2b' : 'b2c') : market;
+            const baseData = personaData[marketType][industry] || personaData[marketType][Object.keys(personaData[marketType])[0]];
+
+            const name = baseData.names[Math.floor(Math.random() * baseData.names.length)];
+            const title = baseData.titles[Math.floor(Math.random() * baseData.titles.length)];
+            const age = baseData.ages[Math.floor(Math.random() * baseData.ages.length)];
+
+            // Income based on price point
+            const incomeRanges = {
+                low: '$40,000 - $70,000',
+                mid: '$70,000 - $120,000',
+                high: '$120,000 - $200,000',
+                enterprise: '$150,000+'
+            };
+
+            return {
+                name: name,
+                title: title,
+                tagline: `The ${title} who needs ${business.toLowerCase()}`,
+                demographics: {
+                    age: age,
+                    income: incomeRanges[pricePoint],
+                    education: marketType === 'b2b' ? 'Bachelor\'s or higher' : 'College educated',
+                    location: 'Urban/Suburban areas'
+                },
+                goals: shuffleArray([...baseData.goals]).slice(0, 3),
+                painPoints: problem ? [problem, ...shuffleArray([...baseData.pains]).slice(0, 2)] : shuffleArray([...baseData.pains]).slice(0, 3),
+                behaviors: shuffleArray([...baseData.behaviors]).slice(0, 3),
+                buyingProcess: generateBuyingProcess(marketType, pricePoint),
+                objections: generateObjections(pricePoint),
+                messagingAngles: generateMessaging(business, problem)
+            };
+        }
+
+        function shuffleArray(arr) {
+            return arr.sort(() => Math.random() - 0.5);
+        }
+
+        function generateBuyingProcess(market, price) {
+            if (market === 'b2b') {
+                if (price === 'enterprise') {
+                    return ['Identifies problem', 'Researches solutions', 'Gets team buy-in', 'Requests demos', 'Negotiates contract', 'Implements with support'];
+                }
+                return ['Discovers via content/ads', 'Evaluates features', 'Tries free trial', 'Discusses with team', 'Makes purchase'];
+            }
+            return ['Sees ad or recommendation', 'Checks reviews', 'Compares alternatives', 'Makes impulse or considered purchase'];
+        }
+
+        function generateObjections(price) {
+            const common = ['Is this worth the investment?', 'Will this actually work for me?'];
+            if (price === 'high' || price === 'enterprise') {
+                return [...common, 'Do we need all these features?', 'What about implementation time?'];
+            }
+            return [...common, 'Are there hidden costs?'];
+        }
+
+        function generateMessaging(business, problem) {
+            return [
+                `"Finally, a ${business.toLowerCase()} that actually works"`,
+                problem ? `"Stop struggling with ${problem.toLowerCase()}"` : '"Get results without the hassle"',
+                '"Trusted by thousands of customers like you"'
+            ];
+        }
+
+        function displayPersona(persona) {
+            const container = document.getElementById('personaContainer');
+            container.innerHTML = `
+                <div class="persona-card">
+                    <div class="persona-header">
+                        <div class="persona-avatar">${persona.name[0]}</div>
+                        <div class="persona-name">${persona.name}</div>
+                        <div class="persona-tagline">${persona.tagline}</div>
+                    </div>
+                    <div class="persona-body">
+                        <div class="persona-grid">
+                            <div class="persona-section">
+                                <div class="section-title">Demographics</div>
+                                <div class="section-content">
+                                    <strong>Age:</strong> ${persona.demographics.age}<br>
+                                    <strong>Income:</strong> ${persona.demographics.income}<br>
+                                    <strong>Education:</strong> ${persona.demographics.education}<br>
+                                    <strong>Location:</strong> ${persona.demographics.location}
+                                </div>
+                            </div>
+                            <div class="persona-section">
+                                <div class="section-title">Goals</div>
+                                <ul class="section-list">
+                                    ${persona.goals.map(g => `<li>${g}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="persona-section">
+                                <div class="section-title">Pain Points</div>
+                                <ul class="section-list">
+                                    ${persona.painPoints.map(p => `<li>${p}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="persona-section">
+                                <div class="section-title">Behaviors</div>
+                                <ul class="section-list">
+                                    ${persona.behaviors.map(b => `<li>${b}</li>`).join('')}
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="persona-full-section">
+                            <div class="section-title">Buying Process</div>
+                            <div class="section-content">
+                                ${persona.buyingProcess.map((step, i) => `${i + 1}. ${step}`).join(' > ')}
+                            </div>
+                        </div>
+
+                        <div class="persona-full-section">
+                            <div class="section-title">Common Objections</div>
+                            <ul class="section-list">
+                                ${persona.objections.map(o => `<li>"${o}"</li>`).join('')}
+                            </ul>
+                        </div>
+
+                        <div class="persona-full-section">
+                            <div class="section-title">Messaging That Resonates</div>
+                            <ul class="section-list">
+                                ${persona.messagingAngles.map(m => `<li>${m}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('resultsSection').classList.add('show');
+        }
+
+        function copyPersona() {
+            const p = generatedPersona;
+            const text = `
+CUSTOMER PERSONA: ${p.name}
+${p.tagline}
+
+DEMOGRAPHICS
+- Age: ${p.demographics.age}
+- Income: ${p.demographics.income}
+- Education: ${p.demographics.education}
+- Location: ${p.demographics.location}
+
+GOALS
+${p.goals.map(g => `- ${g}`).join('\n')}
+
+PAIN POINTS
+${p.painPoints.map(pp => `- ${pp}`).join('\n')}
+
+BEHAVIORS
+${p.behaviors.map(b => `- ${b}`).join('\n')}
+
+BUYING PROCESS
+${p.buyingProcess.map((s, i) => `${i + 1}. ${s}`).join('\n')}
+
+COMMON OBJECTIONS
+${p.objections.map(o => `- "${o}"`).join('\n')}
+
+MESSAGING ANGLES
+${p.messagingAngles.map(m => `- ${m}`).join('\n')}
+            `.trim();
+
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.querySelector('.copy-all-btn');
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = 'Copy Persona to Clipboard';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
