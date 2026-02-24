@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Business Name Generator - AI-Powered Brand Names | ToolsForge</title>
+    <meta name="description" content="Generate unique business names instantly with AI. Free name ideas for startups, brands, and companies. Check domain availability. No signup required.">
+    <meta name="keywords" content="business name generator, company name ideas, brand name generator, startup name generator, free business names">
+    <link rel="canonical" href="https://toolsforge.co/tools/business-name-generator.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230a0a0a' width='100' height='100' rx='20'/><text x='50' y='68' text-anchor='middle' font-size='50' fill='%2300d4aa'>TF</text></svg>">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Business Name Generator",
+        "description": "Generate unique business and brand names with AI",
+        "url": "https://toolsforge.co/tools/business-name-generator.html",
+        "applicationCategory": "BusinessApplication",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-primary: #0a0a0a;
+            --accent-cyan: #00d4aa;
+            --accent-purple: #a855f7;
+            --accent-green: #22c55e;
+            --accent-yellow: #fbbf24;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --glass-bg: rgba(255,255,255,0.03);
+            --glass-border: rgba(255,255,255,0.08);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+        .bg-effects {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0; pointer-events: none;
+        }
+        .gradient-orb {
+            position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.3;
+        }
+        .orb-1 { width: 400px; height: 400px; background: var(--accent-purple); top: -100px; right: -100px; }
+        .orb-2 { width: 300px; height: 300px; background: var(--accent-green); bottom: -50px; left: -50px; }
+
+        header {
+            position: relative; z-index: 10; padding: 1.5rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .logo {
+            font-size: 1.5rem; font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        nav a { color: var(--text-secondary); text-decoration: none; margin-left: 2rem; }
+        nav a:hover { color: var(--accent-cyan); }
+
+        main {
+            position: relative; z-index: 10;
+            max-width: 900px; margin: 0 auto; padding: 3rem 2rem;
+        }
+        h1 {
+            font-size: 2.5rem; text-align: center; margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .subtitle { text-align: center; color: var(--text-secondary); margin-bottom: 2rem; }
+
+        .generator-container {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+            margin-bottom: 1.25rem;
+        }
+        .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .form-group.full { grid-column: 1 / -1; }
+
+        label { color: var(--text-secondary); font-size: 0.9rem; }
+        input, select, textarea {
+            padding: 0.875rem 1rem;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+        }
+
+        .style-chips {
+            display: flex; flex-wrap: wrap; gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .style-chip {
+            padding: 0.5rem 1rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .style-chip:hover, .style-chip.active {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            color: var(--bg-primary);
+            border-color: transparent;
+        }
+
+        .btn {
+            width: 100%; padding: 1rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            color: var(--bg-primary);
+            border: none; border-radius: 12px;
+            font-size: 1.1rem; font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,212,170,0.3);
+        }
+
+        .results { margin-top: 2rem; display: none; }
+        .results.active { display: block; }
+
+        .results-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        .results-header h2 { font-size: 1.25rem; }
+        .regenerate-btn {
+            padding: 0.5rem 1rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: var(--accent-cyan);
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+        .regenerate-btn:hover { background: var(--glass-border); }
+
+        .names-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        .name-card {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .name-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-3px);
+        }
+        .name-card.favorited {
+            border-color: var(--accent-yellow);
+            background: rgba(251,191,36,0.1);
+        }
+        .name-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .name-domain {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .domain-status {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+        }
+        .domain-status.available { background: var(--accent-green); }
+        .domain-status.taken { background: var(--accent-red); }
+        .domain-status.unknown { background: var(--accent-yellow); }
+
+        .name-tags {
+            display: flex; gap: 0.5rem;
+            margin-top: 0.75rem;
+        }
+        .name-tag {
+            font-size: 0.7rem;
+            padding: 0.2rem 0.5rem;
+            background: var(--glass-bg);
+            border-radius: 4px;
+            color: var(--text-secondary);
+        }
+        .name-actions {
+            display: flex; gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .name-action {
+            flex: 1;
+            padding: 0.5rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+            cursor: pointer;
+            text-align: center;
+        }
+        .name-action:hover { background: var(--glass-border); }
+
+        .favorites-section {
+            margin-top: 2rem;
+            background: rgba(0,0,0,0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: none;
+        }
+        .favorites-section.active { display: block; }
+        .favorites-section h3 {
+            font-size: 1rem;
+            color: var(--accent-yellow);
+            margin-bottom: 1rem;
+        }
+        .favorites-list {
+            display: flex; flex-wrap: wrap; gap: 0.75rem;
+        }
+        .favorite-item {
+            padding: 0.5rem 1rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--accent-yellow);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .remove-fav {
+            cursor: pointer;
+            opacity: 0.7;
+        }
+        .remove-fav:hover { opacity: 1; }
+
+        .cta-section {
+            margin-top: 3rem; text-align: center; padding: 2rem;
+            background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(0,212,170,0.1));
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+        }
+        .cta-section h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .cta-section p { color: var(--text-secondary); margin-bottom: 1rem; }
+        .cta-section a {
+            display: inline-block; padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            color: white; text-decoration: none;
+            border-radius: 12px; font-weight: 600;
+        }
+
+        footer {
+            position: relative; z-index: 10;
+            text-align: center; padding: 2rem;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+        }
+        footer a { color: var(--accent-cyan); text-decoration: none; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .form-row { grid-template-columns: 1fr; }
+            .names-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-effects">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+    </div>
+
+    <header>
+        <a href="../index.html" class="logo">ToolsForge</a>
+        <nav>
+            <a href="../index.html">All Tools</a>
+            <a href="https://kaiprompts.com">Premium Prompts</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Business Name Generator</h1>
+        <p class="subtitle">Generate unique brand names with AI</p>
+
+        <div class="generator-container">
+            <div class="form-row">
+                <div class="form-group full">
+                    <label>What does your business do?</label>
+                    <input type="text" id="businessDesc" placeholder="e.g., AI-powered fitness coaching app">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Industry</label>
+                    <select id="industry">
+                        <option value="tech">Technology</option>
+                        <option value="health">Health & Wellness</option>
+                        <option value="finance">Finance</option>
+                        <option value="ecommerce">E-commerce</option>
+                        <option value="food">Food & Beverage</option>
+                        <option value="creative">Creative & Design</option>
+                        <option value="education">Education</option>
+                        <option value="consulting">Consulting</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Keywords (optional)</label>
+                    <input type="text" id="keywords" placeholder="e.g., fit, smart, pro">
+                </div>
+            </div>
+
+            <label style="margin-bottom:0.75rem;display:block;">Name Style</label>
+            <div class="style-chips">
+                <span class="style-chip active" data-style="modern">Modern</span>
+                <span class="style-chip" data-style="playful">Playful</span>
+                <span class="style-chip" data-style="professional">Professional</span>
+                <span class="style-chip" data-style="minimal">Minimal</span>
+                <span class="style-chip" data-style="inventive">Inventive</span>
+                <span class="style-chip" data-style="classic">Classic</span>
+            </div>
+
+            <button class="btn" onclick="generateNames()">Generate Business Names</button>
+
+            <div class="results" id="results">
+                <div class="results-header">
+                    <h2>Generated Names</h2>
+                    <button class="regenerate-btn" onclick="generateNames()">Generate More</button>
+                </div>
+                <div class="names-grid" id="namesGrid"></div>
+
+                <div class="favorites-section" id="favoritesSection">
+                    <h3>Your Favorites</h3>
+                    <div class="favorites-list" id="favoritesList"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h3>Need Help Naming Your Brand?</h3>
+            <p>Get AI prompts for branding, positioning, and marketing</p>
+            <a href="https://kaiprompts.com">Browse Business Prompts</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>Part of the <a href="https://kaiprompts.com">KaiPrompts</a> ecosystem | <a href="../index.html">More Free Tools</a></p>
+    </footer>
+
+    <script>
+        let selectedStyle = 'modern';
+        let favorites = [];
+
+        document.querySelectorAll('.style-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                document.querySelectorAll('.style-chip').forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                selectedStyle = chip.dataset.style;
+            });
+        });
+
+        const prefixes = {
+            modern: ['Nova', 'Flux', 'Nexus', 'Apex', 'Vibe', 'Pulse', 'Sync', 'Hive', 'Core', 'Loop', 'Wave', 'Spark'],
+            playful: ['Happy', 'Zippy', 'Fizz', 'Pop', 'Snap', 'Boop', 'Zap', 'Jolly', 'Sunny', 'Peppy', 'Chirp', 'Bounce'],
+            professional: ['Prime', 'Elite', 'Summit', 'Vertex', 'Atlas', 'Sterling', 'Pinnacle', 'Meridian', 'Capital', 'Anchor'],
+            minimal: ['One', 'Base', 'Pure', 'Clear', 'Simple', 'Basic', 'Mono', 'Clean', 'Bare', 'True', 'Plain', 'Neat'],
+            inventive: ['Quark', 'Pixel', 'Cipher', 'Glitch', 'Byte', 'Vector', 'Matrix', 'Proto', 'Meta', 'Omni', 'Quantum'],
+            classic: ['Heritage', 'Legacy', 'Noble', 'Royal', 'Crown', 'Oak', 'Stone', 'Gold', 'Silver', 'Diamond', 'Pearl']
+        };
+
+        const suffixes = {
+            tech: ['Labs', 'Tech', 'Systems', 'Digital', 'AI', 'Cloud', 'Data', 'Hub', 'Works', 'io', 'ly'],
+            health: ['Health', 'Wellness', 'Life', 'Care', 'Vitality', 'Fit', 'Body', 'Mind', 'Strong', 'Well'],
+            finance: ['Capital', 'Finance', 'Wealth', 'Assets', 'Ventures', 'Partners', 'Group', 'Trust', 'Fund'],
+            ecommerce: ['Shop', 'Market', 'Store', 'Cart', 'Buy', 'Bazaar', 'Mart', 'Direct', 'Plus'],
+            food: ['Eats', 'Kitchen', 'Bites', 'Flavor', 'Fresh', 'Tasty', 'Dine', 'Meals', 'Foods'],
+            creative: ['Studio', 'Design', 'Creative', 'Arts', 'Media', 'Visual', 'Craft', 'Works'],
+            education: ['Learn', 'Academy', 'School', 'Edu', 'Study', 'Course', 'Tutor', 'Knowledge'],
+            consulting: ['Consulting', 'Advisors', 'Solutions', 'Strategy', 'Partners', 'Associates', 'Group'],
+            other: ['Co', 'Inc', 'Group', 'HQ', 'Team', 'Collective', 'Network', 'Agency']
+        };
+
+        function generateNames() {
+            const desc = document.getElementById('businessDesc').value;
+            const industry = document.getElementById('industry').value;
+            const keywords = document.getElementById('keywords').value.split(',').map(k => k.trim()).filter(k => k);
+
+            const styleWords = prefixes[selectedStyle];
+            const industrySuffixes = suffixes[industry];
+
+            const names = [];
+
+            // Generate 8 names
+            for (let i = 0; i < 8; i++) {
+                let name = '';
+                const method = i % 4;
+
+                if (method === 0) {
+                    // Prefix + Suffix
+                    name = styleWords[Math.floor(Math.random() * styleWords.length)] + industrySuffixes[Math.floor(Math.random() * industrySuffixes.length)];
+                } else if (method === 1) {
+                    // Keyword mashup
+                    const keyword = keywords.length > 0 ? keywords[Math.floor(Math.random() * keywords.length)] : styleWords[Math.floor(Math.random() * styleWords.length)];
+                    name = capitalize(keyword) + industrySuffixes[Math.floor(Math.random() * industrySuffixes.length)];
+                } else if (method === 2) {
+                    // Two words combined
+                    name = styleWords[Math.floor(Math.random() * styleWords.length)] + styleWords[Math.floor(Math.random() * styleWords.length)];
+                } else {
+                    // Single word variation
+                    const base = styleWords[Math.floor(Math.random() * styleWords.length)];
+                    const endings = ['ify', 'ly', 'ful', 'er', 'io', 'a', 'i', 'o'];
+                    name = base.toLowerCase() + endings[Math.floor(Math.random() * endings.length)];
+                    name = capitalize(name);
+                }
+
+                names.push({
+                    name: name,
+                    domain: name.toLowerCase().replace(/\s/g, '') + '.com',
+                    tags: [selectedStyle, industry]
+                });
+            }
+
+            displayNames(names);
+        }
+
+        function capitalize(str) {
+            return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+        }
+
+        function displayNames(names) {
+            document.getElementById('results').classList.add('active');
+
+            document.getElementById('namesGrid').innerHTML = names.map((n, i) => `
+                <div class="name-card" data-name="${n.name}" onclick="toggleFavorite('${n.name}')">
+                    <div class="name-text">${n.name}</div>
+                    <div class="name-domain">
+                        <span class="domain-status unknown"></span>
+                        ${n.domain}
+                    </div>
+                    <div class="name-tags">
+                        ${n.tags.map(t => `<span class="name-tag">${t}</span>`).join('')}
+                    </div>
+                    <div class="name-actions">
+                        <div class="name-action" onclick="event.stopPropagation(); copyName('${n.name}')">Copy</div>
+                        <div class="name-action" onclick="event.stopPropagation(); checkDomain('${n.domain}')">Check Domain</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function toggleFavorite(name) {
+            const index = favorites.indexOf(name);
+            if (index > -1) {
+                favorites.splice(index, 1);
+            } else {
+                favorites.push(name);
+            }
+            updateFavorites();
+            updateCardStates();
+        }
+
+        function updateFavorites() {
+            const section = document.getElementById('favoritesSection');
+            const list = document.getElementById('favoritesList');
+
+            if (favorites.length > 0) {
+                section.classList.add('active');
+                list.innerHTML = favorites.map(f => `
+                    <div class="favorite-item">
+                        ${f}
+                        <span class="remove-fav" onclick="toggleFavorite('${f}')">×</span>
+                    </div>
+                `).join('');
+            } else {
+                section.classList.remove('active');
+            }
+        }
+
+        function updateCardStates() {
+            document.querySelectorAll('.name-card').forEach(card => {
+                const name = card.dataset.name;
+                card.classList.toggle('favorited', favorites.includes(name));
+            });
+        }
+
+        function copyName(name) {
+            navigator.clipboard.writeText(name).then(() => {
+                alert(`"${name}" copied to clipboard!`);
+            });
+        }
+
+        function checkDomain(domain) {
+            window.open(`https://www.namecheap.com/domains/registration/results/?domain=${domain}`, '_blank');
+        }
+    </script>
+</body>
+</html>

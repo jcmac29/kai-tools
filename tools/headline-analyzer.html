@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Headline Analyzer - Score Your Headlines | ToolsForge</title>
+    <meta name="description" content="Analyze your headlines for emotional impact, power words, and click potential. Free headline scoring tool for bloggers, marketers, and content creators.">
+    <meta name="keywords" content="headline analyzer, headline score, blog title analyzer, email subject line tester, free headline tool">
+    <link rel="canonical" href="https://toolsforge.co/tools/headline-analyzer.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230a0a0a' width='100' height='100' rx='20'/><text x='50' y='68' text-anchor='middle' font-size='50' fill='%2300d4aa'>TF</text></svg>">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Headline Analyzer",
+        "description": "Analyze and score headlines for emotional impact and click potential",
+        "url": "https://toolsforge.co/tools/headline-analyzer.html",
+        "applicationCategory": "UtilityApplication",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-primary: #0a0a0a;
+            --accent-cyan: #00d4aa;
+            --accent-purple: #a855f7;
+            --accent-green: #22c55e;
+            --accent-yellow: #fbbf24;
+            --accent-red: #ef4444;
+            --accent-blue: #3b82f6;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --glass-bg: rgba(255,255,255,0.03);
+            --glass-border: rgba(255,255,255,0.08);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+        .bg-effects {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0; pointer-events: none;
+        }
+        .gradient-orb {
+            position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.3;
+        }
+        .orb-1 { width: 400px; height: 400px; background: var(--accent-cyan); top: -100px; left: -100px; }
+        .orb-2 { width: 300px; height: 300px; background: var(--accent-purple); bottom: -50px; right: -50px; }
+
+        header {
+            position: relative; z-index: 10; padding: 1.5rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .logo {
+            font-size: 1.5rem; font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        nav a { color: var(--text-secondary); text-decoration: none; margin-left: 2rem; }
+        nav a:hover { color: var(--accent-cyan); }
+
+        main {
+            position: relative; z-index: 10;
+            max-width: 800px; margin: 0 auto; padding: 3rem 2rem;
+        }
+        h1 {
+            font-size: 2.5rem; text-align: center; margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .subtitle { text-align: center; color: var(--text-secondary); margin-bottom: 2rem; }
+
+        .analyzer-container {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        .input-group label {
+            display: block; margin-bottom: 0.5rem;
+            color: var(--text-secondary); font-size: 0.9rem;
+        }
+        .headline-input {
+            width: 100%;
+            padding: 1.25rem 1.5rem;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1.25rem;
+            font-weight: 500;
+        }
+        .headline-input:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+        }
+        .char-count {
+            text-align: right;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        .btn {
+            width: 100%; padding: 1rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            color: var(--bg-primary);
+            border: none; border-radius: 12px;
+            font-size: 1.1rem; font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,212,170,0.3);
+        }
+
+        .results { margin-top: 2rem; display: none; }
+        .results.active { display: block; }
+
+        .score-card {
+            background: linear-gradient(135deg, rgba(0,212,170,0.1), rgba(168,85,247,0.1));
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .score-circle {
+            width: 120px; height: 120px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 2.5rem; font-weight: 800;
+            position: relative;
+        }
+        .score-circle::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            padding: 4px;
+            background: conic-gradient(var(--score-color) calc(var(--score) * 1%), rgba(255,255,255,0.1) 0);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+        .score-label { font-size: 1.1rem; color: var(--text-secondary); }
+        .score-grade {
+            font-size: 1.5rem; font-weight: 700;
+            margin-top: 0.5rem;
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .metric-card {
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+        .metric-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 0.5rem;
+        }
+        .metric-name { font-size: 0.85rem; color: var(--text-secondary); }
+        .metric-value { font-size: 1.1rem; font-weight: 600; }
+        .metric-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .metric-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        .breakdown {
+            background: rgba(0,0,0,0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .breakdown h3 {
+            font-size: 1rem;
+            color: var(--accent-purple);
+            margin-bottom: 1rem;
+        }
+        .breakdown-item {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .breakdown-item:last-child { border-bottom: none; }
+        .breakdown-label { color: var(--text-secondary); font-size: 0.95rem; }
+        .breakdown-value {
+            font-weight: 600;
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+        .breakdown-value.good { background: rgba(34,197,94,0.2); color: var(--accent-green); }
+        .breakdown-value.warn { background: rgba(251,191,36,0.2); color: var(--accent-yellow); }
+        .breakdown-value.bad { background: rgba(239,68,68,0.2); color: var(--accent-red); }
+
+        .suggestions {
+            background: rgba(0,0,0,0.3);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+        .suggestions h3 {
+            font-size: 1rem;
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+        }
+        .suggestion-item {
+            display: flex; gap: 0.75rem;
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        .suggestion-icon { color: var(--accent-green); }
+
+        .cta-section {
+            margin-top: 3rem; text-align: center; padding: 2rem;
+            background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(0,212,170,0.1));
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+        }
+        .cta-section h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .cta-section p { color: var(--text-secondary); margin-bottom: 1rem; }
+        .cta-section a {
+            display: inline-block; padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            color: white; text-decoration: none;
+            border-radius: 12px; font-weight: 600;
+        }
+
+        footer {
+            position: relative; z-index: 10;
+            text-align: center; padding: 2rem;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+        }
+        footer a { color: var(--accent-cyan); text-decoration: none; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .metrics-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-effects">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+    </div>
+
+    <header>
+        <a href="../index.html" class="logo">ToolsForge</a>
+        <nav>
+            <a href="../index.html">All Tools</a>
+            <a href="https://kaiprompts.com">Premium Prompts</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Headline Analyzer</h1>
+        <p class="subtitle">Score your headlines for click-worthy potential</p>
+
+        <div class="analyzer-container">
+            <div class="input-group">
+                <label>Enter your headline</label>
+                <input type="text" class="headline-input" id="headlineInput" placeholder="e.g., 10 Proven Ways to Double Your Email Open Rates" oninput="updateCharCount()">
+                <div class="char-count"><span id="charCount">0</span> characters</div>
+            </div>
+
+            <button class="btn" onclick="analyzeHeadline()">Analyze Headline</button>
+
+            <div class="results" id="results">
+                <div class="score-card">
+                    <div class="score-circle" id="scoreCircle">
+                        <span id="scoreValue">0</span>
+                    </div>
+                    <div class="score-label">Overall Score</div>
+                    <div class="score-grade" id="scoreGrade">Analyzing...</div>
+                </div>
+
+                <div class="metrics-grid" id="metricsGrid"></div>
+
+                <div class="breakdown" id="breakdown">
+                    <h3>Headline Breakdown</h3>
+                    <div id="breakdownItems"></div>
+                </div>
+
+                <div class="suggestions" id="suggestions">
+                    <h3>Suggestions to Improve</h3>
+                    <div id="suggestionsList"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h3>Need Headlines That Convert?</h3>
+            <p>Get proven headline templates for any content type</p>
+            <a href="https://kaiprompts.com">Browse Marketing Prompts</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>Part of the <a href="https://kaiprompts.com">KaiPrompts</a> ecosystem | <a href="../index.html">More Free Tools</a></p>
+    </footer>
+
+    <script>
+        const powerWords = ['proven', 'secret', 'ultimate', 'essential', 'incredible', 'amazing', 'powerful', 'exclusive', 'guaranteed', 'free', 'new', 'easy', 'fast', 'quick', 'simple', 'best', 'top', 'complete', 'definitive', 'revolutionary', 'breakthrough', 'transform', 'instantly', 'boost', 'skyrocket', 'double', 'triple', 'master', 'hack', 'tricks', 'mistakes', 'avoid', 'never', 'always', 'must', 'need', 'want', 'love', 'hate'];
+
+        const emotionalWords = ['amazing', 'awesome', 'beautiful', 'brilliant', 'confident', 'courage', 'delightful', 'exciting', 'fearless', 'grateful', 'happy', 'incredible', 'inspired', 'joyful', 'love', 'passionate', 'powerful', 'proud', 'stunning', 'wonderful', 'worried', 'anxious', 'afraid', 'angry', 'frustrated', 'stressed', 'overwhelmed', 'confused', 'stuck'];
+
+        const uncommonWords = ['surprisingly', 'remarkably', 'exceptionally', 'extraordinarily', 'phenomenally', 'spectacularly', 'tremendously', 'magnificently', 'astonishingly', 'staggeringly'];
+
+        function updateCharCount() {
+            const input = document.getElementById('headlineInput');
+            document.getElementById('charCount').textContent = input.value.length;
+        }
+
+        function analyzeHeadline() {
+            const headline = document.getElementById('headlineInput').value.trim();
+            if (!headline) {
+                alert('Please enter a headline to analyze');
+                return;
+            }
+
+            const analysis = performAnalysis(headline);
+            displayResults(analysis);
+        }
+
+        function performAnalysis(headline) {
+            const words = headline.toLowerCase().split(/\s+/);
+            const wordCount = words.length;
+            const charCount = headline.length;
+
+            // Word balance score
+            let wordBalanceScore = 0;
+            if (wordCount >= 6 && wordCount <= 12) wordBalanceScore = 100;
+            else if (wordCount >= 4 && wordCount <= 14) wordBalanceScore = 75;
+            else if (wordCount >= 3 && wordCount <= 16) wordBalanceScore = 50;
+            else wordBalanceScore = 25;
+
+            // Character count score
+            let charScore = 0;
+            if (charCount >= 50 && charCount <= 70) charScore = 100;
+            else if (charCount >= 40 && charCount <= 80) charScore = 75;
+            else if (charCount >= 30 && charCount <= 90) charScore = 50;
+            else charScore = 25;
+
+            // Power words
+            const foundPowerWords = words.filter(w => powerWords.includes(w.replace(/[^a-z]/g, '')));
+            const powerWordScore = Math.min(foundPowerWords.length * 25, 100);
+
+            // Emotional words
+            const foundEmotionalWords = words.filter(w => emotionalWords.includes(w.replace(/[^a-z]/g, '')));
+            const emotionalScore = Math.min(foundEmotionalWords.length * 30, 100);
+
+            // Number presence
+            const hasNumber = /\d/.test(headline);
+            const numberScore = hasNumber ? 100 : 30;
+
+            // Question or how-to
+            const isQuestion = headline.includes('?');
+            const isHowTo = /^how to/i.test(headline);
+            const formatScore = (isQuestion || isHowTo) ? 100 : 50;
+
+            // Calculate overall score
+            const overallScore = Math.round(
+                (wordBalanceScore * 0.15) +
+                (charScore * 0.1) +
+                (powerWordScore * 0.25) +
+                (emotionalScore * 0.2) +
+                (numberScore * 0.15) +
+                (formatScore * 0.15)
+            );
+
+            // Generate suggestions
+            const suggestions = [];
+            if (foundPowerWords.length === 0) suggestions.push('Add a power word like "proven," "essential," or "ultimate"');
+            if (foundEmotionalWords.length === 0) suggestions.push('Include emotional words to connect with readers');
+            if (!hasNumber) suggestions.push('Add a number for specificity (e.g., "7 Ways..." or "...in 5 Minutes")');
+            if (wordCount < 6) suggestions.push('Your headline is short. Consider adding more context');
+            if (wordCount > 12) suggestions.push('Your headline is long. Try to trim unnecessary words');
+            if (charCount > 70) suggestions.push('Keep it under 70 characters for better display in search results');
+            if (!isQuestion && !isHowTo && !headline.includes(':')) suggestions.push('Try a "How to" format or add a colon for structure');
+
+            if (suggestions.length === 0) suggestions.push('Great headline! Consider A/B testing with a variation');
+
+            return {
+                headline,
+                overallScore,
+                wordCount,
+                charCount,
+                metrics: {
+                    'Word Balance': wordBalanceScore,
+                    'Power Words': powerWordScore,
+                    'Emotional Appeal': emotionalScore,
+                    'Format': formatScore
+                },
+                breakdown: {
+                    'Word Count': { value: wordCount, ideal: '6-12 words', status: wordCount >= 6 && wordCount <= 12 ? 'good' : wordCount >= 4 && wordCount <= 14 ? 'warn' : 'bad' },
+                    'Character Count': { value: charCount, ideal: '50-70 chars', status: charCount >= 50 && charCount <= 70 ? 'good' : charCount >= 40 && charCount <= 80 ? 'warn' : 'bad' },
+                    'Power Words': { value: foundPowerWords.length, ideal: '1-2', status: foundPowerWords.length >= 1 ? 'good' : 'bad' },
+                    'Has Number': { value: hasNumber ? 'Yes' : 'No', ideal: 'Yes', status: hasNumber ? 'good' : 'warn' },
+                    'Format Type': { value: isQuestion ? 'Question' : isHowTo ? 'How-To' : 'Statement', ideal: 'How-To or Question', status: isQuestion || isHowTo ? 'good' : 'warn' }
+                },
+                suggestions
+            };
+        }
+
+        function displayResults(analysis) {
+            document.getElementById('results').classList.add('active');
+
+            // Score circle
+            const scoreCircle = document.getElementById('scoreCircle');
+            const scoreValue = document.getElementById('scoreValue');
+            const scoreGrade = document.getElementById('scoreGrade');
+
+            let scoreColor, grade;
+            if (analysis.overallScore >= 80) { scoreColor = 'var(--accent-green)'; grade = 'Excellent!'; }
+            else if (analysis.overallScore >= 60) { scoreColor = 'var(--accent-cyan)'; grade = 'Good'; }
+            else if (analysis.overallScore >= 40) { scoreColor = 'var(--accent-yellow)'; grade = 'Average'; }
+            else { scoreColor = 'var(--accent-red)'; grade = 'Needs Work'; }
+
+            scoreCircle.style.setProperty('--score', analysis.overallScore);
+            scoreCircle.style.setProperty('--score-color', scoreColor);
+            scoreValue.textContent = analysis.overallScore;
+            scoreValue.style.color = scoreColor;
+            scoreGrade.textContent = grade;
+            scoreGrade.style.color = scoreColor;
+
+            // Metrics
+            document.getElementById('metricsGrid').innerHTML = Object.entries(analysis.metrics).map(([name, value]) => {
+                const color = value >= 75 ? 'var(--accent-green)' : value >= 50 ? 'var(--accent-yellow)' : 'var(--accent-red)';
+                return `
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-name">${name}</span>
+                            <span class="metric-value" style="color:${color}">${value}%</span>
+                        </div>
+                        <div class="metric-bar">
+                            <div class="metric-fill" style="width:${value}%;background:${color}"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Breakdown
+            document.getElementById('breakdownItems').innerHTML = Object.entries(analysis.breakdown).map(([label, data]) => `
+                <div class="breakdown-item">
+                    <span class="breakdown-label">${label}: <strong>${data.value}</strong></span>
+                    <span class="breakdown-value ${data.status}">${data.status === 'good' ? 'Ideal' : data.status === 'warn' ? 'OK' : 'Improve'}</span>
+                </div>
+            `).join('');
+
+            // Suggestions
+            document.getElementById('suggestionsList').innerHTML = analysis.suggestions.map(s => `
+                <div class="suggestion-item">
+                    <span class="suggestion-icon">→</span>
+                    <span>${s}</span>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+</html>

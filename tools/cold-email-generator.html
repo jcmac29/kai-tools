@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free AI Cold Email Generator - Write Emails That Get Replies | ToolsForge</title>
+    <meta name="description" content="Generate high-converting cold emails instantly with AI. Free cold email templates for sales, recruiting, partnerships, and outreach. No signup required.">
+    <meta name="keywords" content="cold email generator, AI email writer, sales email template, outreach email generator, free cold email tool">
+    <link rel="canonical" href="https://toolsforge.co/tools/cold-email-generator.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230a0a0a' width='100' height='100' rx='20'/><text x='50' y='68' text-anchor='middle' font-size='50' fill='%2300d4aa'>TF</text></svg>">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI Cold Email Generator",
+        "description": "Generate high-converting cold emails for sales, recruiting, and outreach",
+        "url": "https://toolsforge.co/tools/cold-email-generator.html",
+        "applicationCategory": "BusinessApplication",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-primary: #0a0a0a;
+            --accent-cyan: #00d4aa;
+            --accent-purple: #a855f7;
+            --accent-green: #22c55e;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --glass-bg: rgba(255,255,255,0.03);
+            --glass-border: rgba(255,255,255,0.08);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+        .bg-effects {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0; pointer-events: none;
+        }
+        .gradient-orb {
+            position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.3;
+        }
+        .orb-1 { width: 400px; height: 400px; background: var(--accent-purple); top: -100px; right: -100px; }
+        .orb-2 { width: 300px; height: 300px; background: var(--accent-cyan); bottom: -50px; left: -50px; }
+
+        header {
+            position: relative; z-index: 10; padding: 1.5rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .logo {
+            font-size: 1.5rem; font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        nav a { color: var(--text-secondary); text-decoration: none; margin-left: 2rem; }
+        nav a:hover { color: var(--accent-cyan); }
+
+        main {
+            position: relative; z-index: 10;
+            max-width: 900px; margin: 0 auto; padding: 3rem 2rem;
+        }
+        h1 {
+            font-size: 2.5rem; text-align: center; margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .subtitle { text-align: center; color: var(--text-secondary); margin-bottom: 2rem; }
+
+        .generator-container {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+            margin-bottom: 1.5rem;
+        }
+        .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+        .form-group.full { grid-column: 1 / -1; }
+
+        label { color: var(--text-secondary); font-size: 0.9rem; }
+        input, select, textarea {
+            padding: 0.875rem 1rem;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+        }
+        textarea { min-height: 100px; resize: vertical; }
+
+        .template-chips {
+            display: flex; flex-wrap: wrap; gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .chip {
+            padding: 0.5rem 1rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .chip:hover, .chip.active {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            color: var(--bg-primary);
+            border-color: transparent;
+        }
+
+        .btn {
+            width: 100%; padding: 1rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            color: var(--bg-primary);
+            border: none; border-radius: 12px;
+            font-size: 1.1rem; font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,212,170,0.3);
+        }
+
+        .output-section {
+            margin-top: 2rem;
+            display: none;
+        }
+        .output-section.active { display: block; }
+
+        .email-output {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .email-header {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--glass-border);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .email-header h3 { font-size: 1rem; color: var(--accent-purple); }
+        .copy-btn {
+            padding: 0.5rem 1rem;
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+            border: none; border-radius: 8px;
+            font-size: 0.85rem; font-weight: 600;
+            cursor: pointer;
+        }
+        .email-content { padding: 1.5rem; }
+        .email-field { margin-bottom: 1rem; }
+        .email-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            margin-bottom: 0.25rem;
+        }
+        .email-value {
+            color: var(--text-primary);
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        .variations {
+            margin-top: 1.5rem;
+        }
+        .variations h4 {
+            font-size: 1rem;
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+        }
+        .variation-tabs {
+            display: flex; gap: 0.5rem; margin-bottom: 1rem;
+        }
+        .var-tab {
+            padding: 0.5rem 1rem;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        .var-tab.active {
+            background: var(--accent-purple);
+            color: white;
+            border-color: transparent;
+        }
+
+        .tips-section {
+            margin-top: 2rem;
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .tips-section h4 {
+            color: var(--accent-green);
+            margin-bottom: 1rem;
+        }
+        .tip-item {
+            display: flex; gap: 0.75rem;
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .tip-icon { color: var(--accent-cyan); }
+
+        .cta-section {
+            margin-top: 3rem; text-align: center; padding: 2rem;
+            background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(0,212,170,0.1));
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+        }
+        .cta-section h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .cta-section p { color: var(--text-secondary); margin-bottom: 1rem; }
+        .cta-section a {
+            display: inline-block; padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            color: white; text-decoration: none;
+            border-radius: 12px; font-weight: 600;
+        }
+
+        footer {
+            position: relative; z-index: 10;
+            text-align: center; padding: 2rem;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+        }
+        footer a { color: var(--accent-cyan); text-decoration: none; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .form-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-effects">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+    </div>
+
+    <header>
+        <a href="../index.html" class="logo">ToolsForge</a>
+        <nav>
+            <a href="../index.html">All Tools</a>
+            <a href="https://kaiprompts.com">Premium Prompts</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>AI Cold Email Generator</h1>
+        <p class="subtitle">Write cold emails that actually get replies</p>
+
+        <div class="generator-container">
+            <label style="margin-bottom:0.75rem;display:block;">Email Type</label>
+            <div class="template-chips">
+                <span class="chip active" data-type="sales">Sales Outreach</span>
+                <span class="chip" data-type="partnership">Partnership</span>
+                <span class="chip" data-type="recruiting">Recruiting</span>
+                <span class="chip" data-type="networking">Networking</span>
+                <span class="chip" data-type="investor">Investor Pitch</span>
+            </div>
+
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Your Name</label>
+                    <input type="text" id="senderName" placeholder="John Smith">
+                </div>
+                <div class="form-group">
+                    <label>Your Company/Role</label>
+                    <input type="text" id="senderCompany" placeholder="Sales Manager at TechCorp">
+                </div>
+                <div class="form-group">
+                    <label>Recipient Name</label>
+                    <input type="text" id="recipientName" placeholder="Sarah Johnson">
+                </div>
+                <div class="form-group">
+                    <label>Recipient Company</label>
+                    <input type="text" id="recipientCompany" placeholder="Acme Inc">
+                </div>
+                <div class="form-group full">
+                    <label>What You're Offering / Your Ask</label>
+                    <input type="text" id="offering" placeholder="e.g., AI tool that saves 10 hours/week on data entry">
+                </div>
+                <div class="form-group full">
+                    <label>Why Them? (Personalization Hook)</label>
+                    <textarea id="personalization" placeholder="e.g., Saw your LinkedIn post about scaling ops, noticed you're hiring 3 data analysts..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Tone</label>
+                    <select id="tone">
+                        <option value="professional">Professional</option>
+                        <option value="casual">Casual & Friendly</option>
+                        <option value="direct">Direct & Concise</option>
+                        <option value="curious">Curious & Consultative</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Email Length</label>
+                    <select id="length">
+                        <option value="short">Short (50-75 words)</option>
+                        <option value="medium" selected>Medium (75-125 words)</option>
+                        <option value="long">Long (125-175 words)</option>
+                    </select>
+                </div>
+            </div>
+
+            <button class="btn" onclick="generateEmail()">Generate Cold Email</button>
+
+            <div class="output-section" id="outputSection">
+                <div class="email-output">
+                    <div class="email-header">
+                        <h3>Generated Email</h3>
+                        <button class="copy-btn" onclick="copyEmail()">Copy All</button>
+                    </div>
+                    <div class="email-content">
+                        <div class="email-field">
+                            <div class="email-label">Subject Line</div>
+                            <div class="email-value" id="subjectLine"></div>
+                        </div>
+                        <div class="email-field">
+                            <div class="email-label">Email Body</div>
+                            <div class="email-value" id="emailBody"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="variations">
+                    <h4>Subject Line Variations</h4>
+                    <div id="subjectVariations"></div>
+                </div>
+
+                <div class="tips-section">
+                    <h4>Tips for This Email</h4>
+                    <div id="tipsList"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h3>Want 50+ Cold Email Templates?</h3>
+            <p>Get battle-tested templates with proven response rates</p>
+            <a href="https://kaiprompts.com">Browse Sales Prompt Pack</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>Part of the <a href="https://kaiprompts.com">KaiPrompts</a> ecosystem | <a href="../index.html">More Free Tools</a></p>
+    </footer>
+
+    <script>
+        let selectedType = 'sales';
+
+        document.querySelectorAll('.chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                selectedType = chip.dataset.type;
+            });
+        });
+
+        function generateEmail() {
+            const data = {
+                type: selectedType,
+                senderName: document.getElementById('senderName').value || 'there',
+                senderCompany: document.getElementById('senderCompany').value || 'our team',
+                recipientName: document.getElementById('recipientName').value || 'there',
+                recipientCompany: document.getElementById('recipientCompany').value || 'your company',
+                offering: document.getElementById('offering').value || 'help you achieve better results',
+                personalization: document.getElementById('personalization').value,
+                tone: document.getElementById('tone').value,
+                length: document.getElementById('length').value
+            };
+
+            const email = createEmail(data);
+            displayEmail(email);
+        }
+
+        function createEmail(data) {
+            const templates = {
+                sales: {
+                    subjects: [
+                        `Quick question about ${data.recipientCompany}`,
+                        `${data.recipientName} - idea for ${data.recipientCompany}`,
+                        `Noticed this about ${data.recipientCompany}`,
+                        `${data.recipientCompany} + ${data.offering.split(' ').slice(0,3).join(' ')}?`
+                    ],
+                    openings: {
+                        professional: `Hi ${data.recipientName},\n\nI hope this finds you well.`,
+                        casual: `Hey ${data.recipientName}!\n\nHope your week is going great.`,
+                        direct: `Hi ${data.recipientName},`,
+                        curious: `Hi ${data.recipientName},\n\nQuick question for you.`
+                    },
+                    tips: [
+                        'Keep the subject line under 50 characters for better open rates',
+                        'Personalization in the first line increases replies by 50%',
+                        'Ask a question to make replying easy',
+                        'Send on Tuesday-Thursday between 8-10am for best results'
+                    ]
+                },
+                partnership: {
+                    subjects: [
+                        `Partnership idea: ${data.senderCompany} x ${data.recipientCompany}`,
+                        `Collaboration opportunity for ${data.recipientCompany}`,
+                        `${data.recipientName} - quick partnership thought`,
+                        `Idea for ${data.recipientCompany} (2 min read)`
+                    ],
+                    openings: {
+                        professional: `Hi ${data.recipientName},\n\nI've been following ${data.recipientCompany}'s work and wanted to reach out.`,
+                        casual: `Hey ${data.recipientName}!\n\nBig fan of what you're building at ${data.recipientCompany}.`,
+                        direct: `Hi ${data.recipientName},\n\nI have a partnership idea that could benefit ${data.recipientCompany}.`,
+                        curious: `Hi ${data.recipientName},\n\nI've been thinking about how our companies might work together.`
+                    },
+                    tips: [
+                        'Lead with what THEY get, not what you want',
+                        'Reference specific work they\'ve done',
+                        'Make the next step crystal clear',
+                        'Keep it short - partnerships need calls, not long emails'
+                    ]
+                },
+                recruiting: {
+                    subjects: [
+                        `${data.recipientName} - opportunity at ${data.senderCompany}`,
+                        `Your background caught my attention`,
+                        `Role you might find interesting`,
+                        `${data.offering} - thought of you`
+                    ],
+                    openings: {
+                        professional: `Hi ${data.recipientName},\n\nI came across your profile and was impressed by your background.`,
+                        casual: `Hey ${data.recipientName}!\n\nYour work caught my eye and I had to reach out.`,
+                        direct: `Hi ${data.recipientName},\n\nI'm reaching out about an opportunity that matches your experience.`,
+                        curious: `Hi ${data.recipientName},\n\nQuick question: are you open to hearing about new opportunities?`
+                    },
+                    tips: [
+                        'Reference specific experience from their profile',
+                        'Mention salary range if possible - transparency wins',
+                        'Don\'t oversell - let the role speak for itself',
+                        'Offer a quick call, not a formal interview'
+                    ]
+                },
+                networking: {
+                    subjects: [
+                        `Fellow ${data.offering} enthusiast`,
+                        `Loved your take on ${data.offering}`,
+                        `Quick hello from ${data.senderCompany}`,
+                        `${data.recipientName} - coffee chat?`
+                    ],
+                    openings: {
+                        professional: `Hi ${data.recipientName},\n\nI've been following your work and wanted to connect.`,
+                        casual: `Hey ${data.recipientName}!\n\nJust wanted to say hi and connect.`,
+                        direct: `Hi ${data.recipientName},\n\nI'd love to learn from your experience.`,
+                        curious: `Hi ${data.recipientName},\n\nI'm curious about your journey and would love to chat.`
+                    },
+                    tips: [
+                        'Be genuine - don\'t network with an agenda',
+                        'Offer value first, ask second',
+                        'Keep expectations low - "quick chat" not "pick your brain"',
+                        'Follow up once, then move on'
+                    ]
+                },
+                investor: {
+                    subjects: [
+                        `${data.senderCompany}: ${data.offering}`,
+                        `Quick intro: ${data.senderCompany}`,
+                        `${data.recipientName} - startup in your focus area`,
+                        `${data.offering} - seeking advice`
+                    ],
+                    openings: {
+                        professional: `Hi ${data.recipientName},\n\nI'm the founder of ${data.senderCompany} and reaching out because of your investment focus.`,
+                        casual: `Hey ${data.recipientName}!\n\nBuilding something I think you'd find interesting.`,
+                        direct: `Hi ${data.recipientName},\n\nI'm raising a seed round and your portfolio fits perfectly.`,
+                        curious: `Hi ${data.recipientName},\n\nWould love your perspective on something we're building.`
+                    },
+                    tips: [
+                        'Keep it to 5 sentences max - investors are busy',
+                        'Include one impressive metric or traction point',
+                        'Reference their specific investment thesis',
+                        'Ask for advice, not money (the money follows)'
+                    ]
+                }
+            };
+
+            const template = templates[data.type];
+            const opening = template.openings[data.tone];
+
+            let personalizationLine = '';
+            if (data.personalization) {
+                personalizationLine = `\n\n${data.personalization}`;
+            }
+
+            let body = '';
+            const offeringLine = data.offering;
+
+            if (data.length === 'short') {
+                body = `${opening}${personalizationLine}\n\nWanted to quickly share: ${offeringLine}.\n\nWorth a 15-min chat?\n\nBest,\n${data.senderName}`;
+            } else if (data.length === 'medium') {
+                body = `${opening}${personalizationLine}\n\nI'm reaching out because ${offeringLine}.\n\nI think this could be valuable for ${data.recipientCompany} because of the work you're doing.\n\nWould you be open to a quick 15-minute call this week?\n\nBest,\n${data.senderName}`;
+            } else {
+                body = `${opening}${personalizationLine}\n\nI'm reaching out because ${offeringLine}.\n\nHere's why I think this matters for ${data.recipientCompany}:\n- [Benefit 1 specific to them]\n- [Benefit 2 based on their situation]\n- [Quick win they could see]\n\nI'd love to share more details if you're interested. Would a quick 15-minute call work for you this week?\n\nLooking forward to connecting,\n${data.senderName}`;
+            }
+
+            return {
+                subject: template.subjects[0],
+                subjectVariations: template.subjects,
+                body: body,
+                tips: template.tips
+            };
+        }
+
+        function displayEmail(email) {
+            document.getElementById('outputSection').classList.add('active');
+            document.getElementById('subjectLine').textContent = email.subject;
+            document.getElementById('emailBody').textContent = email.body;
+
+            document.getElementById('subjectVariations').innerHTML = email.subjectVariations
+                .map((s, i) => `<div class="var-tab ${i === 0 ? 'active' : ''}" onclick="selectSubject('${s.replace(/'/g, "\\'")}')">${s}</div>`)
+                .join('');
+
+            document.getElementById('tipsList').innerHTML = email.tips
+                .map(tip => `<div class="tip-item"><span class="tip-icon">→</span><span>${tip}</span></div>`)
+                .join('');
+        }
+
+        function selectSubject(subject) {
+            document.getElementById('subjectLine').textContent = subject;
+            document.querySelectorAll('.var-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.textContent === subject);
+            });
+        }
+
+        function copyEmail() {
+            const subject = document.getElementById('subjectLine').textContent;
+            const body = document.getElementById('emailBody').textContent;
+            const fullEmail = `Subject: ${subject}\n\n${body}`;
+
+            navigator.clipboard.writeText(fullEmail).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = 'Copied!';
+                setTimeout(() => btn.textContent = 'Copy All', 2000);
+            });
+        }
+    </script>
+</body>
+</html>
