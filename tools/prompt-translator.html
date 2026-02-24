@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Prompt Translator - Convert Prompts Between AI Models | ToolsForge</title>
+    <meta name="description" content="Convert prompts between ChatGPT, Claude, Gemini, and other AI models. Optimize your prompts for different AI systems. Free prompt translation tool.">
+    <meta name="keywords" content="prompt translator, convert ChatGPT to Claude, AI prompt converter, cross-model prompts, prompt optimization">
+    <link rel="canonical" href="https://toolsforge.co/tools/prompt-translator.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230a0a0a' width='100' height='100' rx='20'/><text x='50' y='68' text-anchor='middle' font-size='50' fill='%2300d4aa'>TF</text></svg>">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI Prompt Translator",
+        "description": "Convert and optimize prompts for different AI models like ChatGPT, Claude, Gemini, and Llama",
+        "url": "https://toolsforge.co/tools/prompt-translator.html",
+        "applicationCategory": "UtilityApplication",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-primary: #0a0a0a;
+            --accent-cyan: #00d4aa;
+            --accent-purple: #a855f7;
+            --accent-green: #22c55e;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --glass-bg: rgba(255,255,255,0.03);
+            --glass-border: rgba(255,255,255,0.08);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+        .bg-effects {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0; pointer-events: none;
+        }
+        .gradient-orb {
+            position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.3;
+        }
+        .orb-1 { width: 400px; height: 400px; background: var(--accent-purple); top: -100px; left: -100px; }
+        .orb-2 { width: 300px; height: 300px; background: var(--accent-cyan); bottom: -50px; right: -50px; }
+
+        header {
+            position: relative; z-index: 10; padding: 1.5rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .logo {
+            font-size: 1.5rem; font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        nav a { color: var(--text-secondary); text-decoration: none; margin-left: 2rem; }
+        nav a:hover { color: var(--accent-cyan); }
+
+        main {
+            position: relative; z-index: 10;
+            max-width: 1000px; margin: 0 auto; padding: 3rem 2rem;
+        }
+        h1 {
+            font-size: 2.5rem; text-align: center; margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .subtitle { text-align: center; color: var(--text-secondary); margin-bottom: 2rem; }
+
+        .translator-container {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px; padding: 2rem;
+        }
+
+        .model-selectors {
+            display: grid; grid-template-columns: 1fr auto 1fr;
+            gap: 1rem; align-items: center; margin-bottom: 1.5rem;
+        }
+        .model-select {
+            display: flex; flex-direction: column; gap: 0.5rem;
+        }
+        .model-select label { color: var(--text-secondary); font-size: 0.85rem; }
+        .model-select select {
+            padding: 0.75rem 1rem;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+        .model-select select:focus { outline: none; border-color: var(--accent-cyan); }
+
+        .swap-btn {
+            width: 44px; height: 44px;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            color: var(--accent-cyan);
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 1.25rem;
+        }
+        .swap-btn:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-primary);
+            transform: rotate(180deg);
+        }
+
+        .prompt-panels {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 1.5rem; margin-bottom: 1.5rem;
+        }
+        .panel { display: flex; flex-direction: column; gap: 0.5rem; }
+        .panel label {
+            color: var(--text-secondary); font-size: 0.9rem;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .panel textarea {
+            width: 100%; min-height: 200px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1rem; color: var(--text-primary);
+            font-size: 0.95rem; resize: vertical;
+        }
+        .panel textarea:focus { outline: none; border-color: var(--accent-cyan); }
+
+        .copy-btn {
+            background: none; border: none;
+            color: var(--accent-cyan);
+            cursor: pointer; font-size: 0.85rem;
+        }
+        .copy-btn:hover { text-decoration: underline; }
+
+        .btn {
+            width: 100%; padding: 1rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            color: var(--bg-primary);
+            border: none; border-radius: 12px;
+            font-size: 1.1rem; font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,212,170,0.3);
+        }
+
+        .tips-section {
+            margin-top: 2rem;
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px; padding: 1.5rem;
+        }
+        .tips-section h3 {
+            color: var(--accent-purple);
+            margin-bottom: 1rem; font-size: 1.1rem;
+        }
+        .tip-item {
+            display: flex; gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--glass-border);
+            color: var(--text-secondary); font-size: 0.95rem;
+        }
+        .tip-item:last-child { border-bottom: none; }
+        .tip-icon { color: var(--accent-cyan); }
+
+        .model-info {
+            margin-top: 2rem;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        .model-card {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px; padding: 1.25rem;
+        }
+        .model-card h4 {
+            font-size: 1rem; margin-bottom: 0.5rem;
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .model-card p {
+            font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;
+        }
+
+        .cta-section {
+            margin-top: 3rem; text-align: center; padding: 2rem;
+            background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(0,212,170,0.1));
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+        }
+        .cta-section h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .cta-section p { color: var(--text-secondary); margin-bottom: 1rem; }
+        .cta-section a {
+            display: inline-block; padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            color: white; text-decoration: none;
+            border-radius: 12px; font-weight: 600;
+        }
+
+        footer {
+            position: relative; z-index: 10;
+            text-align: center; padding: 2rem;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+        }
+        footer a { color: var(--accent-cyan); text-decoration: none; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .model-selectors { grid-template-columns: 1fr; }
+            .swap-btn { margin: 0 auto; transform: rotate(90deg); }
+            .swap-btn:hover { transform: rotate(270deg); }
+            .prompt-panels { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-effects">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+    </div>
+
+    <header>
+        <a href="../index.html" class="logo">ToolsForge</a>
+        <nav>
+            <a href="../index.html">All Tools</a>
+            <a href="https://kaiprompts.com">Premium Prompts</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>AI Prompt Translator</h1>
+        <p class="subtitle">Optimize prompts for different AI models</p>
+
+        <div class="translator-container">
+            <div class="model-selectors">
+                <div class="model-select">
+                    <label>From Model</label>
+                    <select id="fromModel">
+                        <option value="generic">Generic Prompt</option>
+                        <option value="chatgpt">ChatGPT / GPT-4</option>
+                        <option value="claude">Claude</option>
+                        <option value="gemini">Gemini</option>
+                        <option value="llama">Llama / Open Source</option>
+                    </select>
+                </div>
+
+                <button class="swap-btn" onclick="swapModels()">⇄</button>
+
+                <div class="model-select">
+                    <label>To Model</label>
+                    <select id="toModel">
+                        <option value="claude">Claude</option>
+                        <option value="chatgpt">ChatGPT / GPT-4</option>
+                        <option value="gemini">Gemini</option>
+                        <option value="llama">Llama / Open Source</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="prompt-panels">
+                <div class="panel">
+                    <label>
+                        Original Prompt
+                        <span style="color:var(--text-muted);font-size:0.8rem;" id="inputCount">0 words</span>
+                    </label>
+                    <textarea id="inputPrompt" placeholder="Paste your prompt here..." oninput="updateCount()"></textarea>
+                </div>
+                <div class="panel">
+                    <label>
+                        Translated Prompt
+                        <button class="copy-btn" onclick="copyOutput()">Copy</button>
+                    </label>
+                    <textarea id="outputPrompt" placeholder="Translated prompt will appear here..." readonly></textarea>
+                </div>
+            </div>
+
+            <button class="btn" onclick="translatePrompt()">Translate Prompt</button>
+
+            <div class="tips-section" id="tipsSection" style="display:none;">
+                <h3>Translation Notes</h3>
+                <div id="tipsList"></div>
+            </div>
+        </div>
+
+        <div class="model-info">
+            <div class="model-card">
+                <h4>🟢 ChatGPT</h4>
+                <p>Responds well to conversational tone, role-playing, and step-by-step instructions.</p>
+            </div>
+            <div class="model-card">
+                <h4>🟣 Claude</h4>
+                <p>Excels with detailed context, XML tags, and explicit formatting requests.</p>
+            </div>
+            <div class="model-card">
+                <h4>🔵 Gemini</h4>
+                <p>Strong with multimodal, factual queries, and structured outputs.</p>
+            </div>
+            <div class="model-card">
+                <h4>🟠 Llama</h4>
+                <p>Works best with clear, direct instructions and explicit examples.</p>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h3>Skip the Translation</h3>
+            <p>Get prompts pre-optimized for every major AI model</p>
+            <a href="https://kaiprompts.com">Browse Premium Prompts</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>Part of the <a href="https://kaiprompts.com">KaiPrompts</a> ecosystem | <a href="../index.html">More Free Tools</a></p>
+    </footer>
+
+    <script>
+        const modelStyles = {
+            chatgpt: {
+                name: 'ChatGPT',
+                prefixes: ['You are', 'Act as', 'I want you to'],
+                style: 'conversational',
+                tips: [
+                    'ChatGPT responds well to role-playing ("You are a...")',
+                    'Use conversational language and questions',
+                    'Step-by-step instructions work great'
+                ]
+            },
+            claude: {
+                name: 'Claude',
+                prefixes: ['Your task is', 'Please', 'I need you to'],
+                style: 'detailed',
+                tips: [
+                    'Claude excels with detailed context and background',
+                    'Use XML tags like <context> and <instructions> for clarity',
+                    'Be explicit about output format and constraints'
+                ]
+            },
+            gemini: {
+                name: 'Gemini',
+                prefixes: ['Generate', 'Create', 'Provide'],
+                style: 'direct',
+                tips: [
+                    'Gemini works well with direct, factual requests',
+                    'Good for structured data and tables',
+                    'Specify output format clearly'
+                ]
+            },
+            llama: {
+                name: 'Llama',
+                prefixes: ['Instructions:', '[INST]', 'Task:'],
+                style: 'explicit',
+                tips: [
+                    'Open source models need very explicit instructions',
+                    'Include examples when possible',
+                    'Keep prompts focused and clear'
+                ]
+            },
+            generic: {
+                name: 'Generic',
+                prefixes: [''],
+                style: 'neutral',
+                tips: ['Starting from a generic prompt']
+            }
+        };
+
+        function updateCount() {
+            const text = document.getElementById('inputPrompt').value;
+            const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+            document.getElementById('inputCount').textContent = words + ' words';
+        }
+
+        function swapModels() {
+            const from = document.getElementById('fromModel');
+            const to = document.getElementById('toModel');
+            const temp = from.value;
+            from.value = to.value;
+            to.value = temp;
+        }
+
+        function translatePrompt() {
+            const input = document.getElementById('inputPrompt').value.trim();
+            const fromModel = document.getElementById('fromModel').value;
+            const toModel = document.getElementById('toModel').value;
+
+            if (!input) {
+                alert('Please enter a prompt to translate');
+                return;
+            }
+
+            const translated = convertPrompt(input, fromModel, toModel);
+            document.getElementById('outputPrompt').value = translated.prompt;
+
+            // Show tips
+            const tipsSection = document.getElementById('tipsSection');
+            const tipsList = document.getElementById('tipsList');
+            tipsSection.style.display = 'block';
+
+            tipsList.innerHTML = translated.tips.map(tip => `
+                <div class="tip-item">
+                    <span class="tip-icon">→</span>
+                    <span>${tip}</span>
+                </div>
+            `).join('');
+        }
+
+        function convertPrompt(input, from, to) {
+            let prompt = input;
+            const tips = [];
+            const toStyle = modelStyles[to];
+
+            // Remove source model prefixes
+            const allPrefixes = Object.values(modelStyles).flatMap(m => m.prefixes).filter(p => p);
+            for (const prefix of allPrefixes) {
+                if (prompt.toLowerCase().startsWith(prefix.toLowerCase())) {
+                    prompt = prompt.slice(prefix.length).trim();
+                    break;
+                }
+            }
+
+            // Apply target model style
+            switch (to) {
+                case 'chatgpt':
+                    if (!prompt.toLowerCase().startsWith('you are') && !prompt.toLowerCase().startsWith('act as')) {
+                        prompt = 'You are a helpful assistant. ' + prompt;
+                        tips.push('Added ChatGPT-style role prefix');
+                    }
+                    // Make more conversational
+                    prompt = prompt.replace(/Provide/gi, 'Please give me');
+                    prompt = prompt.replace(/Generate/gi, 'Please create');
+                    tips.push('Adjusted language to be more conversational');
+                    break;
+
+                case 'claude':
+                    // Add structure with context
+                    if (prompt.length > 100 && !prompt.includes('<')) {
+                        const parts = prompt.split(/\.\s+/);
+                        if (parts.length > 2) {
+                            const context = parts.slice(0, -1).join('. ') + '.';
+                            const task = parts[parts.length - 1];
+                            prompt = `<context>\n${context}\n</context>\n\n<task>\n${task}\n</task>`;
+                            tips.push('Added XML structure for Claude');
+                        }
+                    }
+                    if (!prompt.toLowerCase().includes('please')) {
+                        prompt = 'Please ' + prompt.charAt(0).toLowerCase() + prompt.slice(1);
+                        tips.push('Added polite framing for Claude');
+                    }
+                    break;
+
+                case 'gemini':
+                    // Make more direct
+                    prompt = prompt.replace(/You are a helpful assistant\.\s*/gi, '');
+                    prompt = prompt.replace(/I want you to/gi, 'Please');
+                    prompt = prompt.replace(/Act as/gi, 'Respond as');
+                    if (!prompt.includes('Format:') && !prompt.includes('Output:')) {
+                        prompt += '\n\nProvide a clear, structured response.';
+                        tips.push('Added format guidance for Gemini');
+                    }
+                    tips.push('Streamlined for direct style');
+                    break;
+
+                case 'llama':
+                    // Make very explicit
+                    prompt = prompt.replace(/You are a helpful assistant\.\s*/gi, '');
+                    if (!prompt.startsWith('[INST]') && !prompt.startsWith('Instructions:')) {
+                        prompt = `[INST]\n${prompt}\n[/INST]`;
+                        tips.push('Added instruction tags for Llama');
+                    }
+                    tips.push('Open source models need explicit formatting');
+                    break;
+            }
+
+            // Add model-specific tips
+            tips.push(...toStyle.tips);
+
+            return { prompt, tips };
+        }
+
+        function copyOutput() {
+            const output = document.getElementById('outputPrompt');
+            output.select();
+            navigator.clipboard.writeText(output.value).then(() => {
+                const btn = document.querySelector('.copy-btn');
+                btn.textContent = 'Copied!';
+                setTimeout(() => btn.textContent = 'Copy', 2000);
+            });
+        }
+    </script>
+</body>
+</html>

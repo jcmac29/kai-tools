@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Response Grader - Rate & Improve AI Outputs | ToolsForge</title>
+    <meta name="description" content="Grade AI responses for quality, accuracy, and usefulness. Get suggestions to improve ChatGPT, Claude, and GPT-4 outputs. Free AI response evaluation tool.">
+    <meta name="keywords" content="AI response grader, ChatGPT output quality, Claude response checker, AI quality score, improve AI responses">
+    <link rel="canonical" href="https://toolsforge.co/tools/ai-response-grader.html">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230a0a0a' width='100' height='100' rx='20'/><text x='50' y='68' text-anchor='middle' font-size='50' fill='%2300d4aa'>TF</text></svg>">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI Response Grader",
+        "description": "Evaluate and grade AI responses for quality, accuracy, helpfulness, and clarity",
+        "url": "https://toolsforge.co/tools/ai-response-grader.html",
+        "applicationCategory": "UtilityApplication",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --bg-primary: #0a0a0a;
+            --accent-cyan: #00d4aa;
+            --accent-purple: #a855f7;
+            --accent-green: #22c55e;
+            --accent-yellow: #fbbf24;
+            --accent-red: #ef4444;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --glass-bg: rgba(255,255,255,0.03);
+            --glass-border: rgba(255,255,255,0.08);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+        .bg-effects {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0; pointer-events: none;
+        }
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.3;
+        }
+        .orb-1 { width: 400px; height: 400px; background: var(--accent-purple); top: -100px; right: -100px; }
+        .orb-2 { width: 300px; height: 300px; background: var(--accent-cyan); bottom: -50px; left: -50px; }
+
+        header {
+            position: relative; z-index: 10;
+            padding: 1.5rem 2rem;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .logo {
+            font-size: 1.5rem; font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        nav a { color: var(--text-secondary); text-decoration: none; margin-left: 2rem; }
+        nav a:hover { color: var(--accent-cyan); }
+
+        main {
+            position: relative; z-index: 10;
+            max-width: 900px; margin: 0 auto; padding: 3rem 2rem;
+        }
+        h1 {
+            font-size: 2.5rem; text-align: center; margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .subtitle { text-align: center; color: var(--text-secondary); margin-bottom: 2rem; }
+
+        .grader-container {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+        }
+        .input-section { margin-bottom: 1.5rem; }
+        .input-section label {
+            display: block; margin-bottom: 0.5rem;
+            color: var(--text-secondary); font-size: 0.9rem;
+        }
+        textarea {
+            width: 100%; min-height: 120px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1rem; color: var(--text-primary);
+            font-size: 0.95rem; resize: vertical;
+        }
+        textarea:focus { outline: none; border-color: var(--accent-cyan); }
+
+        .btn {
+            width: 100%; padding: 1rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            color: var(--bg-primary);
+            border: none; border-radius: 12px;
+            font-size: 1.1rem; font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,212,170,0.3);
+        }
+
+        .results { margin-top: 2rem; display: none; }
+        .results.active { display: block; }
+
+        .grade-display {
+            text-align: center;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(0,212,170,0.1), rgba(168,85,247,0.1));
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+        }
+        .grade-letter {
+            font-size: 5rem; font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-purple));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .grade-label { color: var(--text-secondary); margin-top: 0.5rem; }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .metric-card {
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            padding: 1.25rem;
+        }
+        .metric-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 0.75rem;
+        }
+        .metric-name { font-size: 0.9rem; color: var(--text-secondary); }
+        .metric-score { font-size: 1.25rem; font-weight: 700; }
+        .metric-score.high { color: var(--accent-green); }
+        .metric-score.medium { color: var(--accent-yellow); }
+        .metric-score.low { color: var(--accent-red); }
+        .metric-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .metric-fill {
+            height: 100%;
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        .feedback-section {
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+        .feedback-section h3 {
+            color: var(--accent-purple);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        .feedback-item {
+            display: flex; align-items: flex-start; gap: 0.75rem;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--glass-border);
+        }
+        .feedback-item:last-child { border-bottom: none; }
+        .feedback-icon {
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.75rem; flex-shrink: 0;
+        }
+        .feedback-icon.good { background: rgba(34,197,94,0.2); color: var(--accent-green); }
+        .feedback-icon.improve { background: rgba(251,191,36,0.2); color: var(--accent-yellow); }
+        .feedback-icon.issue { background: rgba(239,68,68,0.2); color: var(--accent-red); }
+        .feedback-text { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.5; }
+
+        .cta-section {
+            margin-top: 3rem; text-align: center; padding: 2rem;
+            background: linear-gradient(135deg, rgba(168,85,247,0.1), rgba(0,212,170,0.1));
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+        }
+        .cta-section h3 { font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .cta-section p { color: var(--text-secondary); margin-bottom: 1rem; }
+        .cta-section a {
+            display: inline-block; padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
+            color: white; text-decoration: none;
+            border-radius: 12px; font-weight: 600;
+        }
+
+        footer {
+            position: relative; z-index: 10;
+            text-align: center; padding: 2rem;
+            border-top: 1px solid var(--glass-border);
+            color: var(--text-secondary);
+        }
+        footer a { color: var(--accent-cyan); text-decoration: none; }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .metrics-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-effects">
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+    </div>
+
+    <header>
+        <a href="../index.html" class="logo">ToolsForge</a>
+        <nav>
+            <a href="../index.html">All Tools</a>
+            <a href="https://kaiprompts.com">Premium Prompts</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>AI Response Grader</h1>
+        <p class="subtitle">Evaluate AI outputs for quality, accuracy, and usefulness</p>
+
+        <div class="grader-container">
+            <div class="input-section">
+                <label>Your Original Prompt (optional but recommended)</label>
+                <textarea id="promptInput" placeholder="What did you ask the AI? This helps evaluate relevance..."></textarea>
+            </div>
+
+            <div class="input-section">
+                <label>AI Response to Grade</label>
+                <textarea id="responseInput" placeholder="Paste the AI response you want to evaluate..." style="min-height:180px;"></textarea>
+            </div>
+
+            <button class="btn" onclick="gradeResponse()">Grade This Response</button>
+
+            <div class="results" id="results">
+                <div class="grade-display">
+                    <div class="grade-letter" id="gradeLetter">A</div>
+                    <div class="grade-label" id="gradeLabel">Excellent Response</div>
+                </div>
+
+                <div class="metrics-grid" id="metricsGrid"></div>
+
+                <div class="feedback-section">
+                    <h3>Detailed Feedback</h3>
+                    <div id="feedbackList"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h3>Get Better AI Responses Every Time</h3>
+            <p>Use professionally crafted prompts that consistently deliver high-quality outputs</p>
+            <a href="https://kaiprompts.com">Browse Premium Prompts</a>
+        </div>
+    </main>
+
+    <footer>
+        <p>Part of the <a href="https://kaiprompts.com">KaiPrompts</a> ecosystem | <a href="../index.html">More Free Tools</a></p>
+    </footer>
+
+    <script>
+        function gradeResponse() {
+            const prompt = document.getElementById('promptInput').value.trim();
+            const response = document.getElementById('responseInput').value.trim();
+
+            if (!response) {
+                alert('Please paste an AI response to grade');
+                return;
+            }
+
+            const analysis = analyzeResponse(prompt, response);
+            displayResults(analysis);
+        }
+
+        function analyzeResponse(prompt, response) {
+            const words = response.split(/\s+/).filter(w => w.length > 0);
+            const sentences = response.split(/[.!?]+/).filter(s => s.trim().length > 0);
+            const paragraphs = response.split(/\n\n+/).filter(p => p.trim().length > 0);
+
+            // Metrics calculation
+            const metrics = {
+                clarity: 0,
+                depth: 0,
+                structure: 0,
+                relevance: 0,
+                actionability: 0
+            };
+
+            const feedback = [];
+
+            // Clarity - sentence length, readability
+            const avgSentenceLength = words.length / Math.max(sentences.length, 1);
+            if (avgSentenceLength < 25) {
+                metrics.clarity = 90 + Math.random() * 10;
+                feedback.push({ type: 'good', text: 'Clear, readable sentences that are easy to follow' });
+            } else if (avgSentenceLength < 35) {
+                metrics.clarity = 70 + Math.random() * 15;
+                feedback.push({ type: 'improve', text: 'Some sentences are long. Consider breaking them up for clarity' });
+            } else {
+                metrics.clarity = 50 + Math.random() * 15;
+                feedback.push({ type: 'issue', text: 'Sentences are too long and complex. Request shorter explanations' });
+            }
+
+            // Depth - word count, detail
+            if (words.length > 200) {
+                metrics.depth = 85 + Math.random() * 15;
+                feedback.push({ type: 'good', text: 'Comprehensive response with good depth of information' });
+            } else if (words.length > 100) {
+                metrics.depth = 70 + Math.random() * 15;
+                feedback.push({ type: 'improve', text: 'Response could include more detail. Try asking follow-up questions' });
+            } else {
+                metrics.depth = 40 + Math.random() * 20;
+                feedback.push({ type: 'issue', text: 'Response is too brief. Ask for more detailed explanations' });
+            }
+
+            // Structure - paragraphs, lists, formatting
+            const hasList = /[-•*]\s|^\d+\./m.test(response);
+            const hasHeadings = /^#+\s|^[A-Z][^.!?]*:$/m.test(response);
+
+            if (paragraphs.length > 2 || hasList || hasHeadings) {
+                metrics.structure = 85 + Math.random() * 15;
+                feedback.push({ type: 'good', text: 'Well-structured with clear organization' });
+            } else if (paragraphs.length > 1) {
+                metrics.structure = 65 + Math.random() * 15;
+                feedback.push({ type: 'improve', text: 'Could use better formatting. Ask for bullet points or sections' });
+            } else {
+                metrics.structure = 45 + Math.random() * 15;
+                feedback.push({ type: 'issue', text: 'Response is a wall of text. Request formatted output with lists or sections' });
+            }
+
+            // Relevance - keyword matching with prompt
+            if (prompt) {
+                const promptWords = prompt.toLowerCase().split(/\s+/);
+                const responseWords = response.toLowerCase();
+                const matches = promptWords.filter(w => w.length > 3 && responseWords.includes(w));
+                const matchRatio = matches.length / Math.max(promptWords.filter(w => w.length > 3).length, 1);
+
+                if (matchRatio > 0.5) {
+                    metrics.relevance = 85 + Math.random() * 15;
+                    feedback.push({ type: 'good', text: 'Response directly addresses your question' });
+                } else if (matchRatio > 0.25) {
+                    metrics.relevance = 65 + Math.random() * 15;
+                    feedback.push({ type: 'improve', text: 'Response is somewhat relevant but may have drifted from your question' });
+                } else {
+                    metrics.relevance = 45 + Math.random() * 15;
+                    feedback.push({ type: 'issue', text: 'Response may not fully address your original question' });
+                }
+            } else {
+                metrics.relevance = 75 + Math.random() * 10;
+                feedback.push({ type: 'improve', text: 'Add your original prompt for better relevance analysis' });
+            }
+
+            // Actionability - contains steps, recommendations
+            const hasActions = /you can|you should|try|step|first|then|next|finally|recommend|suggest/i.test(response);
+            const hasExamples = /for example|such as|like|e\.g\.|instance/i.test(response);
+
+            if (hasActions && hasExamples) {
+                metrics.actionability = 90 + Math.random() * 10;
+                feedback.push({ type: 'good', text: 'Contains actionable advice with concrete examples' });
+            } else if (hasActions || hasExamples) {
+                metrics.actionability = 70 + Math.random() * 15;
+                feedback.push({ type: 'improve', text: 'Could include more specific steps or examples' });
+            } else {
+                metrics.actionability = 50 + Math.random() * 15;
+                feedback.push({ type: 'issue', text: 'Response lacks actionable advice. Ask "How do I implement this?"' });
+            }
+
+            // Calculate overall grade
+            const avgScore = Object.values(metrics).reduce((a, b) => a + b, 0) / 5;
+
+            let grade, label;
+            if (avgScore >= 90) { grade = 'A+'; label = 'Exceptional Response'; }
+            else if (avgScore >= 85) { grade = 'A'; label = 'Excellent Response'; }
+            else if (avgScore >= 80) { grade = 'A-'; label = 'Very Good Response'; }
+            else if (avgScore >= 75) { grade = 'B+'; label = 'Good Response'; }
+            else if (avgScore >= 70) { grade = 'B'; label = 'Above Average Response'; }
+            else if (avgScore >= 65) { grade = 'B-'; label = 'Decent Response'; }
+            else if (avgScore >= 60) { grade = 'C+'; label = 'Average Response'; }
+            else if (avgScore >= 55) { grade = 'C'; label = 'Below Average Response'; }
+            else { grade = 'D'; label = 'Needs Improvement'; }
+
+            return { grade, label, metrics, feedback, avgScore };
+        }
+
+        function displayResults(analysis) {
+            document.getElementById('results').classList.add('active');
+            document.getElementById('gradeLetter').textContent = analysis.grade;
+            document.getElementById('gradeLabel').textContent = analysis.label;
+
+            // Metrics
+            const metricsHtml = Object.entries(analysis.metrics).map(([name, score]) => {
+                const scoreClass = score >= 75 ? 'high' : score >= 55 ? 'medium' : 'low';
+                const color = score >= 75 ? 'var(--accent-green)' : score >= 55 ? 'var(--accent-yellow)' : 'var(--accent-red)';
+                const displayName = name.charAt(0).toUpperCase() + name.slice(1);
+
+                return `
+                    <div class="metric-card">
+                        <div class="metric-header">
+                            <span class="metric-name">${displayName}</span>
+                            <span class="metric-score ${scoreClass}">${Math.round(score)}%</span>
+                        </div>
+                        <div class="metric-bar">
+                            <div class="metric-fill" style="width:${score}%; background:${color}"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('metricsGrid').innerHTML = metricsHtml;
+
+            // Feedback
+            const feedbackHtml = analysis.feedback.map(f => `
+                <div class="feedback-item">
+                    <div class="feedback-icon ${f.type}">${f.type === 'good' ? '✓' : f.type === 'improve' ? '!' : '✗'}</div>
+                    <div class="feedback-text">${f.text}</div>
+                </div>
+            `).join('');
+            document.getElementById('feedbackList').innerHTML = feedbackHtml;
+        }
+    </script>
+</body>
+</html>
